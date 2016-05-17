@@ -1,0 +1,20 @@
+/* Loading */
+#loading-bkg {
+    ddisplay:none;
+    position:fixed;top:0;left:0;
+    width:100%;height:100%;background:#222;
+    z-index:99998;opacity:1;
+}
+#loading-img {
+    ddisplay:none;position:absolute;
+    font-size:18px;z-index:99999;width:100%;
+    left:50%;top:50%;margin-left:-60px;margin-top:-60px;
+}
+#loading-img div {
+    display:inline-block;line-height:28px;color:#333;font-weight:bold;
+    letter-spacing:1px;text-align:center;
+}
+#loading-img div a {
+    color:#00bcd4;text-decoration:none;font-size:14px;font-weight:100;
+    border-bottom:1px solid #00bcd4;padding-bottom:1px;
+}
