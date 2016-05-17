@@ -1,12 +1,12 @@
 <widget xmlns       = "http://www.w3.org/ns/widgets"
         xmlns:gap   = "http://phonegap.com/ns/1.0"
-        id          = "br.com.nickford.quickie"
+        id          = "br.com.nickford.viralize"
         version     = "1.0.1">
     
-    <name>Quickie</name>
+    <name>Viralize</name>
 
     <description>
-        Nightclub Chat
+        The Social Disseminator
     </description>
 
     <author href="http://www.nickford.com.br" email="suporte@nickford.com.br">
