@@ -63,6 +63,7 @@ function fName() {
 // - MODAL ON TOP
 //================================
 function halt(modalVisible) {
+    return false;
     // nome da função
     var f = arguments.callee.caller.toString();
     var myName = f.substr('function '.length);

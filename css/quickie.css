@@ -24,13 +24,13 @@ ul.global .item-after img {width:24px;height:24px;}
 [data-page=profile] .content-inner {padding:20px;margin-top:-10px}
 [data-page=profile] .item-link .item-media {min-width:20px;color:#1976d2}
 [data-page=profile] .item-link .item-title {color:#1976d2}
-[data-page=profile] .item-link .red {color:#ff0024}
+[data-page=profile] .item-link .red {color:#0084ff}
 /* BOTTOM TOOLBAR */
 .jwbar {height:auto;height:60px;top: auto !important; bottom: 0 !important;background:#f3f3f3;border-top:1px solid #ddd}
 .jwbar div a span {text-transform:none !important;font-weight:500;color:#333;font-size:12px;margin:auto !important;margin-top:0}
 .jwbar div a i {color:#333;font-size:24px}
-.jwbar div a.active span {color:#ff0024 !important;}
-.jwbar a.active i {color:#ff0024 !important;}
+.jwbar div a.active span {color:#0084ff !important;}
+.jwbar a.active i {color:#0084ff !important;}
 .jwbar-spc {margin-top:32px;padding-bottom:100px}
 .tabbar-labels a.tab-link, .tabbar-labels a.link {padding:auto;padding:6px}
 

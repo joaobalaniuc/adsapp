@@ -37,12 +37,13 @@ $(document).ready(function () {
         }, 300);
     });
     $('#facebook').click(function () {
-
         setTimeout(function () {
             //fb.login();
-            fb.getUserInfo();
+            fb.login();
         }, 300);
-
+    });
+    $('#twitter').click(function () {
+        fb.post();
     });
     //=====================================
     // SHOW INLINE PAGES
@@ -105,7 +106,7 @@ $(document).ready(function () {
 
             // ENCONTROU LOCAL
             if (sessionStorage.loc_id > 0) {
-                
+
                 //myApp.showIndicator();
 
                 $.ajax({
