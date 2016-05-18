@@ -3,7 +3,7 @@
 //--------------------------------------------
 function start() {
     // App config
-    localStorage.server = "http://nickford.com.br/quickie/";
+    localStorage.server = "http://nickford.com.br/viralize/";
     //localStorage.server = "http://www.nickford.com.br/quickie/";
     //localStorage.server = "http://localhost/quickie/server/";
     localStorage.user_id = 1;

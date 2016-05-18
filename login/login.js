@@ -39,7 +39,8 @@ $(document).ready(function () {
     $('#facebook').click(function () {
         setTimeout(function () {
             //fb.login();
-            fb.login();
+            //fb.login();
+            getImage();
         }, 300);
     });
     $('#twitter').click(function () {
