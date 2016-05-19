@@ -73,9 +73,17 @@
 
                         <!-- Scrollable page content-->
                         <div class="page-content jwbar-spc">
+                            
+                            <div onclick="fb.login();" class="content-block" style="margin-top:60px">
+                                <a href="#" class="button button-raised button-fill color-blue">Login Facebook</a>
+                            </div>
 
-                            <div id="fb" class="content-block" style="margin-top:60px">
-                                <a href="#" class="button button-raised button-fill color-blue">Enviar Post</a>
+                            <div onclick="fb.post();" class="content-block">
+                                <a href="#" class="button button-raised button-fill color-green">Enviar Post</a>
+                            </div>
+                            
+                            <div onclick="fb.getUserInfo();" class="content-block">
+                                <a href="#" class="button button-raised button-fill color-cyan">Get User Info</a>
                             </div>
 
                         </div>
