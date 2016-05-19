@@ -6,3 +6,8 @@ $$(document).on('click', '.post', function (e) {
 $$(document).on('click', '#sendpic', function (e) {
     getImage();
 });
+
+$$(document).on('click', '#fb', function (e) {
+    alert(1);
+    fb.post();
+});
