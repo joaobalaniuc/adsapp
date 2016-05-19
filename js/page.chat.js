@@ -188,3 +188,7 @@ $$(document).on('click', '.showChat', function (e) {
     sessionStorage.lastchat_inner = 0;
     view3.router.loadPage('quickie_chat.html', {ignoreCache: true});
 });
+
+$$(document).on('pageBeforeInit', '[data-page="post"]', function (e) {
+    
+});

@@ -10,6 +10,7 @@ function getPeople(gender) {
     if ($('.' + gender).length === 0) { // primeira vez
         $('#loadingPeople_' + gender).show();
     }
+    /*
     $.ajax({
         url: localStorage.server + "/getpeople.json.php",
         data: {
@@ -71,6 +72,7 @@ function getPeople(gender) {
 
                 } // res not null
             }); // after ajax
+            */
 }
 
 $$(document).on('click', '.showProfile', function (e) {

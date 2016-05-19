@@ -53,20 +53,6 @@ var app = {
         start();
         
         fb.getLoginStatus();
-
-        var fn = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
-        app.ready(fn);
-    },
-    // Update DOM on a Received Event
-    ready: function (fn) {
-        switch (fn) {
-            //===============================
-            // INDEX.HTML
-            //===============================
-            case "index.html":
-                //
-                break;
-        }
     },
     // Update DOM on a Received Event
     receivedEvent: function (id) {
