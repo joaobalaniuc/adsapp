@@ -1,12 +1,12 @@
 <widget xmlns       = "http://www.w3.org/ns/widgets"
         xmlns:gap   = "http://phonegap.com/ns/1.0"
-        id          = "br.com.nickford.viralize"
+        id          = "br.com.nickford.adsout"
         version     = "1.0.1">
     
-    <name>Viralize</name>
+    <name>Ads Out</name>
 
     <description>
-        The Social Disseminator
+        The Social Ads
     </description>
 
     <author href="http://www.nickford.com.br" email="suporte@nickford.com.br">
@@ -110,6 +110,6 @@
     <plugin name="org.apache.cordova.network-information" spec="0.2.15" source="pgb" />
     <plugin name="com.phonegap.plugins.facebookconnect" source="pgb" spec="0.9.0">
         <param name="APP_ID" value="1269306609763820" />
-        <param name="APP_NAME" value="Quickie" />
+        <param name="APP_NAME" value="AdsOut" />
     </plugin>
 </widget>

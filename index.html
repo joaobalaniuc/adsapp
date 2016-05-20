@@ -28,14 +28,30 @@
         <!-- MY LOADER -->
         <link href="css/jw-loading.css" rel="stylesheet" />
         <script src="js/jw-loading.js" type="text/javascript"></script>
-
+        
+        <!-- PHONEGAP -->
+        <script src="cordova.js"></script>
+        <!-- API -->
+        <script type="text/javascript" src="build/js/framework7.js"></script>
+        <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+        <script type="text/javascript" src="js/kitchen-sink.js"></script>
+        <script type="text/javascript" src="js/views.js"></script>
+        <!-- MY FUNCTIONS -->
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/arrays.js"></script>
+        <script type="text/javascript" src="js/class.dom.js"></script>
+        <script type="text/javascript" src="js/class.debug.js"></script>
+        <script type="text/javascript" src="js/class.store.js"></script>
+        <script type="text/javascript" src="js/class.str.js"></script>
+        <script type="text/javascript" src="js/class.upload.js"></script>
+        <!-- MY PAGES -->
+        <script type="text/javascript" src="js/page.js"></script>
+        <script type="text/javascript" src="js/page.index.js"></script>
+        <script type="text/javascript" src="js/page.chat.js"></script>
+        <script type="text/javascript" src="js/page.post.js"></script>
         <script type="text/javascript">
             // alias session        
             s = sessionStorage;
-
-            // trash
-            sessionStorage.loc_id = 0;
-            sessionStorage.online = false;
 
             setTimeout(function () {
                 //sessionStorage.online = true;
@@ -44,7 +60,9 @@
 
             app.initialize();
         </script>
+        
     </head>
+    
     <body class='ttheme-black'>
         <!--
         <div id="loading-bkg"></div>
@@ -378,42 +396,5 @@
             </div>
         </div>
 
-
-
-        <!-- PHONEGAP -->
-        <script src="cordova.js"></script>
-        <!-- API -->
-        <script type="text/javascript" src="build/js/framework7.js"></script>
-        <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
-        <script type="text/javascript" src="js/kitchen-sink.js"></script>
-        <script type="text/javascript" src="js/views.js"></script>
-        <!-- MY FUNCTIONS -->
-        <script type="text/javascript" src="js/app.js"></script>
-        <script type="text/javascript" src="js/arrays.js"></script>
-        <script type="text/javascript" src="js/class.dom.js"></script>
-        <script type="text/javascript" src="js/class.debug.js"></script>
-        <script type="text/javascript" src="js/class.store.js"></script>
-        <script type="text/javascript" src="js/class.str.js"></script>
-        <script type="text/javascript" src="js/class.upload.js"></script>
-        <!-- MY PAGES -->
-        <script type="text/javascript" src="js/page.js"></script>
-        <script type="text/javascript" src="js/page.index.js"></script>
-        <script type="text/javascript" src="js/page.chat.js"></script>
-        <script type="text/javascript" src="js/page.post.js"></script>
-        <script>
-            // app start
-            app.initialize();
-
-            // session alias
-            s = sessionStorage;
-
-            start();
-
-            // trash
-            //s.loc_id = 1;
-            //localStorage.user_id = 1;
-
-            //start();
-        </script>
     </body>
 </html>
