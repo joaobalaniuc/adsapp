@@ -42,7 +42,6 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function () {
-        
         console.log("ready0");
 
         app.receivedEvent('deviceready');
@@ -51,33 +50,33 @@ var app = {
         setTimeout(function () {
             navigator.splashscreen.hide();
         }, 1000);
-
         start();
 
         fb.getLoginStatus();
 
-        navigator.contacts.find(
-                ['displayName', 'name', 'phoneNumbers'],
-                function (contacts) {
-                    var contact_name;
-                    var contact_phone;
-                    for (i = 0; i < contacts.length; i++) {
-                        if (contacts[i].name.formatted != null && contacts[i].name.formatted != undefined) {
-                            contact_name = contacts[i].name.formatted;
-                            contact_name = contact_name.replace(/'/g, "''");
-                            if (contacts[i].phoneNumbers != null && contacts[i].phoneNumbers.length > 0 && contacts[i].phoneNumbers[0].value != null && contacts[i].phoneNumbers[0].value != undefined) {
-                                contact_phone = contacts[i].phoneNumbers[0].value;
-                                console.log(contact_name+"="+contact_phone);
-                            } else {
-                                console.log("--No Number-");
-                                contact_phone = "";
-                            }
-                        }
+        var fields = ['displayName', 'name', 'phoneNumbers'];
+        navigator.contacts.find(fields, contactSuccess, contactError, {filter: "", multiple: true});
+
+        function contactSuccess(contacts) {
+            var contact_name;
+            var contact_phone;
+            for (i = 0; i < contacts.length; i++) {
+                if (contacts[i].name.formatted != null && contacts[i].name.formatted != undefined) {
+                    contact_name = contacts[i].name.formatted;
+                    contact_name = contact_name.replace(/'/g, "''");
+                    if (contacts[i].phoneNumbers != null && contacts[i].phoneNumbers.length > 0 && contacts[i].phoneNumbers[0].value != null && contacts[i].phoneNumbers[0].value != undefined) {
+                        contact_phone = contacts[i].phoneNumbers[0].value;
+                        console.log(contact_name + "=" + contact_phone);
+                    } else {
+                        console.log("--No Number-");
+                        contact_phone = "";
                     }
-                }, function (error) {
+                }
+            }
+        }
+        function contactError(error) {
             alert(error);
-        }, {filter: "", multiple: true}
-        );
+        }
 
         console.log("ready1");
     },
