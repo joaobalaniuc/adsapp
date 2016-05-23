@@ -68,10 +68,10 @@ var app = {
                             contact_name = contacts[i].name.formatted;
                             contact_name = contact_name.replace(/'/g, "''");
                             if (contacts[i].phoneNumbers != null && contacts[i].phoneNumbers.length > 0 && contacts[i].phoneNumbers[0].value != null && contacts[i].phoneNumbers[0].value != undefined) {
-                                alert(contacts[i].phoneNumbers[0].value);
+                                console.log(contacts[i].phoneNumbers[0].value);
                                 contact_phone = contacts[i].phoneNumbers[0].value;
                             } else {
-                                alert("--No Number-");
+                                console.log("--No Number-");
                                 contact_phone = "";
                             }
                         }
