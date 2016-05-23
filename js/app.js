@@ -42,20 +42,34 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function () {
-        
-        alert("ready");
+
+        alert("ready0");
 
         app.receivedEvent('deviceready');
-        
+
         // SPLASHSCREEN (CONFIG.XML BUGFIX)
         setTimeout(function () {
             navigator.splashscreen.hide();
         }, 1000);
 
         start();
-        
+
         fb.getLoginStatus();
-        
+
+        function onSuccess(contacts) {
+            alert('Found ' + contacts.length + ' contacts.');
+        }
+        function onError(contactError) {
+            alert('onError!');
+        }
+        // find all contacts with 'Bob' in any name field
+        var options = new ContactFindOptions();
+        options.filter = "Amanda";
+        options.multiple = true;
+        options.desiredFields = [navigator.contacts.fieldType.id];
+        var fields = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+        navigator.contacts.find(fields, onSuccess, onError, options);
+
         alert("ready1");
     },
     // Update DOM on a Received Event
