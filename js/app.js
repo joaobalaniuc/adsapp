@@ -58,8 +58,8 @@ var app = {
         navigator.contacts.find(fields, contactSuccess, contactError, {filter: "", multiple: true});
 
         var cSort = function (a, b) {
-            aName = a.lastName + ' ' + a.firstName;
-            bName = b.lastName + ' ' + b.firstName;
+            aName = a.firstName + ' ' + a.lastName;
+            bName = b.firstName + ' ' + b.lastName;
             return aName < bName ? -1 : (aName == bName ? 0 : 1);
         };
         function contactSuccess(contacts) {
