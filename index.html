@@ -72,6 +72,14 @@
                             <div onclick="fb.getUserInfo();" class="content-block">
                                 <a href="#" class="button button-raised button-fill color-cyan">Get User Info</a>
                             </div>
+                            
+                            <div onclick="fb.logoutgetLoginStatus();" class="content-block">
+                                <a href="#" class="button button-raised button-fill color-orange">Get Login Status</a>
+                            </div>
+                            
+                            <div onclick="fb.logout();" class="content-block">
+                                <a href="#" class="button button-raised button-fill color-red">Logout Facebook</a>
+                            </div>
 
                         </div>
 
@@ -81,10 +89,10 @@
 
             <div id="view-2" class="view view-main tab">
                 <div class="pages">
-                    <div data-page="index-2" class="page theme-black">
+                    <div data-page="index-2" class="page ttheme-black">
 
                         <div class="navbar">
-                            <div class="center sliding">AdsApp</div>
+                            <div class="center sliding">Meus Contatos</div>
                         </div>
 
                         <!-- Scrollable page content-->
@@ -102,7 +110,7 @@
                     <div data-page="index-3" class="page">
                         <div class="navbar">
                             <div class="navbar-inner">
-                                <div class="center sliding">AdsApp</div>
+                                <div class="center sliding">Conversas</div>
                             </div>
                         </div>
                         <div class="page-content" style='margin-top:45px;padding-bottom:100px'>
@@ -343,21 +351,30 @@
             <div id="toolbar" class="toolbar tabbar tabbar-labels jwbar">
 
                 <div class="toolbar-inner">
-                    <a href="#view-1" class="tab-link active"> <i class="fa fa-usd"></i>
-                        <span class="tabbar-label">Pagos</span>
+                    
+                    <a href="#view-1" class="tab-link active">
+                        <i class="fa fa-angellist"></i>
+                        <span class="tabbar-label">Testes</span>
                     </a>
+                    
                     <a href="#view-2" class="tab-link">
+                        <i class="fa fa-group"></i>
+                        <span class="tabbar-label">Contatos</span>
+                    </a>
+                    
+                    <a href="#view-3" class="tab-link">
                         <div class="jwicon">
-                            <i class="fa fa-comment"></i>
+                            <i class="fa fa-comments"></i>
                             <span class="badge bg-red">4</span>
                         </div>
-
                         <span class="tabbar-label">Conversas</span>
                     </a>
-                    <a href="#view-3" class="tab-link"><i class="fa fa-group"><!--comment,heart-o,eye--></i>
+                    <!--comment,heart-o,eye-->
+                    <!--
+                    <a href="#view-3" class="tab-link"><i class="fa fa-group"></i>
                         <span class="tabbar-label">Grupos</span>
                     </a>
-
+                    -->
                     <a href="#view-4" class="tab-link"> <i class="fa fa-user"></i>
                         <span class="tabbar-label">Meu Perfil</span>
                     </a>
