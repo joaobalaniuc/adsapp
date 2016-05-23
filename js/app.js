@@ -57,7 +57,13 @@ var app = {
         var fields = ['displayName', 'name', 'phoneNumbers'];
         navigator.contacts.find(fields, contactSuccess, contactError, {filter: "", multiple: true});
 
+        var cSort = function (a, b) {
+            aName = a.lastName + ' ' + a.firstName;
+            bName = b.lastName + ' ' + b.firstName;
+            return aName < bName ? -1 : (aName == bName ? 0 : 1);
+        };
         function contactSuccess(contacts) {
+            contacts = contacts.sort(cSort);
             var contact_name;
             var contact_phone;
             for (i = 0; i < contacts.length; i++) {
@@ -74,9 +80,11 @@ var app = {
                 }
             }
         }
+        ;
         function contactError(error) {
             alert(error);
         }
+        ;
 
         console.log("ready1");
     },
