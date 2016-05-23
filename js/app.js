@@ -57,13 +57,16 @@ var app = {
         var fields = ['displayName', 'name', 'phoneNumbers'];
         navigator.contacts.find(fields, contactSuccess, contactError, {filter: "", multiple: true});
 
-        var cSort = function (a, b) {
-            aName = a.firstName + ' ' + a.lastName;
-            bName = b.firstName + ' ' + b.lastName;
-            return aName < bName ? -1 : (aName == bName ? 0 : 1);
-        };
+        var headings = 'abcdefghijklmnopqrstuvwxyz';
+
+        var $recipes = $('#recipes').detach();
+        $.each(headings, function () {
+            $('body').append('<h3>' + this + '</h3>');
+            $('body').append($('<ul/>').append($recipes.find('.' + this)));
+        });
+
         function contactSuccess(contacts) {
-            contacts = contacts.sort(cSort);
+            $('#contacts').html("");
             var contact_name;
             var contact_phone;
             for (i = 0; i < contacts.length; i++) {
@@ -73,6 +76,7 @@ var app = {
                     if (contacts[i].phoneNumbers != null && contacts[i].phoneNumbers.length > 0 && contacts[i].phoneNumbers[0].value != null && contacts[i].phoneNumbers[0].value != undefined) {
                         contact_phone = contacts[i].phoneNumbers[0].value;
                         console.log(contact_name + "=" + contact_phone);
+                        $('#contacts').append('<li><div class="item-content"><div class="item-inner"><div class="item-title">' + contact_name + '</div></div></div></li>');
                     } else {
                         console.log("--No Number-");
                         contact_phone = "";
