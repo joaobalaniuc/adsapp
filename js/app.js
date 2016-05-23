@@ -58,17 +58,18 @@ var app = {
         navigator.contacts.find(fields, contactSuccess, contactError, {filter: "", multiple: true});
 
         var headings = 'abcdefghijklmnopqrstuvwxyz';
-
-        var $recipes = $('#recipes').detach();
+        var $recipes = $('#contacts').detach();
         $.each(headings, function () {
             $('body').append('<h3>' + this + '</h3>');
-            $('body').append($('<ul/>').append($recipes.find('.' + this)));
+            $('body').append($('<ul/>').append($recipes.find('.char-' + this)));
         });
 
+
         function contactSuccess(contacts) {
-            $('#contacts').html("");
+            var myArray = [];
             var contact_name;
             var contact_phone;
+            var letter;
             for (i = 0; i < contacts.length; i++) {
                 if (contacts[i].name.formatted != null && contacts[i].name.formatted != undefined) {
                     contact_name = contacts[i].name.formatted;
@@ -76,12 +77,29 @@ var app = {
                     if (contacts[i].phoneNumbers != null && contacts[i].phoneNumbers.length > 0 && contacts[i].phoneNumbers[0].value != null && contacts[i].phoneNumbers[0].value != undefined) {
                         contact_phone = contacts[i].phoneNumbers[0].value;
                         console.log(contact_name + "=" + contact_phone);
-                        $('#contacts').append('<li><div class="item-content"><div class="item-inner"><div class="item-title">' + contact_name + '</div></div></div></li>');
+
+                        var firstLetter = contact_name.charAt(0);
+                        if (!myArray[firstLetter])
+                            myArray[firstLetter] = [];
+                        myArray[firstLetter].push(contact_name);
+
+                        //$('#contacts').append('<li class="char-' + letter + '"><div class="item-content"><div class="item-inner"><div class="item-title">' + contact_name + '</div></div></div></li>');
                     } else {
                         console.log("--No Number-");
                         contact_phone = "";
                     }
                 }
+            }
+            var letter = "";
+            for (var i = 65; i <= 90; i++) {
+                letter = String.fromCharCode(i);
+                if (!myArray[letter])
+                    myArray[letter] = [];
+
+                $('#teste').append("<div>" + letter + "</div>");
+                $.each(myArray[letter], function (k, v) {
+                    $('#teste').append("<div>" + v + "</div>");
+                });
             }
         }
         ;
@@ -91,7 +109,8 @@ var app = {
         ;
 
         console.log("ready1");
-    },
+    }
+    ,
     // Update DOM on a Received Event
     receivedEvent: function (id) {
         /*var parentElement = document.getElementById(id);
