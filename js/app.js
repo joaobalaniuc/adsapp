@@ -43,9 +43,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function () {
         
-        console.log("aaaaa");
-
-        alert("ready0");
+        console.log("ready0");
 
         app.receivedEvent('deviceready');
 
@@ -81,7 +79,7 @@ var app = {
         }, {filter: "", multiple: true}
         );
 
-        alert("ready1");
+        console.log("ready1");
     },
     // Update DOM on a Received Event
     receivedEvent: function (id) {
