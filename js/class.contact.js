@@ -24,12 +24,12 @@ function onContactSuccess(contacts) {
                     myArray[firstLetter] = [];
                 }
                 myArray[firstLetter].push(contact_name);
-
+                /*
                 contactsTmp = [
                     [contact_name, contact_phone]
                 ];
                 contacts = contacts.concat(contactsTmp);
-
+                */
 
             } else {
                 console.log("--No Number-");
@@ -37,10 +37,10 @@ function onContactSuccess(contacts) {
             }
         }
     }
-
+    /*
     console.log("contatos:");
     console.log(contacts);
-
+    */
     var items = [];
     var letter = "";
     for (var i = 65; i <= 90; i++) {
