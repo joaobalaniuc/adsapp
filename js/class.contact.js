@@ -33,14 +33,14 @@ function onContactSuccess(contacts) {
         if (!myArray[letter])
             myArray[letter] = [];
 
-        items.push('<li class="list-group-title">' + letter + '</li>');
+        //items.push('<li class="list-group-title">' + letter + '</li>');
 
         $.each(myArray[letter], function (k, v) {
             console.log(k + "=" + v);
             items.push('<li><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + v + '</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
         });
     }
-    var contacts = myApp.virtualList($$(document).find('.virtual-list'), {
+    var contacts = myApp.virtualList($$("#contacts"), {
         // Pass array with items
         //items: items,
         items: items,
@@ -59,12 +59,18 @@ function onContactSuccess(contacts) {
             return found; //return array with mathced indexes
         },
         // Item height
-        height: 73,
+        height: 73
     });
+    checkContact();
 }
 
 function onContactError(error) {
     alert(error);
 }
-
+//==============================================
+// VERIFICAR SE CONTATO POSSUI ADSAPP
+//==============================================
+function checkContact() {
+    
+}
 
