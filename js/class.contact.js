@@ -33,7 +33,7 @@ function onContactSuccess(contacts) {
         if (!myArray[letter])
             myArray[letter] = [];
 
-        items.push('<li class="list-group-title">' + letter + '</li>');
+        //items.push('<li class="list-group-title">' + letter + '</li>');
 
         $.each(myArray[letter], function (k, v) {
             console.log(k + "=" + v);
