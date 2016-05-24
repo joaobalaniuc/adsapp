@@ -10,35 +10,6 @@ $(document).ready(function () {
         $('#toplogo').css("margin-top", "10px");
     }
 
-    /*
-     var onSuccess = function (position) {
-     alert('Latitude: ' + position.coords.latitude + '\n' +
-     'Longitude: ' + position.coords.longitude + '\n' +
-     'Altitude: ' + position.coords.altitude + '\n' +
-     'Accuracy: ' + position.coords.accuracy + '\n' +
-     'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
-     'Heading: ' + position.coords.heading + '\n' +
-     'Speed: ' + position.coords.speed + '\n' +
-     'Timestamp: ' + position.timestamp + '\n');
-     };
-     function onError(error) {
-     alert('code: ' + error.code + '\n' +
-     'message: ' + error.message + '\n');
-     }
-     navigator.geolocation.getCurrentPosition(onSuccess, onError);
-     */
-    /*
-     function onSuccess(position) {
-     $('#coord').html(position.coords.latitude + " x " + position.coords.longitude);
-     }
-     function onError(error) {
-     alert('code: ' + error.code + '\n' +
-     'message: ' + error.message + '\n');
-     }
-     var watchID = navigator.geolocation.watchPosition(onSuccess, onError, {timeout: 30000});
-     */
-
-
     // Get data and fill
     getSession();
 
@@ -46,6 +17,11 @@ $(document).ready(function () {
     setInterval(function () {
         pageCheck();
     }, 300);
+    
+    // Global timer
+    setInterval(function () {
+        //updContact();
+    }, 500);
 
 });
 
