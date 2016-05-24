@@ -17,7 +17,7 @@ $(document).ready(function () {
     setInterval(function () {
         pageCheck();
     }, 300);
-    
+
     // Global timer
     setInterval(function () {
         //updContact();

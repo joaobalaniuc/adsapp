@@ -26,18 +26,41 @@ function onContactSuccess(contacts) {
         }
     }
 
+    var items = [];
     var letter = "";
     for (var i = 65; i <= 90; i++) {
         letter = String.fromCharCode(i);
         if (!myArray[letter])
             myArray[letter] = [];
 
-        $("#contacts").append('<li class="list-group-title">' + letter + '</li>');
+        items.push('<li class="list-group-title">' + letter + '</li>');
+
         $.each(myArray[letter], function (k, v) {
             console.log(k + "=" + v);
-            $("#contacts").append('<li><div class="item-content"><div class="item-inner"><div class="item-title">' + v + '</div></div></div></li>');
+            items.push('<li><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + v + '</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
         });
     }
+    var contacts = myApp.virtualList($$(document).find('.virtual-list'), {
+        // Pass array with items
+        //items: items,
+        items: items,
+        // Custom search function for searchbar
+        searchAll: function (query, items) {
+            var found = [];
+            for (var i = 0; i < items.length; i++) {
+                /*if (items[i].title.indexOf(query) >= 0 || query.trim() === '') {
+                 found.push(i);
+                 }*/
+                var item = items[i];
+                if ($(item).text().indexOf(query) >= 0 || query.trim() === '') {
+                    found.push(i);
+                }
+            }
+            return found; //return array with mathced indexes
+        },
+        // Item height
+        height: 73,
+    });
 }
 
 function onContactError(error) {

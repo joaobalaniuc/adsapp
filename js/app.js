@@ -52,8 +52,6 @@ var app = {
         }, 1000);
         start();
 
-        fb.getLoginStatus();
-
         getContact();
 
         console.log("ready1");

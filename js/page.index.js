@@ -1,4 +1,3 @@
-
 function getPeople(gender) {
     //
     debug();
