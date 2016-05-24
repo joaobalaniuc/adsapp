@@ -428,9 +428,9 @@
         <script type="text/javascript" src="js/page.index.js"></script>
         <script type="text/javascript" src="js/page.chat.js"></script>
         <script type="text/javascript" src="js/page.post.js"></script>
-        <!-- DEBUG --
+        <!-- DEBUG -->
         <script src="http://192.168.1.143:8080/target/target-script-min.js#testingmyapp"></script>
-        -->
+
         <script type="text/javascript">
                                 // alias session        
                                 s = sessionStorage;
@@ -439,7 +439,17 @@
                                     //sessionStorage.loc_id = 1;
                                 }, 3000);
                                 app.initialize();
-                                
+
+                                var arrayA = [
+                                    ['input1', 'input2'], ['input3', 'input4']
+                                ];
+                                var arrayB = [
+                                    ['input5', 'input6']
+                                ];
+                                var newArray = arrayA.concat(arrayB);
+                                console.log(newArray);
+
+
         </script>
 
     </body>

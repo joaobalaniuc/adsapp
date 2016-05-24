@@ -1,4 +1,11 @@
 
+function enc(array_to_json) {
+    return JSON.stringify(array_to_json);
+}
+function dec(json_to_array) {
+    return JSON.parse(json_to_array);
+}
+
 //-----------------------------------
 // INSERIR ARRAY EM SESSION STORAGE
 //-----------------------------------
