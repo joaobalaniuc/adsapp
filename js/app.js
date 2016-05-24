@@ -57,14 +57,6 @@ var app = {
         var fields = ['displayName', 'name', 'phoneNumbers'];
         navigator.contacts.find(fields, contactSuccess, contactError, {filter: "", multiple: true});
 
-        var headings = 'abcdefghijklmnopqrstuvwxyz';
-        var $recipes = $('#contacts').detach();
-        $.each(headings, function () {
-            $('body').append('<h3>' + this + '</h3>');
-            $('body').append($('<ul/>').append($recipes.find('.char-' + this)));
-        });
-
-
         function contactSuccess(contacts) {
             var myArray = [];
             var contact_name;
