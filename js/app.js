@@ -90,19 +90,17 @@ var app = {
                     }
                 }
             }
-            
-            $elem=$("#contacts");
-            $elem.html("");
+
             var letter = "";
             for (var i = 65; i <= 90; i++) {
                 letter = String.fromCharCode(i);
                 if (!myArray[letter])
                     myArray[letter] = [];
 
-                $elem.append('<li class="list-group-title">' + letter + '</li>');
+                $("#contacts").append('<li class="list-group-title">' + letter + '</li>');
                 $.each(myArray[letter], function (k, v) {
-                    console.log(v);
-                    $elem.append('<li><div class="item-content"><div class="item-inner"><div class="item-title">' + v + '</div></div></div></li>');
+                    console.log(k + "=" + v);
+                    $("#contacts").append('<li><div class="item-content"><div class="item-inner"><div class="item-title">' + v + '</div></div></div></li>');
                 });
             }
         }
