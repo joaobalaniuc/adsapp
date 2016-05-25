@@ -31,12 +31,12 @@ function pageRefresh() {
     var t = 0;
     // mulheres
     if (page === "index") {
-        getPeople("f");
+        //getPeople("f");
         t = 10000;
     }
     // homens
     if (page === "index-2") {
-        getPeople("m");
+        //getPeople("m");
         t = 10000;
     }
     // chat list

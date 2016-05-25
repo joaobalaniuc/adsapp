@@ -4,6 +4,8 @@
 function start() {
     // App config
     localStorage.server = "http://nickford.com.br/quickie/";
+    localStorage.server = "http://192.168.1.143/quickie/server/";
+    localStorage.server = "http://10.0.0.35/quickie/server/";
     //localStorage.server = "http://www.nickford.com.br/quickie/";
     //localStorage.server = "http://localhost/quickie/server/";
     localStorage.user_id = 1;
@@ -15,6 +17,10 @@ function start() {
     sessionStorage.lastchat = 0; // last msg id (#index-3)
     sessionStorage.lastchat_inner = 0; // (#messages)
     //
+    localStorage.dbShort = 'Jowi';
+    localStorage.dbVersion = '1.0';
+    localStorage.dbName = 'Jowi';
+    localStorage.dbMaxSize = 65536;
 }
 
 var app = {
