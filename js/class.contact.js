@@ -41,7 +41,7 @@ function onContactSuccess(contacts) {
             items.push('<li data-num="' + c[1] + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + c[0] + '</div></div><div class="item-subtitle">' + c[1] + '</div></div></a></li>');
         });
     }
-    contacts = myApp.virtualList($$("#contacts"), {
+    myContacts = myApp.virtualList($$("#contacts"), {
         // Pass array with items
         //items: items,
         items: items,
@@ -60,13 +60,40 @@ function onContactSuccess(contacts) {
         height: 73
     });
     checkContact(0, items);
-}
 
+    setTimeout(function () {
+        checkContactDb();
+    }, 3000);
+}
 function onContactError(error) {
     alert(error);
 }
+
 //==============================================
 // VERIFICAR SE CONTATO POSSUI ADSAPP
+// DE ACORDO COM BD INTERNO
+//==============================================
+function checkContactDb() {
+    $.each(myContacts.items, function (index, value) {
+        console.log(index + ": " + value);
+        var num = $(value).attr("data-num");
+        dbx('SELECT * FROM contact WHERE num = "' + num + '"', function (transaction, result) {
+            if (result.rows.length == 0) {
+                $('li[data-num="' + num + '"] .item-subtitle').append("- ADSAPP USER");
+            }
+            else {
+                $('li[data-num="' + num + '"] .item-subtitle').append('<a style="width:50%;float:right;" href="#" class="button button-raised button-fill color-green">Convidar</a>');
+            }
+        });
+        setTimeout(function () {
+            //checkContactDb();
+        }, 10000);
+    });
+}
+
+//==============================================
+// VERIFICAR SE CONTATO POSSUI ADSAPP
+// DE ACORDO COM SERVIDOR
 //==============================================
 function checkContact(num, items) {
 
@@ -158,7 +185,7 @@ function simulateContact() {
     items.push('<li data-num="+5528999999999"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Hylessandro</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
     items.push('<li data-num="+5528999999910"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Marcão</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
     // Create virtual list
-    contacts = myApp.virtualList($$('#contacts'), {
+    myContacts = myApp.virtualList($$('#contacts'), {
         // Pass array with items
         //items: items,
         items: items,
@@ -178,7 +205,7 @@ function simulateContact() {
     });
 
     setTimeout(function () {
-        //checkContact(0, items);
-    }, 1000);
+        checkContactDb();
+    }, 3000);
 }
 
