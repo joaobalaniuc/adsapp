@@ -50,6 +50,8 @@ function onContactSuccess(contacts) {
         var i = 0;
         $.each(myArray[letter], function (k, v) {
 
+        items.push('<li><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + v + '</div></div><div class="item-subtitle">---</div></div></a></li>');
+        /*
             dbx('SELECT * FROM contact WHERE num = "' + contact_phone + '"', function (transaction, result) {
                 if (result.rows.length > 0) {
                     items.push('<li><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + v + '</div></div><div class="item-subtitle">ADSAPP USER</div></div></a></li>');
@@ -58,7 +60,7 @@ function onContactSuccess(contacts) {
                     items.push('<li><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + v + '</div></div><div class="item-subtitle">---</div></div></a></li>');
                 }
             });
-
+            */
 
         });
     }
