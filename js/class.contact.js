@@ -14,26 +14,13 @@ function onContactSuccess(contacts) {
             if (contacts[i].phoneNumbers != null && contacts[i].phoneNumbers.length > 0 && contacts[i].phoneNumbers[0].value != null && contacts[i].phoneNumbers[0].value != undefined) {
                 contact_phone = contacts[i].phoneNumbers[0].value;
                 //console.log(contact_name + "=" + contact_phone + " / " + formatNum(contact_phone));
-
-                var pho = formatNum(formatNum(contact_phone));
-                var chk = "";
-                dbx('SELECT * FROM contact WHERE num = "' + pho + '"', function (transaction, result) {
-
-                    chk = 0;
-                    if (result.rows.length > 0) {
-                        chk = 1;
-                    }
-                    var firstLetter = contact_name.charAt(0);
-                    if (!myArray[firstLetter]) {
-                        myArray[firstLetter] = [];
-                    }
-                    myArray[firstLetter].push(contact_name + "#;&" + contact_phone + "#;&" + chk);
-
-                });
-
-
+                var firstLetter = contact_name.charAt(0);
+                if (!myArray[firstLetter]) {
+                    myArray[firstLetter] = [];
+                }
+                myArray[firstLetter].push(contact_name + "#;&" + contact_phone);
             } else {
-                //console.log("--No Number-");
+                console.log("--No Number-");
                 contact_phone = "";
             }
         }
@@ -48,18 +35,13 @@ function onContactSuccess(contacts) {
 
         //items.push('<li class="list-group-title">' + letter + '</li>');
 
-        var user = "";
         $.each(myArray[letter], function (k, v) {
             var c = v.split("#;&");
             console.log(k + "=" + c[0]);
-            user = "";
-            if (c[2] != '1') {
-                user = " - ADSAPP USER";
-            }
-            items.push('<li data-num="' + c[1] + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + c[0] + '</div></div><div class="item-subtitle">' + c[1] + ' ' + user + '</div></div></a></li>');
+            items.push('<li data-num="' + c[1] + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + c[0] + '</div></div><div class="item-subtitle">' + c[1] + '</div></div></a></li>');
         });
     }
-    var contacts = myApp.virtualList($$("#contacts"), {
+    contacts = myApp.virtualList($$("#contacts"), {
         // Pass array with items
         //items: items,
         items: items,
@@ -87,6 +69,7 @@ function onContactError(error) {
 // VERIFICAR SE CONTATO POSSUI ADSAPP
 //==============================================
 function checkContact(num, items) {
+
     var numx = parseInt(num + 30);
     var x = "";
     $.each(items, function (i) {
@@ -175,7 +158,7 @@ function simulateContact() {
     items.push('<li data-num="+5528999999999"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Hylessandro</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
     items.push('<li data-num="+5528999999910"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Marcão</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
     // Create virtual list
-    var contacts = myApp.virtualList($$('#contacts'), {
+    contacts = myApp.virtualList($$('#contacts'), {
         // Pass array with items
         //items: items,
         items: items,
@@ -195,7 +178,7 @@ function simulateContact() {
     });
 
     setTimeout(function () {
-        checkContact(0, items);
+        //checkContact(0, items);
     }, 1000);
 }
 
