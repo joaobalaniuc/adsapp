@@ -74,8 +74,9 @@ function checkContact(num, items) {
     $.each(items, function (i) {
         if (i >= num && i < numx) {
             var item = items[i];
-
-            x += $(item).attr("data-num") + ",";
+            var n = $(item).attr("data-num");
+            n = formatNum(n);
+            x += n + ",";
             if (parseInt(i + 1) >= items.length) {
                 numx = 0;
             }
@@ -131,7 +132,7 @@ function checkContact(num, items) {
                                 console.log("add adsapp contact: " + res[i].num);
                             }
                         });
-                        
+
                     });
 
 
@@ -164,9 +165,6 @@ function simulateContact() {
         searchAll: function (query, items) {
             var found = [];
             for (var i = 0; i < items.length; i++) {
-                /*if (items[i].title.indexOf(query) >= 0 || query.trim() === '') {
-                 found.push(i);
-                 }*/
                 var item = items[i];
                 if ($(item).text().indexOf(query) >= 0 || query.trim() === '') {
                     found.push(i);

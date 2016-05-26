@@ -16,6 +16,7 @@ function start() {
 
     // User Info
     localStorage.user_id = 1;
+    localStorage.user_num = "+55 28 999652165";
     localStorage.session_id = 1;
     localStorage.session_startdate = "2016-04-11 12:00";
 
