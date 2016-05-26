@@ -38,7 +38,7 @@ function onContactSuccess(contacts) {
         $.each(myArray[letter], function (k, v) {
             var c = v.split("#;&");
             console.log(k + "=" + v);
-            items.push('<li><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + c[0] + '</div></div><div class="item-subtitle">' + c[1] + '</div></div></a></li>');
+            items.push('<li data-num="' + c[1] + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + c[0] + '</div></div><div class="item-subtitle">' + c[1] + '</div></div></a></li>');
         });
     }
     var contacts = myApp.virtualList($$("#contacts"), {
@@ -49,9 +49,6 @@ function onContactSuccess(contacts) {
         searchAll: function (query, items) {
             var found = [];
             for (var i = 0; i < items.length; i++) {
-                /*if (items[i].title.indexOf(query) >= 0 || query.trim() === '') {
-                 found.push(i);
-                 }*/
                 var item = items[i];
                 if ($(item).text().indexOf(query) >= 0 || query.trim() === '') {
                     found.push(i);
@@ -72,7 +69,7 @@ function onContactError(error) {
 // VERIFICAR SE CONTATO POSSUI ADSAPP
 //==============================================
 function checkContact(num, items) {
-    var numx = parseInt(num + 5);
+    var numx = parseInt(num + 10);
     var x = "";
     $.each(items, function (i) {
         if (i >= num && i < numx) {
@@ -84,7 +81,7 @@ function checkContact(num, items) {
             }
         }
     });
-    //console.log(numx + "/" + items.length + "=" + x);
+    console.log(numx + "/" + items.length + "=" + x);
     $.ajax({
         url: localStorage.server + "/contact-check.json.php",
         data: {
@@ -99,7 +96,7 @@ function checkContact(num, items) {
 
                 setTimeout(function () {
                     checkContact(numx, items);
-                }, 1000);
+                }, 3000);
 
             })
 
