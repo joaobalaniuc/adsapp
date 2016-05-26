@@ -2,25 +2,41 @@
 // INICIAR DISPOSITIVO
 //--------------------------------------------
 function start() {
+
     // App config
-    localStorage.server = "http://nickford.com.br/quickie/";
-    localStorage.server = "http://192.168.1.143/quickie/server/";
-    localStorage.server = "http://10.0.0.35/quickie/server/";
+    var version = '1.0.2';
+
+    // Server
+    //localStorage.server = "http://nickford.com.br/quickie/";
+    //localStorage.server = "http://192.168.1.143/quickie/server/";
+    //localStorage.server = "http://10.0.0.35/quickie/server/";
+    localStorage.server = "http://192.168.25.10/quickie/server/";
     //localStorage.server = "http://www.nickford.com.br/quickie/";
     //localStorage.server = "http://localhost/quickie/server/";
+
+    // User Info
     localStorage.user_id = 1;
     localStorage.session_id = 1;
     localStorage.session_startdate = "2016-04-11 12:00";
-    //
+
+    // Dev
     sessionStorage.debug = 1;
     sessionStorage.activePage = "";
     sessionStorage.lastchat = 0; // last msg id (#index-3)
     sessionStorage.lastchat_inner = 0; // (#messages)
-    //
-    localStorage.dbShort = 'Jowi';
-    localStorage.dbVersion = '1.0';
-    localStorage.dbName = 'Jowi';
-    localStorage.dbMaxSize = 65536;
+
+    // Database
+    if (localStorage.version !== version) {
+        localStorage.version = version;
+        // db
+        localStorage.dbShort = 'Jowi';
+        localStorage.dbVersion = '1.0';
+        localStorage.dbName = 'Jowi';
+        localStorage.dbMaxSize = 65536;
+        alert("new version, create db");
+        dbCreate();
+    }
+    dbOpen();
 }
 
 var app = {

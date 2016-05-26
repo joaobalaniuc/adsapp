@@ -4,35 +4,41 @@ function getContact() {
 }
 function onContactSuccess(contacts) {
     var myArray = [];
-    var myArray2 = [];
     var contact_name;
     var contact_phone;
     var letter;
+
+    //===================================
+    // ORGANIZAR CONTATOS EM $MYARRAY
+    //===================================
     for (i = 0; i < contacts.length; i++) {
+
+        // DADOS NÃO NULOS
         if (contacts[i].name.formatted != null && contacts[i].name.formatted != undefined) {
+
             contact_name = contacts[i].name.formatted;
             contact_name = contact_name.replace(/'/g, "''");
+
+            // CONTATO TEM NUMERO
             if (contacts[i].phoneNumbers != null && contacts[i].phoneNumbers.length > 0 && contacts[i].phoneNumbers[0].value != null && contacts[i].phoneNumbers[0].value != undefined) {
                 contact_phone = contacts[i].phoneNumbers[0].value;
-                console.log(contact_name + "=" + contact_phone);
                 var firstLetter = contact_name.charAt(0);
                 if (!myArray[firstLetter]) {
                     myArray[firstLetter] = [];
                 }
                 myArray[firstLetter].push(contact_name);
-
-                var append = new Array(contact_name, contact_phone);
-                myArray2[firstLetter] = myArray2[firstLetter].concat(append);
-                
-            } else {
-                console.log("--No Number-");
+                console.log(contact_name + "=" + contact_phone);
+            }
+            // CONTATO NÃO TEM NUMERO
+            else {
                 contact_phone = "";
+                console.log("--No Number-");
             }
         }
     }
-    console.log("myArray2:");
-    console.log(myArray2);
-
+    //===================================
+    // CRIAR <LI> ITEMS PARA <UL>
+    //===================================
     var items = [];
     var letter = "";
     for (var i = 65; i <= 90; i++) {
@@ -44,13 +50,15 @@ function onContactSuccess(contacts) {
         var i = 0;
         $.each(myArray[letter], function (k, v) {
 
-            console.log(k + "=" + v);
             dbx('SELECT * FROM contact WHERE num = "' + contact_phone + '"', function (transaction, result) {
                 if (result.rows.length > 0) {
-
+                    items.push('<li><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + v + '</div></div><div class="item-subtitle">ADSAPP USER</div></div></a></li>');
+                }
+                else {
+                    items.push('<li><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + v + '</div></div><div class="item-subtitle">---</div></div></a></li>');
                 }
             });
-            items.push('<li><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + v + '</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
+
 
         });
     }
@@ -84,19 +92,30 @@ function onContactError(error) {
 //==============================================
 // VERIFICAR SE CONTATO POSSUI ADSAPP
 //==============================================
-function checkContact(num, items) {
-    var numx = parseInt(num + 5);
+function checkContact(start, items) {
+    
+    var end = parseInt(start + 5);
     var x = "";
+
+    //================================================
+    // ADICIONAR NUMEROS SOB DEMANDA EM VARIAVEL "X"
+    //================================================
     $.each(items, function (i) {
-        if (i >= num && i < numx) {
+        if (i >= start && i < end) {
             var item = items[i];
-            x += $(item).attr("data-num") + ",";
+            var num = $(item).attr("data-num");
+            // ESTE NUMERO JÁ É ADSAPP CONTACT?
+            x += num + ",";
             if (parseInt(i + 1) >= items.length) {
-                numx = 0;
+                end = 0;
             }
         }
     });
-    //console.log(numx + "/" + items.length + "=" + x);
+    console.log(end + "/" + items.length + "=" + x);
+
+    //======================================
+    // ENVIAR NUMEROS(X) PARA SERVIDOR (GET)
+    //======================================
     $.ajax({
         url: localStorage.server + "/contact-check.json.php",
         data: {
