@@ -74,7 +74,7 @@ var app = {
         }, 1000);
         start();
 
-        getContact();
+        //getContact();
 
         console.log("ready1");
     }
