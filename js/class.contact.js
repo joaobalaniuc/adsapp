@@ -13,7 +13,7 @@ function onContactSuccess(contacts) {
             contact_name = contact_name.replace(/'/g, "''");
             if (contacts[i].phoneNumbers != null && contacts[i].phoneNumbers.length > 0 && contacts[i].phoneNumbers[0].value != null && contacts[i].phoneNumbers[0].value != undefined) {
                 contact_phone = contacts[i].phoneNumbers[0].value;
-                //console.log(contact_name + "=" + contact_phone);
+                console.log(contact_name + "=" + contact_phone + " / " + formatNum(contact_phone));
                 var firstLetter = contact_name.charAt(0);
                 if (!myArray[firstLetter]) {
                     myArray[firstLetter] = [];
@@ -37,7 +37,7 @@ function onContactSuccess(contacts) {
 
         $.each(myArray[letter], function (k, v) {
             var c = v.split("#;&");
-            console.log(k + "=" + v);
+            console.log(k + "=" + c[0]);
             items.push('<li data-num="' + c[1] + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + c[0] + '</div></div><div class="item-subtitle">' + c[1] + '</div></div></a></li>');
         });
     }
