@@ -97,7 +97,7 @@ function checkContact(num, items) {
 
                 setTimeout(function () {
                     checkContact(numx, items);
-                }, 3000);
+                }, 1000);
 
             })
 
