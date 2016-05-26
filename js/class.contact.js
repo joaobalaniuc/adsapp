@@ -121,23 +121,17 @@ function checkContact(num, items) {
 
                         // ESTÁ NA MINHA LISTA DE CONTATOS QUE POSSUEM ADSAPP?
                         // ADICIONAR ESTA VERIFICAÇÃO ANTES DO AJAX
-                        var contacts = dec(localStorage.contacts);
-                        var chk = contacts.filter(function (key) {
-                            return key.num == res[i].num;
-                        });
-                        // NÃO ESTÁ, ADICIONAR
-                        console.log(chk);
-                        if (chk) {
-                            if (chk[0]["num"]) {
-
+                        dbx('SELECT * FROM contact WHERE num = "' + res[i].num + '"', function (transaction, result) {
+                            if (result.rows.length == 0) {
+                                var key = "", val = "";
+                                key = "num,nick";
+                                val = '"' + res[i].num + '",';
+                                val += '"' + res[i].nick + '"';
+                                dbQuery('INSERT INTO contact (' + key + ') VALUES (' + val + ')');
+                                console.log("add adsapp contact: " + res[i].num);
                             }
-                        }
-                        else {
-                            contacts.push(res[i]);
-                            localStorage.contacts = enc(contacts);
-                            console.log("add adsapp contact: " + res[i].num);
-                            console.log(localStorage.contacts);
-                        }
+                        });
+                        
                     });
 
 
