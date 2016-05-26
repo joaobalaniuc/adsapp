@@ -61,7 +61,7 @@ function onContactSuccess(contacts) {
         // Item height
         height: 73
     });
-    //checkContact(0);
+    checkContact(0);
 }
 
 function onContactError(error) {
