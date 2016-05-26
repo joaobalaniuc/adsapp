@@ -60,10 +60,12 @@ function onContactSuccess(contacts) {
         height: 73
     });
     checkContact(0, items);
+    
+    checkContactDb();
 
     setTimeout(function () {
         checkContactDb();
-    }, 3000);
+    }, 5000);
 }
 function onContactError(error) {
     alert(error);
