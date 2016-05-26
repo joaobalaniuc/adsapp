@@ -113,9 +113,9 @@ function checkContact(num, items) {
                     }
 
                     if (typeof res.length !== "undefined") {
-                        //console.log(res.length + " results");
+                        console.log(res.length + " results");
                     }
-
+                    console.log(res);
                     // construct
                     $.each(res, function (i, item) {
 
