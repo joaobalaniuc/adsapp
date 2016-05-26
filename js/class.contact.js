@@ -6,7 +6,6 @@ function onContactSuccess(contacts) {
     var myArray = [];
     var contact_name;
     var contact_phone;
-    var letter;
 
     //===================================
     // ORGANIZAR CONTATOS EM $MYARRAY

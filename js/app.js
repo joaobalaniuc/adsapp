@@ -34,8 +34,9 @@ function start() {
         localStorage.dbName = 'Jowi';
         localStorage.dbMaxSize = 65536;
         alert("new version, create db");
-        dbCreate();
+        
     }
+    dbCreate();
     dbOpen();
 }
 
@@ -74,7 +75,7 @@ var app = {
         }, 1000);
         start();
 
-        //getContact();
+        getContact();
 
         console.log("ready1");
     }
