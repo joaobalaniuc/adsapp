@@ -75,7 +75,7 @@ function checkContact(num, items) {
         if (i >= num && i < numx) {
             var item = items[i];
             var n = $(item).attr("data-num");
-            n = formatNum(n);
+            n = formatNum(formatNum(n));
             x += n + ",";
             if (parseInt(i + 1) >= items.length) {
                 numx = 0;
