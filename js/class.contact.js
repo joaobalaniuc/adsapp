@@ -18,7 +18,7 @@ function onContactSuccess(contacts) {
                 if (!myArray[firstLetter]) {
                     myArray[firstLetter] = [];
                 }
-                myArray[firstLetter].push(contact_name);
+                myArray[firstLetter].push(contact_name + "#;&" + contact_phone);
             } else {
                 console.log("--No Number-");
                 contact_phone = "";
@@ -36,8 +36,9 @@ function onContactSuccess(contacts) {
         //items.push('<li class="list-group-title">' + letter + '</li>');
 
         $.each(myArray[letter], function (k, v) {
+            var c = v.split("#;&");
             console.log(k + "=" + v);
-            items.push('<li><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + v + '</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
+            items.push('<li><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + c[0] + '</div></div><div class="item-subtitle">' + c[1] + '</div></div></a></li>');
         });
     }
     var contacts = myApp.virtualList($$("#contacts"), {
