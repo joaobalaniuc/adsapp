@@ -6,26 +6,38 @@ function onContactSuccess(contacts) {
     var myArray = [];
     var contact_name;
     var contact_phone;
-    var letter;
+
+    //===================================
+    // ORGANIZAR CONTATOS EM $MYARRAY
+    //===================================
     for (i = 0; i < contacts.length; i++) {
+
+        // DADOS NÃO NULOS
         if (contacts[i].name.formatted != null && contacts[i].name.formatted != undefined) {
+
             contact_name = contacts[i].name.formatted;
             contact_name = contact_name.replace(/'/g, "''");
+
+            // CONTATO TEM NUMERO
             if (contacts[i].phoneNumbers != null && contacts[i].phoneNumbers.length > 0 && contacts[i].phoneNumbers[0].value != null && contacts[i].phoneNumbers[0].value != undefined) {
                 contact_phone = contacts[i].phoneNumbers[0].value;
-                //console.log(contact_name + "=" + contact_phone);
                 var firstLetter = contact_name.charAt(0);
                 if (!myArray[firstLetter]) {
                     myArray[firstLetter] = [];
                 }
                 myArray[firstLetter].push(contact_name);
-            } else {
-                console.log("--No Number-");
+                console.log(contact_name + "=" + contact_phone);
+            }
+            // CONTATO NÃO TEM NUMERO
+            else {
                 contact_phone = "";
+                console.log("--No Number-");
             }
         }
     }
-
+    //===================================
+    // CRIAR <LI> ITEMS PARA <UL>
+    //===================================
     var items = [];
     var letter = "";
     for (var i = 65; i <= 90; i++) {
@@ -34,10 +46,21 @@ function onContactSuccess(contacts) {
             myArray[letter] = [];
 
         //items.push('<li class="list-group-title">' + letter + '</li>');
-
+        var i = 0;
         $.each(myArray[letter], function (k, v) {
-            console.log(k + "=" + v);
-            items.push('<li><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + v + '</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
+
+            items.push('<li><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + v + '</div></div><div class="item-subtitle">---</div></div></a></li>');
+            /*
+             dbx('SELECT * FROM contact WHERE num = "' + contact_phone + '"', function (transaction, result) {
+             if (result.rows.length > 0) {
+             items.push('<li><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + v + '</div></div><div class="item-subtitle">ADSAPP USER</div></div></a></li>');
+             }
+             else {
+             items.push('<li><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + v + '</div></div><div class="item-subtitle">---</div></div></a></li>');
+             }
+             });
+             */
+
         });
     }
     var contacts = myApp.virtualList($$("#contacts"), {
@@ -70,20 +93,30 @@ function onContactError(error) {
 //==============================================
 // VERIFICAR SE CONTATO POSSUI ADSAPP
 //==============================================
-function checkContact(num, items) {
-    var numx = parseInt(num + 5);
-    var x = "";
-    $.each(items, function (i) {
-        if (i >= num && i < numx) {
-            var item = items[i];
+function checkContact(start, items) {
 
-            x += $(item).attr("data-num") + ",";
+    var end = parseInt(start + 5);
+    var x = "";
+
+    //================================================
+    // ADICIONAR NUMEROS SOB DEMANDA EM VARIAVEL "X"
+    //================================================
+    $.each(items, function (i) {
+        if (i >= start && i < end) {
+            var item = items[i];
+            var num = $(item).attr("data-num");
+            // ESTE NUMERO JÁ É ADSAPP CONTACT?
+            x += num + ",";
             if (parseInt(i + 1) >= items.length) {
-                numx = 0;
+                end = 0;
             }
         }
     });
-    //console.log(numx + "/" + items.length + "=" + x);
+    console.log(end + "/" + items.length + "=" + x);
+
+    //======================================
+    // ENVIAR NUMEROS(X) PARA SERVIDOR (GET)
+    //======================================
     $.ajax({
         url: localStorage.server + "/contact-check.json.php",
         data: {
@@ -123,23 +156,18 @@ function checkContact(num, items) {
 
                         // ESTÁ NA MINHA LISTA DE CONTATOS QUE POSSUEM ADSAPP?
                         // ADICIONAR ESTA VERIFICAÇÃO ANTES DO AJAX
-                        var contacts = dec(localStorage.contacts);
-                        var chk = contacts.filter(function (key) {
-                            return key.num == res[i].num;
-                        });
-                        // NÃO ESTÁ, ADICIONAR
-                        console.log(chk);
-                        if (chk) {
-                            if (chk[0]["num"]) {
 
+                        dbx('SELECT * FROM contact WHERE num = "' + res[i].num + '"', function (transaction, result) {
+                            if (result.rows.length == 0) {
+                                var key = "", val = "";
+                                key = "num,nick";
+                                val = '"' + res[i].num + '",';
+                                val += '"' + res[i].nick + '"';
+                                dbQuery('INSERT INTO contact (' + key + ') VALUES (' + val + ')');
+                                console.log("add adsapp contact: " + res[i].num);
                             }
-                        }
-                        else {
-                            contacts.push(res[i]);
-                            localStorage.contacts = enc(contacts);
-                            console.log("add adsapp contact: " + res[i].num);
-                            console.log(localStorage.contacts);
-                        }
+                        });
+
                     });
 
 
@@ -172,9 +200,6 @@ function simulateContact() {
         searchAll: function (query, items) {
             var found = [];
             for (var i = 0; i < items.length; i++) {
-                /*if (items[i].title.indexOf(query) >= 0 || query.trim() === '') {
-                 found.push(i);
-                 }*/
                 var item = items[i];
                 if ($(item).text().indexOf(query) >= 0 || query.trim() === '') {
                     found.push(i);
