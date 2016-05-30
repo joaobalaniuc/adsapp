@@ -41,7 +41,9 @@ function onContactSuccess(contacts) {
 
                 var subtitle = "";
                 dbx('SELECT * FROM contact WHERE num_local = "' + contact_phone + '"', function (transaction, result) {
-                    console.log(result.rows + " results ");
+                    console.log(result.rows.length + " results ");
+
+                    var myContacts = myApp.virtualList($$("#contacts"));
                     if (result.rows.length == 0) {
                         subtitle = "(NOT USER)";
                     }
