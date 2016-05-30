@@ -27,6 +27,7 @@ function dbCreate() {
                 transaction.executeSql(
                         'CREATE TABLE IF NOT EXISTS contact ' +
                         ' (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ' +
+                        ' id_server INTEGER NOT NULL, ' +
                         ' num TEXT NOT NULL UNIQUE, ' +
                         ' num_local TEXT NOT NULL, ' +
                         ' name TEXT, ' +
