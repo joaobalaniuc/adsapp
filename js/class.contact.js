@@ -44,7 +44,7 @@ function onContactSuccess(contacts) {
                     console.log(result.rows.length + " results ");
 
                     var myContacts = myApp.virtualList($$("#contacts"));
-                    if (result.rows.length == 0) {
+                    if (result.rows.length === 0) {
                         subtitle = "(NOT USER)";
                     }
                     else {
