@@ -28,6 +28,7 @@ function dbCreate() {
                         'CREATE TABLE IF NOT EXISTS contact ' +
                         ' (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ' +
                         ' num TEXT NOT NULL UNIQUE, ' +
+                        ' num_local TEXT NOT NULL, ' +
                         ' name TEXT, ' +
                         ' nick TEXT, ' +
                         ' id_fb TEXT, ' +

@@ -3,48 +3,11 @@ function getContact() {
     navigator.contacts.find(fields, onContactSuccess, onContactError, {filter: "", multiple: true});
 }
 function onContactSuccess(contacts) {
-    var myArray = [];
-    var contact_name;
-    var contact_phone;
-    var letter;
-    for (i = 0; i < contacts.length; i++) {
-        if (contacts[i].name.formatted != null && contacts[i].name.formatted != undefined) {
-            contact_name = contacts[i].name.formatted;
-            contact_name = contact_name.replace(/'/g, "''");
-            if (contacts[i].phoneNumbers != null && contacts[i].phoneNumbers.length > 0 && contacts[i].phoneNumbers[0].value != null && contacts[i].phoneNumbers[0].value != undefined) {
-                contact_phone = contacts[i].phoneNumbers[0].value;
-                //console.log(contact_name + "=" + contact_phone + " / " + formatNum(contact_phone));
-                var firstLetter = contact_name.charAt(0);
-                if (!myArray[firstLetter]) {
-                    myArray[firstLetter] = [];
-                }
-                myArray[firstLetter].push(contact_name + "#;&" + contact_phone);
-            } else {
-                console.log("--No Number-");
-                contact_phone = "";
-            }
-        }
-    }
 
-    var items = [];
-    var letter = "";
-    for (var i = 65; i <= 90; i++) {
-        letter = String.fromCharCode(i);
-        if (!myArray[letter])
-            myArray[letter] = [];
-
-        //items.push('<li class="list-group-title">' + letter + '</li>');
-
-        $.each(myArray[letter], function (k, v) {
-            var c = v.split("#;&");
-            console.log(k + "=" + c[0]);
-            items.push('<li data-num="' + c[1] + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + c[0] + '</div></div><div class="item-subtitle">' + c[1] + '</div></div></a></li>');
-        });
-    }
     myContacts = myApp.virtualList($$("#contacts"), {
         // Pass array with items
         //items: items,
-        items: items,
+        items: [],
         // Custom search function for searchbar
         searchAll: function (query, items) {
             var found = [];
@@ -59,12 +22,68 @@ function onContactSuccess(contacts) {
         // Item height
         height: 73
     });
-    checkContact(0, items);
-    
-    checkContactDb();
+    //checkContact(0, items);
+
+    var myArray = [];
+    var contact_name;
+    var contact_phone;
+    var letter;
+    for (i = 0; i < contacts.length; i++) {
+        if (contacts[i].name.formatted != null && contacts[i].name.formatted != undefined) {
+            contact_name = contacts[i].name.formatted;
+            contact_name = contact_name.replace(/'/g, "''");
+
+            if (contacts[i].phoneNumbers != null && contacts[i].phoneNumbers.length > 0 && contacts[i].phoneNumbers[0].value != null && contacts[i].phoneNumbers[0].value != undefined) {
+                contact_phone = contacts[i].phoneNumbers[0].value;
+                console.log(contacts[i]);
+                //console.log(contact_name + "=" + contact_phone + " / " + formatNum(contact_phone));
+
+                var subtitle = "";
+                dbx('SELECT * FROM contact WHERE num_local = "' + contact_phone + '"', function (transaction, result) {
+                    if (result.rows.length == 0) {
+                        subtitle = "(NOT USER)";
+                    }
+                    else {
+                        subtitle = " (ADSAPP USER)";
+                    }
+                    myList.appendItem('<li data-num="' + contact_phone + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + contact_name + '</div></div><div class="item-subtitle">' + subtitle + '</div></div></a></li>');
+
+                });
+                /*
+                 var firstLetter = contact_name.charAt(0);
+                 if (!myArray[firstLetter]) {
+                 myArray[firstLetter] = [];
+                 }
+                 myArray[firstLetter].push(contact_name + "#;&" + contact_phone);
+                 */
+            } else {
+                console.log("--No Number-");
+                contact_phone = "";
+            }
+        }
+    }
+    /*
+     var items = [];
+     var letter = "";
+     for (var i = 65; i <= 90; i++) {
+     letter = String.fromCharCode(i);
+     if (!myArray[letter])
+     myArray[letter] = [];
+     
+     //items.push('<li class="list-group-title">' + letter + '</li>');
+     
+     $.each(myArray[letter], function (k, v) {
+     var c = v.split("#;&");
+     console.log(k + "=" + c[0]);
+     items.push('<li data-num="' + c[1] + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + c[0] + '</div></div><div class="item-subtitle">' + c[1] + '</div></div></a></li>');
+     });
+     }
+     */
+
+    //checkContactDb();
 
     setTimeout(function () {
-        checkContactDb();
+        //checkContactDb();
     }, 5000);
 }
 function onContactError(error) {
