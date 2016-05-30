@@ -39,9 +39,11 @@ function onContactSuccess(contacts) {
                 console.log(contacts[i]);
                 //console.log(contact_name + "=" + contact_phone + " / " + formatNum(contact_phone));
 
+                myContacts.appendItem('<li data-id="' + contacts[i].id + '" data-num="' + contact_phone + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + contact_name + ' #' + contacts[i].id + '</div></div><div class="item-subtitle">' + subtitle + '</div></div></a></li>');
+
                 var subtitle = "";
                 dbx('SELECT * FROM contact WHERE num_local = "' + contact_phone + '"', function (transaction, result) {
-                    console.log(result.rows.length + " results ");
+                    console.log(contact_phone + " = " + result.rows.length + " results ");
 
                     if (result.rows.length === 0) {
                         subtitle = "(NOT USER)";
