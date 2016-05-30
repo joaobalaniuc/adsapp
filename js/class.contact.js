@@ -23,6 +23,7 @@ function onContactSuccess(contacts) {
         height: 73
     });
     //checkContact(0, items);
+    myContacts.appendItem('<li data-num="NUM"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">NAME</div></div><div class="item-subtitle">SUBTITLE</div></div></a></li>');
 
     var myArray = [];
     var contact_name;
@@ -46,7 +47,7 @@ function onContactSuccess(contacts) {
                     else {
                         subtitle = " (ADSAPP USER)";
                     }
-                    myList.appendItem('<li data-num="' + contact_phone + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + contact_name + '</div></div><div class="item-subtitle">' + subtitle + '</div></div></a></li>');
+                    myContacts.appendItem('<li data-id="' + contacts[i].id + '" data-num="' + contact_phone + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + contact_name + ' #' + contacts[i].id + '</div></div><div class="item-subtitle">' + subtitle + '</div></div></a></li>');
 
                 });
                 /*
