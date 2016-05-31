@@ -21,7 +21,7 @@ function onContactSuccess(contacts) {
                 //console.log(contact_name + "=" + contact_phone + " / " + formatNum(contact_phone));
 
                 //var subtitle = "";
-                dbx('SELECT * FROM contact WHERE num_local = "' + contact_phone + '"', function (transaction, result) {
+                dbx('SELECT * FROM contact WHERE num = "' + contact_phone + '"', function (transaction, result) {
                     console.log(contact_phone + " = " + result.rows.length + " results ");
                     console.log('<li data-id="321" data-num="123"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">kkk</div></div><div class="item-subtitle">xxx</div></div></a></li>');
                     myContacts.appendItem('<li><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">kkk</div></div><div class="item-subtitle">xxx</div></div></a></li>');
@@ -34,7 +34,7 @@ function onContactSuccess(contacts) {
                     }
                     //myContacts.appendItem('<li data-id="' + contacts[i].id + '" data-num="' + contact_phone + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + contact_name + ' #' + contacts[i].id + '</div></div><div class="item-subtitle">' + subtitle + '</div></div></a></li>');
                     myContacts.appendItem('<li data-id="321" data-num="123"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">kkk</div></div><div class="item-subtitle">xxx</div></div></a></li>');
-                    //myContacts.update();
+                    myContacts.update();
                 });
                 /*
                  var firstLetter = contact_name.charAt(0);
