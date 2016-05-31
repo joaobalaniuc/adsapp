@@ -138,7 +138,7 @@ function checkContact(num) {
                                     val += '"' + res[i].nick + '"';
                                     dbQuery('INSERT INTO contact (' + key + ') VALUES (' + val + ')');
                                     //console.log("add adsapp contact: " + enc(res[i]));
-                                    $('[data-num="' + res[i].num + '"] .item-subtitle').html(" - ADSAPP USER");
+                                    $('[data-num="' + res[i].num_local + '"] .item-subtitle').html(" - ADSAPP USER");
                                 }
                             });
                         }
