@@ -58,12 +58,15 @@ function checkContactDb(num) {
         if (i >= num && i < numx) {
             //console.log("checkContactDb(): " + i + ": " + value);
             var num = $(value).attr("data-num");
+            console.log("checkContactDb(): " + num);
             dbx('SELECT * FROM contact WHERE num_local = "' + num + '"', function (transaction, result) {
                 if (result.rows.length == 0) {
                     $('li[data-num="' + num + '"] .item-subtitle').html("- ADSAPP USER(DB)");
+                    console.log("not found");
                 }
                 else {
                     $('li[data-num="' + num + '"] .item-subtitle').html('<a style="width:50%;float:right;" href="#" class="button button-raised button-fill color-green">Convidar</a>');
+                    console.log("OK!!!!!!!!!!!!!!!!!!!!!!!");
                 }
             });
             if (parseInt(i + 1) >= myContacts.items.length) {
