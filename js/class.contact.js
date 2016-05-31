@@ -6,7 +6,7 @@ function onContactSuccess(contacts) {
 
     checkContact(0);
     setTimeout(function () {
-        checkContactDb();
+        //checkContactDb();
     }, 3000);
 
     var myArray = [];
