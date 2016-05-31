@@ -6,7 +6,7 @@ function onContactSuccess(contacts) {
 
     checkContact(0);
     setTimeout(function () {
-        checkContactDb();
+        checkContactDb(0);
     }, 3000);
 
     var myArray = [];
@@ -76,7 +76,7 @@ function checkContactDb(num) {
     });
 
     setTimeout(function () {
-        checkContactDb();
+        checkContactDb(numx);
     }, 3000);
 }
 
@@ -176,9 +176,6 @@ function simulateContact() {
 
     myContacts.update();
     checkContact(0);
-
-    setTimeout(function () {
-        checkContactDb();
-    }, 3000);
+        checkContactDb(0);
 }
 
