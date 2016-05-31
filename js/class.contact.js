@@ -149,24 +149,25 @@ function checkContact(num) {
                     if (typeof res.length !== "undefined") {
                         console.log(res.length + " results");
                     }
-                    console.log(res);
-                    // construct
-                    $.each(res, function (i, item) {
-                        console.log("add adsapp contact: " + res[i].num);
-                        $('[data-num="' + res[i].num + '"] .item-subtitle').html(" - ADSAPP USER");
-                        // ESTÁ NA MINHA LISTA DE CONTATOS QUE POSSUEM ADSAPP?
-                        // ADICIONAR ESTA VERIFICAÇÃO ANTES DO AJAX
-                        dbx('SELECT * FROM contact WHERE num = "' + res[i].num + '"', function (transaction, result) {
-                            if (result.rows.length === 0) {
-                                var key = "", val = "";
-                                key = "num,nick";
-                                val = '"' + res[i].num + '",';
-                                val += '"' + res[i].nick + '"';
-                                dbQuery('INSERT INTO contact (' + key + ') VALUES (' + val + ')');
-                                console.log("(xxx) add adsapp contact: " + res[i].num);
-                            }
-                        });
 
+                    $.each(res, function (i, item) {
+                        if (res[i].num) {
+                            // ESTÁ NA MINHA LISTA DE CONTATOS QUE POSSUEM ADSAPP?
+                            // ADICIONAR ESTA VERIFICAÇÃO ANTES DO AJAX
+                            dbx('SELECT * FROM contact WHERE num = "' + res[i].num + '"', function (transaction, result) {
+                                if (result.rows.length === 0) {
+                                    var key = "", val = "";
+                                    key += "id_server,num,num_local,nick";
+                                    val += '"' + res[i].id + '",';
+                                    val += '"' + res[i].num + '",';
+                                    val += '"' + res[i].num_local + '",';
+                                    val += '"' + res[i].nick + '"';
+                                    dbQuery('INSERT INTO contact (' + key + ') VALUES (' + val + ')');
+                                    //console.log("add adsapp contact: " + enc(res[i]));
+                                    $('[data-num="' + res[i].num + '"] .item-subtitle').html(" - ADSAPP USER");
+                                }
+                            });
+                        }
                     });
 
 

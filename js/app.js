@@ -7,12 +7,11 @@ function start() {
     var version = '1.0.2';
 
     // Server
-    //localStorage.server = "http://nickford.com.br/quickie/";
-    //localStorage.server = "http://192.168.1.143/quickie/server/";
-    localStorage.server = "http://10.0.0.35/quickie/server/";
-    //localStorage.server = "http://192.168.0.110/quickie/server/";
-    //localStorage.server = "http://www.nickford.com.br/quickie/";
-    //localStorage.server = "http://localhost/quickie/server/";
+    localStorage.server = "http://nickford.com.br/quickie/";
+
+    if (web === 1) {
+        localStorage.server = "http://10.0.0.35/quickie/server/";
+    }
 
     // User Info
     localStorage.user_id = 1;
@@ -35,7 +34,7 @@ function start() {
         localStorage.dbName = 'Jowi';
         localStorage.dbMaxSize = 65536;
         alert("new version, create db");
-        
+
     }
     dbCreate();
     dbOpen();

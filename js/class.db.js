@@ -19,6 +19,18 @@ function dbOpen() {
 function dbCreate() {
 
     dbOpen();
+
+    db.transaction(
+            function (transaction) {
+                transaction.executeSql("DROP TABLE contact", [],
+                        function (tx, results) {
+                            console.log("Successfully Dropped");
+                        },
+                        function (tx, error) {
+                            console.log("Could not delete");
+                        });
+            }
+    );
     //''''''''''''''''''''''''
     // SONGS
     //''''''''''''''''''''''''
@@ -45,7 +57,7 @@ function dbCreate() {
 // EXECUTAR QUERY
 //========================
 function dbQuery(query, callback) {
-    //alert(query);
+    console.log("dbQuery: " + query);
     db.transaction(
             function (transaction) {
                 transaction.executeSql(
@@ -78,7 +90,7 @@ function dbx(query, callback) {
 // RETORNAR ERRO
 //========================
 function errorHandler(transaction, error) {
-    alert('Oops. Error was ' + error.message + ' (Code ' + error.code + ')');
+    console.log('Oops. Error was ' + error.message + ' (Code ' + error.code + ')');
     //popup("SQL Error: " + error.message + " (Code: " + error.code + ")", "red");
     return true;
 }
