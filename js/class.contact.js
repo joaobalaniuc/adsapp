@@ -24,7 +24,7 @@ function onContactSuccess(contacts) {
                 console.log(contacts[i]);
                 //console.log(contact_name + "=" + contact_phone + " / " + formatNum(contact_phone));
 
-                contactAdd('<li data-id="' + contacts[i].id + '" data-num="' + contact_phone + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + contact_name + ' #' + contacts[i].id + '</div></div><div class="item-subtitle">' + subtitle + '</div></div></a></li>');
+                //contactAdd('<li data-id="' + contacts[i].id + '" data-num="' + contact_phone + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + contact_name + ' #' + contacts[i].id + '</div></div><div class="item-subtitle">' + subtitle + '</div></div></a></li>');
 
                 var subtitle = "";
                 dbx('SELECT * FROM contact WHERE num_local = "' + contact_phone + '"', function (transaction, result) {
@@ -36,9 +36,9 @@ function onContactSuccess(contacts) {
                     else {
                         subtitle = " (ADSAPP USER)";
                     }
-                    contactAdd('<li data-id="321" data-num="123"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">aaa-kkk</div></div><div class="item-subtitle">xxx</div></div></a></li>');
+                    //contactAdd('<li data-id="321" data-num="123"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">aaa-kkk</div></div><div class="item-subtitle">xxx</div></div></a></li>');
                     myContacts.appendItem('<li data-id="' + contacts[i].id + '" data-num="' + contact_phone + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + contact_name + ' #' + contacts[i].id + '</div></div><div class="item-subtitle">' + subtitle + '</div></div></a></li>');
-                    myContacts.appendItem('<li data-id="321" data-num="123"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">kkk</div></div><div class="item-subtitle">xxx</div></div></a></li>');
+                    //myContacts.appendItem('<li data-id="321" data-num="123"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">kkk</div></div><div class="item-subtitle">xxx</div></div></a></li>');
                 });
                 /*
                  var firstLetter = contact_name.charAt(0);
