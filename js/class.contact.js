@@ -5,6 +5,9 @@ function getContact() {
 function onContactSuccess(contacts) {
 
     checkContact(0);
+    setTimeout(function () {
+        checkContactDb();
+    }, 3000);
 
     var myArray = [];
     var contact_name;
@@ -33,42 +36,13 @@ function onContactSuccess(contacts) {
                         //subtitle = " (ADSAPP USER)";
                     }
                 });
-                /*
-                 var firstLetter = contact_name.charAt(0);
-                 if (!myArray[firstLetter]) {
-                 myArray[firstLetter] = [];
-                 }
-                 myArray[firstLetter].push(contact_name + "#;&" + contact_phone);
-                 */
             } else {
                 console.log("--No Number-");
                 contact_phone = "";
             }
         }
     }
-    /*
-     var items = [];
-     var letter = "";
-     for (var i = 65; i <= 90; i++) {
-     letter = String.fromCharCode(i);
-     if (!myArray[letter])
-     myArray[letter] = [];
-     
-     //items.push('<li class="list-group-title">' + letter + '</li>');
-     
-     $.each(myArray[letter], function (k, v) {
-     var c = v.split("#;&");
-     console.log(k + "=" + c[0]);
-     items.push('<li data-num="' + c[1] + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + c[0] + '</div></div><div class="item-subtitle">' + c[1] + '</div></div></a></li>');
-     });
-     }
-     */
 
-    //checkContactDb();
-
-    setTimeout(function () {
-        //checkContactDb();
-    }, 5000);
 }
 function onContactError(error) {
     alert(error);
@@ -80,9 +54,9 @@ function onContactError(error) {
 //==============================================
 function checkContactDb() {
     $.each(myContacts.items, function (index, value) {
-        console.log(index + ": " + value);
+        console.log("checkContactDb(): " + index + ": " + value);
         var num = $(value).attr("data-num");
-        dbx('SELECT * FROM contact WHERE num = "' + num + '"', function (transaction, result) {
+        dbx('SELECT * FROM contact WHERE num_local = "' + num + '"', function (transaction, result) {
             if (result.rows.length == 0) {
                 $('li[data-num="' + num + '"] .item-subtitle').append("- ADSAPP USER");
             }
@@ -91,7 +65,7 @@ function checkContactDb() {
             }
         });
         setTimeout(function () {
-            //checkContactDb();
+            checkContactDb();
         }, 10000);
     });
 }
@@ -194,7 +168,7 @@ function simulateContact() {
     checkContact(0);
 
     setTimeout(function () {
-        //checkContactDb();
+        checkContactDb();
     }, 3000);
 }
 
