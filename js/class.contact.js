@@ -4,7 +4,7 @@ function getContact() {
 }
 function onContactSuccess(contacts) {
 
-    //checkContact(0, items);
+    checkContact(0);
 
     var myArray = [];
     var contact_name;
@@ -20,12 +20,12 @@ function onContactSuccess(contacts) {
                 console.log(contacts[i]);
                 //console.log(contact_name + "=" + contact_phone + " / " + formatNum(contact_phone));
 
-                myContacts.appendItem('<li data-id="' + contacts[i].id + '" data-num="' + contact_phone + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + contact_name + ' #' + contacts[i].id + '</div></div><div class="item-subtitle">ADSAPP USER</div></div></a></li>');
-                
+                myContacts.appendItem('<li data-id="' + contacts[i].id + '" data-num="' + contact_phone + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + contact_name + ' #' + contacts[i].id + '</div></div><div class="item-subtitle">' + contact_phone + '</div></div></a></li>');
+
                 //var subtitle = "";
                 dbx('SELECT * FROM contact WHERE num = "' + contact_phone + '"', function (transaction, result) {
-                    console.log(contact_phone + " = " + result.rows.length + " results ");
-                    
+                    //console.log(contact_phone + " = " + result.rows.length + " results ");
+
                     if (result.rows.length === 0) {
                         //subtitle = "(NOT USER)";
                     }
@@ -100,22 +100,22 @@ function checkContactDb() {
 // VERIFICAR SE CONTATO POSSUI ADSAPP
 // DE ACORDO COM SERVIDOR
 //==============================================
-function checkContact(num, items) {
+function checkContact(num) {
 
     var numx = parseInt(num + 30);
     var x = "";
-    $.each(items, function (i) {
+    $.each(myContacts.items, function (i) {
         if (i >= num && i < numx) {
-            var item = items[i];
+            var item = myContacts.items[i];
             var n = $(item).attr("data-num");
-            n = formatNum(formatNum(n));
+            //n = formatNum(formatNum(n));
             x += n + ",";
-            if (parseInt(i + 1) >= items.length) {
+            if (parseInt(i + 1) >= myContacts.items.length) {
                 numx = 0;
             }
         }
     });
-    console.log(numx + "/" + items.length + "=" + x);
+    console.log(numx + "/" + myContacts.items.length + "=" + x);
     $.ajax({
         url: localStorage.server + "/contact-check.json.php",
         data: {
@@ -129,7 +129,7 @@ function checkContact(num, items) {
             .always(function () {
 
                 setTimeout(function () {
-                    checkContact(numx, items);
+                    checkContact(numx);
                 }, 1000);
 
             })
@@ -152,17 +152,18 @@ function checkContact(num, items) {
                     console.log(res);
                     // construct
                     $.each(res, function (i, item) {
-
+                        console.log("add adsapp contact: " + res[i].num);
+                        $('[data-num="' + res[i].num + '"] .item-subtitle').html(" - ADSAPP USER");
                         // ESTÁ NA MINHA LISTA DE CONTATOS QUE POSSUEM ADSAPP?
                         // ADICIONAR ESTA VERIFICAÇÃO ANTES DO AJAX
                         dbx('SELECT * FROM contact WHERE num = "' + res[i].num + '"', function (transaction, result) {
-                            if (result.rows.length == 0) {
+                            if (result.rows.length === 0) {
                                 var key = "", val = "";
                                 key = "num,nick";
                                 val = '"' + res[i].num + '",';
                                 val += '"' + res[i].nick + '"';
                                 dbQuery('INSERT INTO contact (' + key + ') VALUES (' + val + ')');
-                                console.log("add adsapp contact: " + res[i].num);
+                                console.log("(xxx) add adsapp contact: " + res[i].num);
                             }
                         });
 
@@ -175,42 +176,24 @@ function checkContact(num, items) {
 }
 
 function simulateContact() {
-    var items = [];
-    for (var i = 0; i < 10; i++) {
-        //items.push('<li><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">AAA' + i + '</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
-    }
-    items.push('<li data-num="+5528999726858"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Amanda</div></div><div class="item-subtitle"></div></div></a></li>');
-    items.push('<li data-num="+5528999999991"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Rebeca</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
-    items.push('<li data-num="+5528999999993"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Paula</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
-    items.push('<li data-num="+5528999999994"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Fernanda</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
-    items.push('<li data-num="+5528999999995"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Ana</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
-    items.push('<li data-num="+5528999999996"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Cláudia</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
-    items.push('<li data-num="+5528999999997"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Dalma</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
-    items.push('<li data-num="+5528999999998"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Márcia</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
-    items.push('<li data-num="+5528999999999"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Hylessandro</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
-    items.push('<li data-num="+5528999999910"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Marcão</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
-    // Create virtual list
-    myContacts = myApp.virtualList($$('#contacts'), {
-        // Pass array with items
-        //items: items,
-        items: items,
-        // Custom search function for searchbar
-        searchAll: function (query, items) {
-            var found = [];
-            for (var i = 0; i < items.length; i++) {
-                var item = items[i];
-                if ($(item).text().indexOf(query) >= 0 || query.trim() === '') {
-                    found.push(i);
-                }
-            }
-            return found; //return array with mathced indexes
-        },
-        // Item height
-        height: 73
-    });
+
+    myContacts.appendItem('<li data-num="+5528999726858"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Amanda</div></div><div class="item-subtitle"></div></div></a></li>');
+    myContacts.appendItem('<li data-num="+5528999999991"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Rebeca</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
+    myContacts.appendItem('<li data-num="+5528999999993"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Paula</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
+    myContacts.appendItem('<li data-num="+5528999999994"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Fernanda</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
+    myContacts.appendItem('<li data-num="+5528999999995"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Ana</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
+    myContacts.appendItem('<li data-num="+5528999999996"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Cláudia</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
+    myContacts.appendItem('<li data-num="+5528999999997"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Dalma</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
+    myContacts.appendItem('<li data-num="+5528999999998"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Márcia</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
+    myContacts.appendItem('<li data-num="+5528999999999"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Hylessandro</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
+    myContacts.appendItem('<li data-num="+5528999999910"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Marcão</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
+
+
+    myContacts.update();
+    checkContact(0);
 
     setTimeout(function () {
-        checkContactDb();
+        //checkContactDb();
     }, 3000);
 }
 

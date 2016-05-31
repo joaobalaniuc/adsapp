@@ -7,9 +7,9 @@ function start() {
     var version = '1.0.2';
 
     // Server
-    localStorage.server = "http://nickford.com.br/quickie/";
+    //localStorage.server = "http://nickford.com.br/quickie/";
     //localStorage.server = "http://192.168.1.143/quickie/server/";
-    //localStorage.server = "http://10.0.0.35/quickie/server/";
+    localStorage.server = "http://10.0.0.35/quickie/server/";
     //localStorage.server = "http://192.168.0.110/quickie/server/";
     //localStorage.server = "http://www.nickford.com.br/quickie/";
     //localStorage.server = "http://localhost/quickie/server/";
