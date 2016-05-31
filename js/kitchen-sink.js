@@ -1,5 +1,5 @@
 // Init App
-myApp = new Framework7({
+var myApp = new Framework7({
     modalTitle: 'Framework7',
     // Enable Material theme
     material: true,

@@ -1,3 +1,22 @@
+var myContacts = myApp.virtualList($$("#contacts"), {
+    // Pass array with items
+    //items: items,
+    items: [],
+    // Custom search function for searchbar
+    searchAll: function (query, items) {
+        var found = [];
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            if ($(item).text().indexOf(query) >= 0 || query.trim() === '') {
+                found.push(i);
+            }
+        }
+        return found; //return array with mathced indexes
+    },
+    // Item height
+    height: 73
+});
+
 $(window).on("load", function () {
     //loadingHide();
 });
