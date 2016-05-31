@@ -6,7 +6,7 @@ function onContactSuccess(contacts) {
 
     checkContact(0);
     setTimeout(function () {
-        //checkContactDb();
+        checkContactDb();
     }, 3000);
 
     var myArray = [];
@@ -52,22 +52,29 @@ function onContactError(error) {
 // VERIFICAR SE CONTATO POSSUI ADSAPP
 // DE ACORDO COM BD INTERNO
 //==============================================
-function checkContactDb() {
-    $.each(myContacts.items, function (index, value) {
-        console.log("checkContactDb(): " + index + ": " + value);
-        var num = $(value).attr("data-num");
-        dbx('SELECT * FROM contact WHERE num_local = "' + num + '"', function (transaction, result) {
-            if (result.rows.length == 0) {
-                $('li[data-num="' + num + '"] .item-subtitle').append("- ADSAPP USER");
+function checkContactDb(num) {
+    var numx = parseInt(num + 50);
+    $.each(myContacts.items, function (i, value) {
+        if (i >= num && i < numx) {
+            //console.log("checkContactDb(): " + i + ": " + value);
+            var num = $(value).attr("data-num");
+            dbx('SELECT * FROM contact WHERE num_local = "' + num + '"', function (transaction, result) {
+                if (result.rows.length == 0) {
+                    $('li[data-num="' + num + '"] .item-subtitle').html("- ADSAPP USER(DB)");
+                }
+                else {
+                    $('li[data-num="' + num + '"] .item-subtitle').html('<a style="width:50%;float:right;" href="#" class="button button-raised button-fill color-green">Convidar</a>');
+                }
+            });
+            if (parseInt(i + 1) >= myContacts.items.length) {
+                numx = 0;
             }
-            else {
-                $('li[data-num="' + num + '"] .item-subtitle').append('<a style="width:50%;float:right;" href="#" class="button button-raised button-fill color-green">Convidar</a>');
-            }
-        });
-        setTimeout(function () {
-            checkContactDb();
-        }, 10000);
+        }
     });
+
+    setTimeout(function () {
+        checkContactDb();
+    }, 3000);
 }
 
 //==============================================
@@ -76,7 +83,7 @@ function checkContactDb() {
 //==============================================
 function checkContact(num) {
 
-    var numx = parseInt(num + 30);
+    var numx = parseInt(num + 50);
     var x = "";
     $.each(myContacts.items, function (i) {
         if (i >= num && i < numx) {
