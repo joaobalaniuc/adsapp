@@ -14,6 +14,8 @@ function getChatList() {
         if (result.rows.length > 0) {
             $('#nenhumacon').hide();
         }
+        
+        console.log(enc(result.rows));
 
         // construct
         var x = 0;
