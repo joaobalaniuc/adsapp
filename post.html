@@ -13,10 +13,9 @@
                 <li id="sendpic">
                     <div class="item-content" style="background:#eee">
                         <div style="margin:10px;width:90%;bbackground:#ccc;margin-right:auto;margin-left:auto;text-align:center">
-                            <div style="color:#666;font-weight:100;">
+                            <div id="postImg" style="color:#666;font-weight:100;">
                                 <img src="img/upload-cloud-flat.png" width="100" /><br/>
                                 Enviar imagem
-                                <div id="teste"></div>
                             </div>
                         </div>
                     </div>
@@ -49,33 +48,34 @@
                     </div>
                 </li>
 
-                
-                                <li>
-                                    <div class="item-content">
-                                        <div class="item-media"><i class="icon icon-form-calendar"></i></div>
-                                        <div class="item-inner"> 
-                                            <div class="item-title label">Início da Campanha</div>
-                                            <div class="item-input">
-                                                <input type="date" placeholder="dd/mm/aaaa" value="" name="birth-date"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item-content">
-                                        <div class="item-media"><i class="icon icon-form-calendar"></i></div>
-                                        <div class="item-inner"> 
-                                            <div class="item-title label">Fim da Campanha</div>
-                                            <div class="item-input">
-                                                <input type="date" placeholder="dd/mm/aaaa" value="" name="birth-date2"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                
+                <!--
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                        <div class="item-inner"> 
+                            <div class="item-title label">Início da Campanha</div>
+                            <div class="item-input">
+                                <input type="date" placeholder="dd/mm/aaaa" value="" name="birth-date"/>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                        <div class="item-inner"> 
+                            <div class="item-title label">Fim da Campanha</div>
+                            <div class="item-input">
+                                <input type="date" placeholder="dd/mm/aaaa" value="" name="birth-date2"/>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                -->
+
             </ul>
             <div class="content-block" style="margin-top:10px">
-                <a href="#" class="button button-raised button-fill color-blue">Enviar Post</a>
+                <a id="postSend" href="#" class="button button-raised button-fill color-blue">Enviar Post</a>
             </div>
 
         </form>

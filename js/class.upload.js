@@ -19,7 +19,7 @@ function uploadPhoto(imageURI) {
     options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
     options.mimeType = "image/jpeg";
 
-    $('#teste').html("<img src='" + imageURI + "' />");
+    $('#postImg').html("<img src='" + imageURI + "' width='90%' />");
 
     var params = new Object();
     params.value1 = "test";
@@ -36,7 +36,13 @@ function win(r) {
     console.log("Code = " + r.responseCode);
     console.log("Response = " + r.response);
     console.log("Sent = " + r.bytesSent);
-    alert(r.response);
+    //alert(r.response);
+    if (r.response === "error") {
+        alert("Houve uma falha no servidor");
+    }
+    else {
+        sessionStorage.postImg = r.response;
+    }
 }
 
 function fail(error) {

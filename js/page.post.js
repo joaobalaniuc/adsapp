@@ -3,6 +3,10 @@ $$(document).on('click', '.post', function (e) {
     view3.router.loadPage('post.html', {ignoreCache: true});
 });
 
-$$(document).on('click', '#sendpic', function (e) {
+$$(document).on('click', '#postImg', function (e) {
     getImage();
+});
+
+$$(document).on('click', '#postSend', function (e) {
+    
 });
