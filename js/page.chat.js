@@ -14,30 +14,40 @@ function getChatList() {
         if (result.rows.length > 0) {
             $('#nenhumacon').hide();
         }
-        
-        console.log(enc(result.rows));
 
+        var res = [];
+        for (var i = 0; i < result.rows.length; i++) {
+            var row = result.rows.item(i);
+            res[i] = {
+                id: row['id'],
+                name: row['name'],
+                num: row['num'],
+                id_fb: row['id_fb'],
+                chat_from: row['chat_from'],
+                chat_to: row['chat_to'],
+                chat_msg: row['chat_msg']
+            };
+        }
         // construct
         var x = 0;
         var html = '';
         var fb, url, vc, nome;
-
-        $.each(result.rows, function (i, item) {
-
-            var res = result.rows[i];
-            if (res.chat_from !== "me") {
-                fb = res.srcFb;
+        $.each(res, function (i, item) {
+            var rs = res[i];
+            console.log("aaa:" + enc(res[i]));
+            if (rs.chat_from !== "me") {
+                //fb = rs.srcFb;
                 vc = "";
-                nome = res.srcNome;
+                //nome = rs.srcNome;
             }
             else {
-                fb = res.dstFb;
+                //fb = rs.dstFb;
                 vc = "<em>Você:</em> ";
-                nome = res.dstNome;
+                //nome = rs.dstNome;
             }
-            url = "https://graph.facebook.com/" + res.id_fb + "/picture?type=large";
+            url = "https://graph.facebook.com/" + rs.id_fb + "/picture?type=large";
             //
-            html += '<li class="showChat swipeout" data-fb="' + res.id_fb + '" data-num="' + res.num + '" data-name="' + res.name + '">'; // row
+            html += '<li class="showChat swipeout" data-fb="' + rs.id_fb + '" data-num="' + rs.num + '" data-name="' + rs.name + '">'; // row
             html += '<div class="swipeout-content">';
             html += '<a href="#" class="item-link item-content">';
             html += '<div class="item-media">';
@@ -45,21 +55,21 @@ function getChatList() {
             html += '</div>';
             html += '<div class="item-inner">';
             html += '<div class="item-title-row">';
-            html += '<div class="item-title">' + res.name + '</div>';
+            html += '<div class="item-title">' + rs.name + '</div>';
             html += '<div class="item-after">';
             //html += '<div class="chip" style="margin-top:-5px;background:#0288d1;color:#fff;font-size:12px;font-weight:100">';
             //html += '<div class="chip-label">5</div>';
             //html += '</div>';
             html += '</div>';
             html += '</div>';
-            html += '<div class="item-text" style="font-weight:100">' + vc + res.chat_msg + '</div>';
+            html += '<div class="item-text" style="font-weight:100">' + vc + rs.chat_msg + '</div>';
             html += '</div>';
             html += '</a>';
             html += '</div>';
             html += '<div class="swipeout-actions-left"><a href="#" class="bg-green swipeout-overswipe demo-reply">Responder</a><a href="#" class="demo-forward bg-blue">Repray</a></div>';
             html += '<div class="swipeout-actions-right"><a href="#" class="demo-actions">Mais</a><a href="#" class="demo-mark bg-orange">Fav</a><a href="#" data-confirm="Are you sure you want to delete this item?" class="swipeout-delete swipeout-overswipe">Denunciar</a></div>';
             html += '</li>'; // row
-            //sessionStorage.lastchat = res.id; // last chat id
+            //sessionStorage.lastchat = rs.id; // last chat id
         });
         $('#getChatList').html(html);
 
