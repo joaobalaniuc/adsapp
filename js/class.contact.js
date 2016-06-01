@@ -60,7 +60,7 @@ function checkContactDb(start) {
             var num = $(value).attr("data-num");
             //console.log("checkContactDb(): " + num);
             dbx('SELECT * FROM contact WHERE num_local = "' + num + '"', function (transaction, result) {
-                if (result.rows.length === 0) {
+                if (result.rows.length > 0) {
                     $('li[data-num="' + num + '"] .item-subtitle').html("- ADSAPP USER(DB)=" + num);
                     console.log("not found=" + num);
                 }
