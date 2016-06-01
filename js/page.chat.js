@@ -15,6 +15,7 @@ function getChatList() {
             $('#nenhumacon').hide();
         }
 
+        // FIX FIELDS FOR IPHONE
         var res = [];
         for (var i = 0; i < result.rows.length; i++) {
             var row = result.rows.item(i);
@@ -176,20 +177,35 @@ function getChat() {
     dbx('SELECT * FROM chat WHERE chat.chat_num = "' + sessionStorage.chatNum + '" ORDER BY id ASC', function (transaction, result) {
 
         //console.log(result.rows);
+        
+        // FIX FIELDS FOR IPHONE
+        var res = [];
+        for (var i = 0; i < result.rows.length; i++) {
+            var row = result.rows.item(i);
+            res[i] = {
+                id: row['id'],
+                name: row['name'],
+                num: row['num'],
+                id_fb: row['id_fb'],
+                chat_from: row['chat_from'],
+                chat_to: row['chat_to'],
+                chat_msg: row['chat_msg']
+            };
+        }
 
         // construct
         var x = 0;
         var html = '';
         var fb, url, vc, nome;
 
-        $.each(result.rows, function (i, item) {
+        $.each(res, function (i, item) {
 
-            var res = result.rows[i];
+            var rs = res[i];
 
-            if (res.chat_from === "me") {
+            if (rs.chat_from === "me") {
 
                 myMessages.addMessage({
-                    text: res.chat_msg,
+                    text: rs.chat_msg,
                     avatar: 'http://blogs.timesofindia.indiatimes.com/wp-content/uploads/2015/12/mark-zuckerberg.jpg',
                     type: 'sent',
                     date: 'Agora'
@@ -197,7 +213,7 @@ function getChat() {
             }
             else {
                 myMessages.addMessage({
-                    text: res.chat_msg,
+                    text: rs.chat_msg,
                     avatar: sessionStorage.chatFbLink,
                     type: 'received',
                     date: 'Agora'
