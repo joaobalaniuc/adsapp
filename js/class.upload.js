@@ -18,8 +18,8 @@ function uploadPhoto(imageURI) {
     options.fileKey = "file";
     options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
     options.mimeType = "image/jpeg";
-    alert(imageURI);
-    return false;
+
+    $('#teste').html("<img src='" + imageURI + "' />");
 
     var params = new Object();
     params.value1 = "test";
@@ -29,7 +29,7 @@ function uploadPhoto(imageURI) {
     options.chunkedMode = false;
 
     var ft = new FileTransfer();
-    ft.upload(imageURI, "http://nickford.com.br/viralize/upload.php", win, fail, options);
+    ft.upload(imageURI, "http://nickford.com.br/adsapp/upload.php", win, fail, options);
 }
 
 function win(r) {
