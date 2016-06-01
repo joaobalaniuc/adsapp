@@ -273,7 +273,7 @@ myApp.onPageInit('messages', function (page) {
             text: messageText,
             avatar: 'http://blogs.timesofindia.indiatimes.com/wp-content/uploads/2015/12/mark-zuckerberg.jpg',
             type: 'sent',
-            date: 'Now'
+            date: 'Agora'
         });
         conversationStarted = true;
         // Add answer after timeout
@@ -288,7 +288,7 @@ myApp.onPageInit('messages', function (page) {
                 type: 'received',
                 name: sessionStorage.chatName,
                 avatar: 'http://graph.facebook.com/' + sessionStorage.chatFb + '/picture?type=square',
-                date: 'Just now'
+                date: 'Agora mesmo'
             });
             var key = "", val = "";
             key += "chat_from,chat_num,chat_to,chat_msg";

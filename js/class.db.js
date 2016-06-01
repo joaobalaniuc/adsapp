@@ -21,8 +21,8 @@ function dbCreate() {
     dbOpen();
    
     
-    //dbQuery("DROP TABLE chat");
-    //dbQuery("DROP TABLE contact");
+    dbQuery("DROP TABLE chat");
+    dbQuery("DROP TABLE contact");
     
    
     //''''''''''''''''''''''''

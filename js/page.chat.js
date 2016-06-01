@@ -180,7 +180,7 @@ function getChat() {
                     text: res.chat_msg,
                     avatar: 'http://blogs.timesofindia.indiatimes.com/wp-content/uploads/2015/12/mark-zuckerberg.jpg',
                     type: 'sent',
-                    date: 'Now'
+                    date: 'Agora'
                 });
             }
             else {
@@ -188,7 +188,7 @@ function getChat() {
                     text: res.chat_msg,
                     avatar: sessionStorage.chatFbLink,
                     type: 'received',
-                    date: 'Now'
+                    date: 'Agora'
                 });
 
             }
