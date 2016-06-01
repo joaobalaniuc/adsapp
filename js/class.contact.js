@@ -62,11 +62,11 @@ function checkContactDb(start) {
             dbx('SELECT * FROM contact WHERE num_local = "' + num + '"', function (transaction, result) {
                 if (result.rows.length > 0) {
                     $('li[data-num="' + num + '"] .item-subtitle').html("- ADSAPP USER(DB)=" + num);
-                    console.log("not found=" + num);
+                    console.log("found=" + num);
                 }
                 else {
                     $('li[data-num="' + num + '"] .item-subtitle').html('<a style="width:50%;ffloat:right;" href="#" class="button button-raised button-fill color-green">Convidar=' + num + '</a>');
-                    console.log("found! " + enc(result));
+                    console.log("not found= " + enc(result));
                 }
                 //myContacts.update();
             });
