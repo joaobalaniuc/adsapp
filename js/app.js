@@ -4,7 +4,7 @@
 function start() {
 
     // App config
-    var version = '1.0.2';
+    var version = '1.0.0';
 
     // Server
     localStorage.server = "http://nickford.com.br/adsapp/";
@@ -75,7 +75,10 @@ var app = {
         }, 1000);
         start();
 
-        getContact();
+        setTimeout(function () {
+            simulateContact();
+        }, 1000);
+        //getContact();
 
         console.log("ready1");
     }

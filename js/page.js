@@ -64,9 +64,9 @@ function pageRefresh() {
         t = 7000;
     }
     // chat inner
-    if (page === "messages") {
+    if (page === "mmessages") {
         getChat();
-        t = 5000;
+        t = 1000;
     }
     // run again
     if (t > 0) {
@@ -114,6 +114,7 @@ function getSession() {
     });
 
 }
+
 
 $$(document).on('click', 'a.tab-link', function (e) {
     var href = $(this).attr("href");

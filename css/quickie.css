@@ -8,6 +8,8 @@ ul.global .active {-webkit-line-clamp:8;max-height:120px}
 ul.global .info {}
 ul.global .item-after img {width:24px;height:24px;}
 .item-subtitle{font-weight:100}
+.message-text{font-weight:100}
+
 /* PAGES */
 .banner {text-align:center}
 /* LISTA MULHERES */

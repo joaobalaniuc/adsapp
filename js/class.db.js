@@ -19,27 +19,21 @@ function dbOpen() {
 function dbCreate() {
 
     dbOpen();
-
-    db.transaction(
-            function (transaction) {
-                transaction.executeSql("DROP TABLE contact", [],
-                        function (tx, results) {
-                            console.log("Successfully Dropped");
-                        },
-                        function (tx, error) {
-                            console.log("Could not delete");
-                        });
-            }
-    );
+   
+    
+    //dbQuery("DROP TABLE chat");
+    //dbQuery("DROP TABLE contact");
+    
+   
     //''''''''''''''''''''''''
-    // SONGS
+    // CONTACT
     //''''''''''''''''''''''''
     db.transaction(
             function (transaction) {
                 transaction.executeSql(
                         'CREATE TABLE IF NOT EXISTS contact ' +
                         ' (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ' +
-                        ' id_server INTEGER NOT NULL, ' +
+                        ' id_server INTEGER, ' +
                         ' num TEXT NOT NULL UNIQUE, ' +
                         ' num_local TEXT NOT NULL, ' +
                         ' name TEXT, ' +
@@ -47,6 +41,24 @@ function dbCreate() {
                         ' id_fb TEXT, ' +
                         ' id_in TEXT, ' +
                         ' fav INTEGER);' // favorito
+                        );
+            }
+    );
+    //''''''''''''''''''''''''
+    // CHAT
+    //''''''''''''''''''''''''
+    db.transaction(
+            function (transaction) {
+                transaction.executeSql(
+                        'CREATE TABLE IF NOT EXISTS chat ' +
+                        ' (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ' +
+                        ' chat_id_server INTEGER, ' +
+                        ' chat_num TEXT NOT NULL, ' +
+                        ' chat_from TEXT NOT NULL, ' +
+                        ' chat_to TEXT NOT NULL, ' +
+                        ' chat_msg TEXT, ' +
+                        ' chat_read INTEGER, ' +
+                        ' chat_date TEXT);'
                         );
             }
     );

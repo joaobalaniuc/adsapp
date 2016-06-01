@@ -164,20 +164,42 @@ function checkContact(num) {
 
 function simulateContact() {
 
-    myContacts.appendItem('<li data-num="+5528999726858"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Amanda</div></div><div class="item-subtitle"></div></div></a></li>');
-    myContacts.appendItem('<li data-num="+5528999999991"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Rebeca</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
-    myContacts.appendItem('<li data-num="+5528999999993"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Paula</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
-    myContacts.appendItem('<li data-num="+5528999999994"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Fernanda</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
-    myContacts.appendItem('<li data-num="+5528999999995"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Ana</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
-    myContacts.appendItem('<li data-num="+5528999999996"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Cláudia</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
-    myContacts.appendItem('<li data-num="+5528999999997"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Dalma</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
-    myContacts.appendItem('<li data-num="+5528999999998"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Márcia</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
-    myContacts.appendItem('<li data-num="+5528999999999"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Hylessandro</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
-    myContacts.appendItem('<li data-num="+5528999999910"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">Marcão</div></div><div class="item-subtitle">{{subtitle}}</div></div></a></li>');
+    var contacts = [];
+    contacts.push({
+        num: "+5527999999991",
+        name: "João Williams",
+        fb: "100006778331081"
+    });
+    contacts.push({
+        num: "+5527999999992",
+        name: "Mayconn Andrade",
+        fb: "100000995783085"
+    });
+    contacts.push({
+        num: "+5527999999993",
+        name: "Marcus Teixeira",
+        fb: "100001455409013"
+    });
+    contacts.push({
+        num: "+5527999999994",
+        name: "Michel Temer",
+        fb: "100005617898093"
+    });
+    $.each(contacts, function (i, item) {
+        console.log(contacts[i].num);
+        myContacts.appendItem('<li class="showChat" data-num="' + contacts[i].num + '" data-name="' + contacts[i].name + '" data-fb="' + contacts[i].fb + '"><a href="#view-3" class="tab-link item-link item-content"><div class="item-media"><img src="http://graph.facebook.com/' + contacts[i].fb + '/picture?type=square" width="44"></div><div class="item-inner"><div class="item-title-row"><div class="item-title">' + contacts[i].name + '</div></div><div class="item-subtitle">' + contacts[i].num + '</div></div></a></li>');
+        var key = "", val = "";
+        key += "num,num_local,name,nick,id_fb";
+        val += '"' + contacts[i].num + '",';
+        val += '"' + contacts[i].num + '",';
+        val += '"' + contacts[i].name + '",';
+        val += '"' + contacts[i].name + '",';
+        val += '"' + contacts[i].fb + '"';
+        dbQuery('INSERT INTO contact (' + key + ') VALUES (' + val + ')');
+    });
 
-
-    myContacts.update();
-    checkContact(0);
-    checkContactDb(0);
+    return false;
+    //checkContact(0);
+    //checkContactDb(0);
 }
 
