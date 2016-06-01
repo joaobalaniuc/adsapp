@@ -58,7 +58,7 @@ function checkContactDb(start) {
         if (i >= start && i < end) {
             console.log("checkContactDb(): " + i);
             var num = $(value).attr("data-num");
-            //console.log("checkContactDb(): " + num);
+            console.log("checkContactDb(): " + num);
             dbx('SELECT * FROM contact WHERE num_local = "' + num + '"', function (transaction, result) {
                 if (result.rows.length > 0) {
                     $('li[data-num="' + num + '"] .item-subtitle').html("- ADSAPP USER(DB)=" + num);
@@ -66,7 +66,7 @@ function checkContactDb(start) {
                 }
                 else {
                     $('li[data-num="' + num + '"] .item-subtitle').html('<a style="width:50%;ffloat:right;" href="#" class="button button-raised button-fill color-green">Convidar=' + num + '</a>');
-                    console.log("not found= " + enc(result));
+                    //console.log("not found= " + enc(result));
                 }
                 //myContacts.update();
             });
@@ -78,7 +78,7 @@ function checkContactDb(start) {
     }
     setTimeout(function () {
         checkContactDb(end);
-    }, 500);
+    }, 2000);
 
 }
 
@@ -101,7 +101,7 @@ function checkContact(num) {
             }
         }
     });
-    //console.log("checkContact(): " + numx + "/" + myContacts.items.length + "=" + x);
+    console.log("checkContact(): " + numx + "/" + myContacts.items.length + "=" + x);
     $.ajax({
         url: localStorage.server + "/contact-check.json.php",
         data: {
