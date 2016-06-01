@@ -411,6 +411,7 @@
 
         <!-- DEBUG -->
         <script>var web = 0;</script>
+        <!--
         <script src="http://10.0.0.35:8080/target/target-script-min.js#adsapp"></script>
         <!-- PHONEGAP -->
         <script src="cordova.js"></script>
@@ -436,7 +437,7 @@
         <script type="text/javascript" src="js/page.index.js"></script>
         <script type="text/javascript" src="js/page.chat.js"></script>
         <script type="text/javascript" src="js/page.post.js"></script>
-        
+
         <script type="text/javascript">
             // alias session        
             s = sessionStorage;
@@ -449,8 +450,9 @@
             // DEV
             if (web === 1) {
                 start();
-                simulateContact();
-                //checkContactDb();
+                setTimeout(function () {
+                    simulateContact();
+                }, 2000);
             }
 
         </script>

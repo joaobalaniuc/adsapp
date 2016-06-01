@@ -4,11 +4,6 @@ function getContact() {
 }
 function onContactSuccess(contacts) {
 
-    checkContact(0);
-    setTimeout(function () {
-        checkContactDb(0);
-    }, 3000);
-
     var myArray = [];
     var contact_name;
     var contact_phone;
@@ -20,7 +15,7 @@ function onContactSuccess(contacts) {
 
             if (contacts[i].phoneNumbers != null && contacts[i].phoneNumbers.length > 0 && contacts[i].phoneNumbers[0].value != null && contacts[i].phoneNumbers[0].value != undefined) {
                 contact_phone = contacts[i].phoneNumbers[0].value;
-                console.log(contacts[i]);
+                //console.log(contacts[i]);
                 //console.log(contact_name + "=" + contact_phone + " / " + formatNum(contact_phone));
 
                 myContacts.appendItem('<li data-id="' + contacts[i].id + '" data-num="' + contact_phone + '"><a href="#" class="item-link item-content"><div class="item-inner"><div class="item-title-row"><div class="item-title">' + contact_name + ' #' + contacts[i].id + '</div></div><div class="item-subtitle">' + contact_phone + '</div></div></a></li>');
@@ -37,11 +32,14 @@ function onContactSuccess(contacts) {
                     }
                 });
             } else {
-                console.log("--No Number-");
+                //console.log("--No Number-");
                 contact_phone = "";
             }
         }
     }
+
+    checkContact(0);
+    checkContactDb(0);
 
 }
 function onContactError(error) {
@@ -52,32 +50,36 @@ function onContactError(error) {
 // VERIFICAR SE CONTATO POSSUI ADSAPP
 // DE ACORDO COM BD INTERNO
 //==============================================
-function checkContactDb(num) {
-    var numx = parseInt(num + 50);
+function checkContactDb(start) {
+    var end = parseInt(start + 50);
+    //console.log(start);
     $.each(myContacts.items, function (i, value) {
-        if (i >= num && i < numx) {
-            //console.log("checkContactDb(): " + i + ": " + value);
+        //console.log(start);
+        if (i >= start && i < end) {
+            console.log("checkContactDb(): " + i);
             var num = $(value).attr("data-num");
-            console.log("checkContactDb(): " + num);
+            //console.log("checkContactDb(): " + num);
             dbx('SELECT * FROM contact WHERE num_local = "' + num + '"', function (transaction, result) {
-                if (result.rows.length == 0) {
+                if (result.rows.length === 0) {
                     $('li[data-num="' + num + '"] .item-subtitle').html("- ADSAPP USER(DB)");
-                    console.log("not found");
+                    console.log("not found=" + num);
                 }
                 else {
-                    $('li[data-num="' + num + '"] .item-subtitle').html('<a style="width:50%;float:right;" href="#" class="button button-raised button-fill color-green">Convidar</a>');
-                    console.log("OK!!!!!!!!!!!!!!!!!!!!!!!");
+                    $('li[data-num="' + num + '"] .item-subtitle').html('<a style="width:50%;ffloat:right;" href="#" class="button button-raised button-fill color-green">Convidar</a>');
+                    console.log("found! " + enc(result));
                 }
+                //myContacts.update();
             });
-            if (parseInt(i + 1) >= myContacts.items.length) {
-                numx = 0;
-            }
         }
     });
-
+    if (parseInt(end + 1) >= myContacts.items.length) {
+        //console.log("end");
+        end = 0; // start for timeout
+    }
     setTimeout(function () {
-        checkContactDb(numx);
-    }, 3000);
+        checkContactDb(end);
+    }, 500);
+
 }
 
 //==============================================
@@ -99,7 +101,7 @@ function checkContact(num) {
             }
         }
     });
-    console.log(numx + "/" + myContacts.items.length + "=" + x);
+    //console.log("checkContact(): " + numx + "/" + myContacts.items.length + "=" + x);
     $.ajax({
         url: localStorage.server + "/contact-check.json.php",
         data: {
@@ -131,7 +133,7 @@ function checkContact(num) {
                     }
 
                     if (typeof res.length !== "undefined") {
-                        console.log(res.length + " results");
+                        //console.log(res.length + " results");
                     }
 
                     $.each(res, function (i, item) {
@@ -148,7 +150,7 @@ function checkContact(num) {
                                     val += '"' + res[i].nick + '"';
                                     dbQuery('INSERT INTO contact (' + key + ') VALUES (' + val + ')');
                                     //console.log("add adsapp contact: " + enc(res[i]));
-                                    $('[data-num="' + res[i].num_local + '"] .item-subtitle').html(" - ADSAPP USER");
+                                    //$('[data-num="' + res[i].num_local + '"] .item-subtitle').html(" - ADSAPP USER");
                                 }
                             });
                         }
@@ -176,6 +178,6 @@ function simulateContact() {
 
     myContacts.update();
     checkContact(0);
-        checkContactDb(0);
+    checkContactDb(0);
 }
 
