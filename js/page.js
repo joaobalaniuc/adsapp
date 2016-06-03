@@ -22,7 +22,8 @@ $(window).on("load", function () {
 
 });
 $(document).ready(function () {
-
+    
+    localStorage.removeItem("user_id");
     if (typeof localStorage.user_id === "undefined") {
         view1.router.loadPage('welcome.html', {ignoreCache: true});
         $('#toolbar').hide();

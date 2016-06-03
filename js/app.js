@@ -14,7 +14,6 @@ function start() {
     }
 
     // User Info
-    localStorage.removeItem("user_id");
     //localStorage.user_id = 1;
     //localStorage.user_num = "+55 28 999652165";
     //localStorage.session_id = 1;
@@ -77,7 +76,7 @@ var app = {
         start();
 
         setTimeout(function () {
-            simulateContact();
+            //simulateContact();
         }, 1000);
         //getContact();
 
