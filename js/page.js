@@ -19,8 +19,14 @@ var myContacts = myApp.virtualList($$("#contacts"), {
 
 $(window).on("load", function () {
     //loadingHide();
+
 });
 $(document).ready(function () {
+
+    if (typeof localStorage.user_id === "undefined") {
+        view1.router.loadPage('welcome.html', {ignoreCache: true});
+        $('#toolbar').hide();
+    }
 
     // Android layout fix
     if (localStorage.os === "Android") {

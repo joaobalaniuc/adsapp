@@ -169,18 +169,21 @@ function getChat() {
     if ($('.message').length === 0) {
         //myApp.showIndicator();
     }
+    
+    $('#getChat').html("");
 
     var myMessages = myApp.messages('.messages');
     var myMessagebar = myApp.messagebar('.messagebar');
 
     var t = "";
-    t += "<div style='font-size:12px'>"; // post
+    t += "<div style='font-size:12px;position:relative'><div style='position:absolute;top:100px;background:#000;color:#fff;opacity:0.8;font-size:24px'>R$ 350,00</div>"; // post
     t += "<img src='http://nickford.com.br/adsapp/img/724432198.jpg' mmax-width='90%' />";
     t += "<div style='margin-top:5px;font-weight:bold'>Saiba como ficar rico em 5 minutos</div>";
     t += "<div style='margin-top:5px;'>Uma nova técnica foi disponibilizada para pessoas comuns ganharem dinheiro dentro de casa</div>";
     t += '<p class="buttons-row">';
     t += '<a href="#" class="button button-raised button-fill color-indigo"><i class="fa fa-facebook-official" aria-hidden="true"></i> 1/32</a>';
     t += '<a href="#" class="button button-raised button-fill color-pink"><i class="fa fa-instagram" aria-hidden="true"></i> 8/12</a>';
+    t += '<a href="#" class="button button-raised button-fill color-green"><i class="fa fa-comments-o" aria-hidden="true"></i> 12</a>';
     t += '</p>';
     t += "</div>"; // post
 

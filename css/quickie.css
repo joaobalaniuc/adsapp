@@ -1,5 +1,6 @@
 
 /* GLOBAL */
+input{font-family:Nunito}
 #global .item-subtitle {font-size:10px;text-transform:uppercase;color:#999}
 .navbar {bbackground:#ffc600}
 ul.global .item-text {margin-top:7px}
@@ -21,6 +22,13 @@ ul.global .item-after img {width:24px;height:24px;}
     background-position: center;
     background-size: 128px;
 }
+/* PERFIL DA MULHER */
+[data-page=welcome] .content-block {margin:0 !important;padding:0 !important}
+[data-page=welcome] .page-content {margin-top:30px;padding-bottom:100px}
+[data-page=welcome] .content-inner {padding:20px;margin-top:-10px}
+[data-page=welcome] .item-link .item-media {min-width:20px;color:#1976d2}
+[data-page=welcome] .item-link .item-title {color:#1976d2}
+[data-page=welcome] .item-link .red {color:#0084ff}
 /* PERFIL DA MULHER */
 [data-page=profile] .content-block {margin:0 !important;padding:0 !important}
 [data-page=profile] .page-content {margin-top:30px;padding-bottom:100px}
