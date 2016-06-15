@@ -91,7 +91,7 @@ $$(document).on('click', '#updateName', function (e) {
     console.log(localStorage.server + " " + sessionStorage.confirm_name);
 
     $.ajax({
-        url: localStorage.server + "/updateName.json.php",
+        url: localStorage.server + "/updateProfile.json.php",
         data: {
             'num': sessionStorage.confirm_cel,
             'value': sessionStorage.confirm_name,
@@ -122,6 +122,7 @@ $$(document).on('click', '#updateName', function (e) {
                         localStorage.userName = sessionStorage.confirm_name;
                         localStorage.userNum = sessionStorage.confirm_cel;
                         view1.router.loadPage('index.html', {ignoreCache: true});
+                        $('#toolbar').show();
                     }
                 }
             });
