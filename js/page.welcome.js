@@ -94,7 +94,8 @@ $$(document).on('click', '#updateName', function (e) {
         url: localStorage.server + "/updateName.json.php",
         data: {
             'num': sessionStorage.confirm_cel,
-            'name': sessionStorage.confirm_name
+            'value': sessionStorage.confirm_name,
+            'table': "nick"
         },
         type: 'GET',
         dataType: 'jsonp',
