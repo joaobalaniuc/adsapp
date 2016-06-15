@@ -7,17 +7,11 @@ function start() {
     var version = '1.0.0';
 
     // Server
-    localStorage.server = "http://nickford.com.br/adsapp/";
+    localStorage.server = "http://sempreon.mobi/adsapp/";
 
     if (web === 1) {
-        localStorage.server = "http://10.0.0.35/adsapp/server/";
+        //localStorage.server = "http://10.0.0.35/adsapp/server/";
     }
-
-    // User Info
-    //localStorage.user_id = 1;
-    //localStorage.user_num = "+55 28 999652165";
-    //localStorage.session_id = 1;
-    //localStorage.session_startdate = "2016-04-11 12:00";
 
     // Dev
     sessionStorage.debug = 1;

@@ -24,9 +24,8 @@ $(window).on("load", function () {
 $(document).ready(function () {
     
     localStorage.removeItem("user_id");
-    if (typeof localStorage.user_id === "undefined") {
+    if (typeof localStorage.userId === "undefined") {
         view1.router.loadPage('welcome.html', {ignoreCache: true});
-        $('#toolbar').hide();
     }
 
     // Android layout fix
@@ -55,20 +54,19 @@ function pageRefresh() {
     var page = myApp.getCurrentView().activePage.name;
     var view = myApp.getCurrentView().container.id;
     var t = 0;
-    // mulheres
-    if (page === "index") {
-        //getPeople("f");
-        t = 10000;
-    }
-    // homens
+    // contatos
     if (page === "index-2") {
-        //getPeople("m");
-        t = 10000;
+        contactList();
+        t = 0;
     }
     // chat list
     if (page === "index-3") {
         getChatList();
         t = 7000;
+    }
+    // profile
+    if (page === "index-4") {
+        loadProfile();
     }
     // chat inner
     if (page === "mmessages") {
@@ -129,8 +127,9 @@ $$(document).on('click', 'a.tab-link', function (e) {
 });
 
 $$(document).on('pageBeforeInit', '*', function (e) {
-    $('#toolbar').show();
-    getSession();
+    //alert(1);
+    //$('#toolbar').show();
+    //getSession();
 });
 
 $$(document).on('pageBack', '*', function (e) {

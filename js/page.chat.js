@@ -332,11 +332,12 @@ $$(document).on('pageInit', '[data-page="messages"]', function (e) {
 });
 
 $$(document).on('click', '.showChat', function (e) {
+    return false;
     sessionStorage.chatNum = $(this).attr("data-num");
     sessionStorage.chatNome = $(this).attr("data-name");
     sessionStorage.chatFb = $(this).attr("data-fb");
     sessionStorage.chatFbLink = "http://graph.facebook.com/" + sessionStorage.chatFb + "/picture?type=square";
-    view3.router.loadPage('quickie_chat.html', {ignoreCache: true});
+    view3.router.loadPage('chat.html', {ignoreCache: true});
 });
 
 $$(document).on('pageBeforeInit', '[data-page="post"]', function (e) {

@@ -11,19 +11,30 @@
             <div class="content-inner" style="padding:0;margin-top:10px">
 
                 <div style="padding:20px;padding-bottom:0;margin-bottom:-5px;margin-top:50px">
-                    <h2 style="text-align:center">
-                        Para continuar, confirme seu número de telefone:
-                    </h2>
+
 
                     <form id="confirm" style="text-align:center">
-                        <input type="text" placeholder="País" name="cp" value="+55" style="padding:10px;font-size:18px;font-weight:100;width:40px;text-align:center" />
-                        <input type="text" placeholder="DDD" name="ddd" value="" maxlength="2" style="padding:10px;font-size:18px;font-weight:100;width:40px;text-align:center"  />
-                        <input type="text" placeholder="Número" name="ddd" value="" maxlength="9" style="padding:10px;font-size:18px;font-weight:100;width:110px;text-align:center"  />
+                        <h2 style="text-align:center">
+                            Para continuar, confirme seu número de telefone:
+                        </h2>
+                        <input class="confirm" type="text" pattern="[0-9]*" placeholder="País" id="cc" value="+55" style="padding:10px;font-size:18px;font-weight:100;width:40px;text-align:center" />
+                        <input class="confirm" type="text" pattern="[0-9]*" placeholder="DDD" id="ddd" value="" maxlength="2" style="padding:10px;font-size:18px;font-weight:100;width:40px;text-align:center"  />
+                        <input class="confirm" type="text" pattern="[0-9]*" placeholder="Número" id="num" value="" maxlength="9" style="padding:10px;font-size:18px;font-weight:100;width:110px;text-align:center"  />
+                        <p class="buttons-row" style="margin-top:20px">
+                            <a id="sendCode" href="#" class="button button-raised button-fill color-green">Enviar Código</a>
+                        </p>
                     </form>
 
-                    <p class="buttons-row" style="margin-top:20px">
-                        <a href="#" class="button button-raised button-fill color-green">Enviar Código</a>
-                    </p>
+                    <form id="confirm_code" style="text-align:center;display:none">
+                        <h2 style="text-align:center">
+                            Digite o código:
+                        </h2>
+                        <input class="confirm" type="text" pattern="[0-9]*" placeholder="Somente números" id="code" value="" style="padding:10px;font-size:18px;font-weight:100;width:90%;text-align:center" />
+                        <p class="buttons-row" style="margin-top:20px">
+                            <a id="checkCode" href="#" class="button button-raised button-fill color-green">Confirmar</a>
+                        </p>
+                    </form>
+
 
 
                 </div>

@@ -95,5 +95,5 @@ $$(document).on('click', '.showProfile', function (e) {
 });
 
 $$(document).on('pageBeforeInit', '[data-page="welcome"]', function (e) {
-    //$('#toolbar').hide();
+    $('#toolbar').hide();
 });
