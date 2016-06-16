@@ -1,17 +1,20 @@
 function contactList() {
     //
     debug();
-    //
-    if (halt(true))
-        return;
-    var fN = fName();
-    //
-    if ($('.showChat').length === 0) {
-        myApp.showIndicator();
-    }
-    else {
-        return false;
-    }
+    /*
+     if (halt(true))
+     return;
+     var fN = fName();
+     //
+     if ($('.showChat').length === 0) {
+     // ja existem itens carregados
+     }
+     else {
+     }
+     */
+    myContacts.deleteAllItems();
+    myApp.showIndicator();
+
     $.ajax({
         url: localStorage.server + "/contactList.json.php",
         type: 'GET',
@@ -20,7 +23,7 @@ function contactList() {
         timeout: 7000
     })
             .always(function () {
-                s.removeItem(fN); // halt
+                //s.removeItem(fN); // halt
                 myApp.hideIndicator();
             })
 
@@ -44,7 +47,7 @@ function contactList() {
                             img = '<img src="' + localStorage.server + '/img/profile.png" width="44">';
                         }
                         if (contacts[i].bio === null) {
-                            status = '<span style="font-weight:100;color:#ccc;text-transform:oblique">'+contacts[i].num+'</span>';
+                            status = '<span style="font-weight:100;color:#ccc;text-transform:oblique">' + contacts[i].num + '</span>';
                         }
                         else {
                             status = contacts[i].bio;

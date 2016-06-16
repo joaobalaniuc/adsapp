@@ -23,7 +23,6 @@ $(window).on("load", function () {
 });
 $(document).ready(function () {
     
-    localStorage.removeItem("user_id");
     if (typeof localStorage.userId === "undefined") {
         view1.router.loadPage('welcome.html', {ignoreCache: true});
     }

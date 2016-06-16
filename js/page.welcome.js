@@ -2,7 +2,6 @@ $$(document).on('click', '#checkCode', function (e) {
 
     sessionStorage.confirm_code = $("#code").val();
     myApp.showIndicator();
-
     console.log(localStorage.server + " " + sessionStorage.confirm_code + " " + sessionStorage.confirm_cel)
 
     $.ajax({
@@ -32,7 +31,21 @@ $$(document).on('click', '#checkCode', function (e) {
                         return;
                     }
                     if (res.success) {
-                        view1.router.loadPage('welcome_profile.html', {ignoreCache: true});
+                        if (res.nick) {
+                            localStorage.userName = res.nick;
+                            if (res.id) {
+                                localStorage.userId = res.id;
+                            }
+                            if (res.bio) {
+                                localStorage.userStatus = res.bio;
+                            }
+                            console.log(localStorage);
+                            view1.router.loadPage('index.html', {ignoreCache: true});
+                            $('#toolbar').show();
+                        }
+                        else {
+                            view1.router.loadPage('welcome_profile.html', {ignoreCache: true});
+                        }
                     }
                 }
             });
@@ -43,11 +56,8 @@ $$(document).on('click', '#sendCode', function (e) {
     sessionStorage.confirm_ddd = $("#ddd").val();
     sessionStorage.confirm_num = $("#num").val();
     sessionStorage.confirm_cel = sessionStorage.confirm_cc + sessionStorage.confirm_ddd + sessionStorage.confirm_num;
-
     myApp.showIndicator();
-
     console.log(localStorage.server + " " + sessionStorage.confirm_cel);
-
     $.ajax({
         url: localStorage.server + "/codeSend.json.php",
         data: {
@@ -70,8 +80,6 @@ $$(document).on('click', '#sendCode', function (e) {
 
                 $('#confirm').hide();
                 $('#confirm_code').show();
-
-
                 if (res !== null) {
                     if (res.error) {
                         myApp.alert('Desculpe, ocorreu um erro interno.' + res.error, 'Erro');
@@ -86,6 +94,7 @@ $$(document).on('click', '#sendCode', function (e) {
 $$(document).on('click', '#updateName', function (e) {
 
     sessionStorage.confirm_name = $("#name").val();
+
     myApp.showIndicator();
 
     console.log(localStorage.server + " " + sessionStorage.confirm_name);
@@ -127,10 +136,12 @@ $$(document).on('click', '#updateName', function (e) {
                 }
             });
 });
+$$(document).on('click', '#contactList', function (e) {
+    contactList();
+});
 $$(document).on('pageBeforeInit', '[data-page="welcome"]', function (e) {
     $('#toolbar').hide();
 });
-
 $$(document).on('pageBeforeInit', '[data-page="welcome_profile"]', function (e) {
     $('#toolbar').hide();
 });
