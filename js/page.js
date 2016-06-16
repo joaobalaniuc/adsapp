@@ -21,7 +21,7 @@ $(window).on("load", function () {
     //loadingHide();
 });
 $$(document).on("submit", "form", function (e) {
-    alert(1);
+    //alert(1);
     e.preventDefault();
     return false;
 });
