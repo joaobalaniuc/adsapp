@@ -124,7 +124,7 @@ function profileFb() {
 
     var fb_id;
 
-    if (typeof localStorage.fb_id !== "undefined") {
+    if (typeof localStorage.fb_id === "undefined") {
         if (typeof sessionStorage.fb_id !== "undefined") {
             fb_id = sessionStorage.fb_id;
         }

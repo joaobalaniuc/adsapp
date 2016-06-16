@@ -78,10 +78,10 @@ var fb = {
     logout: function () {
         facebookConnectPlugin.logout(
                 function () {
+                    localStorage.removeItem("fb_id");
                     profileFb();
                     profileFbUpdate(sessionStorage.fb_id, "out");
-                    localStorage.removeItem("fb_id");
-                    alert(":) logout ok");
+                    //alert(":) logout ok");
                 },
                 function () {
                     alert(":( logout error");
