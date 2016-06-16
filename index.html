@@ -280,14 +280,21 @@
 
                                 </ul>
 
-                                <div onclick="fb.login();" class="content-block" style="margin-bottom:-15px">
+                                <div id="FbIn" onclick="fb.login();" class="content-block" style="margin-bottom:-15px">
                                     <a href="#" class="button button-raised button-fill color-cyan">
                                         <i class="fa fa-facebook" style="position:absolute;left:10px;top:10px"></i>
                                         Login Facebook
                                     </a>
                                 </div>
+                                
+                                <div id="FbOut" onclick="fb.logout();" class="content-block" style="display:none;margin-bottom:-15px">
+                                    <a href="#" class="button button-raised button-fill color-gray">
+                                        <i class="fa fa-facebook" style="position:absolute;left:10px;top:10px"></i>
+                                        Sair do Facebook
+                                    </a>
+                                </div>
 
-                                <div onclick="fb.login();" class="content-block">
+                                <div onclick="" class="content-block">
                                     <a href="#" class="button button-raised button-fill color-pink">
                                         <i class="fa fa-instagram" style="position:absolute;left:10px;top:10px"></i>
                                         Login Instagram

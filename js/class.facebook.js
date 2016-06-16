@@ -22,11 +22,19 @@ var fb = {
     },
     login: function () {
         facebookConnectPlugin.login(["email", "public_profile"], function (result) {
-            alert(":) fb.login() = " + JSON.stringify(result));
-            localStorage.fb_id = result.authResponse.userID;
+            //alert(":) fb.login() = " + JSON.stringify(result));
+            //---
+            // nesta altura guardar id em session...
+            // profilefpupdate() guardará em local
+            //---
+            sessionStorage.fb_id = result.authResponse.userID;
             localStorage.fb_token = result.authResponse.accessToken;
             localStorage.fb_status = 'connected';
-            profileImg();
+            // updates
+            profileFb(); // frontend
+            profileFbUpdate(sessionStorage.fb_id, "in"); // database
+            // get rest of data
+            this.getUserInfo();
         }, function (err) {
             alert('an error occured while trying to login. please try again. Err:' + err);
         });
@@ -70,6 +78,9 @@ var fb = {
     logout: function () {
         facebookConnectPlugin.logout(
                 function () {
+                    profileFb();
+                    profileFbUpdate(sessionStorage.fb_id, "out");
+                    localStorage.removeItem("fb_id");
                     alert(":) logout ok");
                 },
                 function () {
