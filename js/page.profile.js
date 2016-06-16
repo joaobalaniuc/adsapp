@@ -26,7 +26,7 @@ $$(document).on('change', "#userName", function (e) {
                 console.log(res);
                 if (res !== null) {
                     if (res.error) {
-                        myApp.alert('Desculpe, ocorreu um erro interno.' + res.error, 'Erro');
+                        myApp.alert('Desculpe, ocorreu um erro interno = ' + localStorage.server + "," + localStorage.userNum + "," + sessionStorage.userName + "," + res.error, 'Erro');
                         return;
                     }
                     if (res.success) {
