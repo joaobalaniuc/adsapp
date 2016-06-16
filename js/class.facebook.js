@@ -79,6 +79,7 @@ var fb = {
         facebookConnectPlugin.logout(
                 function () {
                     localStorage.removeItem("fb_id");
+                    sessionStorage.removeItem("fb_id");
                     profileFb();
                     profileFbUpdate(sessionStorage.fb_id, "out");
                     //alert(":) logout ok");
