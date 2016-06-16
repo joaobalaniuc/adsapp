@@ -27,7 +27,7 @@ function start() {
         localStorage.dbVersion = '1.0';
         localStorage.dbName = 'Jowi';
         localStorage.dbMaxSize = 65536;
-        alert("new version, create db");
+        //alert("new version, create db");
 
     }
     dbCreate();

@@ -32,13 +32,7 @@ $$(document).on('click', '#checkCode', function (e) {
                     }
                     if (res.success) {
                         if (res.nick) {
-                            localStorage.userName = res.nick;
-                            if (res.id) {
-                                localStorage.userId = res.id;
-                            }
-                            if (res.bio) {
-                                localStorage.userStatus = res.bio;
-                            }
+                            profileConstruct(res);
                             localStorage.userNum = sessionStorage.confirm_cel;
                             view1.router.loadPage('index.html', {ignoreCache: true});
                             $('#toolbar').show();
@@ -127,7 +121,7 @@ $$(document).on('click', '#updateName', function (e) {
                         return;
                     }
                     if (res.success) {
-                        localStorage.userId = res.id;
+                        profileConstruct(res);
                         localStorage.userName = sessionStorage.confirm_name;
                         localStorage.userNum = sessionStorage.confirm_cel;
                         view1.router.loadPage('index.html', {ignoreCache: true});

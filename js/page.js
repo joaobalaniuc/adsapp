@@ -19,10 +19,14 @@ var myContacts = myApp.virtualList($$("#contacts"), {
 
 $(window).on("load", function () {
     //loadingHide();
-
+});
+$$(document).on("submit", "form", function (e) {
+    alert(1);
+    e.preventDefault();
+    return false;
 });
 $(document).ready(function () {
-    
+
     if (typeof localStorage.userId === "undefined") {
         view1.router.loadPage('welcome.html', {ignoreCache: true});
     }

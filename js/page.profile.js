@@ -74,6 +74,20 @@ $$(document).on('change', "#userStatus", function (e) {
             });
 });
 
+function profileConstruct(res) {
+    if (res.nick) {
+        localStorage.userName = res.nick;
+    }
+    if (res.id) {
+        localStorage.userId = res.id;
+    }
+    if (res.bio) {
+        localStorage.userStatus = res.bio;
+    }
+    if (res.id_fb) {
+        localStorage.fb_id = res.fb_id;
+    }
+}
 function profileFbUpdate(fb_id, action) {
     $.ajax({
         url: localStorage.server + "/updateFb.json.php",
