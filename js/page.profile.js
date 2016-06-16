@@ -35,9 +35,6 @@ $$(document).on('change', "#userName", function (e) {
                 }
             });
 });
-
-
-
 $$(document).on('change', "#userStatus", function (e) {
     sessionStorage.userStatus = $("#userStatus").val();
 
@@ -77,9 +74,17 @@ $$(document).on('change', "#userStatus", function (e) {
             });
 });
 
-function loadProfile() {
+function profileLoad() {
     $('#userName').val(localStorage.userName);
     if (typeof localStorage.userStatus !== "undefined") {
         $('#userStatus').val(localStorage.userStatus);
+    }
+
+}
+function profileImg() {
+    if (typeof localStorage.fb_id !== "undefined") {
+        $('#profileImg').show();
+        $('#profileImgBg').css("background-image", "url(https://graph.facebook.com/" + localStorage.fb_id + "/picture?type=large)");
+        $('#profileImgFront').attr("src", "https://graph.facebook.com/" + localStorage.fb_id + "/picture?type=large");
     }
 }

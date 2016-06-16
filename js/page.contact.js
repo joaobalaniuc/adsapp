@@ -1,13 +1,13 @@
-function contactList() {
+function contactList(first) {
     //
     debug();
     /*
      if (halt(true))
      return;
      var fN = fName();
-     //
+     
      if ($('.showChat').length === 0) {
-     // ja existem itens carregados
+     // ainda nao existem itens carregados
      }
      else {
      }

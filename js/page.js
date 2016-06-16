@@ -65,7 +65,7 @@ function pageRefresh() {
     }
     // profile
     if (page === "index-4") {
-        loadProfile();
+        profileLoad();
     }
     // chat inner
     if (page === "mmessages") {

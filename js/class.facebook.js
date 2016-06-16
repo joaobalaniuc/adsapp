@@ -26,6 +26,7 @@ var fb = {
             localStorage.fb_id = result.authResponse.userID;
             localStorage.fb_token = result.authResponse.accessToken;
             localStorage.fb_status = 'connected';
+            profileImg();
         }, function (err) {
             alert('an error occured while trying to login. please try again. Err:' + err);
         });
