@@ -81,13 +81,15 @@
     <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="lightcontent" />
-   <!--
+    <!--
     <plugin name="com.phonegap.plugins.facebookconnect" source="pgb" spec="0.9.0">
         <param name="APP_ID" value="1269306609763820" />
         <param name="APP_NAME" value="AdsOut" />
     </plugin>
     -->
-    
+    <preference name="phonegap-version" value="cli-5.2.0" />
+    <preference name="android-minSdkVersion" value="14" />
+    <preference name="android-maxSdkVersion" value="23" />
     <preference name="android-build-tool" value="gradle" /> 
     <plugin name="cordova-plugin-facebook4" source="npm">
         <param name="APP_ID" value="1269306609763820" />
