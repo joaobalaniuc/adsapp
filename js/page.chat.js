@@ -217,6 +217,14 @@ function chatGet() {
 
     var myMessages = myApp.messages('.messages');
     var myMessagebar = myApp.messagebar('.messagebar');
+
+    myMessages.addMessage({
+        text: "teste",
+        //avatar: myPic,
+        type: 'sent',
+        //date: dateFormat(new Date(rs.chat_date), "dd/mm hh:MM")
+    });
+
     /*
      var t = "";
      t += "<div style='font-size:12px;position:relative'><div style='position:absolute;top:100px;background:#000;color:#fff;opacity:0.8;font-size:24px'>R$ 350,00</div>"; // post
@@ -264,15 +272,15 @@ function chatGet() {
 
             // from me (sent)
             if (rs.chat_from == localStorage.userId) {
-                
-                alert("eu="+rs.chat_msg);
+
+                //alert("eu=" + rs.chat_msg);
 
                 var myPic;
                 if (typeof localStorage.fb_id === "undefined")
                     myPic = "";
                 else
                     myPic = 'http://graph.facebook.com/' + localStorage.fb_id + '/picture?type=square';
-                
+
                 myMessages.addMessage({
                     text: rs.chat_msg,
                     avatar: myPic,
@@ -281,7 +289,7 @@ function chatGet() {
                 });
             }
             else {
-                
+
                 alert(rs.chat_msg);
 
                 var dstPic;
