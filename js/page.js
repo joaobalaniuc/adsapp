@@ -18,7 +18,9 @@ var myContacts = myApp.virtualList($$("#contacts"), {
 });
 
 $(window).on("load", function () {
+    alert(dateFormat(new Date(), "yyyy-mm-dd hh:MM:ss"));
     //loadingHide();
+
 });
 $$(document).on("submit", "form", function (e) {
     //alert(1);
@@ -51,6 +53,10 @@ $(document).ready(function () {
         //updContact();
     }, 500);
 
+    setTimeout(function () {
+        chatGetAjax();
+    }, 1000);
+
 });
 
 function pageRefresh() {
@@ -72,9 +78,9 @@ function pageRefresh() {
         profileLoad();
     }
     // chat inner
-    if (page === "mmessages") {
-        getChat();
-        t = 1000;
+    if (page === "messages") {
+        //chatGet();
+        t = 10000;
     }
     // run again
     if (t > 0) {
@@ -95,6 +101,7 @@ function pageCheck() {
             clearInterval(pageRefreshTimer);
         }
         pageRefresh();
+        getSession();
         console.log("change page to " + page);
     }
 }
@@ -132,7 +139,7 @@ $$(document).on('click', 'a.tab-link', function (e) {
 $$(document).on('pageBeforeInit', '*', function (e) {
     //alert(1);
     //$('#toolbar').show();
-    //getSession();
+    getSession();
 });
 
 $$(document).on('pageBack', '*', function (e) {

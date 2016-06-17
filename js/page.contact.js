@@ -44,7 +44,7 @@ function contactList(first) {
                             img = '<img src="http://graph.facebook.com/' + contacts[i].id_fb + '/picture?type=square" width="44">';
                         }
                         else {
-                            img = '<img src="' + localStorage.server + '/img/profile.png" width="44">';
+                            img = '<img src="img/profile.png" width="44">';
                         }
                         if (contacts[i].bio === null) {
                             status = '<span style="font-weight:100;color:#ccc;text-transform:oblique">' + contacts[i].num + '</span>';
@@ -52,7 +52,7 @@ function contactList(first) {
                         else {
                             status = contacts[i].bio;
                         }
-                        myContacts.appendItem('<li class="showChat" data-num="' + contacts[i].num + '" data-name="' + contacts[i].nick + '" data-fb="' + contacts[i].id_fb + '"><a href="#view-3" class="tab-link item-link item-content"><div class="item-media">' + img + '</div><div class="item-inner"><div class="item-title-row"><div class="item-title">' + contacts[i].nick + '</div></div><div class="item-subtitle">' + status + '</div></div></a></li>');
+                        myContacts.appendItem('<li class="showChat" data-id="' + contacts[i].id + '" data-num="' + contacts[i].num + '" data-name="' + contacts[i].nick + '" data-fb="' + contacts[i].id_fb + '"><a href="#view-3" class="tab-link item-link item-content"><div class="item-media">' + img + '</div><div class="item-inner"><div class="item-title-row"><div class="item-title">' + contacts[i].nick + '</div></div><div class="item-subtitle">' + status + '</div></div></a></li>');
                         /*var key = "", val = "";
                          key += "num,num_local,name,nick,id_fb";
                          val += '"' + contacts[i].num + '",';

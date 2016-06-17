@@ -9,15 +9,14 @@ function start() {
     // Server
     localStorage.server = "http://sempreon.mobi/adsapp/";
 
-    if (web === 1) {
-        //localStorage.server = "http://10.0.0.35/adsapp/server/";
-    }
-
     // Dev
     sessionStorage.debug = 1;
     sessionStorage.activePage = "";
-    sessionStorage.lastchat = 0; // last msg id (#index-3)
-    sessionStorage.lastchat_inner = 0; // (#messages)
+
+    // Defaults
+    localStorage.LAST_CHAT_ID = 0; // id(server) of last general msg
+    localStorage.LAST_CHAT_ID_ACTIVE = 0; // id(local) of last msg from active chat only
+    
 
     // Database
     if (localStorage.version !== version) {
@@ -31,7 +30,6 @@ function start() {
 
     }
     dbCreate();
-    dbOpen();
 }
 
 var app = {
@@ -60,15 +58,12 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function () {
         console.log("ready0");
-
         app.receivedEvent('deviceready');
-
         // SPLASHSCREEN (CONFIG.XML BUGFIX)
         setTimeout(function () {
             navigator.splashscreen.hide();
         }, 1000);
         start();
-
         setTimeout(function () {
             //simulateContact();
         }, 1000);

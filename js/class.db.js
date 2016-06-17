@@ -12,6 +12,18 @@ function dbOpen() {
     var maxSize = localStorage.dbMaxSize;
     //
     db = openDatabase(shortName, version, displayName, maxSize);
+
+    //=============================
+    // SET "LAST_CHAT_ID"
+    //=============================
+    dbx('SELECT id FROM chat ORDER BY id DESC LIMIT 1', function (transaction, result) {
+        for (var i = 0; i < result.rows.length; i++) {
+            var row = result.rows.item(i);
+            localStorage.LAST_CHAT_ID = row['id'];
+            console.log(localStorage);
+        }
+    });
+
 }
 //========================
 // CRIAR BANCO DE DADOS
@@ -19,12 +31,9 @@ function dbOpen() {
 function dbCreate() {
 
     dbOpen();
-   
-    
-    dbQuery("DROP TABLE chat");
-    dbQuery("DROP TABLE contact");
-    
-   
+    //dbQuery("DROP TABLE chat");
+    //dbQuery("DROP TABLE contact");
+
     //''''''''''''''''''''''''
     // CONTACT
     //''''''''''''''''''''''''
@@ -52,17 +61,16 @@ function dbCreate() {
                 transaction.executeSql(
                         'CREATE TABLE IF NOT EXISTS chat ' +
                         ' (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ' +
-                        ' chat_id_server INTEGER, ' +
-                        ' chat_num TEXT NOT NULL, ' +
-                        ' chat_from TEXT NOT NULL, ' +
-                        ' chat_to TEXT NOT NULL, ' +
+                        ' chat_id INTEGER, ' + // CHAT ID FROM SERVER
+                        ' chat_from INTEGER NOT NULL, ' + // SRC ID FROM SERVER
+                        ' chat_to INTEGER NOT NULL, ' + // DST ID FROM SERVER
                         ' chat_msg TEXT, ' +
                         ' chat_read INTEGER, ' +
+                        ' chat_post INTEGER, ' + // POST ID FROM SERVER (SE NOT NULL, NÃO É MENSAGEM, É POST)
                         ' chat_date TEXT);'
                         );
             }
     );
-
 
 }
 //========================

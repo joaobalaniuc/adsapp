@@ -212,91 +212,54 @@ myApp.onPageInit('messages', function (page) {
         // Clear messagebar
         myMessagebar.clear();
 
-        var html = '';
-        html += '<div class="message message-sent">';
-        html += '<div class="message message-sent message-with-avatar">';
-        html += '<div class="message-text">' + messageText;
-        html += '<div class="message-date">Feb 9, 12:59</div>';
-        html += '</div>';
-        html += '<div style="background-image:url(http://cp91279.biography.com/1000509261001/1000509261001_1822909398001_BIO-Biography-29-Innovators-Mark-Zuckerberg-115956-SF.jpg)" class="message-avatar"></div>';
-        html += '</div>';
-
-        var key = "", val = "";
-        key += "chat_from,chat_num,chat_to,chat_msg";
-        val += '"me",';
-        val += '"' + sessionStorage.chatNum + '",';
-        val += '"' + sessionStorage.chatNum + '",';
-        val += '"' + messageText + '"';
-        dbQuery('INSERT INTO chat (' + key + ') VALUES (' + val + ')');
-
-
-        //$('#getChat').append(html);
-
         $("html, body, .page-content, .messages").animate({scrollTop: $(document).height()}, 1000);
+
         console.log("sending " + messageText);
-        /*
-         $.ajax({
-         url: localStorage.server + "/chat-send.json.php",
-         data: {
-         'username': localStorage.username,
-         'userpass': localStorage.userpass,
-         'msg': messageText,
-         'id_user_dst': sessionStorage.id_user_dst
-         },
-         type: 'GET',
-         dataType: 'jsonp',
-         jsonp: 'callback',
-         timeout: 5000
-         })
-         .always(function () {
-         //myApp.hideIndicator();
-         })
-         
-         .fail(function () {
-         myApp.alert('Desculpe, verifique sua conexão e tente novamente.', 'Erro');
-         })
-         
-         .done(function (res) {
-         if (res !== null) {
-         if (res.error) {
-         myApp.alert('Desculpe, ocorreu um erro interno.', 'Erro');
-         return;
-         }
-         sessionStorage.lastchat_inner = res.success;
-         
-         } // res not null
-         }); // after ajax
-         */
+        chatInsert(localStorage.userId, sessionStorage.chatId, messageText);
+
+        //=======================
         // Add Message
+        //=======================
+        var myPic;
+        if (typeof localStorage.fb_id === "undefined")
+            myPic = "";
+        else
+            myPic = 'http://graph.facebook.com/' + localStorage.fb_id + '/picture?type=square';
 
         myMessages.addMessage({
             text: messageText,
-            avatar: 'http://blogs.timesofindia.indiatimes.com/wp-content/uploads/2015/12/mark-zuckerberg.jpg',
+            avatar: myPic,
             type: 'sent',
-            date: 'Agora'
+            date: dateFormat(new Date(), "hh:MM")
         });
         conversationStarted = true;
-        // Add answer after timeout
-        if (answerTimeout)
+        //=======================
+        // Add reply simulator
+        //=======================
+        if (answerTimeout) {
             clearTimeout(answerTimeout);
+        }
         answerTimeout = setTimeout(function () {
             var answerText = answers[Math.floor(Math.random() * answers.length)];
             var person = people[Math.floor(Math.random() * people.length)];
             var msg = answers[Math.floor(Math.random() * answers.length)];
+
+            var dstPic;
+            console.log(sessionStorage.chatFb);
+            if (sessionStorage.chatFb === "null") {
+                dstPic = "";
+            }
+            else {
+                dstPic = sessionStorage.chatFbLink;
+            }
             myMessages.addMessage({
                 text: msg,
                 type: 'received',
-                name: sessionStorage.chatName,
-                avatar: 'http://graph.facebook.com/' + sessionStorage.chatFb + '/picture?type=square',
-                date: 'Agora mesmo'
+                //name: sessionStorage.chatName,
+                avatar: dstPic,
+                date: dateFormat(new Date(), "hh:MM")
             });
-            var key = "", val = "";
-            key += "chat_from,chat_num,chat_to,chat_msg";
-            val += '"' + sessionStorage.chatNum + '",';
-            val += '"' + sessionStorage.chatNum + '",';
-            val += '"me",';
-            val += '"' + msg+ '"';
-            dbQuery('INSERT INTO chat (' + key + ') VALUES (' + val + ')');
+            chatInsert(sessionStorage.chatId, localStorage.userId, msg);
         }, 2000);
 
     });
