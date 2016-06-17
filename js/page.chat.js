@@ -237,7 +237,6 @@ function chatGet() {
      date: 'Agora'
      });
      */
-    alert(sessionStorage.chatId);
     dbx('SELECT * FROM chat WHERE (chat_from = "' + sessionStorage.chatId + '" OR chat_to = "' + sessionStorage.chatId + '") AND id > ' + localStorage.LAST_CHAT_ID_ACTIVE + ' ORDER BY id ASC', function (transaction, result) {
         //console.log(result.rows);
 
