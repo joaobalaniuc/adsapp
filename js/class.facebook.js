@@ -36,7 +36,7 @@ var fb = {
             // get rest of data
             this.getUserInfo();
         }, function (err) {
-            alert('an error occured while trying to login. please try again. Err:' + err);
+            alert('an error occured while trying to login. please try again. Err:' + enc(err));
         });
     },
     getUserInfo: function () {
