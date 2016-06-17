@@ -255,7 +255,7 @@ function chatGet() {
         }
         //console.log(localStorage);
 
-        alert(result.rows.length + " " + localStorage.LAST_CHAT_ID_ACTIVE + " " + res.length);
+        //alert(result.rows.length + " " + localStorage.LAST_CHAT_ID_ACTIVE + " " + res.length);
 
         // construct
         $.each(res, function (i, item) {
@@ -264,13 +264,15 @@ function chatGet() {
 
             // from me (sent)
             if (rs.chat_from == localStorage.userId) {
+                
+                alert("eu="+rs.chat_msg);
 
                 var myPic;
                 if (typeof localStorage.fb_id === "undefined")
                     myPic = "";
                 else
                     myPic = 'http://graph.facebook.com/' + localStorage.fb_id + '/picture?type=square';
-
+                
                 myMessages.addMessage({
                     text: rs.chat_msg,
                     avatar: myPic,
@@ -279,6 +281,8 @@ function chatGet() {
                 });
             }
             else {
+                
+                alert(rs.chat_msg);
 
                 var dstPic;
                 if (sessionStorage.chatFb === "null")
