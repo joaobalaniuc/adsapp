@@ -238,7 +238,6 @@ function chatGet() {
      });
      */
     dbx('SELECT * FROM chat WHERE (chat_from = "' + sessionStorage.chatId + '" OR chat_to = "' + sessionStorage.chatId + '") AND id > ' + localStorage.LAST_CHAT_ID_ACTIVE + ' ORDER BY id ASC', function (transaction, result) {
-        //console.log(result.rows);
 
         // FIX FIELDS FOR IPHONE
         var res = [];
@@ -256,11 +255,9 @@ function chatGet() {
         }
         //console.log(localStorage);
 
-        // construct
-        var x = 0;
-        var html = '';
-        var fb, url, vc, nome;
+        alert(result.rows.length + " " + localStorage.LAST_CHAT_ID_ACTIVE + " " + res.length);
 
+        // construct
         $.each(res, function (i, item) {
 
             var rs = res[i];

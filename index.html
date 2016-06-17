@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
         <!--
         <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'"/>
-        -->
         <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline'; media-src *; img-src * data:; " />
+        -->
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -351,7 +351,9 @@
         </div>
 
         <!-- DEBUG -->
-        <script>var web = 0;</script>
+        <script>
+            var isApp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+        </script>
         <!-- !--
         <script src="http://10.0.0.35:8080/target/target-script-min.js#adsapp"></script>
         <!-- PHONEGAP -->
@@ -386,19 +388,18 @@
         <script type="text/javascript">
             // alias session        
             s = sessionStorage;
-            setTimeout(function () {
-                //sessionStorage.online = true;
-                //sessionStorage.loc_id = 1;
-            }, 3000);
+            
+            // init
             app.initialize();
-            //localStorage.removeItem("userId");
+            
             // DEV
-            if (web === 1) {
+            if (!isApp) {
                 start();
-                setTimeout(function () {
-                    //simulateContact();
-                }, 1000);
             }
+            else {
+                alert("app ok");
+            }
+            //localStorage.removeItem("userId");
 
             console.log(localStorage);
             console.log(sessionStorage);
