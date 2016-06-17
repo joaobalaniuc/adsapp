@@ -215,18 +215,6 @@ function chatGet() {
         //myApp.showIndicator();
     }
 
-// Init App
-    var myApp = new Framework7();
-    var myMessages = myApp.messages('.messages');
-    var myMessagebar = myApp.messagebar('.messagebar');
-
-    myMessages.addMessage({
-        text: "teste",
-        //avatar: myPic,
-        type: 'sent',
-        //date: dateFormat(new Date(rs.chat_date), "dd/mm hh:MM")
-    });
-
     /*
      var t = "";
      t += "<div style='font-size:12px;position:relative'><div style='position:absolute;top:100px;background:#000;color:#fff;opacity:0.8;font-size:24px'>R$ 350,00</div>"; // post
@@ -249,6 +237,12 @@ function chatGet() {
      */
     dbx('SELECT * FROM chat WHERE (chat_from = "' + sessionStorage.chatId + '" OR chat_to = "' + sessionStorage.chatId + '") AND id > ' + localStorage.LAST_CHAT_ID_ACTIVE + ' ORDER BY id ASC', function (transaction, result) {
 
+
+        // Init App
+        var myApp = new Framework7();
+        var myMessages = myApp.messages('.messages');
+        var myMessagebar = myApp.messagebar('.messagebar');
+
         // FIX FIELDS FOR IPHONE
         var res = [];
         for (var i = 0; i < result.rows.length; i++) {
@@ -270,12 +264,14 @@ function chatGet() {
         // construct
         $.each(res, function (i, item) {
 
+            alert(rs.chat_msg);
+
             var rs = res[i];
 
             // from me (sent)
             if (rs.chat_from == localStorage.userId) {
 
-                //alert("eu=" + rs.chat_msg);
+                //
 
                 var myPic;
                 if (typeof localStorage.fb_id === "undefined")
