@@ -16,11 +16,14 @@ function dbOpen() {
     //=============================
     // SET "LAST_CHAT_ID"
     //=============================
-    dbx('SELECT id FROM chat ORDER BY id DESC LIMIT 1', function (transaction, result) {
+    dbx('SELECT chat_id FROM chat WHERE chat_id IS NOT NULL ORDER BY chat_id DESC LIMIT 1', function (transaction, result) {
         for (var i = 0; i < result.rows.length; i++) {
             var row = result.rows.item(i);
-            localStorage.LAST_CHAT_ID = row['id'];
-            console.log(localStorage);
+            localStorage.LAST_CHAT_ID = row['chat_id'];
+            //console.log(localStorage);
+        }
+        if (localStorage.LAST_CHAT_ID < 0) {
+            localStorage.LAST_CHAT_ID = 0;
         }
     });
 
@@ -30,7 +33,7 @@ function dbOpen() {
 //========================
 function dbCreate() {
     //dbQuery("DROP TABLE chat");
-    //dbQuery("DROP TABLE contact");
+    //dbQuery("DROP TABLE user");
 
     //''''''''''''''''''''''''
     // CONTACT
@@ -38,16 +41,16 @@ function dbCreate() {
     db.transaction(
             function (transaction) {
                 transaction.executeSql(
-                        'CREATE TABLE IF NOT EXISTS contact ' +
+                        'CREATE TABLE IF NOT EXISTS user ' +
                         ' (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ' +
-                        ' id_server INTEGER, ' +
-                        ' num TEXT NOT NULL UNIQUE, ' +
-                        ' num_local TEXT NOT NULL, ' +
-                        ' name TEXT, ' +
-                        ' nick TEXT, ' +
-                        ' id_fb TEXT, ' +
-                        ' id_in TEXT, ' +
-                        ' fav INTEGER);' // favorito
+                        ' user_id INTEGER UNIQUE, ' + // from server
+                        ' user_num TEXT UNIQUE, ' +
+                        ' user_num_local TEXT, ' +
+                        ' user_name TEXT, ' +
+                        ' user_nick TEXT, ' +
+                        ' user_fb TEXT, ' +
+                        ' user_in TEXT, ' +
+                        ' user_fav INTEGER);' // favorito
                         );
             }
     );
@@ -59,7 +62,8 @@ function dbCreate() {
                 transaction.executeSql(
                         'CREATE TABLE IF NOT EXISTS chat ' +
                         ' (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ' +
-                        ' chat_id INTEGER, ' + // CHAT ID FROM SERVER
+                        ' chat_id INTEGER, ' + // MSG ID FROM SERVER
+                        ' chat_with INTEGER, ' + // ID SERVER OF OTHER PERSON 
                         ' chat_from INTEGER NOT NULL, ' + // SRC ID FROM SERVER
                         ' chat_to INTEGER NOT NULL, ' + // DST ID FROM SERVER
                         ' chat_msg TEXT, ' +

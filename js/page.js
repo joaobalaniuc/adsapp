@@ -27,6 +27,7 @@ $$(document).on("submit", "form", function (e) {
     e.preventDefault();
     return false;
 });
+
 $(document).ready(function () {
 
     if (typeof localStorage.userId === "undefined") {
@@ -70,8 +71,8 @@ function pageRefresh() {
     }
     // chat list
     if (page === "index-3") {
-        //getChatList();
-        t = 7000;
+        chatList();
+        t = 0;
     }
     // profile
     if (page === "index-4") {

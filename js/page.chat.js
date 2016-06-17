@@ -1,19 +1,19 @@
-function getChatList() {
-    return false;
+function chatList() {
     //
     debug();
     //
-    if (halt(true))
-        return;
-    var fN = fName();
-    //
-    if ($('.showChat').length === 0) {
-        //myApp.showIndicator();
-    }
-    dbx('SELECT * FROM chat INNER JOIN contact ON contact.num=chat.chat_num WHERE chat.chat_from = "me" OR chat.chat_to = "me" GROUP BY chat_num ORDER BY id DESC', function (transaction, result) {
+    /*if (halt(true))
+     return;
+     var fN = fName();
+     //
+     if ($('.showChat').length === 0) {
+     //myApp.showIndicator();
+     }
+     */
+    dbx('SELECT * FROM chat INNER JOIN user ON chat.chat_with=user.user_id GROUP BY chat_with ORDER BY id DESC', function (transaction, result) {
 
         if (result.rows.length > 0) {
-            $('#nenhumacon').hide();
+            $('#chatNone').hide();
         }
 
         // FIX FIELDS FOR IPHONE
@@ -21,10 +21,12 @@ function getChatList() {
         for (var i = 0; i < result.rows.length; i++) {
             var row = result.rows.item(i);
             res[i] = {
-                id: row['id'],
-                name: row['name'],
-                num: row['num'],
-                id_fb: row['id_fb'],
+                user_id: row['user_id'],
+                user_nick: row['user_nick'],
+                user_num: row['user_num'],
+                user_fb: row['user_fb'],
+                //
+                chat_id: row['chat_id'],
                 chat_from: row['chat_from'],
                 chat_to: row['chat_to'],
                 chat_msg: row['chat_msg']
@@ -36,8 +38,8 @@ function getChatList() {
         var fb, url, vc, nome;
         $.each(res, function (i, item) {
             var rs = res[i];
-            console.log("aaa:" + enc(res[i]));
-            if (rs.chat_from !== "me") {
+            console.log(rs);
+            if (rs.chat_from !== localStorage.userId) {
                 //fb = rs.srcFb;
                 vc = "";
                 //nome = rs.srcNome;
@@ -47,9 +49,14 @@ function getChatList() {
                 vc = "<em>Você:</em> ";
                 //nome = rs.dstNome;
             }
-            url = "https://graph.facebook.com/" + rs.id_fb + "/picture?type=large";
+            if (rs.user_fb != "null") {
+                url = "https://graph.facebook.com/" + rs.user_fb + "/picture?type=large";
+            }
+            else {
+                url = "img/profile.png";
+            }
             //
-            html += '<li class="showChat swipeout" data-fb="' + rs.id_fb + '" data-num="' + rs.num + '" data-name="' + rs.name + '">'; // row
+            html += '<li class="showChat swipeout" data-id="' + rs.user_id + '" data-fb="' + rs.user_fb + '" data-num="' + rs.user_num + '" data-name="' + rs.user_nick + '">'; // row
             html += '<div class="swipeout-content">';
             html += '<a href="#" class="item-link item-content">';
             html += '<div class="item-media">';
@@ -57,7 +64,7 @@ function getChatList() {
             html += '</div>';
             html += '<div class="item-inner">';
             html += '<div class="item-title-row">';
-            html += '<div class="item-title">' + rs.name + '</div>';
+            html += '<div class="item-title">' + rs.user_nick + '</div>';
             html += '<div class="item-after">';
             //html += '<div class="chip" style="margin-top:-5px;background:#0288d1;color:#fff;font-size:12px;font-weight:100">';
             //html += '<div class="chip-label">5</div>';
@@ -167,6 +174,15 @@ function chatGetAjax() {
     if (typeof localStorage.userId === "undefined") {
         return false;
     }
+    // PRIMEIRA EXECUÇÃO, ENTÃO..
+    // VARIAVEL AINDA NAO FOI SETADA EM CLASS.DB()
+    if (localStorage.LAST_CHAT_ID < 0) {
+        setTimeout(function () {
+            chatGetAjax();
+        }, 3000);
+        return false;
+    }
+    //console.log("searching chat id > " + localStorage.LAST_CHAT_ID);
 
     $.ajax({
         url: localStorage.server + "/chatGet.json.php",
@@ -196,11 +212,12 @@ function chatGetAjax() {
 
                     if (typeof res.length !== "undefined") {
                         console.log(res.length + " new msg received now");
+                        //console.log("saving last chat id = " + res[parseInt(res.length - 1)].id);
+                        localStorage.LAST_CHAT_ID = res[parseInt(res.length - 1)].id;
                     }
                     // construct
                     $.each(res, function (i, item) {
                         chatInsert(res[i].id_user_src, res[i].id_user_dst, res[i].msg, res[i].id);
-                        localStorage.LAST_CHAT_ID = res[i].id;
                     });
 
                 } // res not null
@@ -265,8 +282,8 @@ function chatGet() {
         $.each(res, function (i, item) {
 
             var rs = res[i];
-            
-            console.log("MSG=" + rs.chat_msg);
+
+
 
             // from me (sent)
             if (rs.chat_from == localStorage.userId) {
@@ -277,16 +294,18 @@ function chatGet() {
                 else
                     myPic = 'http://graph.facebook.com/' + localStorage.fb_id + '/picture?type=square';
 
+                //console.log("MSG1X=" + rs.chat_msg + " " + myPic + "AAA");
                 myMessages.addMessage({
                     text: rs.chat_msg,
                     avatar: myPic,
-                    type: 'sent',
-                    date: dateFormat(new Date(rs.chat_date), "dd/mm hh:MM")
+                    type: 'sent'
+                            //date: dateFormat(new Date(rs.chat_date), "dd/mm hh:MM")
                 });
+                //console.log("aaa");
             }
             else {
 
-                //alert(rs.chat_msg);
+                //console.log("MSG2=" + rs.chat_msg);
 
                 var dstPic;
                 if (sessionStorage.chatFb === "null")
@@ -298,7 +317,7 @@ function chatGet() {
                     text: rs.chat_msg,
                     avatar: dstPic,
                     type: 'received',
-                    date: dateFormat(new Date(rs.chat_date), "dd/mm hh:MM")
+                    //date: dateFormat(new Date(rs.chat_date), "dd/mm hh:MM")
                 });
 
             }
@@ -308,12 +327,18 @@ function chatGet() {
 
 }
 function chatInsert(src, dst, messageText, idReceivedFromServer) {
+    // other person? to easiest chat list
+    if (src == localStorage.userId)
+        var other = dst;
+    else
+        var other = src;
     //==========================
     // INSERT MSG ON LOCAL DB
     //==========================
     var now = dateFormat(new Date(), "yyyy-mm-dd hh:MM:ss");
     var key = "", val = "";
-    key += "chat_from,chat_to,chat_msg,chat_date,chat_id";
+    key += "chat_with,chat_from,chat_to,chat_msg,chat_date,chat_id";
+    val += '"' + other + '",';
     val += '"' + src + '",';
     val += '"' + dst + '",';
     val += '"' + messageText + '",';
@@ -331,7 +356,8 @@ function chatInsert(src, dst, messageText, idReceivedFromServer) {
                                 chatSend(src, dst, messageText, id_local);
                             }
                             else {
-                                localStorage.LAST_CHAT_ID = idReceivedFromServer;
+                                // já insere isso em getajax()
+                                //localStorage.LAST_CHAT_ID = idReceivedFromServer;
                             }
 
                         });
@@ -399,6 +425,7 @@ $$(document).on('click', '.showChat', function (e) {
     if (sessionStorage.chatFb === "null") {
         sessionStorage.chatFbLink = "img/profile.png";
     }
+    contactSave(sessionStorage.chatId, sessionStorage.chatName, sessionStorage.chatNum, sessionStorage.chatFb);
     view3.router.loadPage('chat.html', {ignoreCache: true});
 });
 

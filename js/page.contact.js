@@ -69,3 +69,20 @@ function contactList(first) {
             }); // after ajax
 
 }
+function contactSave(user_id, user_nick, user_num, user_fb) {
+    dbx('SELECT * FROM user WHERE user_id="' + user_id + '"', function (transaction, result) {
+        // contact dont exists
+        if (result.rows.length === 0) {
+            //==========================
+            // INSERT CONTACT ON DB
+            //==========================
+            var key = "", val = "";
+            key += "user_id,user_nick,user_num,user_fb";
+            val += '"' + user_id + '",';
+            val += '"' + user_nick + '",';
+            val += '"' + user_num + '",';
+            val += '"' + user_fb + '"';
+            dbQuery('INSERT INTO user (' + key + ') VALUES (' + val + ')');
+        }
+    });
+}
