@@ -215,6 +215,8 @@ function chatGet() {
         //myApp.showIndicator();
     }
 
+// Init App
+    var myApp = new Framework7();
     var myMessages = myApp.messages('.messages');
     var myMessagebar = myApp.messagebar('.messagebar');
 
@@ -290,7 +292,7 @@ function chatGet() {
             }
             else {
 
-                alert(rs.chat_msg);
+                //alert(rs.chat_msg);
 
                 var dstPic;
                 if (sessionStorage.chatFb === "null")
