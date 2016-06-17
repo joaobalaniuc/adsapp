@@ -70,7 +70,7 @@ function pageRefresh() {
     }
     // chat list
     if (page === "index-3") {
-        getChatList();
+        //getChatList();
         t = 7000;
     }
     // profile
@@ -80,7 +80,7 @@ function pageRefresh() {
     // chat inner
     if (page === "messages") {
         //chatGet();
-        t = 10000;
+        t = 1000;
     }
     // run again
     if (t > 0) {
