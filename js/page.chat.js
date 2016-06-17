@@ -264,14 +264,12 @@ function chatGet() {
         // construct
         $.each(res, function (i, item) {
 
-            alert(rs.chat_msg);
-
             var rs = res[i];
+            
+            console.log("MSG=" + rs.chat_msg);
 
             // from me (sent)
             if (rs.chat_from == localStorage.userId) {
-
-                //
 
                 var myPic;
                 if (typeof localStorage.fb_id === "undefined")
