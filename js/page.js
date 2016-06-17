@@ -18,7 +18,7 @@ var myContacts = myApp.virtualList($$("#contacts"), {
 });
 
 $(window).on("load", function () {
-    alert(dateFormat(new Date(), "yyyy-mm-dd hh:MM:ss"));
+    //alert(dateFormat(new Date(), "yyyy-mm-dd hh:MM:ss"));
     //loadingHide();
 
 });

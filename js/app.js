@@ -29,6 +29,7 @@ function start() {
         //alert("new version, create db");
 
     }
+    dbOpen();
     dbCreate();
 }
 

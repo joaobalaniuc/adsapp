@@ -29,8 +29,6 @@ function dbOpen() {
 // CRIAR BANCO DE DADOS
 //========================
 function dbCreate() {
-
-    dbOpen();
     //dbQuery("DROP TABLE chat");
     //dbQuery("DROP TABLE contact");
 
