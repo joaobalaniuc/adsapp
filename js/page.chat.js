@@ -2,14 +2,6 @@ function chatList() {
     //
     debug();
     //
-    /*if (halt(true))
-     return;
-     var fN = fName();
-     //
-     if ($('.showChat').length === 0) {
-     //myApp.showIndicator();
-     }
-     */
     dbx('SELECT * FROM chat INNER JOIN user ON chat.chat_with=user.user_id GROUP BY chat_with ORDER BY id DESC', function (transaction, result) {
 
         if (result.rows.length > 0) {
@@ -81,92 +73,8 @@ function chatList() {
             //sessionStorage.lastchat = rs.id; // last chat id
         });
         $('#getChatList').html(html);
-
-
     });
-    /*
-     $.ajax({
-     url: localStorage.server + "/chat-list.json.php",
-     data: {
-     'user_id': localStorage.user_id,
-     'startdate': sessionStorage.session_startdate,
-     'lastchat': sessionStorage.lastchat
-     },
-     type: 'GET',
-     dataType: 'jsonp',
-     jsonp: 'callback',
-     timeout: 7000
-     })
-     .always(function () {
-     s.removeItem(fN); // halt
-     myApp.hideIndicator();
-     })
-     
-     .fail(function () {
-     myApp.alert('Desculpe, verifique sua conexão e tente novamente.', 'Erro');
-     })
-     
-     .done(function (res) {
-     if (res !== null) {
-     if (res.error) {
-     myApp.alert('Desculpe, ocorreu um erro interno.' + res.error, 'Erro');
-     return;
-     }
-     
-     if (typeof res.length !== "undefined") {
-     console.log(res.length + " results");
-     }
-     
-     // construct
-     var x = 0;
-     var html = '';
-     var fb, url, vc, nome;
-     $.each(res, function (i, item) {
-     
-     if (res[i].dstId === localStorage.userid) {
-     fb = res[i].srcFb;
-     vc = "";
-     nome = res[i].srcNome;
-     }
-     else {
-     fb = res[i].dstFb;
-     vc = "<em>Você:</em> ";
-     nome = res[i].dstNome;
-     }
-     url = "https://graph.facebook.com/" + fb + "/picture?type=large";
-     //
-     html += '<li class="showChat swipeout" data-id-user-dst="' + res[i].dstId + '" data-id-pair="' + res[i].id_pair + '" data-nome="' + nome + '">'; // row
-     html += '<div class="swipeout-content">';
-     html += '<a href="#" class="item-link item-content">';
-     html += '<div class="item-media">';
-     html += '<img src="' + url + '" style="width:42px !important;height:42px !important"/>';
-     html += '</div>';
-     html += '<div class="item-inner">';
-     html += '<div class="item-title-row">';
-     html += '<div class="item-title">' + nome + '</div>';
-     html += '<div class="item-after">';
-     html += '<div class="chip" style="margin-top:-5px;background:#0288d1;color:#fff;font-size:12px;font-weight:100">';
-     html += '<div class="chip-label">5</div>';
-     html += '</div>';
-     html += '</div>';
-     html += '</div>';
-     html += '<div class="item-text" style="font-weight:100">' + vc + res[i].msg + '</div>';
-     html += '</div>';
-     html += '</a>';
-     html += '</div>';
-     html += '<div class="swipeout-actions-left"><a href="#" class="bg-green swipeout-overswipe demo-reply">Responder</a><a href="#" class="demo-forward bg-blue">Repray</a></div>';
-     html += '<div class="swipeout-actions-right"><a href="#" class="demo-actions">Mais</a><a href="#" class="demo-mark bg-orange">Fav</a><a href="#" data-confirm="Are you sure you want to delete this item?" class="swipeout-delete swipeout-overswipe">Denunciar</a></div>';
-     html += '</li>'; // row
-     sessionStorage.lastchat = res[i].id; // last chat id
-     });
-     $('#getChatList').html(html);
-     
-     
-     } // res not null
-     }); // after ajax
-     */
 }
-
 function chatGetAjax() {
     //
     debug();
@@ -252,9 +160,8 @@ function chatGet() {
      date: 'Agora'
      });
      */
-    dbx('SELECT * FROM chat WHERE (chat_from = "' + sessionStorage.chatId + '" OR chat_to = "' + sessionStorage.chatId + '") AND id > ' + localStorage.LAST_CHAT_ID_ACTIVE + ' ORDER BY id ASC', function (transaction, result) {
-
-
+    //console.log("getting id > " + localStorage.LAST_CHAT_ID_ACTIVE);
+    dbx('SELECT * FROM chat WHERE (chat_from = "' + sessionStorage.chatId + '" OR chat_to = "' + sessionStorage.chatId + '") AND chat_id > ' + localStorage.LAST_CHAT_ID_ACTIVE + ' AND chat_id IS NOT NULL AND chat_id <> "undefined" ORDER BY id ASC', function (transaction, result) {
         // Init App
         var myApp = new Framework7();
         var myMessages = myApp.messages('.messages');
@@ -275,25 +182,17 @@ function chatGet() {
             localStorage.LAST_CHAT_ID_ACTIVE = res[i]['chat_id'];
         }
         //console.log(localStorage);
-
-        //alert(result.rows.length + " " + localStorage.LAST_CHAT_ID_ACTIVE + " " + res.length);
-
+        console.log("get: " + result.rows.length + " " + localStorage.LAST_CHAT_ID_ACTIVE + " " + res.length);
         // construct
         $.each(res, function (i, item) {
-
             var rs = res[i];
-
-
-
             // from me (sent)
             if (rs.chat_from == localStorage.userId) {
-
                 var myPic;
                 if (typeof localStorage.fb_id === "undefined")
                     myPic = "";
                 else
                     myPic = 'http://graph.facebook.com/' + localStorage.fb_id + '/picture?type=square';
-
                 //console.log("MSG1X=" + rs.chat_msg + " " + myPic + "AAA");
                 myMessages.addMessage({
                     text: rs.chat_msg,
@@ -304,29 +203,27 @@ function chatGet() {
                 //console.log("aaa");
             }
             else {
-
                 //console.log("MSG2=" + rs.chat_msg);
-
                 var dstPic;
                 if (sessionStorage.chatFb === "null")
                     dstPic = "";
                 else
                     dstPic = sessionStorage.chatFbLink;
-
                 myMessages.addMessage({
                     text: rs.chat_msg,
                     avatar: dstPic,
-                    type: 'received',
-                    //date: dateFormat(new Date(rs.chat_date), "dd/mm hh:MM")
+                    type: 'received'
+                            //date: dateFormat(new Date(rs.chat_date), "dd/mm hh:MM")
                 });
-
             }
-
         });
     });
 
 }
 function chatInsert(src, dst, messageText, idReceivedFromServer) {
+    //
+    this.scope = [src, dst, messageText, idReceivedFromServer];
+    debug(this);
     // other person? to easiest chat list
     if (src == localStorage.userId)
         var other = dst;

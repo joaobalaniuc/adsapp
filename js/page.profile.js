@@ -85,7 +85,7 @@ function profileConstruct(res) {
         localStorage.userStatus = res.bio;
     }
     if (res.id_fb) {
-        localStorage.fb_id = res.fb_id;
+        localStorage.fb_id = res.id_fb;
     }
 }
 function profileFbUpdate(fb_id, action) {

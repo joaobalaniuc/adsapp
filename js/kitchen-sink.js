@@ -212,7 +212,7 @@ myApp.onPageInit('messages', function (page) {
         // Clear messagebar
         myMessagebar.clear();
 
-        $("html, body, .page-content, .messages").animate({scrollTop: $(document).height()}, 1000);
+        //$("html, body, .page-content, .messages").animate({scrollTop: $(document).height()}, 1000);
 
         console.log("sending " + messageText);
         chatInsert(localStorage.userId, sessionStorage.chatId, messageText);
@@ -232,35 +232,37 @@ myApp.onPageInit('messages', function (page) {
             type: 'sent',
             date: dateFormat(new Date(), "hh:MM")
         });
-        conversationStarted = true;
         //=======================
         // Add reply simulator
         //=======================
-        if (answerTimeout) {
-            clearTimeout(answerTimeout);
-        }
-        answerTimeout = setTimeout(function () {
-            var answerText = answers[Math.floor(Math.random() * answers.length)];
-            var person = people[Math.floor(Math.random() * people.length)];
-            var msg = answers[Math.floor(Math.random() * answers.length)];
-
-            var dstPic;
-            console.log(sessionStorage.chatFb);
-            if (sessionStorage.chatFb === "null") {
-                dstPic = "";
-            }
-            else {
-                dstPic = sessionStorage.chatFbLink;
-            }
-            myMessages.addMessage({
-                text: msg,
-                type: 'received',
-                //name: sessionStorage.chatName,
-                avatar: dstPic,
-                date: dateFormat(new Date(), "hh:MM")
-            });
-            chatInsert(sessionStorage.chatId, localStorage.userId, msg);
-        }, 2000);
+        /*
+         conversationStarted = true;
+         if (answerTimeout) {
+         clearTimeout(answerTimeout);
+         }
+         answerTimeout = setTimeout(function () {
+         var answerText = answers[Math.floor(Math.random() * answers.length)];
+         var person = people[Math.floor(Math.random() * people.length)];
+         var msg = answers[Math.floor(Math.random() * answers.length)];
+         
+         var dstPic;
+         console.log(sessionStorage.chatFb);
+         if (sessionStorage.chatFb === "null") {
+         dstPic = "";
+         }
+         else {
+         dstPic = sessionStorage.chatFbLink;
+         }
+         myMessages.addMessage({
+         text: msg,
+         type: 'received',
+         //name: sessionStorage.chatName,
+         avatar: dstPic,
+         date: dateFormat(new Date(), "hh:MM")
+         });
+         chatInsert(sessionStorage.chatId, localStorage.userId, msg);
+         }, 2000);
+         */
 
     });
 });

@@ -80,7 +80,7 @@ function pageRefresh() {
     }
     // chat inner
     if (page === "messages") {
-        //chatGet();
+        chatGet();
         t = 1000;
     }
     // run again

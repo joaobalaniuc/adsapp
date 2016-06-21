@@ -16,7 +16,7 @@ function dbOpen() {
     //=============================
     // SET "LAST_CHAT_ID"
     //=============================
-    dbx('SELECT chat_id FROM chat WHERE chat_id IS NOT NULL ORDER BY chat_id DESC LIMIT 1', function (transaction, result) {
+    dbx('SELECT chat_id FROM chat WHERE chat_id IS NOT NULL AND chat_id <> "undefined" ORDER BY chat_id DESC LIMIT 1', function (transaction, result) {
         for (var i = 0; i < result.rows.length; i++) {
             var row = result.rows.item(i);
             localStorage.LAST_CHAT_ID = row['chat_id'];
