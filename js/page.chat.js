@@ -161,7 +161,7 @@ function chatGet() {
      });
      */
     //console.log("getting id > " + localStorage.LAST_CHAT_ID_ACTIVE);
-    dbx('SELECT * FROM chat WHERE (chat_from = "' + sessionStorage.chatId + '" OR chat_to = "' + sessionStorage.chatId + '") AND chat_id > ' + localStorage.LAST_CHAT_ID_ACTIVE + ' AND chat_id IS NOT NULL AND chat_id <> "undefined" ORDER BY id ASC', function (transaction, result) {
+    dbx('SELECT * FROM chat WHERE (chat_from = "' + sessionStorage.chatId + '" OR chat_to = "' + sessionStorage.chatId + '") AND id > ' + localStorage.LAST_CHAT_ID_ACTIVE + ' AND chat_id IS NOT NULL AND chat_id <> "undefined" ORDER BY id ASC', function (transaction, result) {
         // Init App
         var myApp = new Framework7();
         var myMessages = myApp.messages('.messages');
@@ -179,10 +179,10 @@ function chatGet() {
                 chat_msg: row['chat_msg'],
                 chat_date: row['chat_date']
             };
-            localStorage.LAST_CHAT_ID_ACTIVE = res[i]['chat_id'];
+            localStorage.LAST_CHAT_ID_ACTIVE = res[i]['id'];
         }
         //console.log(localStorage);
-        console.log("get: " + result.rows.length + " " + localStorage.LAST_CHAT_ID_ACTIVE + " " + res.length);
+        console.log("get: news:" + result.rows.length + " last:" + localStorage.LAST_CHAT_ID_ACTIVE + "(id_local)");
         // construct
         $.each(res, function (i, item) {
             var rs = res[i];
@@ -291,7 +291,7 @@ function chatSend(src, dst, messageText, id_local) {
                         myApp.alert('Desculpe, ocorreu um erro interno.', 'Erro');
                         return;
                     }
-                    localStorage.LAST_CHAT_ID_ACTIVE = res.success;
+                    localStorage.LAST_CHAT_ID_ACTIVE = id_local;
                     localStorage.LAST_CHAT_ID = res.success;
                     //console.log("msg server id:" + res.success);
                     dbQuery('UPDATE chat SET chat_id="' + res.success + '" WHERE id="' + id_local + '"');
