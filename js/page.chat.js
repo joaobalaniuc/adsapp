@@ -231,6 +231,10 @@ function chatInsert(src, dst, messageText, idReceivedFromServer) {
         var other = dst;
     else
         var other = src;
+    // RECEBI MENSAGEM DO SERVIDOR, E A MENSAGEM É MINHA, IGNORÁ-LA
+    if (src === localStorage.userId && typeof idReceivedFromServer !== "undefined") {
+        return false;
+    }
     //==========================
     // INSERT MSG ON LOCAL DB
     //==========================
