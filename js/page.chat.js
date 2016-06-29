@@ -125,7 +125,9 @@ function chatGetAjax() {
                     }
                     // construct
                     $.each(res, function (i, item) {
-                        chatInsert(res[i].id_user_src, res[i].id_user_dst, res[i].msg, res[i].id);
+                        if (res[i].id !== localStorage.LAST_CHAT_ID_ACTIVE) {
+                            chatInsert(res[i].id_user_src, res[i].id_user_dst, res[i].msg, res[i].id);
+                        }
                     });
 
                 } // res not null
