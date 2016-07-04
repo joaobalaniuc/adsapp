@@ -169,6 +169,7 @@ function groupCreateLocal(title, idReceivedFromServer, afterCreate) {
                             var id_group = result.insertId; // id local group
                             if (afterCreate === "join_people") {
                                 localStorage.ID_GROUP_JOIN = idReceivedFromServer;
+                                groupChatList();
                                 joinPopup();
                             }
                         },

@@ -202,7 +202,7 @@ function chatGet() {
         $.each(res, function (i, item) {
             var rs = res[i];
             // from me (sent)
-            if (rs.chat_from == localStorage.userId) {
+            if (rs.chat_from === localStorage.userId) {
                 var myPic;
                 if (typeof localStorage.fb_id === "undefined")
                     myPic = "";
@@ -329,10 +329,10 @@ $$(document).on('pageBeforeInit', '[data-page="messages"]', function (e) {
 $$(document).on('pageInit', '[data-page="messages"]', function (e) {
 
     if (sessionStorage.chatType === "group") {
-        groupChatGet();
+        //groupChatGet();
     }
     else if (sessionStorage.chatType === "priv8") {
-        chatGet();
+        //chatGet();
     }
     $('#chatName').html(sessionStorage.chatName);
     $('#chatFbLink').attr("src", sessionStorage.chatFbLink);
