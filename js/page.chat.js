@@ -327,7 +327,13 @@ $$(document).on('pageBeforeInit', '[data-page="messages"]', function (e) {
 });
 
 $$(document).on('pageInit', '[data-page="messages"]', function (e) {
-    chatGet();
+
+    if (sessionStorage.chatType === "group") {
+        groupChatGet();
+    }
+    else if (sessionStorage.chatType === "priv8") {
+        chatGet();
+    }
     $('#chatName').html(sessionStorage.chatName);
     $('#chatFbLink').attr("src", sessionStorage.chatFbLink);
 });
