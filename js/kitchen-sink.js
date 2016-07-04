@@ -1,6 +1,6 @@
 // Init App
 var myApp = new Framework7({
-    modalTitle: 'Framework7',
+    modalTitle: 'AdsApp',
     // Enable Material theme
     material: true,
     // dindin
@@ -215,7 +215,14 @@ myApp.onPageInit('messages', function (page) {
         //$("html, body, .page-content, .messages").animate({scrollTop: $(document).height()}, 1000);
 
         console.log("sending " + messageText);
-        chatInsert(localStorage.userId, sessionStorage.chatId, messageText);
+        // type of msg
+        if (sessionStorage.chatType === "group") {
+            groupChatInsert(localStorage.userId, sessionStorage.chatId, messageText);
+        }
+        else if (sessionStorage.chatType === "priv8") {
+            chatInsert(localStorage.userId, sessionStorage.chatId, messageText);
+        }
+
 
         //=======================
         // Add Message

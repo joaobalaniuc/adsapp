@@ -26,6 +26,20 @@ function dbOpen() {
             localStorage.LAST_CHAT_ID = 0;
         }
     });
+    
+    //=============================
+    // GROUP CHAT = SET "LAST_GCHAT_ID"
+    //=============================
+    dbx('SELECT chat_id FROM g_chat WHERE chat_id IS NOT NULL AND chat_id <> "undefined" ORDER BY chat_id DESC LIMIT 1', function (transaction, result) {
+        for (var i = 0; i < result.rows.length; i++) {
+            var row = result.rows.item(i);
+            localStorage.LAST_GCHAT_ID = row['chat_id'];
+            //console.log(localStorage);
+        }
+        if (localStorage.LAST_GCHAT_ID < 0) {
+            localStorage.LAST_GCHAT_ID = 0;
+        }
+    });
 
 }
 //========================
@@ -34,9 +48,11 @@ function dbOpen() {
 function dbCreate() {
     //dbQuery("DROP TABLE chat");
     //dbQuery("DROP TABLE user");
+    //dbQuery("DROP TABLE groups");
+    //dbQuery("DROP TABLE groups_chat");
 
     //''''''''''''''''''''''''
-    // CONTACT
+    // CONTACT (USER)
     //''''''''''''''''''''''''
     db.transaction(
             function (transaction) {
@@ -73,7 +89,42 @@ function dbCreate() {
                         );
             }
     );
+    //''''''''''''''''''''''''
+    // GROUP
+    //''''''''''''''''''''''''
 
+    db.transaction(
+            function (transaction) {
+                transaction.executeSql(
+                        'CREATE TABLE IF NOT EXISTS g ' +
+                        ' (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ' +
+                        ' group_id INTEGER, ' + // GROUP ID FROM SERVER
+                        ' group_title TEXT NOT NULL, ' + // TITLE
+                        ' group_img TEXT, ' + // IMG URL
+                        ' group_read INTEGER, ' +
+                        ' group_date TEXT);' // DATE INSERT
+                        );
+            }
+    );
+    //''''''''''''''''''''''''
+    // GROUP_CHAT
+    //''''''''''''''''''''''''
+    db.transaction(
+            function (transaction) {
+                transaction.executeSql(
+                        'CREATE TABLE IF NOT EXISTS g_chat ' +
+                        ' (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ' +
+                        ' chat_id INTEGER, ' + // MSG ID FROM SERVER
+                        ' chat_id_group INTEGER, ' + // ID GROUP DST
+                        ' chat_from INTEGER NOT NULL, ' + // SRC ID FROM SERVER
+                        ' chat_msg TEXT, ' +
+                        ' chat_read INTEGER, ' +
+                        ' chat_post INTEGER, ' + // POST ID FROM SERVER (SE NOT NULL, NÃO É MENSAGEM, É POST)
+                        ' chat_date TEXT);'
+                        );
+            }
+    );
+    
 }
 //========================
 // EXECUTAR QUERY

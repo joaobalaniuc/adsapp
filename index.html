@@ -50,10 +50,9 @@
 
         <div class="views tabs toolbar-through">
 
-            <div id="view-1" class="view view-main tab active">
+            <div id="view-1" class="view view-main tab">
                 <!-- Pages-->
                 <div class="pages">
-
                     <!-- Page, data-page contains page name-->
                     <div data-page="index" class="page ttheme-black">
 
@@ -62,7 +61,7 @@
                                 <!--<div class="left"><a href="index.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>-->
                                 <div class="center">Grupos</div>
                                 <div class="right">
-                                    <a href="#" class="open-panel link icon-only"><i class="fa fa-plus-circle"></i></a>
+                                    <a href="#" class="groupCreate link icon-only"><i class="fa fa-plus-circle"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -130,20 +129,22 @@
 
                         </div>
 
+
+
                     </div>
 
 
                 </div>
             </div>
 
-            <div id="view-2" class="view view-main tab">
+            <div id="view-2" class="view view-main tab active">
                 <div class="pages navbar-through toolbar-through">
                     <div data-page="index-2" class="page ttheme-black">
 
                         <div class="navbar">
                             <div class="navbar-inner">
                                 <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-                                <div class="center sliding">Meus Contatos</div>
+                                <div class="center sliding">Usuários</div>
                                 <div class="right">
                                     <a id="contactList" href="#" class="link icon-only"><i class="fa fa-refresh"></i></a>
                                 </div>
@@ -160,7 +161,7 @@
                         <!-- Scrollable page content-->
                         <div class="page-content jjwbar-spc">
 
-                            <div id="contacts" style="margin-top:0;margin-bottom:60px" class="list-block virtual-list searchbar-found media-list">
+                            <div id="contacts" style="margin-top:0;margin-bottom:60px" class="contacts list-block virtual-list searchbar-found media-list">
                             </div>
 
                             <div class="list-block searchbar-not-found">
@@ -233,7 +234,7 @@
                     <div data-page="index-4" class="page">
                         <div class="navbar">
                             <div class="navbar-inner">
-                                <div class="center">Meu Perfil</div>
+                                <div class="center">Ajustes</div>
                             </div>
                         </div>
                         <div class="page-content" style="padding-bottom:80px !important">
@@ -316,9 +317,9 @@
 
                 <div class="toolbar-inner">
 
-                    <a href="#view-2" class="tab-link">
-                        <i class="fa fa-group"></i>
-                        <span class="tabbar-label">Contatos</span>
+                    <a href="#view-2" class="tab-link active">
+                        <i class="fa fa-user"></i>
+                        <span class="tabbar-label">Usuários</span>
                     </a>
 
                     <a href="#view-3" class="tab-link">
@@ -327,13 +328,13 @@
                             <span class="badge bg-red">4</span>
                         </div>
                         -->
-                        <i class="fa fa-comment-o"></i>
+                        <i class="fa fa-comments"></i>
                         <span class="tabbar-label">Conversas</span>
                     </a>
 
 
-                    <a href="#view-1" class="tab-link active">
-                        <i class="fa fa-comments"></i>
+                    <a href="#view-1" class="tab-link">
+                        <i class="fa fa-group"></i>
                         <span class="tabbar-label">Grupos</span>
                     </a>
 
@@ -344,9 +345,29 @@
                     </a>
                     -->
                     <a href="#view-4" class="tab-link">
-                        <i class="fa fa-user"></i>
-                        <span class="tabbar-label">Meu Perfil</span>
+                        <i class="fa fa-cog"></i>
+                        <span class="tabbar-label">Ajustes</span>
                     </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="joinPopup" class="popup demo-popup">
+            <div class="view navbar-fixed">
+                <div class="pages">
+                    <div class="page">
+                        <div class="navbar">
+                            <div class="navbar-inner">
+                                <div class="center" style="font-weight:100">Selecionar usuários</div>
+                                <div class="right"><a href="#" class="link close-popup">Feito!</a></div>
+                            </div>
+                        </div>
+                        <div class="page-content">
+                            
+                            <div id="joinList"></div>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -381,6 +402,7 @@
         <script type="text/javascript" src="js/page.js"></script>
         <script type="text/javascript" src="js/page.index.js"></script>
         <script type="text/javascript" src="js/page.chat.js"></script>
+        <script type="text/javascript" src="js/page.group.js"></script>
         <script type="text/javascript" src="js/page.post.js"></script>
         <script type="text/javascript" src="js/page.welcome.js"></script>
         <script type="text/javascript" src="js/page.profile.js"></script>

@@ -1,4 +1,4 @@
-var myContacts = myApp.virtualList($$("#contacts"), {
+var myContacts = myApp.virtualList($$(".contacts"), {
     // Pass array with items
     //items: items,
     items: [],
@@ -64,6 +64,11 @@ function pageRefresh() {
     var page = myApp.getCurrentView().activePage.name;
     var view = myApp.getCurrentView().container.id;
     var t = 0;
+    // grupos
+    if (page === "index") {
+        groupChatList();
+        t = 0;
+    }
     // contatos
     if (page === "index-2") {
         contactList();
@@ -80,7 +85,14 @@ function pageRefresh() {
     }
     // chat inner
     if (page === "messages") {
-        chatGet();
+
+        if (sessionStorage.chatType === "priv8") {
+            chatGet();
+        }
+        if (sessionStorage.chatType === "group") {
+            groupChatGet();
+        }
+
         t = 1000;
     }
     // run again

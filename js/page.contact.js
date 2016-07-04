@@ -73,6 +73,7 @@ function contactSave(user_id, user_nick, user_num, user_fb) {
     dbx('SELECT * FROM user WHERE user_id="' + user_id + '"', function (transaction, result) {
         // contact dont exists
         if (result.rows.length === 0) {
+            console.log("add new contact = " + user_nick + " , " + user_num);
             //==========================
             // INSERT CONTACT ON DB
             //==========================

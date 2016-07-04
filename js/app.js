@@ -14,7 +14,8 @@ function start() {
     sessionStorage.activePage = "";
 
     // Defaults
-    localStorage.LAST_CHAT_ID = -1; // id(server) of last general msg
+    localStorage.LAST_CHAT_ID = -1; // priv8 chat = id(server) of last general msg
+    localStorage.LAST_GCHAT_ID = -1; // group chat = id(server) of last general chat msg
     localStorage.LAST_CHAT_ID_ACTIVE = 0; // id(local) of last msg from active chat only
     
 

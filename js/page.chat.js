@@ -96,7 +96,8 @@ function chatGetAjax() {
         url: localStorage.server + "/chatGet.json.php",
         data: {
             'id_user': localStorage.userId,
-            'id_chat': localStorage.LAST_CHAT_ID
+            'id_chat': localStorage.LAST_CHAT_ID,
+            'id_gchat': localStorage.LAST_GCHAT_ID
         },
         type: 'GET',
         dataType: 'jsonp',
@@ -117,16 +118,28 @@ function chatGetAjax() {
 
             .done(function (res) {
                 if (res !== null) {
-
-                    if (typeof res.length !== "undefined") {
-                        console.log(res.length + " new msg received now");
-                        //console.log("saving last chat id = " + res[parseInt(res.length - 1)].id);
-                        localStorage.LAST_CHAT_ID = res[parseInt(res.length - 1)].id;
+                    // PRIV8 CHAT
+                    if (typeof res["chat"].length !== "undefined") {
+                        console.log(res["chat"].length + " new chats received now");
+                        //console.log("saving last chat id = " + res[parseInt(res["chat"].length - 1)].id);
+                        localStorage.LAST_CHAT_ID = res["chat"][parseInt(res["chat"].length - 1)].id;
                     }
-                    // construct
-                    $.each(res, function (i, item) {
-                        if (res[i].id !== localStorage.LAST_CHAT_ID_ACTIVE) {
-                            chatInsert(res[i].id_user_src, res[i].id_user_dst, res[i].msg, res[i].id);
+                    // GROUP CHAT
+                    if (typeof res["gchat"].length !== "undefined") {
+                        console.log(res["gchat"].length + " new g-chats received now");
+                        //console.log("saving last g-chat id = " + res[parseInt(res["gchat"].length - 1)].id);
+                        localStorage.LAST_GCHAT_ID = res["gchat"][parseInt(res["gchat"].length - 1)].id;
+                    }
+                    // CONSTRUCT => PRIV8 CHAT
+                    $.each(res["chat"], function (i, item) {
+                        if (res["chat"][i].id !== localStorage.LAST_CHAT_ID_ACTIVE) {
+                            chatInsert(res["chat"][i].id_user_src, res["chat"][i].id_user_dst, res["chat"][i].msg, res["chat"][i].id);
+                        }
+                    });
+                    // CONSTRUCT => GROUP CHAT
+                    $.each(res["gchat"], function (i, item) {
+                        if (res["gchat"][i].id !== localStorage.LAST_GCHAT_ID_ACTIVE) {
+                            groupChatInsert(res["gchat"][i].id_user_src, res["gchat"][i].id_group, res["gchat"][i].msg, res["gchat"][i].id);
                         }
                     });
 
@@ -184,7 +197,7 @@ function chatGet() {
             localStorage.LAST_CHAT_ID_ACTIVE = res[i]['id'];
         }
         //console.log(localStorage);
-        console.log("get: news:" + result.rows.length + " last:" + localStorage.LAST_CHAT_ID_ACTIVE + "(id_local)");
+        console.log("get chat results:" + result.rows.length + " last:" + localStorage.LAST_CHAT_ID_ACTIVE + "(id_local)");
         // construct
         $.each(res, function (i, item) {
             var rs = res[i];
@@ -199,7 +212,8 @@ function chatGet() {
                 myMessages.addMessage({
                     text: rs.chat_msg,
                     avatar: myPic,
-                    type: 'sent'
+                    type: 'sent',
+                    date: rs.chat_date
                             //date: dateFormat(new Date(rs.chat_date), "dd/mm hh:MM")
                 });
                 //console.log("aaa");
@@ -214,7 +228,8 @@ function chatGet() {
                 myMessages.addMessage({
                     text: rs.chat_msg,
                     avatar: dstPic,
-                    type: 'received'
+                    type: 'received',
+                    date: rs.chat_date
                             //date: dateFormat(new Date(rs.chat_date), "dd/mm hh:MM")
                 });
             }
@@ -265,7 +280,7 @@ function chatInsert(src, dst, messageText, idReceivedFromServer) {
 
                         });
             }
-    );
+    ); // transaction
 }
 function chatSend(src, dst, messageText, id_local) {
     //==========================
@@ -320,7 +335,8 @@ $$(document).on('pageInit', '[data-page="messages"]', function (e) {
 $$(document).on('click', '.showChat', function (e) {
     //return false;
     localStorage.LAST_CHAT_ID_ACTIVE = 0;
-    sessionStorage.chatId = $(this).attr("data-id");
+    sessionStorage.chatType = "priv8";
+    sessionStorage.chatId = $(this).attr("data-id"); // id_group
     sessionStorage.chatNum = $(this).attr("data-num");
     sessionStorage.chatName = $(this).attr("data-name");
     sessionStorage.chatFb = $(this).attr("data-fb");
