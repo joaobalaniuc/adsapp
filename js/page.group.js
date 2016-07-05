@@ -109,7 +109,7 @@ function groupChatGet() {
             localStorage.LAST_CHAT_ID_ACTIVE = res[i]['id'];
         }
         //console.log(localStorage);
-        //console.log("get group results:" + result.rows.length + " last:" + localStorage.LAST_CHAT_ID_ACTIVE + "(id_local)");
+        console.log("get group results:" + result.rows.length + " last:" + localStorage.LAST_CHAT_ID_ACTIVE + "(id_local)");
         // construct
         $.each(res, function (i, item) {
             var rs = res[i];
