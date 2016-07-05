@@ -81,10 +81,9 @@ function groupChatGet() {
     if ($('.message').length === 0) {
         //myApp.showIndicator();
     }
-    //var qr = 'SELECT g.*,u.user_nick,u.user_id,u.user_fb,u.user_num FROM g_chat g INNER JOIN user u ON g.chat_from=u.user_id WHERE g.chat_id_group = ' + sessionStorage.chatId + ' AND g.id > ' + localStorage.LAST_CHAT_ID_ACTIVE + ' AND g.chat_id IS NOT NULL AND g.chat_id <> "undefined" ORDER BY g.id ASC';
-    var qr = 'SELECT g_chat.*,user.user_nick,user.user_id,user.user_fb,user.user_num FROM g_chat INNER JOIN user ON g_chat.chat_from=user.user_id WHERE g_chat.chat_id_group = ' + sessionStorage.chatId + ' AND g_chat.id > ' + localStorage.LAST_CHAT_ID_ACTIVE + ' AND g_chat.chat_id IS NOT NULL AND g_chat.chat_id <> "undefined" ORDER BY g_chat.id ASC';
+    var qr = 'SELECT g.*,u.user_nick,u.user_id,u.user_fb,u.user_num FROM g_chat g LEFT JOIN user u ON g.chat_from=u.user_id WHERE g.chat_id_group = ' + sessionStorage.chatId + ' AND g.id > ' + localStorage.LAST_CHAT_ID_ACTIVE + ' AND g.chat_id IS NOT NULL AND g.chat_id <> "undefined" ORDER BY g.id ASC';
     dbx(qr, function (transaction, result) {
-        
+
         // Init App
         var myApp = new Framework7();
         var myMessages = myApp.messages('.messages');
@@ -109,7 +108,6 @@ function groupChatGet() {
             };
             localStorage.LAST_CHAT_ID_ACTIVE = res[i]['id'];
         }
-        console.log(qr);
         console.log("get group results:" + result.rows.length + " last:" + localStorage.LAST_CHAT_ID_ACTIVE + "(id_local)");
         // construct
         $.each(res, function (i, item) {
