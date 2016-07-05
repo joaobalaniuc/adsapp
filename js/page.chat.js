@@ -202,7 +202,7 @@ function chatGet() {
         $.each(res, function (i, item) {
             var rs = res[i];
             // from me (sent)
-            if (rs.chat_from === localStorage.userId) {
+            if (rs.chat_from == localStorage.userId) {
                 var myPic;
                 if (typeof localStorage.fb_id === "undefined")
                     myPic = "";
