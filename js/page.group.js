@@ -108,7 +108,7 @@ function groupChatGet() {
             };
             localStorage.LAST_CHAT_ID_ACTIVE = res[i]['id'];
         }
-        //console.log(localStorage);
+        console.log('SELECT g.*,u.user_nick,u.user_id,u.user_fb,u.user_num FROM g_chat g INNER JOIN user u ON g.chat_from=u.user_id WHERE g.chat_id_group = ' + sessionStorage.chatId + ' AND g.id > ' + localStorage.LAST_CHAT_ID_ACTIVE + ' AND g.chat_id IS NOT NULL AND g.chat_id <> "undefined" ORDER BY g.id ASC');
         console.log("get group results:" + result.rows.length + " last:" + localStorage.LAST_CHAT_ID_ACTIVE + "(id_local)");
         // construct
         $.each(res, function (i, item) {
