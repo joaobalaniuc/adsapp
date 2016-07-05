@@ -31,7 +31,7 @@ $$(document).on("submit", "form", function (e) {
 $(document).ready(function () {
 
     if (typeof localStorage.userId === "undefined") {
-        view1.router.loadPage('welcome.html', {ignoreCache: true});
+        view2.router.loadPage('welcome.html', {ignoreCache: true});
     }
 
     // Android layout fix
@@ -51,11 +51,11 @@ $(document).ready(function () {
 
     // Global timer
     setInterval(function () {
-        //updContact();
+        conexCheck();
     }, 500);
 
     setTimeout(function () {
-        chatGetAjax();
+        ajaxPing();
     }, 1000);
 
 });
@@ -142,7 +142,19 @@ function getSession() {
     });
 
 }
+function conexCheck() {
+    // Houve alteração no status de conexão?
+    if (sessionStorage.onlineLast !== sessionStorage.online) {
+        if (sessionStorage.online === "true") {
+            $('#conexCheck').html("<span style='color:#6ccb5e'><img src='img/online.png' style='vertical-align:bottom' /> &nbsp; Conexão estabelecida</span>");
+        }
+        else {
+            $('#conexCheck').html("<span style='color:#e95651'><img src='img/offline.png' style='vertical-align:bottom' /> &nbsp; Você está offline</span>");
+        }
+        sessionStorage.onlineLast = sessionStorage.online;
+    }
 
+}
 
 $$(document).on('click', 'a.tab-link', function (e) {
     var href = $(this).attr("href");

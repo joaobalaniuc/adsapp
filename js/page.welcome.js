@@ -34,7 +34,7 @@ $$(document).on('click', '#checkCode', function (e) {
                         if (res.nick) {
                             profileConstruct(res);
                             localStorage.userNum = sessionStorage.confirm_cel;
-                            view1.router.loadPage('index.html', {ignoreCache: true});
+                            view2.router.loadPage('index.html', {ignoreCache: true});
                             $('#toolbar').show();
                         }
                         else {

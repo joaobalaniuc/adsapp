@@ -12,7 +12,9 @@ function dbOpen() {
     var maxSize = localStorage.dbMaxSize;
     //
     db = openDatabase(shortName, version, displayName, maxSize);
-
+    setLastId();
+}
+function setLastId() {
     //=============================
     // SET "LAST_CHAT_ID"
     //=============================
@@ -26,7 +28,6 @@ function dbOpen() {
             localStorage.LAST_CHAT_ID = 0;
         }
     });
-    
     //=============================
     // GROUP CHAT = SET "LAST_GCHAT_ID"
     //=============================
@@ -40,7 +41,18 @@ function dbOpen() {
             localStorage.LAST_GCHAT_ID = 0;
         }
     });
-
+    //=============================
+    // SET "LAST_ACTION_ID"
+    //=============================
+    dbx('SELECT action_id FROM g_action WHERE action_id IS NOT NULL AND action_id <> "undefined" ORDER BY action_id DESC LIMIT 1', function (transaction, result) {
+        for (var i = 0; i < result.rows.length; i++) {
+            var row = result.rows.item(i);
+            localStorage.LAST_ACTION_ID = row['action_id'];
+        }
+        if (localStorage.LAST_ACTION_ID < 0) {
+            localStorage.LAST_ACTION_ID = 0;
+        }
+    });
 }
 //========================
 // CRIAR BANCO DE DADOS
@@ -49,7 +61,7 @@ function dbCreate() {
     //dbQuery("DROP TABLE chat");
     //dbQuery("DROP TABLE user");
     //dbQuery("DROP TABLE groups");
-    //dbQuery("DROP TABLE groups_chat");
+    //dbQuery("DROP TABLE g_chat");
 
     //''''''''''''''''''''''''
     // CONTACT (USER)
@@ -117,14 +129,18 @@ function dbCreate() {
                         ' chat_id INTEGER, ' + // MSG ID FROM SERVER
                         ' chat_id_group INTEGER, ' + // ID GROUP DST
                         ' chat_from INTEGER NOT NULL, ' + // SRC ID FROM SERVER
+                        ' chat_to INTEGER, ' + // SE NOT NULL, NÃO É MSG, É ACTION
                         ' chat_msg TEXT, ' +
                         ' chat_read INTEGER, ' +
                         ' chat_post INTEGER, ' + // POST ID FROM SERVER (SE NOT NULL, NÃO É MENSAGEM, É POST)
+                        ' chat_action TEXT, ' + // SE NOT NULL, NÃO É MSG, É ACTION(KICK,JOIN,...)
+                        ' chat_action_value TEXT, ' +
                         ' chat_date TEXT);'
                         );
             }
     );
-    
+
+
 }
 //========================
 // EXECUTAR QUERY

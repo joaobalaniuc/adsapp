@@ -1,5 +1,5 @@
 
-// Idade por data de nascimento
+// AGE BY BIRTHDAY
 function getAge(dateString) {
     /*
      this.scope = [dateString];
@@ -15,7 +15,7 @@ function getAge(dateString) {
     return age;
 }
 
-
+// FORMAT USER NUMERIC PHONE
 function formatNum(num) {
     var str = num.replace(/[()-]/g, '').split(' ').join('');
 
@@ -32,4 +32,32 @@ function formatNum(num) {
         str = myCc + str;
     }
     return str;
+}
+
+// REPLACE ALL OCCURENCES OF A STRING
+function replaceAll(string, token, newtoken) {
+	while (string.indexOf(token) != -1) {
+ 		string = string.replace(token, newtoken);
+	}
+	return string;
+}
+
+// CLEAR "NULL" VALUES FOR DB INSERT
+function clearNull(val) {
+    var val = replaceAll(val, "'", "");
+    val = replaceAll(val, '"', '');
+    val = val.split(",");
+    var val_ = "", virg = ",";
+    $.each(val, function (key, value) {
+        if (parseInt(key + 1) === val.length) {
+            virg = "";
+        }
+        if (val[key] == "null") {
+            val_ += "null,";
+        }
+        else {
+            val_ += '"' + value + '"' + virg;
+        }
+    });
+    return val_;
 }

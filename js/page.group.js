@@ -7,8 +7,8 @@ function groupChatList() {
         if (result.rows.length > 0) {
             $('#groupNone').hide();
         }
-        console.log("GROUP CHAT LIST RESULT:");
-        console.log(result);
+        //console.log("GROUP CHAT LIST RESULT:");
+        //console.log(result);
         //return false;
 
         // FIX FIELDS FOR IPHONE
@@ -40,7 +40,7 @@ function groupChatList() {
             else {
                 url = "img/group.png";
             }
-            if (rs.chat_msg === null) {
+            if (rs.chat_msg === null || rs.chat_msg == "") {
                 rs.chat_msg = "<span style='color:#ccc'>(Nenhuma mensagem)</span>";
             }
             //
@@ -297,6 +297,47 @@ function groupChatInsert(src, id_group, messageText, idReceivedFromServer) {
                             }
 
                         });
+            }
+    ); // transaction
+}
+function groupChatInsert_(res) {
+    //
+    debug();
+    // RECEBI MENSAGEM DO SERVIDOR, E A MENSAGEM É MINHA, IGNORÁ-LA
+    if (res.id_user_src === localStorage.userId && typeof res.id !== "undefined" && typeof res.action === "undefined") {
+        //return false;
+    }
+    //==========================
+    // INSERT MSG ON LOCAL DB
+    //==========================
+    var now = dateFormat(new Date(), "yyyy-mm-dd hh:MM:ss");
+    var key = "", val = "";
+    key += "chat_from,chat_to,chat_id_group,chat_msg,chat_action,chat_action_value,chat_post,chat_date,chat_id";
+    val += '"' + res.id_user_src + '",';
+    val += '"' + res.id_user_dst + '",';
+    val += '"' + res.id_group + '",';
+    val += '"' + res.msg + '",';
+    val += '"' + res.action + '",';
+    val += '"' + res.action_value + '",';
+    val += '"' + res.id_post + '",';
+    val += '"' + now + '",';
+    val += '"' + res.id + '"';
+    val = clearNull(val);
+    var query = 'INSERT INTO g_chat (' + key + ') VALUES (' + val + ')';
+    console.log(query);
+    db.transaction(
+            function (transaction) {
+                transaction.executeSql(
+                        query,
+                        null,
+                        function (transaction, result) {
+                            var id_local = result.insertId;
+                            // SEND DATA TO SERVER
+                            if (typeof res.id === "undefined") {
+                                groupChatSend(res.id_user_src, res.id_group, res.id_msg, id_local);
+                            }
+                        },
+                        errorHandler);
             }
     ); // transaction
 }
