@@ -4,35 +4,19 @@
 function start() {
 
     // App config
-    var version = '1.0.0';
+    localStorage.appname = "AdsApp";
+    localStorage.version = "1.0.0";
 
     // Server
-    localStorage.server = "http://sempreon.mobi/adsapp/";
+    localStorage.server = "http://dev.house/adsapp/";
+    localStorage.server_img = "/app/upload/";
 
     // Dev
     sessionStorage.debug = 1;
     sessionStorage.activePage = "";
 
-    // Defaults
-    // Defined by setLastId() called by dbOpen()
-    localStorage.LAST_CHAT_ID = -1; // priv8 chat = id(server) of last general msg
-    localStorage.LAST_GCHAT_ID = -1; // group chat = id(server) of last general chat msg
-    localStorage.LAST_CHAT_ID_ACTIVE = 0; // id(local) of last msg from active chat only
-    
-
-    // Database
-    if (localStorage.version !== version) {
-        localStorage.version = version;
-        // db
-        localStorage.dbShort = 'Jowi';
-        localStorage.dbVersion = '1.0';
-        localStorage.dbName = 'Jowi';
-        localStorage.dbMaxSize = 65536;
-        //alert("new version, create db");
-
-    }
-    dbOpen();
-    dbCreate();
+    // Ajax timeout
+    localStorage.timeout = 5000; // ajax
 }
 
 var app = {

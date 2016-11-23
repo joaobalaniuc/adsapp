@@ -4,38 +4,20 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
         <!--
-        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'"/>
-        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline'; media-src *; img-src * data:; " />
-        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * data: 'unsafe-inline'; connect-src * 'unsafe-inline'; frame-src *;" />
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline script-src * 'unsafe-inline' 'unsafe-eval'"/>
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline script-src * 'unsafe-inline media-src *; img-src * data:; " />
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline script-src * 'unsafe-inline' 'unsafe-eval img-src * data: 'unsafe-inline connect-src * 'unsafe-inline frame-src *;" />
         -->
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="theme-color" content="#2196f3">
-        <title>AdsApp</title>
-        <link rel="stylesheet" href="build/css/framework7.material.css">
-        <link rel="stylesheet" href="build/css/framework7.material.colors.css">
-        <link rel="stylesheet" href="css/fa-4.6.3/css/font-awesome.min.css">
-        <!--
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-        <link href="http://fonts.googleapis.com/css?family=Roboto:400,300,500,700" rel="stylesheet" type="text/css">
-        <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
-        -->
-        <link href='https://fonts.googleapis.com/css?family=Nunito:300,400' rel='stylesheet' type='text/css'>
-        <!--
-        <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-        -->
-        <link rel="stylesheet" href="css/kitchen-sink.css">
-        <link rel="stylesheet" href="css/quickie.css">
-        <link rel="icon" href="img/icon.png">
-        <!-- MY LOADER --
-        <link href="css/jw-loading.css" rel="stylesheet" />
-        <script src="js/jw-loading.js" type="text/javascript"></script>
-        -->
 
+        <title>AdsApp</title>
+        <link rel="stylesheet" href="css/include.css">
+        <link rel="icon" href="img/icon.png">
     </head>
 
-    <body class='ttheme-black'>
+    <body class='theme-pink'>
         <!--
         <div id="loading-bkg"></div>
         <div id="loading-img">
@@ -50,134 +32,124 @@
 
         <div class="views tabs toolbar-through">
 
-            <div id="view-1" class="view view-main tab">
-                <!-- Pages-->
-                <div class="pages">
-                    <!-- Page, data-page contains page name-->
-                    <div data-page="index" class="page ttheme-black">
-
-                        <div class="navbar">
-                            <div class="navbar-inner">
-                                <!--<div class="left"><a href="index.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>-->
-                                <div class="center">Grupos</div>
-                                <div class="right">
-                                    <a href="#" class="groupCreate link icon-only"><i class="fa fa-plus-circle"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Scrollable page content-->
-                        <div class="page-content" style='margin-top:45px;ppadding-bottom:100px'>
-
-                            <div id="groupNone" class="content-block-title" style="height:20px">
-                                Nenhum grupo
-                            </div>
-
-                            <div class="list-block media-list" style="margin-top:12px">
-
-                                <ul id="getGroupList">
-                                    <!--<li class="swipeout">
-                                        <div class="swipeout-content">
-                                            <a href="quickie_chat.html" class="item-link item-content">
-                                                <div class="item-media">
-                                                    <img src="http://lorempixel.com/160/160/people/1" width="80"/>
-                                                </div>
-                                                <div class="item-inner">
-                                                    <div class="item-title-row">
-                                                        <div class="item-title">Paola Silva</div>
-                                                        <div class="item-after">
-                                                            <div class="chip" style="margin-top:-5px;background:#0288d1;color:#fff">
-                                                                <div class="chip-label">5</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="item-text" style="font-weight:100">Olá você sumiu, tudo bem? Cade vc? Aparece kkk</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="swipeout-actions-left"><a href="#" class="bg-green swipeout-overswipe demo-reply">Responder</a><a href="#" class="demo-forward bg-blue">Repray</a></div>
-                                        <div class="swipeout-actions-right"><a href="#" class="demo-actions">Mais</a><a href="#" class="demo-mark bg-orange">Fav</a><a href="#" data-confirm="Are you sure you want to delete this item?" class="swipeout-delete swipeout-overswipe">Denunciar</a></div>
-                                    </li>-->
-                                </ul>
-                            </div>
-
-
-                            <!--
-                            <div onclick="fb.login();" class="content-block" style="margin-top:60px">
-                                <a href="#" class="button button-raised button-fill color-blue">
-                                    <i class="fa fa-facebook"></i>
-                                    Login Facebook
-                                </a>
-                            </div>
-
-                            <div onclick="fb.post();" class="content-block">
-                                <a href="#" class="button button-raised button-fill color-green">Enviar Post</a>
-                            </div>
-
-                            <div onclick="fb.getUserInfo();" class="content-block">
-                                <a href="#" class="button button-raised button-fill color-cyan">Get User Info</a>
-                            </div>
-
-                            <div onclick="fb.logoutgetLoginStatus();" class="content-block">
-                                <a href="#" class="button button-raised button-fill color-orange">Get Login Status</a>
-                            </div>
-
-                            <div onclick="fb.logout();" class="content-block">
-                                <a href="#" class="button button-raised button-fill color-red">Logout Facebook</a>
-                            </div>
-                            -->
-
-                        </div>
-
-
-
-                    </div>
-
-
-                </div>
-            </div>
-
-            <div id="view-2" class="view view-main tab active">
+            <div id="view-1" class="view view-main tab active">
                 <div class="pages navbar-through toolbar-through">
-                    <div data-page="index-2" class="page ttheme-black">
+                    <div data-page="index" class="page ttheme-black">
 
                         <div class="navbar">
                             <div class="navbar-inner">
                                 <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
                                 <div class="center sliding">
-                                    Usuários
+                                    <i class="fa fa-bolt"></i> &nbsp; Ads<span style="font-weight:100">App</span>
+
                                 </div>
-                                <div class="right">
+                                <!--<div class="right">
                                     <a id="contactList" href="#" class="link icon-only"><i class="fa fa-refresh"></i></a>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
 
-                        <form data-search-list="#contacts" class="searchbar searchbar-init">
+                        <!--<form data-search-list="#contacts" class="searchbar searchbar-init">
                             <div class="searchbar-input">
                                 <input type="search" placeholder="Search"/><a href="#" class="searchbar-clear"></a>
                             </div>
                         </form>
-                        <div class="searchbar-overlay"></div>
+                        <div class="searchbar-overlay"></div>-->
 
                         <!-- Scrollable page content-->
-                        <div class="page-content jjwbar-spc">
+                        <div class="page-content pull-to-refresh-content infinite-scroll" style="padding-top:55px;padding-bottom:60px">
 
-                            <div id="contacts" style="margin-top:0;margin-bottom:60px" class="contacts list-block virtual-list searchbar-found media-list">
+                            <div class="pull-to-refresh-layer">
+                                <div class="preloader preloader-pink"></div>
+                                <div class="pull-to-refresh-arrow"></div>
                             </div>
 
-                            <div class="list-block searchbar-not-found">
-                                <ul>
-                                    <li class="item-content">
-                                        <div class="item-inner">
-                                            <div class="item-title">Nothing found</div>
-                                        </div>
-                                    </li>
-                                </ul>
+                            <div id="post_template" style="display:none;margin-bottom:10px" class="card ks-facebook-card" data-id="1">
+                                <div class="user_read card-header">
+                                    <div class="ks-facebook-avatar"><img class="user_fb_pic" src="img/user.png" width="34" height="34"/></div>
+                                    <div class="user_name ks-facebook-name">...</div>
+                                    <div class="post_date ks-facebook-date prettydate">...</div>
+                                </div>
+                                <div class="post_read card-content"> 
+                                    <div class="card-content-inner">
+                                        <p class="post_txt">...</p>
+                                        <!--<p class="color-gray">Likes: 112 &nbsp;&nbsp; Comments: 43</p>-->
+                                    </div>
+                                    <img class="post_img" src="" width="100%"/>
+
+                                </div>
+                                <!--
+                                <div class="card-footer"><a href="#" class="postShow link">Like</a><a href="#" class="link">Comment</a><a href="#" class="link">Share</a></div>
+                                -->
+                            </div>
+
+                            <div id="post_none" style="display:none;text-align:center;padding:15px;font-size:20px;color:#ccc;font-weight:100">
+                                <i class="fa fa-search" style="font-size:48px;margin:20px"></i><br/>
+                                Encontre seus amigos e lojas preferidas <a href="#view-2" class="tab-link">clicando aqui</a>.
+                            </div>
+
+                            <div id="post_list"></div>
+
+                            <div id="post_infinite" style="display:none" class="infinite-scroll-preloader">
+                                <div class="preloader preloader-pink"></div>
                             </div>
 
                         </div>
 
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-2" class="view view-main tab">
+                <!-- Pages-->
+                <div class="pages">
+                    <!-- Page, data-page contains page name-->
+                    <div data-page="index-2" class="page ttheme-black">
+
+                        <div class="navbar">
+                            <div class="navbar-inner">
+                                <!--<div class="left"><a href="index.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>-->
+                                <div class="center">Anúncios</div>
+                                <div class="right">
+                                    <a href="#" class="link icon-only"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Scrollable page content-->
+                        <div class="page-content pull-to-refresh-content infinite-scroll" style="padding-top:55px;padding-bottom:60px">
+
+                            <div class="pull-to-refresh-layer">
+                                <div class="preloader preloader-pink"></div>
+                                <div class="pull-to-refresh-arrow"></div>
+                            </div>
+
+                            <div id="post2_template" style="display:none;margin-bottom:10px" class="card ks-facebook-card" data-id="1">
+                                <div class="user_read card-header">
+                                    <div class="ks-facebook-avatar"><img class="user_fb_pic" src="img/user.png" width="34" height="34"/></div>
+                                    <div class="user_name ks-facebook-name">...</div>
+                                    <div class="post_date ks-facebook-date prettydate">...</div>
+                                </div>
+                                <div class="post_read card-content"> 
+                                    <div class="card-content-inner">
+                                        <p class="post_txt">...</p>
+                                        <!--<p class="color-gray">Likes: 112 &nbsp;&nbsp; Comments: 43</p>-->
+                                    </div>
+                                    <img class="post_img" src="" width="100%"/>
+
+                                </div>
+                                <!--
+                                <div class="card-footer"><a href="#" class="postShow link">Like</a><a href="#" class="link">Comment</a><a href="#" class="link">Share</a></div>
+                                -->
+                            </div>
+
+                            <div id="post2_list"></div>
+
+                            <div id="post2_infinite" style="display:none" class="infinite-scroll-preloader">
+                                <div class="preloader preloader-pink"></div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -194,36 +166,41 @@
 
                         <div class="page-content" style='margin-top:45px;ppadding-bottom:100px'>
 
-                            <div id="chatNone" class="content-block-title" style="height:20px">
+                            <div style="display:none" id="chat_none" class="content-block-title" style="height:20px">
                                 Nenhuma conversa
                             </div>
 
-
                             <div class="list-block media-list" style="margin-top:12px">
 
-                                <ul id="getChatList">
-                                    <!--<li class="swipeout">
+                                <ul>
+                                    <li style="display:none" id="chat_list_template" class="chat swipeout" data-id="" data-pic="" data-name="">
                                         <div class="swipeout-content">
-                                            <a href="quickie_chat.html" class="item-link item-content">
+                                            <a href="#" class="item-link item-content">
                                                 <div class="item-media">
-                                                    <img src="http://lorempixel.com/160/160/people/1" width="80"/>
+                                                    <img class="user_pic" src="" style="width:42px !important;height:42px !important"/>
                                                 </div>
                                                 <div class="item-inner">
                                                     <div class="item-title-row">
-                                                        <div class="item-title">Paola Silva</div>
-                                                        <div class="item-after">
-                                                            <div class="chip" style="margin-top:-5px;background:#0288d1;color:#fff">
+                                                        <div class="user_name item-title">...</div>
+                                                        <!--<div class="item-after">
+                                                            <div class="chip" style="margin-top:-5px;background:#0288d1;color:#fff;font-size:12px;font-weight:100">
                                                                 <div class="chip-label">5</div>
-                                                            </div>
-                                                        </div>
+                                                                </div>
+                                                        </div>-->
                                                     </div>
-                                                    <div class="item-text" style="font-weight:100">Olá você sumiu, tudo bem? Cade vc? Aparece kkk</div>
+                                                    <div class="chat_txt item-text truncate" style="font-weight:100">...</div>
                                                 </div>
                                             </a>
                                         </div>
-                                        <div class="swipeout-actions-left"><a href="#" class="bg-green swipeout-overswipe demo-reply">Responder</a><a href="#" class="demo-forward bg-blue">Repray</a></div>
-                                        <div class="swipeout-actions-right"><a href="#" class="demo-actions">Mais</a><a href="#" class="demo-mark bg-orange">Fav</a><a href="#" data-confirm="Are you sure you want to delete this item?" class="swipeout-delete swipeout-overswipe">Denunciar</a></div>
-                                    </li>-->
+                                        <!--<div class="swipeout-actions-left"><a href="#" class="bg-green swipeout-overswipe demo-reply">Responder</a><a href="#" class="demo-forward bg-blue">Repray</a></div>-->
+                                        <div class="swipeout-actions-right">
+                                            <a href="#" data-confirm="Tem certeza que deseja deletar esta conversa?" class="swipeout-delete swipeout-overswipe">Deletar</a>
+                                        </div>
+                                    </li>
+
+                                    <span id="chat_list"></span>
+
+
                                 </ul>
                             </div>
                         </div>
@@ -233,81 +210,77 @@
 
             <div id="view-4" class="view view-main tab">
                 <div class="pages navbar-fixed">
-                    <div data-page="index-4" class="page">
+                    <div id="index-4" data-page="index-4" class="page">
                         <div class="navbar">
                             <div class="navbar-inner">
-                                <div class="center">Ajustes</div>
+                                <div class="center">Meu Perfil</div>
+                                <div class="right">
+                                    <a href="user_form.html" class="link icon-only"><i class="fa fa-pencil"></i></a>
+                                </div>
                             </div>
                         </div>
                         <div class="page-content" style="padding-bottom:80px !important">
 
-                            <div id="profileImg" style="display:none">
+                            <div id="profileImg" style="ddisplay:none">
                                 <div
                                     id ="profileImgBg"
                                     class="blur darkglow lazy lazy-fadeIn ks-demo-lazy" 
-                                    style="height:150px;background-position:center;background-image:url()">
+                                    style="height:150px;background-position:center;background-image:url(img/user.png)">
                                 </div>
 
                                 <img
                                     id ="profileImgFront"
                                     class="circle"
                                     style="position:absolute;top:70px;left:50%;margin-left:-64px;width:128px;height:128px"
-                                    src=""
+                                    src="img/user.png"
                                     />
                             </div>
-
+                            <div class="content-block" style="margin-bottom:-20px">
+                                <p class="buttons-row" style="margin-bottom:-10px">
+                                    <a href="#" class="button button-raised color-blue">Seguidores (<span class="user_followers">0</span>)</a>
+                                    <a href="#" class="button button-raised ccolor-green">Seguindo (<span class="user_following">0</span>)</a>
+                                </p>
+                            </div>
                             <div id="conexCheck" class="content-block-title" style="margin-top:0;"></div>
-                            <div class="content-block-title" style="margin-top:-10px;">Meus dados públicos</div>
-                            <form id="demoform-1" class="list-block">
+                            <div class="content-block" style="margin-top:0px">
+                                <h2 class="user_name" style="margin-bottom:-10px">...</h2>
+                                <p class="user_bio" style="margin-bottom:10px">...</p>
+                                <div class="row" style="font-weight:100">
+                                    <div class="col-50"><i class="fa fa-phone"></i> <span class="user_phone">...</span></div>
+                                    <div class="col-50" style="text-align:right;margin-right:10px"><a class="color-indigo" href="user_form.html"><i class="fa fa-pencil"></i> editar dados</a></div>
+                                </div>
+                            </div>
+
+                            <div class="content-block-title" style="margin-top:-10px;">Meus anúncios</div>
+                            
+                            <div class="list-block">
                                 <ul>
-                                    <li>
-                                        <div class="item-content">
-                                            <div class="item-media"><i class="icon icon-form-name"></i></div>
-                                            <div class="item-inner"> 
-                                                <div class="item-title label">Nome</div>
-                                                <div class="item-input">
-                                                    <input id="userName" type="text" placeholder="Seu nome"/>
+                                    <li class="post_read" id="user_post_template" style="display:none">
+                                        <a href="#" class="item-link">
+                                            <div class="item-content">
+                                                <div class="item-media">
+                                                    <img style="border-radius:0" class="img_fn" src="img/user.png" />
+                                                </div>
+                                                <div class="item-inner"> 
+                                                    <div class="post_name item-title">
+                                                        ...
+                                                    </div>
+                                                    <div class="post_price item-after">...</div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </li>
-
-                                    <li class="align-top">
-                                        <div class="item-content">
-                                            <div class="item-media"><i class="icon icon-form-comment"></i></div>
-                                            <div class="item-inner"> 
-                                                <div class="item-title label">Status</div>
-                                                <div class="item-input">
-                                                    <textarea id="userStatus" class="resizable" placeholder="Seu status"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-
+                                    <span id="user_post"></span>
                                 </ul>
+                            </div>
+                            
+                            <div id="user_post_none" class="content-block-title" style="display:none;padding:0;font-weight:100">Você ainda não enviou nenhum anúncio...</div>
 
-                                <div id="FbIn" onclick="fb.login();" class="content-block" style="margin-bottom:-15px">
-                                    <a href="#" class="button button-raised button-fill color-cyan">
-                                        <i class="fa fa-facebook" style="position:absolute;left:10px;top:10px"></i>
-                                        Login Facebook
-                                    </a>
-                                </div>
+                            <!--<div id="my_post_loading" style="text-align:center">
+                                <div class="preloader preloader-pink"></div>
+                            </div>-->
 
-                                <div id="FbOut" onclick="fb.logout();" class="content-block" style="display:none;margin-bottom:-15px">
-                                    <a href="#" class="button button-raised button-fill color-gray">
-                                        <i class="fa fa-facebook" style="position:absolute;left:10px;top:10px"></i>
-                                        Sair do Facebook
-                                    </a>
-                                </div>
 
-                                <div onclick="" class="content-block">
-                                    <a href="#" class="button button-raised button-fill color-pink">
-                                        <i class="fa fa-instagram" style="position:absolute;left:10px;top:10px"></i>
-                                        Login Instagram
-                                    </a>
-                                </div>
-
-                            </form>
 
                         </div>
                     </div>
@@ -315,41 +288,68 @@
             </div>
 
             <!-- Bottom Tabbar-->
-            <div id="toolbar" class="toolbar tabbar tabbar-labels jwbar">
+            <div id="toolbar_off" class="theme-pink toolbar tabbar tabbar-labels jwbar">
 
                 <div class="toolbar-inner">
 
-                    <a href="#view-2" class="tab-link active">
+                    <a href="#!" class="off tab-link active">
+                        <i class="fa fa-home"></i>
+                    </a>
+                    <a href="#!" class="off tab-link active">
+                        <i class="fa fa-search"></i>
+                    </a>
+                    <a href="#!" class="off off_ tab-link active">
+                        <i class="fa fa-camera"></i>
+                    </a>
+                    <a href="#!" class="off tab-link active">
+                        <i class="fa fa-comment"></i>
+                    </a>
+                    <a href="#!" class="off tab-link active">
                         <i class="fa fa-user"></i>
-                        <span class="tabbar-label">Usuários</span>
                     </a>
 
-                    <a href="#view-3" class="tab-link">
+
+
+                </div>
+            </div>
+
+            <div id="toolbar_on" class="theme-pink toolbar tabbar tabbar-labels jwbar">
+
+                <div class="toolbar-inner">
+
+                    <a href="#view-1" class="on tab-link active">
+                        <i class="fa fa-home"></i>
+                    </a>
+                    <a href="#view-2" class="on tab-link">
+                        <i class="fa fa-search"></i>
+                    </a>
+
+                    <a href="#!" class="on tab-link">
+                        <iframe
+                            id="camera" 
+                            src="http://dev.house/adsapp/app/"
+                            style="display:none;width:50px;height:100%;border:0;" 
+                            scrolling="no"
+                            allowtransparency="true">   
+                        </iframe>
+                        <img id="camera-loading" src="img/hourglass.gif" style="width:32px;margin-top:5px" />
+                    </a>
+                    <a href="#view-3" class="on tab-link">
                         <!--<div class="jwicon">
                             <i class="fa fa-comment-o"></i>
                             <span class="badge bg-red">4</span>
                         </div>
                         -->
-                        <i class="fa fa-comments"></i>
-                        <span class="tabbar-label">Conversas</span>
+                        <i class="fa fa-comment"></i>
+                        <!--<span class="tabbar-label">Conversas</span>-->
+                    </a>
+
+                    <a href="#view-4" class="on tab-link">
+                        <i class="fa fa-user"></i>
+                        <!--<span class="tabbar-label">Opções</span>-->
                     </a>
 
 
-                    <a href="#view-1" class="tab-link">
-                        <i class="fa fa-group"></i>
-                        <span class="tabbar-label">Grupos</span>
-                    </a>
-
-                    <!--comment,heart-o,eye-->
-                    <!--
-                    <a href="#view-3" class="tab-link"><i class="fa fa-group"></i>
-                        <span class="tabbar-label">Grupos</span>
-                    </a>
-                    -->
-                    <a href="#view-4" class="tab-link">
-                        <i class="fa fa-cog"></i>
-                        <span class="tabbar-label">Ajustes</span>
-                    </a>
                 </div>
             </div>
         </div>
@@ -365,9 +365,9 @@
                             </div>
                         </div>
                         <div class="page-content">
-                            
+
                             <div id="joinList"></div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -378,20 +378,26 @@
         <script>
             var isApp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
         </script>
-        <script src="https://debug2.phonegap.com/target/target-script-min.js#2fcde2a6-1c48-11e6-93ce-067c7ecc21b3"></script>
-        <!--<script src="http://192.168.0.100:8080/target/target-script-min.js#adsapp"></script>-->
+        <!--<script src="https://debug2.phonegap.com/target/target-script-min.js#2fcde2a6-1c48-11e6-93ce-067c7ecc21b3"></script>
+        <script src="http://192.168.0.100:8080/target/target-script-min.js#adsapp"></script>-->
         <!-- PHONEGAP -->
         <script src="cordova.js"></script>
         <!-- API -->
-        <script type="text/javascript" src="build/js/framework7.js"></script>
+        <script type="text/javascript" src="f7/js/framework7.js"></script>
         <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mask.js"></script>
         <script type="text/javascript" src="js/kitchen-sink.js"></script>
         <script type="text/javascript" src="js/views.js"></script>
+        <!-- VENDOR -->
+        <script type="text/javascript" src="js/prettydate.js"></script>
+        <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mask.js"></script>
+        <!--<script type="text/javascript" src="js/moment.min.js"></script>-->
         <!-- APP -->
         <script type="text/javascript" src="js/app.js"></script>
         <script type="text/javascript" src="js/arrays.js"></script>
         <!-- MY CLASSES -->
-        <script type="text/javascript" src="js/class.db.js"></script>
+        <!--<script type="text/javascript" src="js/class.db.js"></script>-->
         <script type="text/javascript" src="js/class.facebook.js"></script>
         <script type="text/javascript" src="js/class.dom.js"></script>
         <script type="text/javascript" src="js/class.debug.js"></script>
@@ -408,8 +414,7 @@
         <script type="text/javascript" src="js/page.group.js"></script>
         <script type="text/javascript" src="js/page.post.js"></script>
         <script type="text/javascript" src="js/page.welcome.js"></script>
-        <script type="text/javascript" src="js/page.profile.js"></script>
-        <script type="text/javascript" src="js/page.contact.js"></script>
+        <script type="text/javascript" src="js/page.user.js"></script>
 
         <script type="text/javascript">
             // alias session        
@@ -422,7 +427,14 @@
             if (!isApp) {
                 start();
             }
-            //localStorage.removeItem("userId");
+
+            // fix for browser reload
+            sessionStorage.activePage = 0;
+            sessionStorage.post_id_list = 0;
+            sessionStorage.post2_id_list = 0;
+            sessionStorage.loadIndex = 0;
+            sessionStorage.chat_list_loading = 0;
+
             console.log(localStorage);
             console.log(sessionStorage);
 

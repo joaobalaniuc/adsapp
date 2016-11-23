@@ -1,37 +1,43 @@
-var myContacts = myApp.virtualList($$(".contacts"), {
-    // Pass array with items
-    //items: items,
-    items: [],
-    // Custom search function for searchbar
-    searchAll: function (query, items) {
-        var found = [];
-        for (var i = 0; i < items.length; i++) {
-            var item = items[i];
-            if ($(item).text().indexOf(query) >= 0 || query.trim() === '') {
-                found.push(i);
-            }
-        }
-        return found; //return array with mathced indexes
-    },
-    // Item height
-    height: 73
-});
-
+/* SESSION:
+ * .activePage = pagina atual
+ * .oldPage = pagina anterior
+ * .post_id = active post_read.html
+ * .post_id_list = last id for postList (old posts)
+ * .post_id_list_new = last id for postList (new posts)
+ * .edit_id = se > 0, active post.html (editar)
+ * .friend_id = active user user_read.html
+ * .chat_user = active user chat.html
+ * .chat_id = last chat id loaded (for limit)
+ * .chat_id_list = last chat id for chatList()
+ * 
+ */
+//============================
+// GLOBAL EVENTS
+//============================
 $(window).on("load", function () {
-    //alert(dateFormat(new Date(), "yyyy-mm-dd hh:MM:ss"));
     //loadingHide();
-
 });
+function go(fn) {
+    //view2.router.loadPage(fn, {ignoreCache: true});
+    //myApp.showTab('#view-1');
+    $$('.tab.active')[0].f7View.loadPage(fn, {ignoreCache: true});
+}
+
 $$(document).on("submit", "form", function (e) {
     //alert(1);
     e.preventDefault();
     return false;
 });
 
+//============================
+// READY
+//============================
 $(document).ready(function () {
 
-    if (typeof localStorage.userId === "undefined") {
-        view2.router.loadPage('welcome.html', {ignoreCache: true});
+    if (typeof localStorage.user_id === "undefined") {
+        go("user_login.html");
+        $(".toolbar").hide();
+        return false;
     }
 
     // Android layout fix
@@ -40,6 +46,10 @@ $(document).ready(function () {
         $('.banner').css("margin-top", "-11px");
         $('#toplogo').css("margin-top", "10px");
     }
+
+    userRead(localStorage.user_id, userReadCb_Me);
+    postList(0);
+    postList(0, "", true);
 
     // Get data and fill
     getSession();
@@ -58,42 +68,52 @@ $(document).ready(function () {
         ajaxPing();
     }, 1000);
 
+
 });
 
 function pageRefresh() {
     var page = myApp.getCurrentView().activePage.name;
+    var old_page = sessionStorage.oldPage;
     var view = myApp.getCurrentView().container.id;
     var t = 0;
-    // grupos
-    if (page === "index") {
-        groupChatList();
-        t = 0;
+    // paginas sem toolbar
+    if (page !== "post_form"
+            && page !== "user_read"
+            && page !== "user_form"
+            && page !== "user_login"
+            && page !== "user_register"
+            && page !== "chat") {
+        $("#toolbar_on").fadeIn("fast");
+        $("#toolbar_off").fadeOut("fast");
     }
-    // contatos
-    if (page === "index-2") {
-        contactList();
-        t = 0;
+    else {
+        $("#toolbar_on, #toolbar_off").hide();
+    }
+    // novo post
+    if (page === "post_form") {
+        $("#toolbar_off").show();
+        $("#toolbar_on").fadeOut("fast");
+        setMask();
+        postCat(postCatCb);
+    }
+    // ver post
+    if (page === "post_read") {
+    }
+    // timeline
+    if (page === "index") {
+        if (sessionStorage.loadIndex > 0) {
+            if ($('#post_list').children().length === 0) {
+                postList(0, "", true); // followers
+            }
+        }
+        else {
+            sessionStorage.loadIndex = 1;
+        }
     }
     // chat list
     if (page === "index-3") {
-        chatList();
-        t = 0;
-    }
-    // profile
-    if (page === "index-4") {
-        profileLoad();
-    }
-    // chat inner
-    if (page === "messages") {
-
-        if (sessionStorage.chatType === "priv8") {
-            chatGet();
-        }
-        if (sessionStorage.chatType === "group") {
-            groupChatGet();
-        }
-
-        t = 1000;
+        chatList(0);
+        t = 10000;
     }
     // run again
     if (t > 0) {
@@ -109,6 +129,7 @@ function pageRefreshRun(t) {
 function pageCheck() {
     var page = myApp.getCurrentView().activePage.name;
     if (page !== sessionStorage.activePage) {
+        sessionStorage.oldPage = sessionStorage.activePage;
         sessionStorage.activePage = page;
         if (typeof pageRefreshTimer !== "undefined") {
             clearInterval(pageRefreshTimer);
@@ -161,16 +182,123 @@ $$(document).on('click', 'a.tab-link', function (e) {
     $('.toolbar-inner a[href="' + href + '"]').addClass("active");
 });
 
-$$(document).on('pageBeforeInit', '*', function (e) {
-    //alert(1);
-    //$('#toolbar').show();
-    getSession();
-});
-
 $$(document).on('pageBack', '*', function (e) {
     $('#toolbar').show(); // back from messages
 });
 
 myApp.onPageInit('*', function (page) {
-    //
+    //var name = myApp.getCurrentView().activePage.name;
+    //console.log("aaa=" + name);
 });
+
+//==============================================
+// FILL FORM WITH OBJECT DATA
+//==============================================
+function FF(data, form_elem) {
+
+    console.log("FF() :)");
+
+    console.log(data);
+
+    if (typeof form_elem === "undefined") {
+        form_elem = "form";
+    }
+    console.log(form_elem);
+
+    var $elem = $(form_elem);
+    var i = 0;
+    for (i = 0; i < data.length; i++) {
+        $.each(data[i], function (k, v) {
+            console.log(k + "=" + v);
+            if (v !== null) {
+                var n = "[name=" + k + "]";
+                var input = "";
+                input += "textarea" + n + ",";
+                input += "select" + n + ",";
+                input += "[type=text]" + n + ",";
+                input += "[type=password]" + n + ",";
+                input += "[type=email]" + n + ",";
+                input += "[type=url]" + n + ",";
+                input += "[type=number]" + n + ",";
+                input += "[type=hidden]" + n + ",";
+                input += "[type=search]" + n;
+                //==========================
+                // INPUT VALUE
+                //==========================
+                $elem.find(input).val(v);
+                //==========================
+                // CHECKBOX
+                //==========================
+                //if (v === "1") {
+                $elem.find("[type=checkbox]" + n).prop("checked", "checked");
+                //}
+                //==========================
+                // CHILD ELEMENTS
+                //==========================
+                $elem.find("[ff-child]" + n).each(function (i) {
+                    var child = $(this).attr("ff-child");
+                    $(child).show();
+                });
+                //==========================
+                // RELATIVE NAME
+                //==========================
+                $elem.find("[ff-name]" + n).each(function (i) {
+                    var name = $(this).attr("ff-name");
+                });
+                // bug fix = materializecss labels update
+                /*$elem.find(input).each(function (i, element) {
+                 if ($(element).val().length > 0) {
+                 $(this).siblings("label, i").addClass("active");
+                 }
+                 });*/
+            } // not null
+        }); // each
+    } // for
+}
+
+function isFunction(functionToCheck) {
+    var getType = {};
+    return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+}
+
+//============================
+// GLOBAL FUNCTIONS
+//============================
+function setMask() {
+    $('.money').mask('000.000.000.000.000,00', {reverse: true});
+    $('.phone').mask('(00) 00000-0000');
+    $('.zipcode').mask('00000-000');
+}
+
+
+//==============================================
+// SET PRETTY DATE = REQUER prettydate.js
+//==============================================
+function pretty() {
+    $(".prettydate").prettydate({
+        beforeSuffix: "atrás",
+        messages: {
+            second: "Agora mesmo",
+            seconds: "%s segundos %s",
+            minute: "Um minuto %s",
+            minutes: "%s minutos %s",
+            hour: "Uma hora %s",
+            hours: "%s horas %s",
+            day: "Um dia %s",
+            days: "%s dias %s",
+            week: "Uma semana %s",
+            weeks: "%s semanas %s",
+            month: "Um mês %s",
+            months: "%s meses %s",
+            year: "Um ano %s",
+            years: "%s anos %s",
+            // Extra
+            yesterday: "Ontem",
+            beforeYesterday: "Antes de ontem",
+            tomorrow: "Amanhã",
+            afterTomorrow: "Depois de amanhã"
+
+        }
+    });
+}
+

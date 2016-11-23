@@ -1,22 +1,23 @@
-
-<div data-page="messages" class="page " >
+<div id="chat" data-page="chat" class="page " >
     <div class="navbar ttheme-black">
         <div class="navbar-inner">
-            <div class="left"><a href="index.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>
-            <div id="chatName" class="center" style="font-weight:100;margin:0 !important">Messages</div>
+            <div class="left"><a href="#" class="back link icon-only"><i class="icon icon-back"></i></a></div>
+            <div id="chatName" class="user_read center" style="font-weight:100;margin:0 !important">Messages</div>
             <div class="right">
-                <div class="item-media" style="margin-right:8px;margin-top:8px"><img id="chatFbLink" src="" width="44"></div>
+                <div class="item-media" style="margin-right:8px;margin-top:8px"><img id="chatPic" src="" width="44"></div>
             </div>
         </div>
     </div>
-    <div class="toolbar messagebar ">
+    <div class="toolbar messagebar">
         <div class="toolbar-inner">
             <!--<a href="#" class="post link icon-only">
                 <i class="icon icon-camera"></i>
             </a>
             -->
-            <textarea id="msg" placeholder="Mensagem" style="font-weight:100;padding-left:20px"></textarea>
-            <a id="send" href="#" class="link send-message">Enviar</a>
+            <textarea id="chatTxt" placeholder="Mensagem" style="padding-left:20px;color:#fff"></textarea>
+            <a id="chatSend" href="#" class="link send-message">
+                <i class="fa fa-chevron-right" style="color:#fff;font-size:24px"></i>
+            </a>
         </div>
     </div>
     <div class="page-content messages-content" style="padding-top:70px;background:url(img/bkg4.jpg);background-size:100% 100%;">

@@ -36,8 +36,7 @@ $$(document).on('click', '#checkCode', function (e) {
                             localStorage.userNum = sessionStorage.confirm_cel;
                             view2.router.loadPage('index.html', {ignoreCache: true});
                             $('#toolbar').show();
-                        }
-                        else {
+                        } else {
                             view1.router.loadPage('welcome_profile.html', {ignoreCache: true});
                         }
                     }
@@ -45,7 +44,12 @@ $$(document).on('click', '#checkCode', function (e) {
             });
 });
 $$(document).on('click', '#sendCode', function (e) {
-
+    
+    if ($("#ddd").val() == "" || $("#num").val() == "" || $("#cc").val() == "") {
+        alert("Favor preencher todos os campos.");
+        return false;
+    }
+    
     sessionStorage.confirm_cc = $("#cc").val();
     sessionStorage.confirm_ddd = $("#ddd").val();
     sessionStorage.confirm_num = $("#num").val();
@@ -131,11 +135,11 @@ $$(document).on('click', '#updateName', function (e) {
             });
 });
 $$(document).on('click', '#contactList', function (e) {
-    contactList();
+    //contactList();
 });
 $$(document).on('pageBeforeInit', '[data-page="welcome"]', function (e) {
-    $('#toolbar').hide();
+    //$('#toolbar').hide();
 });
 $$(document).on('pageBeforeInit', '[data-page="welcome_profile"]', function (e) {
-    $('#toolbar').hide();
+    //$('#toolbar').hide();
 });
