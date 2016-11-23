@@ -167,7 +167,7 @@ function conexCheck() {
     // Houve alteração no status de conexão?
     if (sessionStorage.onlineLast !== sessionStorage.online) {
         if (sessionStorage.online === "true") {
-            $('#conexCheck').html("<span style='color:#6ccb5e'><img src='img/online.png' style='vertical-align:bottom' /> &nbsp; Conexão estabelecida</span>");
+            $('#conexCheck').html("<span style='color:#6ccb5e'><img src='img/online.png' style='vertical-align:bottom' /> &nbsp; Conectado</span>");
         }
         else {
             $('#conexCheck').html("<span style='color:#e95651'><img src='img/offline.png' style='vertical-align:bottom' /> &nbsp; Você está offline</span>");
