@@ -2,16 +2,18 @@
 // SEND PIC IFRAME
 //========================================
 $(function () {
-    
+
     if (typeof localStorage.user_id === "undefined") {
         return;
     }
 
-    $("iframe").attr("src", localStorage.server + "/app/");
+    var usr = "?user_id=" + localStorage.user_id + "&user_email=" + localStorage.user_email + "&user_pass=" + localStorage.user_pass;
+
+    $("iframe").attr("src", localStorage.server + "/app/" + usr);
 
     $("iframe").load(function (e) {
-        
-        $("#camera-loading").fadeOut("fast", function() {
+
+        $("#camera-loading").fadeOut("fast", function () {
             $("#camera").fadeIn("fast");
         });
 

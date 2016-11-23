@@ -75,7 +75,7 @@ function chatRead() {
             })
 
             .fail(function () {
-
+                alert("err");
             })
 
             .done(function (res) {
@@ -86,7 +86,7 @@ function chatRead() {
                         var rs = res[i];
 
                         // bugfix msg enviada proxima ao timer
-                        if (rs.chat_id > sessionStorage.chat_id) {
+                        if (rs.chat_id > parseInt(sessionStorage.chat_id)) {
                             // enviado
                             if (rs.chat_user_src === localStorage.user_id) {
                                 var type = "sent";
@@ -103,6 +103,23 @@ function chatRead() {
                                 date: dateFormat(new Date(rs.chat_date_src), "dd/mm hh:MM")
                                         //date: dateFormat(new Date(rs.chat_date), "dd/mm hh:MM")
                             });
+
+                            /*
+                             $("#" + type + "_template")
+                             .clone()
+                             .prop({
+                             id: "msg_" + rs.chat_id
+                             })
+                             .appendTo("#msg");
+                             
+                             $("#msg_" + rs.chat_id).each(function (index) {
+                             
+                             $(this).find(".message-name").html(rs.user_name);
+                             $(this).find(".message-text").html(rs.chat_txt);
+                             $(this).find(".message-date").html(rs.chat_date);
+                             }).show();
+                             */
+
                             sessionStorage.chat_id = rs.chat_id;
                             window.scrollTo(0, document.body.scrollHeight);
                         }

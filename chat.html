@@ -10,10 +10,10 @@
     </div>
     <div class="toolbar messagebar">
         <div class="toolbar-inner">
-            <!--<a href="#" class="post link icon-only">
+            <a href="#" class="post link icon-only">
                 <i class="icon icon-camera"></i>
             </a>
-            -->
+
             <textarea id="chatTxt" placeholder="Mensagem" style="padding-left:20px;color:#fff"></textarea>
             <a id="chatSend" href="#" class="link send-message">
                 <i class="fa fa-chevron-right" style="color:#fff;font-size:24px"></i>
@@ -22,7 +22,27 @@
     </div>
     <div class="page-content messages-content" style="padding-top:70px;background:url(img/bkg4.jpg);background-size:100% 100%;">
 
-        <div id="getChat" class="messages messages-auto-layout">
+        <div id="msg" class="messages messages-auto-layout">
+
+            <div id="s_template" style="display:none" class="message message-sent">
+                <div class="message-text">Hi, Kate
+                    <div class="message-date">Feb 9, 12:58</div>
+                </div>
+                <!--
+                <div style="background-image:url(img/img1.jpg)" class="message-avatar"></div>
+                -->
+            </div>
+            <div id="r_template" style="display:none" class="message message-received">
+                <div class="message-name">Kate Johnson</div>
+                <div class="message-text">Hi, i am good
+                    <div class="message-date">Feb 9, 13:11</div>
+                </div>
+                <!--
+                <div style="background-image:url(img/img3.jpg)" class="message-avatar"></div>
+                -->
+            </div>
+
+
             <!--
             <div class="message message-sent message-with-avatar">
                 <div class="message-text">Hi, Kate
