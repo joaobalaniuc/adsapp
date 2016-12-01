@@ -128,6 +128,8 @@ function postReadCb(res) {
     var post = res["post"];
     console.log(post);
     if (res === null || res.fail || res.error) {
+        myApp.alert("Verifique sua conexão e tente novamente.");
+        window.location.href="index.html";
         return;
     }
 
