@@ -14,10 +14,9 @@ $$(document).on('click', '#removeLastImg', function (e) {
     if (sessionStorage.edit_id > 0) {
     }
     else {
-        myApp.confirm('Tem certeza disto?', 'Desfazer envio', function () {
+        myApp.confirm('Tem certeza disto?', 'Cancelar envio', function () {
             removeLastImg();
             view1.router.back();
-            //window.location.href = "index.html";
         });
     }
 });
@@ -42,7 +41,7 @@ myApp.onPageInit('post_form', function (page) {
         rules: {
             post_name: {
                 required: true,
-                minlength: 3
+                minlength: 5
             },
             post_phone: {
                 required: true
@@ -292,10 +291,6 @@ function postList(last_id, op, followers) {
                             if (val["user_fb_pic"] != null) {
                                 $(this).find(".user_fb_pic").attr("src", val["user_fb_pic"]);
                             }
-                            $(this).find(".post_name").html(val["post_name"]);
-                            if (val["post_price"]!==null) {
-                                $(this).find(".post_price").html("R$ "+val["post_price"]);
-                              }
                             $(this).find(".user_read").attr("data-id", val["user_id"]);
                             $(this).find(".post_read").attr("data-id", val["post_id"]);
                             $(this).find(".user_name").html(val["user_name"]);
@@ -306,11 +301,6 @@ function postList(last_id, op, followers) {
                                     return currentText.substr(0, 128) + " ...";
                                 }
                             });
-                            // chat
-                            $(this).find(".chat").attr("data-id", val["user_id"]);
-                            $(this).find(".chat").attr("data-name", val["user_name"]);
-                            // tel
-                            $(".user_phone").attr("href", "tel:0" + val["user_phone"]);
 
                         }).show();
                         //======================
@@ -366,33 +356,11 @@ function postList(last_id, op, followers) {
 
             }); // after ajax
 }
-
-//=============================
-// GRID MASONRY
-//=============================
-
-function postGrid() {
-  var $grid = $('.grid');
-              $grid.masonry({
-                // use outer width of grid-sizer for columnWidth
-          columnWidth: '.grid-sizer',
-          // do not use .grid-sizer in layout
-          itemSelector: '.grid-item',
-          percentPosition: true
-          });
-          setTimeout(function() {
-            var $items = $('<div class="grid-item"><img src="img/teste.jpg" /></div><div class="grid-item"><img src="img/teste.jpg" /></div>');
-  // append items to grid
-  $grid.append( $items )
-    // add and lay out newly appended items
-    .masonry( 'appended', $items );
-          },3000);
-
-        }
 //=============================
 // INSERT / DELETE POST
 //=============================
 function postSend() {
+// DATA TO SEND
     var data_form = $("#post_form form").serialize();
     var data_user = {
         user_id: localStorage.user_id,
@@ -524,7 +492,6 @@ function postCat(cb) {
                     });
                     cb();
                 }
-                console.log("cat");
                 console.log(sessionStorage);
             }); // after ajax
 }

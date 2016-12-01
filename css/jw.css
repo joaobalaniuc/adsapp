@@ -4,6 +4,16 @@
 #chat ::-webkit-input-placeholder {
     color: #fff;
 }
+/* GRID STYLES */
+.grid-item {width:33.333% !important;margin:0;margin-bottom:-6px}
+.grid-item img {width:100%}
+.grid-sizer { width: 33.333%; }
+
+@media screen and (min-width: 768px) {
+  /* 5 columns for larger screens */
+  .grid-item { width: 25%; }
+  .grid-sizer { width: 25%; }
+}
 /* GLOBAL */
 p,textarea,input[type=text],select {font-weight:100 !important}
 input{font-family:Nunito}
@@ -38,7 +48,7 @@ ul.global .item-after img {width:24px;height:24px;}
 .infinite-scroll-preloader .preloader {
     width:34px;
     height:34px;
-}  
+}
 /* BOTTOM TOOLBAR */
 .jwbar {height:auto;height:60px;top: auto !important; bottom: 0 !important;border-top:1px solid #ddd}
 .jwbar div a span {text-transform:none !important;font-weight:500;color:#333;font-size:12px;margin:auto !important;margin-top:0}

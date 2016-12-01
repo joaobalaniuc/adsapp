@@ -166,8 +166,9 @@ function userRead(target_id, cb) {
                 var r = {"fail": true};
                 cb(r);
             })
-
+            
             .done(function (res) {
+              console.log(res);
                 cb(res);
             });
 }
@@ -175,7 +176,7 @@ function userReadCb_Form(res) {
     FF(res, "#userForm");
     /*$(".user_first_name").html(res[0].user_first_name);
      $(".user_email").html(res[0].user_email);
-     
+
      var fb = res[0].user_fb_pic;
      if (fb != null) {
      //$(".avatar").attr("src", "http://graph.facebook.com/" + fb + "/picture?width=100&height=100");

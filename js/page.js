@@ -9,7 +9,7 @@
  * .chat_user = active user chat.html
  * .chat_id = last chat id loaded (for limit)
  * .chat_id_list = last chat id for chatList()
- * 
+ *
  */
 //============================
 // GLOBAL EVENTS
@@ -46,6 +46,8 @@ $(document).ready(function () {
         $('.banner').css("margin-top", "-11px");
         $('#toplogo').css("margin-top", "10px");
     }
+
+
 
     userRead(localStorage.user_id, userReadCb_Me);
     postList(0);
@@ -114,6 +116,10 @@ function pageRefresh() {
     if (page === "index-3") {
         chatList(0);
         t = 10000;
+    }
+    if (page === "index-4") {
+      postGrid();
+
     }
     // run again
     if (t > 0) {
@@ -301,4 +307,3 @@ function pretty() {
         }
     });
 }
-
