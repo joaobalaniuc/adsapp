@@ -118,13 +118,10 @@ function pageRefresh() {
         t = 10000;
     }
     if (page === "index-2") {
-          if ($('#post2_list').children().length === 1) {
+          if ($('#post2_list').children().length === 0) {
             //postGrid();
             myApp.showIndicator();
-            setTimeout(function() {
-
-              postListGrid(0);
-            },1000);
+            postListGrid(0);
 
           }
 

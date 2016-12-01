@@ -8,6 +8,7 @@
 
 /* CUSTOM */
 @import url("jw.css");
+@import url("grid.css");
 
 /* GFONT */
 @font-face {
@@ -22,4 +23,3 @@
     font-weight: 400;
     src: local('Nunito-Regular'), url(1D_AI14T6X7H5aa5BXWWyuvvDin1pK8aKteLpeZ5c0A.woff) format('woff');
 }
-

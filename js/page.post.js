@@ -368,16 +368,6 @@ function postList(last_id, op, followers) {
 }
 function postListGrid(last_id, op) {
 
-  $grid = $('#post2_list');
-              $grid.masonry({
-                // use outer width of grid-sizer for columnWidth
-          columnWidth: '.grid-sizer',
-          // do not use .grid-sizer in layout
-          itemSelector: '.grid-item',
-          percentPosition: true
-          //gutter: 1
-          });
-
   console.log("postListGrid...");
 
     var prefix="post2";
@@ -430,24 +420,26 @@ function postListGrid(last_id, op) {
                     $.each(res, function (key, val) {
                         i++;
                         // create new item elements
-                        var item = '<div class="grid-item post_read" data-id="'+val["post_id"]+'"><img src="'+localStorage.server+localStorage.server_img+val["img_fn"]+'" /></div>';
+                        var item = '';
+                        item += '<div class="square">';
+                        item += '<div class="content">';
+                        item += '<div class="table">';
+                        item += '<div class="post_read table-cell" data-id="'+val["post_id"]+'" style="background-image:url('+localStorage.server+localStorage.server_img+val["img_fn"]+')">';
+                        //item += '<img class="rs" src="'+localStorage.server+localStorage.server_img+val["img_fn"]+'" />';
+                        //item += 'Responsive image.';
+                        item += '</div>';
+                        item += '</div>';
+                        item += '</div>';
+                        item += '</div>';
                         console.log(item);
-                        var $items = $(item);
 
                         // PREPEND
                         if (op === "new") {
-                          // append items to grid
-                          $grid.preppend( $items )
-                            // add and lay out newly appended items
-                            .masonry( 'preppended', $items );
 
                         }
                         // APPEND
                         else {
-                              // append items to grid
-                              $grid.append( $items )
-                                // add and lay out newly appended items
-                                .masonry( 'appended', $items );
+                              $("#" + prefix + "_list").append(item);
                         }
 
                         //======================
