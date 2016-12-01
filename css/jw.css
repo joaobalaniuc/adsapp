@@ -5,14 +5,13 @@
     color: #fff;
 }
 /* GRID STYLES */
-.grid-item {width:33.333% !important;margin:0;margin-bottom:-6px}
-.grid-item img {width:100%}
+.grid-item {width:33.333% !important;margin:0;margin-bottom:-6px;}
+.grid-item img {width:100%;}
 .grid-sizer { width: 33.333%; }
 
 @media screen and (min-width: 768px) {
   /* 5 columns for larger screens */
   .grid-item { width: 25%; }
-  .grid-sizer { width: 25%; }
 }
 /* GLOBAL */
 p,textarea,input[type=text],select {font-weight:100 !important}

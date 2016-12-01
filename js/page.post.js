@@ -366,27 +366,131 @@ function postList(last_id, op, followers) {
 
             }); // after ajax
 }
+function postListGrid(last_id, op) {
 
+  console.log("postListGrid...");
+
+    var prefix="post2";
+    // POST GERAL
+        if (op === "new") {
+            sessionStorage.post_id_list_new = last_id;
+        }
+        else {
+            op = "";
+            sessionStorage.post_id_list = last_id;
+        }
+
+        if ($('#'+prefix+'_list').children().length === 1) {
+            myApp.showIndicator();
+        }
+
+
+    $.ajax({
+        url: localStorage.server + "/post_list.php",
+        data: {
+            user_id: localStorage.user_id,
+            user_email: localStorage.user_email,
+            user_pass: localStorage.user_pass,
+            //
+            last_id: last_id,
+            op: op
+        },
+        type: 'GET',
+        dataType: 'jsonp',
+        jsonp: 'callback',
+        timeout: localStorage.timeout
+    })
+            .always(function () {
+                $("#" + prefix + "_infinite").fadeOut("slow");
+                myApp.hideIndicator();
+                console.log("end");
+            })
+
+            .fail(function () {
+                //myApp.alert('Desculpe, verifique sua conexão e tente novamente.', 'Erro');
+            })
+
+            .done(function (res) {
+                if (res !== null) {
+
+                    console.log(res);
+                    if (res === false) {
+                        return;
+                    }
+                    if (res.error) {
+                        return;
+                    }
+                    var i = 0;
+                    var $items="";
+                    var $grid = $("#" + prefix + "_list");
+                    $.each(res, function (key, val) {
+                        i++;
+                        // create new item elements
+                        var item = '<div class="grid-item post_read" data-id="'+val["post_id"]+'"><img src="'+localStorage.server+localStorage.server_img+val["img_fn"]+'" /></div>';
+                        console.log(item);
+                            $items = $(item);
+
+                        // PREPEND
+                        if (op === "new") {
+                          // append items to grid
+                          $grid.preppend( $items )
+                            // add and lay out newly appended items
+                            .masonry( 'preppended', $items );
+
+                        }
+                        // APPEND
+                        else {
+                              // append items to grid
+                              $grid.append( $items )
+                                // add and lay out newly appended items
+                                .masonry( 'appended', $items );
+                        }
+
+                        //======================
+                        // ULTIMO ID RECEBIDO
+                        //======================
+                        // POST GERAL
+                        //======================
+                            if (op === "new") {
+                                sessionStorage.post_id_list_new = val["post_id"];
+                            }
+                            else {
+                                sessionStorage.post_id_list = val["post_id"];
+                            }
+                            if (last_id === 0) {
+                                sessionStorage.post_id_list = val["post_id"];
+                                if (i === 1)
+                                    sessionStorage.post_id_list_new = val["post_id"];
+                            }
+
+                      });
+
+                            console.log("(NEW/GRID) post_id = " + sessionStorage.post_id_list_new + " (OLD) post_id = " + sessionStorage.post_id_list);
+
+                } // res not null
+                else {
+                    alert("Erro interno.");
+                }
+                if (sessionStorage.post2_id_list == 0) {
+                    $("#post_none").fadeIn("slow");
+                }
+
+            }); // after ajax
+}
 //=============================
 // GRID MASONRY
 //=============================
-
 function postGrid() {
-  var $grid = $('.grid');
+  var $grid = $('#post2_list');
               $grid.masonry({
                 // use outer width of grid-sizer for columnWidth
           columnWidth: '.grid-sizer',
           // do not use .grid-sizer in layout
           itemSelector: '.grid-item',
           percentPosition: true
+          //gutter: 1
           });
-          setTimeout(function() {
-            var $items = $('<div class="grid-item"><img src="img/teste.jpg" /></div><div class="grid-item"><img src="img/teste.jpg" /></div>');
-  // append items to grid
-  $grid.append( $items )
-    // add and lay out newly appended items
-    .masonry( 'appended', $items );
-          },3000);
+
 
         }
 //=============================
@@ -579,7 +683,7 @@ function catChange(id) {
 $$('.pull-to-refresh-content').on('refresh', function (e) {
     // ALL POSTS
     if (sessionStorage.activePage === "index-2") {
-        postList(sessionStorage.post2_id_list_new, "new");
+        postListGrid(sessionStorage.post2_id_list_new, "new");
     }
     // POST FOLLOWERS
     else {
@@ -597,7 +701,7 @@ $$('.infinite-scroll').on('infinite', function () {
     if (sessionStorage.activePage === "index-2") {
         if ($("#post2_infinite").css("display") === "none") {
             $("#post2_infinite").fadeIn("slow", function () {
-                postList(sessionStorage.post_id_list);
+                postListGrid(sessionStorage.post_id_list);
             });
         }
     }

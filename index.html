@@ -135,7 +135,15 @@
 
 
 
-                            <div id="post2_template" style="display:none;margin:0;margin-bottom:20px" class="card ks-facebook-card" data-id="1">
+
+
+                                                                                                                                          <div id="post2_list" class="grid">
+                                                                                                                <div class="grid-sizer"></div>
+                                                                                                                </div>
+
+
+
+                            <div id="post2_template_tmp" style="display:none;margin:0;margin-bottom:20px" class="card ks-facebook-card" data-id="1">
                                 <div class="user_read card-header">
                                     <div class="ks-facebook-avatar"><img class="user_fb_pic" src="img/user.png" width="34" height="34"/></div>
                                     <div class="user_name ks-facebook-name">...</div>
@@ -155,7 +163,11 @@
                                 -->
                             </div>
 
-                            <div id="post2_list"></div>
+                            <div id="post2_list_tmp"></div>
+
+
+
+
 
                             <div id="post2_infinite" style="display:none" class="infinite-scroll-preloader">
                                 <div class="preloader preloader-pink"></div>
@@ -302,24 +314,6 @@
                             </div>
 
 
-
-
-                                                                                                              <div class="grid">
-                                                                                    <!-- do not use banner in Masonry layout -->
-                                                                                    <div class="static-banner">Static banner</div>
-                                                                                    <div class="grid-sizer"></div>
-                                                                                    <div class="grid-item"><img src='img/teste.jpg' /></div>
-                                                                                    <div class="grid-item"><img src='img/teste.jpg' /></div>
-                                                                                    <div class="grid-item"><img src='img/teste.jpg' /></div>
-                                                                                    <div class="grid-item"><img src='icon.png' /></div>
-                                                                                    <div class="grid-item"><img src='icon.png' /></div>
-                                                                                    <div class="grid-item"><img src='icon.png' /></div>
-                                                                                    <div class="grid-item"><img src='icon.png' /></div>
-                                                                                    <div class="grid-item"><img src='icon.png' /></div>
-                                                                                    <div class="grid-item"><img src='icon.png' /></div>
-                                                                                    <div class="grid-item"><img src='img/teste.jpg' /></div>
-                                                                                    <div class="grid-item"><img src='img/teste.jpg' /></div>
-                                                                                    </div>
 
 
                         </div>
@@ -474,6 +468,7 @@
             sessionStorage.post_id_list = 0;
             sessionStorage.post2_id_list = 0;
             sessionStorage.loadIndex = 0;
+            sessionStorage.loadIndex2 = 0;
             sessionStorage.chat_list_loading = 0;
 
             console.log(localStorage);

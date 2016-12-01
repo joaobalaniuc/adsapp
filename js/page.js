@@ -50,7 +50,7 @@ $(document).ready(function () {
 
 
     userRead(localStorage.user_id, userReadCb_Me);
-    postList(0);
+    //postList(0);
     postList(0, "", true);
 
     // Get data and fill
@@ -117,8 +117,13 @@ function pageRefresh() {
         chatList(0);
         t = 10000;
     }
-    if (page === "index-4") {
-      postGrid();
+    if (page === "index-2") {
+          if ($('#post2_list').children().length === 1) {
+            postGrid();
+            postListGrid(0);
+          }
+          sessionStorage.loadIndex2 = 1;
+
 
     }
     // run again
