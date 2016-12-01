@@ -16,8 +16,8 @@ $$(document).on('click', '#removeLastImg', function (e) {
     else {
         myApp.confirm('Tem certeza disto?', 'Desfazer envio', function () {
             removeLastImg();
-            view1.router.back();
-            //window.location.href = "index.html";
+            //view1.router.back();
+
         });
     }
 });
@@ -368,6 +368,16 @@ function postList(last_id, op, followers) {
 }
 function postListGrid(last_id, op) {
 
+  $grid = $('#post2_list');
+              $grid.masonry({
+                // use outer width of grid-sizer for columnWidth
+          columnWidth: '.grid-sizer',
+          // do not use .grid-sizer in layout
+          itemSelector: '.grid-item',
+          percentPosition: true
+          //gutter: 1
+          });
+
   console.log("postListGrid...");
 
     var prefix="post2";
@@ -379,11 +389,6 @@ function postListGrid(last_id, op) {
             op = "";
             sessionStorage.post_id_list = last_id;
         }
-
-        if ($('#'+prefix+'_list').children().length === 1) {
-            myApp.showIndicator();
-        }
-
 
     $.ajax({
         url: localStorage.server + "/post_list.php",
@@ -403,7 +408,7 @@ function postListGrid(last_id, op) {
             .always(function () {
                 $("#" + prefix + "_infinite").fadeOut("slow");
                 myApp.hideIndicator();
-                console.log("end");
+                console.log("end postListGrid");
             })
 
             .fail(function () {
@@ -421,14 +426,13 @@ function postListGrid(last_id, op) {
                         return;
                     }
                     var i = 0;
-                    var $items="";
-                    var $grid = $("#" + prefix + "_list");
+                    //var $grid = $("#" + prefix + "_list");
                     $.each(res, function (key, val) {
                         i++;
                         // create new item elements
                         var item = '<div class="grid-item post_read" data-id="'+val["post_id"]+'"><img src="'+localStorage.server+localStorage.server_img+val["img_fn"]+'" /></div>';
                         console.log(item);
-                            $items = $(item);
+                        var $items = $(item);
 
                         // PREPEND
                         if (op === "new") {
@@ -464,8 +468,7 @@ function postListGrid(last_id, op) {
                             }
 
                       });
-
-                            console.log("(NEW/GRID) post_id = " + sessionStorage.post_id_list_new + " (OLD) post_id = " + sessionStorage.post_id_list);
+                      console.log("(NEW/GRID) post_id = " + sessionStorage.post_id_list_new + " (OLD) post_id = " + sessionStorage.post_id_list);
 
                 } // res not null
                 else {
@@ -481,18 +484,7 @@ function postListGrid(last_id, op) {
 // GRID MASONRY
 //=============================
 function postGrid() {
-  var $grid = $('#post2_list');
-              $grid.masonry({
-                // use outer width of grid-sizer for columnWidth
-          columnWidth: '.grid-sizer',
-          // do not use .grid-sizer in layout
-          itemSelector: '.grid-item',
-          percentPosition: true
-          //gutter: 1
-          });
-
-
-        }
+}
 //=============================
 // INSERT / DELETE POST
 //=============================
@@ -567,7 +559,7 @@ function postDel(post_id) {
             });
 }
 function removeLastImg() {
-
+  myApp.showPreloader();
     $.ajax({
         url: localStorage.server + "/img_del.php",
         data: {
@@ -581,7 +573,7 @@ function removeLastImg() {
         timeout: localStorage.timeout
     })
             .always(function () {
-
+              window.location.href = "index.html";
             })
             .fail(function () {
                 //myApp.alert('Desculpe, verifique sua conexão e tente novamente.', 'Erro');

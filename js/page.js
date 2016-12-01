@@ -119,11 +119,14 @@ function pageRefresh() {
     }
     if (page === "index-2") {
           if ($('#post2_list').children().length === 1) {
-            postGrid();
-            postListGrid(0);
-          }
-          sessionStorage.loadIndex2 = 1;
+            //postGrid();
+            myApp.showIndicator();
+            setTimeout(function() {
 
+              postListGrid(0);
+            },1000);
+
+          }
 
     }
     // run again
