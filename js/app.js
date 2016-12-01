@@ -45,19 +45,14 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function () {
         
-        console.log("ready0");
         app.receivedEvent('deviceready');
+        
         // SPLASHSCREEN (CONFIG.XML BUGFIX)
         setTimeout(function () {
             navigator.splashscreen.hide();
+            StatusBar.hide();
         }, 1000);
         start();
-        setTimeout(function () {
-            //simulateContact();
-        }, 1000);
-        //getContact();
-
-        console.log("ready1");
     }
     ,
     // Update DOM on a Received Event

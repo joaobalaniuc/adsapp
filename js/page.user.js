@@ -530,7 +530,9 @@ function userUpdate() {
 function userLogout() {
     myApp.confirm('Tem certeza disto?', 'Fazer logout', function () {
         localStorage.removeItem("user_id");
-        window.location.href = "index.html";
+        setTimeout(function () {
+            window.location.href = "index.html";
+        }, 1000);
     });
 
 }

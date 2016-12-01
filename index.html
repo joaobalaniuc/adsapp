@@ -13,40 +13,22 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
         <title>AdsApp</title>
+        <link rel="stylesheet" href="css/include.css">
+        <!--
         <link rel="stylesheet" href="f7/css/framework7.material.css">
         <link rel="stylesheet" href="f7/css/framework7.material.colors.css">
         <link rel="stylesheet" href="css/fa-4.6.3/css/font-awesome.min.css">
-        <!--
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-        <link href="http://fonts.googleapis.com/css?family=Roboto:400,300,500,700" rel="stylesheet" type="text/css">
-        <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
-        -->
         <link href='https://fonts.googleapis.com/css?family=Nunito:300,400' rel='stylesheet' type='text/css'>
-        <!--
-        <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-        -->
         <link rel="stylesheet" href="css/kitchen-sink.css">
         <link rel="stylesheet" href="css/jw.css">
-        <link rel="icon" href="img/icon.png">
-        <!-- MY LOADER --
-        <link href="css/jw-loading.css" rel="stylesheet" />
-        <script src="js/jw-loading.js" type="text/javascript"></script>
         -->
-
+        <link rel="icon" href="img/icon.png">
     </head>
 
     <body class='theme-pink'>
-        <!--
-        <div id="loading-bkg"></div>
-        <div id="loading-img">
-            <div data-id="spinner">
-                <img src="img/loadingdark.gif" style="width:112px;height:112px" />
-            </div>
-        </div>
-        -->
+        
         <div class="statusbar-overlay"></div>
         <div class="panel-overlay"></div>
-
 
         <div class="views tabs toolbar-through">
 
@@ -82,19 +64,18 @@
                                 <div class="pull-to-refresh-arrow"></div>
                             </div>
 
-                            <div id="post_template" style="display:none;margin-bottom:10px" class="card ks-facebook-card" data-id="1">
+                            <div id="post_template" style="display:none;margin:0;margin-bottom:20px" class="card ks-facebook-card" data-id="1">
                                 <div class="user_read card-header">
                                     <div class="ks-facebook-avatar"><img class="user_fb_pic" src="img/user.png" width="34" height="34"/></div>
                                     <div class="user_name ks-facebook-name">...</div>
                                     <div class="post_date ks-facebook-date prettydate">...</div>
                                 </div>
                                 <div class="post_read card-content"> 
+                                    <img class="post_img" src="" width="100%"/>
                                     <div class="card-content-inner">
                                         <p class="post_txt">...</p>
                                         <!--<p class="color-gray">Likes: 112 &nbsp;&nbsp; Comments: 43</p>-->
                                     </div>
-                                    <img class="post_img" src="" width="100%"/>
-
                                 </div>
                                 <!--
                                 <div class="card-footer"><a href="#" class="postShow link">Like</a><a href="#" class="link">Comment</a><a href="#" class="link">Share</a></div>
@@ -142,18 +123,19 @@
                                 <div class="pull-to-refresh-arrow"></div>
                             </div>
 
-                            <div id="post2_template" style="display:none;margin-bottom:10px" class="card ks-facebook-card" data-id="1">
+                            <div id="post2_template" style="display:none;margin:0;margin-bottom:20px" class="card ks-facebook-card" data-id="1">
                                 <div class="user_read card-header">
                                     <div class="ks-facebook-avatar"><img class="user_fb_pic" src="img/user.png" width="34" height="34"/></div>
                                     <div class="user_name ks-facebook-name">...</div>
                                     <div class="post_date ks-facebook-date prettydate">...</div>
                                 </div>
                                 <div class="post_read card-content"> 
+                                    <img class="post_img" src="" width="100%"/>
                                     <div class="card-content-inner">
                                         <p class="post_txt">...</p>
                                         <!--<p class="color-gray">Likes: 112 &nbsp;&nbsp; Comments: 43</p>-->
                                     </div>
-                                    <img class="post_img" src="" width="100%"/>
+                                    
 
                                 </div>
                                 <!--
@@ -259,7 +241,7 @@
                                     <a href="#" class="button button-raised ccolor-green">Seguindo (<span class="user_following">0</span>)</a>
                                 </p>
                             </div>
-                            
+
                             <div class="content-block" style="margin-top:0px;margin-bottom:0">
                                 <h2 class="user_name" style="margin-bottom:-10px">...</h2>
                                 <p class="user_bio" style="margin-bottom:10px">...</p>
@@ -269,10 +251,9 @@
                                 </div>
                             </div>
                             <div id="conexCheck" class="content-block-title" style="margin-top:0;">...</div>
-                            
 
                             <div class="content-block-title" style="margin-top:-10px;">Meus anúncios</div>
-                            
+
                             <div class="list-block">
                                 <ul>
                                     <li class="post_read" id="user_post_template" style="display:none">
@@ -293,7 +274,7 @@
                                     <span id="user_post"></span>
                                 </ul>
                             </div>
-                            
+
                             <div id="user_post_none" class="content-block-title" style="display:none;padding:0;font-weight:100">Você ainda não enviou anúncios...</div>
 
                             <!--<div id="my_post_loading" style="text-align:center">
@@ -301,6 +282,11 @@
                             </div>-->
 
 
+                            <div class="content-block" style="font-weight:100">
+                                <a href="#" class="userLogout button button-raised">
+                                    Sair da minha conta
+                                </a>
+                            </div>
 
                         </div>
                     </div>

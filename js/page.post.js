@@ -10,6 +10,16 @@ $$(document).on('click', '.post_read', function (e) {
 //=============================
 // PAGE: POST_FORM
 //=============================
+$$(document).on('click', '#removeLastImg', function (e) {
+    if (sessionStorage.edit_id > 0) {
+    }
+    else {
+        myApp.confirm('Tem certeza disto?', 'Cancelar envio', function () {
+            removeLastImg();
+            view1.router.back();
+        });
+    }
+});
 myApp.onPageInit('post_form', function (page) {
     sessionStorage.serialize = $("#post_form form").serialize();
     // EDITAR POST
@@ -418,6 +428,30 @@ function postDel(post_id) {
             })
             .done(function (res) {
                 window.location.href = "index.html";
+            });
+}
+function removeLastImg() {
+
+    $.ajax({
+        url: localStorage.server + "/img_del.php",
+        data: {
+            user_id: localStorage.user_id,
+            user_email: localStorage.user_email,
+            user_pass: localStorage.user_pass
+        },
+        type: 'GET',
+        dataType: 'jsonp',
+        jsonp: 'callback',
+        timeout: localStorage.timeout
+    })
+            .always(function () {
+
+            })
+            .fail(function () {
+                //myApp.alert('Desculpe, verifique sua conexão e tente novamente.', 'Erro');
+            })
+            .done(function (res) {
+                //window.location.href = "index.html";
             });
 }
 //=============================
