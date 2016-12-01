@@ -50,7 +50,7 @@ var app = {
         // SPLASHSCREEN (CONFIG.XML BUGFIX)
         setTimeout(function () {
             navigator.splashscreen.hide();
-            StatusBar.hide();
+            //StatusBar.hide();
         }, 1000);
         start();
     }
