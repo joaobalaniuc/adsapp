@@ -9,6 +9,8 @@ $(function () {
 
     var usr = "?user_id=" + localStorage.user_id + "&user_email=" + localStorage.user_email + "&user_pass=" + localStorage.user_pass;
 
+    //postStart();
+
     /*$("iframe").attr("src", localStorage.server + "/app/" + usr);
 
     $("iframe").load(function (e) {
@@ -18,45 +20,7 @@ $(function () {
         });*/
 
         //myApp.showIndicator();
-        $.ajax({
-            url: localStorage.server + "/img_last.php",
-            data: {
-                'user_id': localStorage.user_id,
-                'user_email': localStorage.user_email,
-                'user_pass': localStorage.user_pass
-            },
-            type: 'GET',
-            dataType: 'jsonp',
-            jsonp: 'callback',
-            timeout: 10000
-        })
-                .always(function () {
-                    myApp.hideIndicator();
-                    userAds(localStorage.user_id, userAdsCb_Me);
-                })
 
-                .fail(function () {
-                    myApp.alert("Falha na conexão.", "Ops!")
-                })
-
-                .done(function (res) {
-
-                    console.log("iframe.loaded. result:");
-                    console.log(res);
-
-                    if (res !== null) {
-
-                        if (res.error) {
-                            myApp.alert('Desculpe, ocorreu um erro interno. ' + res.error, 'Erro');
-                            return;
-                        }
-
-                        if (res !== false) {
-                            sessionStorage.img_last = res[0]["img_fn"];
-                            go("post_form.html");
-                        }
-                    } // res not null
-                }); // after ajax
 
     /*});*/
 

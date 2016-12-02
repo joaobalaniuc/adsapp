@@ -1,5 +1,5 @@
 function getImage() {
-  //alert("call camera");
+      alert("call camera");
       navigator.camera.getPicture(uploadPhoto, function(message) {
       //alert('get picture failed');
       }, {
@@ -35,6 +35,7 @@ function uploadPhoto(imageURI) {
           myApp.hidePreloader();
           alert(result);
           alert(JSON.stringify(result));
+          postStart(result);
       }, function(error){
           myApp.hidePreloader();
           alert(JSON.stringify(error));
