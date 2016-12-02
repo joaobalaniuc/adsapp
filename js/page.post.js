@@ -150,6 +150,9 @@ function postReadCb(res) {
         console.log(url);
         $("#post_read .img_fn").attr("src", url);
     }
+    if (post[0]["user_fb_pic"] != null) {
+        $("#post_read .user_fb_pic").attr("src", post[0]["user_fb_pic"]);
+    }
 
     // CHAT FILL
     $("#post_read .chat").attr("data-id", post[0]["user_id"]);

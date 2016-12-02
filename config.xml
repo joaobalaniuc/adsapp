@@ -29,8 +29,9 @@
 
     <!-- crash fix for android -->
     <preference name="loadUrlTimeoutValue" value="700000" />
-    <plugin name="cordova-plugin-camera" source="npm" />
 
+    <plugin name="cordova-plugin-camera" source="npm" />
+    <plugin name="cordova-plugin-file-transfer" source="npm" />
     <plugin name="cordova-plugin-device" source="npm" />
     <plugin name="cordova-plugin-device-orientation" source="npm" />
     <plugin name="cordova-plugin-dialogs" source="npm" />
