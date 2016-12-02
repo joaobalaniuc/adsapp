@@ -1,5 +1,4 @@
 function getImage() {
-      alert("call camera");
       navigator.camera.getPicture(uploadPhoto, function(message) {
       //alert('get picture failed');
       }, {
@@ -20,13 +19,13 @@ function uploadPhoto(imageURI) {
       options.fileKey = "file";
       options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
       options.mimeType = "image/jpeg";
-      alert(JSON.stringify(options.fileName));
+      //alert(JSON.stringify(options.fileName));
       var params = new Object();
 
       // user data
-      params.user_id: localStorage.user_id,
-      params.user_email: localStorage.user_email,
-      params.user_pass: localStorage.user_pass,
+      params.user_id: localStorage.user_id;
+      params.user_email: localStorage.user_email;
+      params.user_pass: localStorage.user_pass;
       options.params = params;
       options.chunkedMode = false;
 
