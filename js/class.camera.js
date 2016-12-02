@@ -1,4 +1,5 @@
 function getImage() {
+  alert("call camera");
       navigator.camera.getPicture(uploadPhoto, function(message) {
       alert('get picture failed');
       }, {

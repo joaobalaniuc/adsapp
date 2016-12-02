@@ -9,13 +9,13 @@ $(function () {
 
     var usr = "?user_id=" + localStorage.user_id + "&user_email=" + localStorage.user_email + "&user_pass=" + localStorage.user_pass;
 
-    $("iframe").attr("src", localStorage.server + "/app/" + usr);
+    /*$("iframe").attr("src", localStorage.server + "/app/" + usr);
 
     $("iframe").load(function (e) {
 
         $("#camera-loading").fadeOut("fast", function () {
             $("#camera").fadeIn("fast");
-        });
+        });*/
 
         //myApp.showIndicator();
         $.ajax({
@@ -58,7 +58,7 @@ $(function () {
                     } // res not null
                 }); // after ajax
 
-    });
+    /*});*/
 
 });
 
