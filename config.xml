@@ -108,13 +108,13 @@
         <param name="ios-package" value="CDVStatusBar" onload="true" />
     </feature>
 
-    <!--
+
     <plugin name="cordova-plugin-facebook4" source="npm">
-        <param name="APP_ID" value="680019738832743" />
-        <param name="APP_NAME" value="Help Animal" />
+        <param name="APP_ID" value="1269306609763820" />
+        <param name="APP_NAME" value="AdsApp" />
     </plugin>
 
-
+    <!--
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" />
 
     <plugin name="cordova-plugin-inappbrowser" source="npm" />
