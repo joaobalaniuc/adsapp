@@ -29,7 +29,7 @@
 
     <!-- crash fix for android -->
     <preference name="loadUrlTimeoutValue" value="700000" />
-    <preference name="android-windowSoftInputMode" value="adjustResize"/>
+    <preference name="android-windowSoftInputMode" value="stateVisible|adjustResize" />
 
     <plugin name="cordova-plugin-camera" source="npm" />
     <plugin name="cordova-plugin-file-transfer" source="npm" />
