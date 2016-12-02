@@ -59,15 +59,13 @@ $$('#camera').on('click', function () {
       {
         text: 'Câmera',
         onClick: function() {
-          myApp.alert('You clicked first button!');
-          getImage();
+          getImage(true);
         }
       },
       {
         text: 'Galeria',
         onClick: function() {
-          myApp.alert('You clicked second button!');
-          getImage(true);
+          getImage();
         }
       }
     ]
