@@ -1,9 +1,17 @@
-function getImage() {
+function getImage(gallery) {
+    var type;
+    if (typeof gallery === "undefined") {
+      type = navigator.camera.PictureSourceType.PHOTOLIBRARY
+    }
+    else {
+      type = navigator.camera.PictureSourceType.CAMERA
+    }
       navigator.camera.getPicture(uploadPhoto, function(message) {
       //alert('get picture failed');
       }, {
+
       destinationType: navigator.camera.DestinationType.FILE_URI,
-      //sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+      sourceType: type,
       quality : 50,
       allowEdit : true,
       targetWidth: 600,
@@ -40,3 +48,28 @@ function uploadPhoto(imageURI) {
           alert(JSON.stringify(error));
       }, options);
 }
+
+
+$$('#camera').on('click', function () {
+  myApp.modal({
+    title:  'Enviar imagem',
+    text: 'Escolha uma opção',
+    //verticalButtons: true,
+    buttons: [
+      {
+        text: 'Câmera',
+        onClick: function() {
+          myApp.alert('You clicked first button!');
+          getImage();
+        }
+      },
+      {
+        text: 'Galeria',
+        onClick: function() {
+          myApp.alert('You clicked second button!');
+          getImage(true);
+        }
+      }
+    ]
+  });
+});

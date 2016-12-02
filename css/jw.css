@@ -4,6 +4,12 @@
 #chat ::-webkit-input-placeholder {
     color: #fff;
 }
+/* CUSTOM MODALS */
+.modal-buttons {text-align:center}
+.modal-button {display:inline-block !important;margin-left:auto;margin-right:auto;}
+.modal-title {text-align:center}
+.modal-text {text-align:center}
+
 /* PROFILE */
 .pic_bg {
     position:absolute;z-index:-1;
