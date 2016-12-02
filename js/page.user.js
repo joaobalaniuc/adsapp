@@ -283,10 +283,9 @@ function userAds(user_id, cb) {
             });
 }
 function userAdsCb_Me(res) {
-    //console.log("aaa");
-    //console.log(res);
 
     if (res !== null) {
+
 
         if (res.error) {
             myApp.alert('Desculpe, ocorreu um erro interno. ' + res.error, 'Erro');

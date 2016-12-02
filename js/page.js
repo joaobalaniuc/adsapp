@@ -51,6 +51,7 @@ $(document).ready(function () {
 
 
     userRead(localStorage.user_id, userReadCb_Me);
+    userAds(localStorage.user_id, userAdsCb_Me);
     //postList(0);
     postList(0, "", true);
 
