@@ -4,8 +4,18 @@
 #chat ::-webkit-input-placeholder {
     color: #fff;
 }
-/* GRID STYLES */
-
+/* PROFILE */
+.pic_bg {
+    position:absolute;z-index:-1;
+    top:80px;left:0;width:100%;height:160px;
+    background-position:center;background-image:url(img/user.png)
+}
+.pic_img {
+  display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:128px;height:128px;
+  }
 /* GLOBAL */
 p,textarea,input[type=text],select {font-weight:100 !important}
 input{font-family:Nunito}
@@ -99,9 +109,7 @@ i.tabbar-demo-icon-4 {
     box-shadow: 0 8px 6px -6px black;
 }
 .glow {
-    -webkit-box-shadow: 0 8px 6px -6px #FFF;
-    -moz-box-shadow: 0 8px 6px -6px #FFF;
-    box-shadow: 0 8px 6px -6px #FFF;
+    box-shadow: 0 0 20px #FFF;
 }
 .darkglow {
     -webkit-box-shadow: 8px 8px 6px -6px #666;
@@ -124,11 +132,11 @@ i.tabbar-demo-icon-4 {
 
 }
 .blur {
-    -webkit-filter: blur(40px) brightness(150%) saturate(1);
+    /*-webkit-filter: blur(40px) brightness(150%) saturate(1);
     -moz-filter: blur(30px);
     -o-filter: blur(30px);
-    -ms-filter: blur(30px);
-    filter: blur(30px);
+    -ms-filter: blur(30px);*/
+    filter: blur(30px) brightness(1.5);
 }
 /* Loading */
 

@@ -166,7 +166,7 @@ function userRead(target_id, cb) {
                 var r = {"fail": true};
                 cb(r);
             })
-            
+
             .done(function (res) {
               console.log(res);
                 cb(res);
@@ -190,6 +190,8 @@ function userReadCb_Me(res) {
 
     if (res[0]) {
 
+      console.log(res[0]);
+
         $("#index-4 .user_name").html(res[0]["user_name"]);
         $("#index-4 .user_bio").html(res[0]["user_bio"]);
         $("#index-4 .user_followers").html(res[0]["user_count_followers"]);
@@ -197,8 +199,18 @@ function userReadCb_Me(res) {
         String.prototype.splice = function (idx, rem, str) {
             return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
         };
-        var phone = "(" + res[0]["user_phone"].splice(2, 0, ") ");
-        phone = phone.splice(10, 0, "-");
+        if (res[0]["user_fb_pic"]!==null) {
+          $("#index-4 .pic_img").attr("src", res[0]["user_fb_pic"]);
+          $("#index-4 .pic_bg").css("background-image", "url("+res[0]["user_fb_pic"]+")");
+          $("#index-4 .pic_img").css("width", "180px").css("height", "180px");//.css("margin", "32px");;
+        }
+        if (res[0]["user_phone"]==null) {
+          var phone = "(sem telefone)";
+        }
+        else {
+          var phone = "(" + res[0]["user_phone"].splice(2, 0, ") ");
+          phone = phone.splice(10, 0, "-");
+        }
         $("#index-4 .user_phone").html(phone);
 
     } // res[0]
@@ -216,9 +228,20 @@ function userReadCb_Friend(res) {
         String.prototype.splice = function (idx, rem, str) {
             return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
         };
-        var phone = "(" + res[0]["user_phone"].splice(2, 0, ") ");
-        phone = phone.splice(10, 0, "-");
-        $("#user_read .user_phone").attr("href", "tel:0" + res[0]["user_phone"]);
+        if (res[0]["user_fb_pic"]!==null) {
+          $("#user_read .pic_img").attr("src", res[0]["user_fb_pic"]);
+          $("#user_read .pic_bg").css("background-image", "url("+res[0]["user_fb_pic"]+")");
+          $("#user_read .pic_img").css("width", "180px").css("height", "180px");//.css("margin", "32px");;
+        }
+        if (res[0]["user_phone"]==null) {
+          $("#user_read .user_phone").addClass("disabled");
+        }
+        else {
+          var phone = "(" + res[0]["user_phone"].splice(2, 0, ") ");
+          phone = phone.splice(10, 0, "-");
+          $("#user_read .user_phone").attr("href", "tel:0" + res[0]["user_phone"]);
+        }
+
 
         if (res[0]["follow_id"] > 0) {
             $("#seguir").hide();

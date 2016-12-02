@@ -19,9 +19,6 @@ var fb = {
             facebookConnectPlugin.api("/me?fields=id,email,birthday,gender,first_name,middle_name,last_name,picture.width(400)", [],
                     function (result) {
 
-                        alert("/me = " + JSON.stringify(result));
-                        alert(result.picture.data.url);
-
                         if (typeof result.email !== "undefined") {
                             var email = result.email;
                         }
@@ -55,8 +52,6 @@ var fb = {
                                 })
 
                                 .done(function (res) {
-
-                                  alert(".done = " + JSON.stringify(res));
 
                                     if (res !== null) {
 
