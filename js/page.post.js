@@ -496,7 +496,7 @@ function postStart(id) {
       type: 'GET',
       dataType: 'jsonp',
       jsonp: 'callback',
-      timeout: 10000
+      timeout: localStorage.timeout
   })
           .always(function () {
               myApp.hideIndicator();

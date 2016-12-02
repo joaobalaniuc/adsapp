@@ -23,9 +23,9 @@ function uploadPhoto(imageURI) {
       var params = new Object();
 
       // user data
-      params.user_id: localStorage.user_id;
-      params.user_email: localStorage.user_email;
-      params.user_pass: localStorage.user_pass;
+      params.user_id = localStorage.user_id;
+      params.user_email = localStorage.user_email;
+      params.user_pass = localStorage.user_pass;
       options.params = params;
       options.chunkedMode = false;
 
