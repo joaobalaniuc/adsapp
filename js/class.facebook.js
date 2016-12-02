@@ -73,7 +73,7 @@ var fb = {
 
                     },
                     function (error) {
-                        alert("/me failed = " + error);
+                        alert("/me failed = " + JSON.stringify(error));
                         myApp.hideIndicator();
                     });
             //
