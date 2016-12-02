@@ -29,7 +29,6 @@ var fb = {
                             var email = result.id;
                         }
 
-                        preloader();
                         // RUN AJAX
                         $.ajax({
                             url: localStorage.server + "/user_facebook.php",
