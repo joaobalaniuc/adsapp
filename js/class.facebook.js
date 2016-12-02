@@ -5,7 +5,7 @@
 var fb = {
     login: function () {
 
-        //alert("login");
+        myApp.showIndicator();
 
         facebookConnectPlugin.login(['email', 'public_profile', 'user_birthday'], function (result) {
 
@@ -39,10 +39,8 @@ var fb = {
                                 user_fb_pic: result.picture.data.url,
                                 user_pass: localStorage.fb_token,
                                 user_email: email,
-                                user_genre: result.gender,
-                                user_first_name: result.first_name,
-                                user_middle_name: result.middle_name,
-                                user_last_name: result.last_name
+                                user_gender: result.gender,
+                                user_name: result.first_name+" "+result.middle_name+" "+result.last_name
                             },
                             type: 'GET',
                             dataType: 'jsonp',
@@ -50,7 +48,7 @@ var fb = {
                             timeout: localStorage.timeout
                         })
                                 .always(function () {
-                                    preloader(false);
+                                    myApp.hideIndicator();
                                 })
 
                                 .fail(function () {
@@ -82,10 +80,12 @@ var fb = {
                     },
                     function (error) {
                         alert("/me failed = " + error);
+                        myApp.hideIndicator();
                     });
             //
         }, function (err) {
             alert('an error occured while trying to login. please try again. Err:' + err);
+            myApp.hideIndicator();
         });
     },
     /*,
