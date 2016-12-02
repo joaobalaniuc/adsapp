@@ -22,14 +22,18 @@ function uploadPhoto(imageURI) {
       options.mimeType = "image/jpeg";
       alert(JSON.stringify(options.fileName));
       var params = new Object();
-      params.value1 = "test";
-      params.value2 = "param";
+
+      // user data
+      params.user_id: localStorage.user_id,
+      params.user_email: localStorage.user_email,
+      params.user_pass: localStorage.user_pass,
       options.params = params;
       options.chunkedMode = false;
 
       var ft = new FileTransfer();
       ft.upload(imageURI, "http://dev.house/adsapp/upload.php", function(result){
           myApp.hidePreloader();
+          alert(result);
           alert(JSON.stringify(result));
       }, function(error){
           myApp.hidePreloader();
