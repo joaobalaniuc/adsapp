@@ -15,6 +15,7 @@ function getImage() {
 }
 
 function uploadPhoto(imageURI) {
+      myApp.showPreloader();
       var options = new FileUploadOptions();
       options.fileKey = "file";
       options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
@@ -28,8 +29,10 @@ function uploadPhoto(imageURI) {
 
       var ft = new FileTransfer();
       ft.upload(imageURI, "http://dev.house/adsapp/upload.php", function(result){
-      alert(JSON.stringify(result));
+          myApp.hidePreloader();
+          alert(JSON.stringify(result));
       }, function(error){
-      alert(JSON.stringify(error));
+          myApp.hidePreloader();
+          alert(JSON.stringify(error));
       }, options);
 }
