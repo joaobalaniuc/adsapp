@@ -31,10 +31,10 @@ function uploadPhoto(imageURI) {
 
       var ft = new FileTransfer();
       ft.upload(imageURI, "http://dev.house/adsapp/upload.php", function(result){
-          myApp.hidePreloader();
-          alert(result);
-          alert(JSON.stringify(result));
-          postStart(result);
+          //myApp.hidePreloader();
+          //alert(result);
+          //alert(JSON.stringify(result));
+          postStart();
       }, function(error){
           myApp.hidePreloader();
           alert(JSON.stringify(error));

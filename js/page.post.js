@@ -499,7 +499,7 @@ function postStart(id) {
       timeout: localStorage.timeout
   })
           .always(function () {
-              myApp.hideIndicator();
+              myApp.hidePreloader();
               userAds(localStorage.user_id, userAdsCb_Me);
           })
 
