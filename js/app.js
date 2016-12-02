@@ -38,15 +38,23 @@ var app = {
         function onOffline() {
             sessionStorage.online = false;
         }
+        document.addEventListener('showkeyboard', onKeyboardShow, false);
+        function onKeyboardShow(e) {
+          alert(1);
+          setTimeout(function() {
+            e.target.activeElement.scrollIntoViewIfNeeded()
+          }, 500) //needed timeout to wait for viewport to resize
+        }
+
     },
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function () {
-        
+
         app.receivedEvent('deviceready');
-        
+
         // SPLASHSCREEN (CONFIG.XML BUGFIX)
         setTimeout(function () {
             navigator.splashscreen.hide();
