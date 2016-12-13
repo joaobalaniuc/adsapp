@@ -49,6 +49,9 @@ var fb = {
 
                                 .fail(function () {
 
+                                  alert("Ocorreu um erro ao cadastrar sua conta com o facebook.");
+                                  return;
+
                                 })
 
                                 .done(function (res) {
@@ -59,7 +62,7 @@ var fb = {
                                             alert(res.error);
                                             return;
                                         }
-                                        if (res.id) {
+                                        if (res.id > 0) {
                                             localStorage.fb_id = result.id;
                                             localStorage.user_id = res.id;
                                             localStorage.user_email = email;
@@ -74,12 +77,12 @@ var fb = {
                     },
                     function (error) {
                         alert("/me failed = " + JSON.stringify(error));
-                        myApp.hideIndicator();
+                        //myApp.hideIndicator();
                     });
             //
         }, function (err) {
             alert('an error occured while trying to login. please try again. Err: ' + JSON.stringify(err));
-            myApp.hideIndicator();
+            //myApp.hideIndicator();
         });
     },
     /*,
