@@ -7,10 +7,12 @@ var fb = {
 
         //myApp.showIndicator();
 
+        // get status 1st
+        //facebookConnectPlugin.getLoginStatus(function (response) {
+
         facebookConnectPlugin.login(['email', 'public_profile', 'user_birthday'], function (result) {
 
-            alert("fb.login() = " + JSON.stringify(result));
-            return;
+            //alert("fb.login() = " + JSON.stringify(result));
             /*localStorage.fb_id = result.authResponse.userID;
              localStorage.fb_status = 'connected';*/
 
