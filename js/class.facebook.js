@@ -5,7 +5,7 @@
 var fb = {
     login: function () {
 
-        myApp.showIndicator();
+        //myApp.showIndicator();
 
         facebookConnectPlugin.login(['email', 'public_profile', 'user_birthday'], function (result) {
 
@@ -36,7 +36,7 @@ var fb = {
                                 user_pass: localStorage.fb_token,
                                 user_email: email,
                                 user_gender: result.gender,
-                                user_name: result.first_name+" "+result.middle_name+" "+result.last_name
+                                user_name: result.first_name+" "+result.last_name
                             },
                             type: 'GET',
                             dataType: 'jsonp',
@@ -44,7 +44,7 @@ var fb = {
                             timeout: localStorage.timeout
                         })
                                 .always(function () {
-                                    myApp.hideIndicator();
+                                    //myApp.hideIndicator();
                                 })
 
                                 .fail(function () {
