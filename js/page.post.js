@@ -301,6 +301,9 @@ function postList(last_id, op, followers) {
                             if (val["post_price"]!==null) {
                                 $(this).find(".post_price").html("R$ "+val["post_price"]);
                               }
+                              if (val["user_bio"]!==null) {
+                                  $(this).find(".user_bio").html(val["user_bio"]);
+                                }
                             $(this).find(".user_read").attr("data-id", val["user_id"]);
                             $(this).find(".post_read").attr("data-id", val["post_id"]);
                             $(this).find(".user_name").html(val["user_name"]);

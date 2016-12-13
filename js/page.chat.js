@@ -10,7 +10,7 @@ $$(document).on('click', '.chat', function (e) {
         pic = "img/user.png";
     }
     sessionStorage.chat_pic = pic;
-    go("chat.html");
+    //go("chat.html");
 });
 //================================
 // PAGE: CHAT
@@ -36,6 +36,13 @@ $$(document).on('click', '#chatSend', function (e) {
     }
     chatSend(chat_txt);
 });
+$$(document).on('click', '.chat_del', function (e) {
+  myApp.confirm('Are you sure?', function () {
+          var id_other = $(this).attr("data-id-other");
+          chatDel(id_other);
+      });
+});
+
 //================================
 // FUNCTIONS
 //================================
@@ -111,9 +118,9 @@ function chatRead() {
                              id: "msg_" + rs.chat_id
                              })
                              .appendTo("#msg");
-                             
+
                              $("#msg_" + rs.chat_id).each(function (index) {
-                             
+
                              $(this).find(".message-name").html(rs.user_name);
                              $(this).find(".message-text").html(rs.chat_txt);
                              $(this).find(".message-date").html(rs.chat_date);
@@ -184,7 +191,6 @@ function chatList(last_id) {
             user_id: localStorage.user_id,
             user_email: localStorage.user_email,
             user_pass: localStorage.user_pass
-
         },
         type: 'GET',
         dataType: 'jsonp',
@@ -242,12 +248,19 @@ function chatList(last_id) {
                                 .prop({
                                     id: "chat_" + rs.chat_id
                                 })
-                                .appendTo("#chat_list")
+                                .attr("data-id-other", other_id)
+                                .appendTo("#chat_list");
+
+                        $("#chat_" + rs.chat_id).each(function (index) {
+
+                            $(this).find(".chat")
+                                .attr("href", "chat.html")
                                 .attr("data-id", other_id)
                                 .attr("data-name", name)
                                 .attr("data-pic", pic);
 
-                        $("#chat_" + rs.chat_id).each(function (index) {
+                            $(this).find(".chat_del")
+                                    .attr("data-id-other", other_id);
 
                             $(this).find(".user_pic").attr("src", pic);
                             $(this).find(".user_name").html(name);
@@ -261,5 +274,34 @@ function chatList(last_id) {
                 else {
                     $("#chat_none").show();
                 }
+            });
+}
+function chatDel(id_other) {
+
+    console.log("id_other="+id_other);
+
+    myApp.showIndicator();
+    $.ajax({
+        url: localStorage.server + "/chat_del.php",
+        data: {
+            user_id: localStorage.user_id,
+            user_email: localStorage.user_email,
+            user_pass: localStorage.user_pass,
+            //
+            id_other: id_other
+        },
+        type: 'GET',
+        dataType: 'jsonp',
+        jsonp: 'callback',
+        timeout: localStorage.timeout
+    })
+            .always(function () {
+                myApp.hideIndicator();
+            })
+            .fail(function () {
+                //myApp.alert('Desculpe, verifique sua conexão e tente novamente.', 'Erro');
+            })
+            .done(function (res) {
+                $("li[data-id-other="+id_other+"]").fadeOut("fast");
             });
 }

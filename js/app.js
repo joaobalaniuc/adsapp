@@ -38,13 +38,7 @@ var app = {
         function onOffline() {
             sessionStorage.online = false;
         }
-        document.addEventListener('showkeyboard', onKeyboardShow, false);
-        function onKeyboardShow(e) {
-          alert(1);
-          setTimeout(function() {
-            e.target.activeElement.scrollIntoViewIfNeeded()
-          }, 500) //needed timeout to wait for viewport to resize
-        }
+        
 
     },
     // deviceready Event Handler

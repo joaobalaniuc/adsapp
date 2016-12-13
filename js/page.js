@@ -113,6 +113,12 @@ function pageRefresh() {
         else {
             sessionStorage.loadIndex = 1;
         }
+        // atualizou followers
+        if (typeof sessionStorage.refreshFollow !== "undefined") {
+            sessionStorage.removeItem("refreshFollow");
+            $('#post_list').html("");
+            postList(0, "", true); // followers
+        }
     }
     // chat list
     if (page === "index-3") {
