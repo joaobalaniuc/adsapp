@@ -9,7 +9,8 @@ var fb = {
 
         facebookConnectPlugin.login(['email', 'public_profile', 'user_birthday'], function (result) {
 
-            //alert("fb.login() = " + JSON.stringify(result));
+            alert("fb.login() = " + JSON.stringify(result));
+            return;
             /*localStorage.fb_id = result.authResponse.userID;
              localStorage.fb_status = 'connected';*/
 
