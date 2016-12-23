@@ -16,7 +16,9 @@
 //============================
 $(window).on("load", function () {
     //loadingHide();
+    $("#loaderx").fadeOut("slow");
 });
+
 function go(fn) {
     //view2.router.loadPage(fn, {ignoreCache: true});
     //myApp.showTab('#view-1');
@@ -126,12 +128,12 @@ function pageRefresh() {
         t = 10000;
     }
     if (page === "index-2") {
-          if ($('#post2_list').children().length === 0) {
+        if ($('#post2_list').children().length === 0) {
             //postGrid();
             myApp.showIndicator();
             postListGrid(0);
 
-          }
+        }
 
     }
     // run again

@@ -404,7 +404,7 @@ function userFollow(target_id) {
                             $("#deixar").hide();
                             $("#seguir").show();
                         }
-                        alert(1);
+                        //alert(1);
                         sessionStorage.refreshFollow=1;
                     }
 

@@ -432,7 +432,7 @@ function postListGrid(last_id, op) {
                         item += '<div class="square">';
                         item += '<div class="content">';
                         item += '<div class="table">';
-                        item += '<div class="post_read table-cell" data-id="'+val["post_id"]+'" style="background-image:url('+localStorage.server+localStorage.server_img+val["img_fn"]+')">';
+                        item += '<div class="post_read table-cell" data-id="'+val["post_id"]+'" style="background-image:url('+localStorage.server+localStorage.server_img+"thumb_"+val["img_fn"]+')">';
                         //item += '<img class="rs" src="'+localStorage.server+localStorage.server_img+val["img_fn"]+'" />';
                         //item += 'Responsive image.';
                         item += '</div>';
