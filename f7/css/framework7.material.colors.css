@@ -1,4 +1,4 @@
-/* adsapp = #e91e63 por #ff0036 */
+/* adsapp = #e91e63 por #fff0036, #E60052 */
 /*
  * Framework7 1.3.5
  * Full Featured Mobile HTML Framework For Building iOS & Android Apps
@@ -418,19 +418,19 @@ html:not(.watch-active-state) .floating-button.color-red:active,
   background-color: rgba(244, 67, 54, 0.3);
 }
 .color-pink {
-  color: #ff0036;
+  color: #E60052;
 }
 .list-block .item-link.list-button.color-pink,
 .tabbar a.active.color-pink,
 a.color-pink {
-  color: #ff0036;
+  color: #E60052;
 }
 .label-switch input[type="checkbox"]:checked + .checkbox.color-pink,
 .label-switch.color-pink input[type="checkbox"]:checked + .checkbox {
-  background-color: #ff0036;
+  background-color: #E60052;
 }
 .theme-pink .button:not(.button-fill) {
-  color: #ff0036;
+  color: #E60052;
 }
 .theme-pink .navbar .button:not(.button-fill),
 .theme-pink.navbar .button:not(.button-fill),
@@ -442,10 +442,10 @@ a.color-pink {
 }
 .button.color-pink:not(.button-fill),
 .color-pink.buttons-row .button:not(.button-fill) {
-  color: #ff0036 !important;
+  color: #E60052 !important;
 }
 .theme-pink .button.button-fill {
-  background: #ff0036;
+  background: #E60052;
   color: #fff;
 }
 html:not(.watch-active-state) .theme-pink .button.button-fill:active,
@@ -454,7 +454,7 @@ html:not(.watch-active-state) .theme-pink .button.button-fill:active,
 }
 .button.button-fill.bg-pink,
 .button.button-fill.color-pink {
-  background: #ff0036 !important;
+  background: #E60052 !important;
   color: #fff;
 }
 html:not(.watch-active-state) .button.button-fill.bg-pink:active,
@@ -465,7 +465,7 @@ html:not(.watch-active-state) .button.button-fill.color-pink:active,
 }
 .color-pink i.icon,
 i.icon.color-pink {
-  color: #ff0036;
+  color: #E60052;
 }
 i.icon-next.color-pink,
 i.icon-next.theme-pink {
@@ -489,10 +489,10 @@ i.icon-bars.theme-pink {
 }
 .preloader.color-pink svg circle,
 .preloader.preloader-pink svg circle {
-  stroke: #ff0036;
+  stroke: #E60052;
 }
 .theme-pink a {
-  color: #ff0036;
+  color: #E60052;
 }
 .theme-pink .navbar,
 .navbar.theme-pink,
@@ -502,27 +502,27 @@ i.icon-bars.theme-pink {
 .subnavbar.theme-pink,
 .theme-pink .searchbar,
 .searchbar.theme-pink {
-  background-color: #ff0036;
+  background-color: #E60052;
 }
 .theme-pink .range-slider input[type="range"]::-webkit-slider-thumb:before,
 .range-slider.theme-pink input[type="range"]::-webkit-slider-thumb:before {
-  background-color: #ff0036;
+  background-color: #E60052;
 }
 .theme-pink .range-slider input[type="range"]::-webkit-slider-thumb,
 .range-slider.theme-pink input[type="range"]::-webkit-slider-thumb {
-  background-color: #ff0036;
+  background-color: #E60052;
 }
 .theme-pink .range-slider input[type="range"]::-ms-thumb,
 .range-slider.theme-pink input[type="range"]::-ms-thumb {
-  background-color: #ff0036;
+  background-color: #E60052;
 }
 .theme-pink .range-slider input[type="range"]::-ms-fill-lower,
 .range-slider.theme-pink input[type="range"]::-ms-fill-lower {
-  background-color: #ff0036;
+  background-color: #E60052;
 }
 .theme-pink .range-slider input[type="range"]::-moz-range-thumb,
 .range-slider.theme-pink input[type="range"]::-moz-range-thumb {
-  background-color: #ff0036;
+  background-color: #E60052;
 }
 .theme-pink .label-switch input[type="checkbox"]:checked + .checkbox,
 .label-switch.theme-pink input[type="checkbox"]:checked + .checkbox {
@@ -530,7 +530,7 @@ i.icon-bars.theme-pink {
 }
 .theme-pink .label-switch input[type="checkbox"]:checked + .checkbox:after,
 .label-switch.theme-pink input[type="checkbox"]:checked + .checkbox:after {
-  background-color: #ff0036;
+  background-color: #E60052;
 }
 .theme-pink label.label-checkbox,
 label.label-checkbox.theme-pink {
@@ -552,12 +552,12 @@ label.label-checkbox.theme-pink input[type="radio"]:checked ~ .item-after i.icon
 label.label-checkbox.theme-pink input[type="checkbox"]:checked ~ .item-inner i.icon-form-checkbox,
 .theme-pink label.label-checkbox input[type="radio"]:checked ~ .item-inner i.icon-form-checkbox,
 label.label-checkbox.theme-pink input[type="radio"]:checked ~ .item-inner i.icon-form-checkbox {
-  border-color: #ff0036;
-  background-color: #ff0036;
+  border-color: #E60052;
+  background-color: #E60052;
 }
 .theme-pink label.label-radio i.icon-form-radio:after,
 label.label-radio.theme-pink i.icon-form-radio:after {
-  background-color: #ff0036;
+  background-color: #E60052;
 }
 .theme-pink label.label-radio input[type="checkbox"]:checked + .item-media i.icon-form-radio,
 label.label-radio.theme-pink input[type="checkbox"]:checked + .item-media i.icon-form-radio,
@@ -571,7 +571,7 @@ label.label-radio.theme-pink input[type="radio"]:checked ~ .item-after i.icon-fo
 label.label-radio.theme-pink input[type="checkbox"]:checked ~ .item-inner i.icon-form-radio,
 .theme-pink label.label-radio input[type="radio"]:checked ~ .item-inner i.icon-form-radio,
 label.label-radio.theme-pink input[type="radio"]:checked ~ .item-inner i.icon-form-radio {
-  border-color: #ff0036;
+  border-color: #E60052;
 }
 .theme-pink label.label-radio input[type="checkbox"]:checked + .item-media i.icon-form-radio:after,
 label.label-radio.theme-pink input[type="checkbox"]:checked + .item-media i.icon-form-radio:after,
@@ -585,37 +585,37 @@ label.label-radio.theme-pink input[type="radio"]:checked ~ .item-after i.icon-fo
 label.label-radio.theme-pink input[type="checkbox"]:checked ~ .item-inner i.icon-form-radio:after,
 .theme-pink label.label-radio input[type="radio"]:checked ~ .item-inner i.icon-form-radio:after,
 label.label-radio.theme-pink input[type="radio"]:checked ~ .item-inner i.icon-form-radio:after {
-  background-color: #ff0036;
+  background-color: #E60052;
 }
 .theme-pink .focus-state .label,
 .theme-pink .focus-state .floating-label {
-  color: #ff0036;
+  color: #E60052;
 }
 .theme-pink .item-input-field.focus-state:after,
 .theme-pink .input-field.focus-state:after,
 .theme-pink .item-input-field.not-empty-state:after,
 .theme-pink .input-field.not-empty-state:after {
-  background: #ff0036;
+  background: #E60052;
 }
 .theme-pink .picker-calendar-day.picker-calendar-day-today span {
-  color: #ff0036;
+  color: #E60052;
 }
 .theme-pink .picker-calendar-day.picker-calendar-day-selected span {
-  background-color: #ff0036;
+  background-color: #E60052;
   color: #fff;
 }
 .theme-pink .picker-calendar-day.picker-calendar-day-has-events span:after {
-  background-color: #ff0036;
+  background-color: #E60052;
 }
 .theme-pink .picker-header {
-  background-color: #ff0036;
+  background-color: #E60052;
 }
 .theme-pink .modal-button {
-  color: #ff0036;
+  color: #E60052;
 }
 .swiper-pagination.color-pink .swiper-pagination-bullet-active,
 .theme-pink .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #ff0036;
+  background-color: #E60052;
 }
 .swiper-button-next.color-pink,
 .swiper-container-rtl .swiper-button-prev.color-pink,
@@ -633,10 +633,10 @@ label.label-radio.theme-pink input[type="radio"]:checked ~ .item-inner i.icon-fo
 a.bg-pink,
 .list-block .swipeout-actions-left a.bg-pink,
 .list-block .swipeout-actions-right a.bg-pink {
-  background-color: #ff0036;
+  background-color: #E60052;
 }
 .border-pink {
-  border-color: #ff0036;
+  border-color: #E60052;
 }
 .list-block .border-pink.item-inner:after,
 .list-block ul.border-pink:after,
@@ -644,13 +644,13 @@ a.bg-pink,
 .list-block .border-pink.item-inner:before,
 .list-block ul.border-pink:before,
 .border-pink:before {
-  background-color: #ff0036;
+  background-color: #E60052;
 }
 .theme-pink .floating-button,
 .floating-button.theme-pink,
 .floating-button.color-pink {
   color: #fff;
-  background: #ff0036;
+  background: #E60052;
 }
 html:not(.watch-active-state) .theme-pink .floating-button:active,
 html:not(.watch-active-state) .floating-button.theme-pink:active,
