@@ -129,7 +129,7 @@ function postReadCb(res) {
     console.log(post);
     if (res === null || res.fail || res.error) {
         myApp.alert("Verifique sua conexão e tente novamente.");
-        window.location.href="index.html";
+        window.location.href = "index.html";
         return;
     }
 
@@ -292,18 +292,20 @@ function postList(last_id, op, followers) {
                         $("#" + prefix + "_" + val["post_id"]).each(function (index) {
 
                             if (val["img_fn"] != null) {
+                                $(this).find(".thumb").attr("src", localStorage.server + localStorage.server_img + "thumb_" + val["img_fn"]);
                                 $(this).find(".post_img").attr("src", localStorage.server + localStorage.server_img + val["img_fn"]);
+
                             }
                             if (val["user_fb_pic"] != null) {
                                 $(this).find(".user_fb_pic").attr("src", val["user_fb_pic"]);
                             }
                             $(this).find(".post_name").html(val["post_name"]);
-                            if (val["post_price"]!==null) {
-                                $(this).find(".post_price").html("R$ "+val["post_price"]);
-                              }
-                              if (val["user_bio"]!==null) {
-                                  $(this).find(".user_bio").html(val["user_bio"]);
-                                }
+                            if (val["post_price"] !== null) {
+                                $(this).find(".post_price").html("R$ " + val["post_price"]);
+                            }
+                            if (val["user_bio"] !== null) {
+                                $(this).find(".user_bio").html(val["user_bio"]);
+                            }
                             $(this).find(".user_read").attr("data-id", val["user_id"]);
                             $(this).find(".post_read").attr("data-id", val["post_id"]);
                             $(this).find(".user_name").html(val["user_name"]);
@@ -376,17 +378,17 @@ function postList(last_id, op, followers) {
 }
 function postListGrid(last_id, op) {
 
-  console.log("postListGrid...");
+    console.log("postListGrid...");
 
-    var prefix="post2";
+    var prefix = "post2";
     // POST GERAL
-        if (op === "new") {
-            sessionStorage.post_id_list_new = last_id;
-        }
-        else {
-            op = "";
-            sessionStorage.post_id_list = last_id;
-        }
+    if (op === "new") {
+        sessionStorage.post_id_list_new = last_id;
+    }
+    else {
+        op = "";
+        sessionStorage.post_id_list = last_id;
+    }
 
     $.ajax({
         url: localStorage.server + "/post_list.php",
@@ -432,7 +434,7 @@ function postListGrid(last_id, op) {
                         item += '<div class="square">';
                         item += '<div class="content">';
                         item += '<div class="table">';
-                        item += '<div class="post_read table-cell" data-id="'+val["post_id"]+'" style="background-image:url('+localStorage.server+localStorage.server_img+"thumb_"+val["img_fn"]+')">';
+                        item += '<div class="post_read table-cell" data-id="' + val["post_id"] + '" style="background-image:url(' + localStorage.server + localStorage.server_img + "thumb_" + val["img_fn"] + ')">';
                         //item += '<img class="rs" src="'+localStorage.server+localStorage.server_img+val["img_fn"]+'" />';
                         //item += 'Responsive image.';
                         item += '</div>';
@@ -447,7 +449,7 @@ function postListGrid(last_id, op) {
                         }
                         // APPEND
                         else {
-                              $("#" + prefix + "_list").append(item);
+                            $("#" + prefix + "_list").append(item);
                         }
 
                         //======================
@@ -455,20 +457,20 @@ function postListGrid(last_id, op) {
                         //======================
                         // POST GERAL
                         //======================
-                            if (op === "new") {
+                        if (op === "new") {
+                            sessionStorage.post_id_list_new = val["post_id"];
+                        }
+                        else {
+                            sessionStorage.post_id_list = val["post_id"];
+                        }
+                        if (last_id === 0) {
+                            sessionStorage.post_id_list = val["post_id"];
+                            if (i === 1)
                                 sessionStorage.post_id_list_new = val["post_id"];
-                            }
-                            else {
-                                sessionStorage.post_id_list = val["post_id"];
-                            }
-                            if (last_id === 0) {
-                                sessionStorage.post_id_list = val["post_id"];
-                                if (i === 1)
-                                    sessionStorage.post_id_list_new = val["post_id"];
-                            }
+                        }
 
-                      });
-                      console.log("(NEW/GRID) post_id = " + sessionStorage.post_id_list_new + " (OLD) post_id = " + sessionStorage.post_id_list);
+                    });
+                    console.log("(NEW/GRID) post_id = " + sessionStorage.post_id_list_new + " (OLD) post_id = " + sessionStorage.post_id_list);
 
                 } // res not null
                 else {
@@ -483,51 +485,51 @@ function postListGrid(last_id, op) {
 // CEHCK LAST IMG
 function postStart(id) {
 
-  if (typeof id !== "undefined") {
-    sessionStorage.img_last = res[0]["img_fn"];
-    go("post_form.html");
-    return;
-  }
+    if (typeof id !== "undefined") {
+        sessionStorage.img_last = res[0]["img_fn"];
+        go("post_form.html");
+        return;
+    }
 
-  $.ajax({
-      url: localStorage.server + "/img_last.php",
-      data: {
-          'user_id': localStorage.user_id,
-          'user_email': localStorage.user_email,
-          'user_pass': localStorage.user_pass
-      },
-      type: 'GET',
-      dataType: 'jsonp',
-      jsonp: 'callback',
-      timeout: localStorage.timeout
-  })
-          .always(function () {
-              myApp.hidePreloader();
-              userAds(localStorage.user_id, userAdsCb_Me);
-          })
+    $.ajax({
+        url: localStorage.server + "/img_last.php",
+        data: {
+            'user_id': localStorage.user_id,
+            'user_email': localStorage.user_email,
+            'user_pass': localStorage.user_pass
+        },
+        type: 'GET',
+        dataType: 'jsonp',
+        jsonp: 'callback',
+        timeout: localStorage.timeout
+    })
+            .always(function () {
+                myApp.hidePreloader();
+                userAds(localStorage.user_id, userAdsCb_Me);
+            })
 
-          .fail(function () {
-              myApp.alert("Falha na conexão.", "Ops!")
-          })
+            .fail(function () {
+                myApp.alert("Falha na conexão.", "Ops!")
+            })
 
-          .done(function (res) {
+            .done(function (res) {
 
-              console.log("iframe.loaded. result:");
-              console.log(res);
+                console.log("iframe.loaded. result:");
+                console.log(res);
 
-              if (res !== null) {
+                if (res !== null) {
 
-                  if (res.error) {
-                      myApp.alert('Desculpe, ocorreu um erro interno. ' + res.error, 'Erro');
-                      return;
-                  }
+                    if (res.error) {
+                        myApp.alert('Desculpe, ocorreu um erro interno. ' + res.error, 'Erro');
+                        return;
+                    }
 
-                  if (res !== false) {
-                      sessionStorage.img_last = res[0]["img_fn"];
-                      go("post_form.html");
-                  }
-              } // res not null
-          }); // after ajax
+                    if (res !== false) {
+                        sessionStorage.img_last = res[0]["img_fn"];
+                        go("post_form.html");
+                    }
+                } // res not null
+            }); // after ajax
 }
 //=============================
 // GRID MASONRY
@@ -608,7 +610,7 @@ function postDel(post_id) {
             });
 }
 function removeLastImg() {
-  myApp.showPreloader();
+    myApp.showPreloader();
     $.ajax({
         url: localStorage.server + "/img_del.php",
         data: {
@@ -622,7 +624,7 @@ function removeLastImg() {
         timeout: localStorage.timeout
     })
             .always(function () {
-              window.location.href = "index.html";
+                window.location.href = "index.html";
             })
             .fail(function () {
                 //myApp.alert('Desculpe, verifique sua conexão e tente novamente.', 'Erro');
