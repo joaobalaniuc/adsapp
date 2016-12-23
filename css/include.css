@@ -1,6 +1,10 @@
 /* FA */
 @import url("fa-4.6.3/css/font-awesome.min.css");
 
+/* ICO MOON */
+@import url("icomoon.css");
+
+
 /* F7 */
 @import url("../f7/css/framework7.material.css");
 @import url("../f7/css/framework7.material.colors.css");
