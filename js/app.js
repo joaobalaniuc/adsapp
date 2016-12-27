@@ -38,7 +38,7 @@ var app = {
         function onOffline() {
             sessionStorage.online = false;
         }
-        
+
 
     },
     // deviceready Event Handler
@@ -48,6 +48,15 @@ var app = {
     onDeviceReady: function () {
 
         app.receivedEvent('deviceready');
+
+        // BACK BUTTON INDEX
+        document.addEventListener("backbutton", function (e) {
+            if (sessionStorage.activePage == "index") {
+                e.preventDefault();
+            }
+        }, false);
+
+
 
         // SPLASHSCREEN (CONFIG.XML BUGFIX)
         setTimeout(function () {
