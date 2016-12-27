@@ -44,8 +44,8 @@ myApp.onPageInit("user_login", function (page) {
         rules: {
             user_email: {
                 required: true,
-                minlength: 7,
-                email: true
+                minlength: 7
+                //email: true
             },
             user_pass: {
                 required: true

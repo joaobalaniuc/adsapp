@@ -514,7 +514,7 @@ function postStart(id) {
 
             .done(function (res) {
 
-                console.log("iframe.loaded. result:");
+                //console.log("iframe.loaded. result:");
                 console.log(res);
 
                 if (res !== null) {
