@@ -45,7 +45,7 @@ myApp.onPageInit("user_login", function (page) {
             user_email: {
                 required: true,
                 minlength: 7
-                //email: true
+                        //email: true
             },
             user_pass: {
                 required: true
@@ -168,7 +168,7 @@ function userRead(target_id, cb) {
             })
 
             .done(function (res) {
-              console.log(res);
+                console.log(res);
                 cb(res);
             });
 }
@@ -176,7 +176,7 @@ function userReadCb_Form(res) {
     FF(res, "#userForm");
     /*$(".user_first_name").html(res[0].user_first_name);
      $(".user_email").html(res[0].user_email);
-
+     
      var fb = res[0].user_fb_pic;
      if (fb != null) {
      //$(".avatar").attr("src", "http://graph.facebook.com/" + fb + "/picture?width=100&height=100");
@@ -190,26 +190,27 @@ function userReadCb_Me(res) {
 
     if (res[0]) {
 
-      console.log(res[0]);
+        console.log(res[0]);
 
         $("#index-4 .user_name").html(res[0]["user_name"]);
+        $("#index-4 .user_fullname").html(res[0]["user_fullname"]);
         $("#index-4 .user_bio").html(res[0]["user_bio"]);
         $("#index-4 .user_followers").html(res[0]["user_count_followers"]);
         $("#index-4 .user_following").html(res[0]["user_count_following"]);
         String.prototype.splice = function (idx, rem, str) {
             return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
         };
-        if (res[0]["user_fb_pic"]!==null) {
-          $("#index-4 .pic_img").attr("src", res[0]["user_fb_pic"]);
-          $("#index-4 .pic_bg").css("background-image", "url("+res[0]["user_fb_pic"]+")");
-          $("#index-4 .pic_img").css("width", "180px").css("height", "180px");//.css("margin", "32px");;
+        if (res[0]["user_fb_pic"] !== null) {
+            $("#index-4 .pic_img").attr("src", res[0]["user_fb_pic"]);
+            $("#index-4 .pic_bg").css("background-image", "url(" + res[0]["user_fb_pic"] + ")");
+            $("#index-4 .pic_img").css("width", "180px").css("height", "180px");//.css("margin", "32px");;
         }
-        if (res[0]["user_phone"]==null) {
-          var phone = "(sem telefone)";
+        if (res[0]["user_phone"] == null) {
+            var phone = "(sem telefone)";
         }
         else {
-          var phone = "(" + res[0]["user_phone"].splice(2, 0, ") ");
-          phone = phone.splice(10, 0, "-");
+            var phone = "(" + res[0]["user_phone"].splice(2, 0, ") ");
+            phone = phone.splice(10, 0, "-");
         }
         $("#index-4 .user_phone").html(phone);
 
@@ -228,18 +229,18 @@ function userReadCb_Friend(res) {
         String.prototype.splice = function (idx, rem, str) {
             return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
         };
-        if (res[0]["user_fb_pic"]!==null) {
-          $("#user_read .pic_img").attr("src", res[0]["user_fb_pic"]);
-          $("#user_read .pic_bg").css("background-image", "url("+res[0]["user_fb_pic"]+")");
-          $("#user_read .pic_img").css("width", "180px").css("height", "180px");//.css("margin", "32px");;
+        if (res[0]["user_fb_pic"] !== null) {
+            $("#user_read .pic_img").attr("src", res[0]["user_fb_pic"]);
+            $("#user_read .pic_bg").css("background-image", "url(" + res[0]["user_fb_pic"] + ")");
+            $("#user_read .pic_img").css("width", "180px").css("height", "180px");//.css("margin", "32px");;
         }
-        if (res[0]["user_phone"]==null) {
-          $("#user_read .user_phone").addClass("disabled");
+        if (res[0]["user_phone"] == null) {
+            $("#user_read .user_phone").addClass("disabled");
         }
         else {
-          var phone = "(" + res[0]["user_phone"].splice(2, 0, ") ");
-          phone = phone.splice(10, 0, "-");
-          $("#user_read .user_phone").attr("href", "tel:0" + res[0]["user_phone"]);
+            var phone = "(" + res[0]["user_phone"].splice(2, 0, ") ");
+            phone = phone.splice(10, 0, "-");
+            $("#user_read .user_phone").attr("href", "tel:0" + res[0]["user_phone"]);
         }
 
 
@@ -405,7 +406,7 @@ function userFollow(target_id) {
                             $("#seguir").show();
                         }
                         //alert(1);
-                        sessionStorage.refreshFollow=1;
+                        sessionStorage.refreshFollow = 1;
                     }
 
 
@@ -542,7 +543,7 @@ function userUpdate() {
                 if (res !== null) {
                     console.log(res);
                     if (res.error) {
-                        alert(res.error);
+                        alert("Erro: " + res.error);
                         return;
                     }
                     if (res.success) {
