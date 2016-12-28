@@ -169,7 +169,7 @@ function postReadCb(res) {
     $("#post_read .user_phone").attr("href", "tel:0" + post[0]["user_phone"]);
     $("#post_read .post_price").html(post[0]["post_price"]);
     pretty();
-    var txt = post[0]["post_txt_rn"];
+    var txt = post[0]["post_txt"];
     if (txt !== null) {
         $("#post_read .post_txt").html(txt);
     }
@@ -183,6 +183,7 @@ function postReadCb(res) {
     }
 }
 function postEditCb(res) {
+    res.post[0]["post_txt"] = res.post[0]["post_txt_rn"];
     FF(res.post, "#post_form");
     //
     var url = localStorage.server + localStorage.server_img + res["post"][0]["img_fn"];
