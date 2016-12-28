@@ -85,6 +85,7 @@ function pageRefresh() {
             && page !== "user_read"
             && page !== "user_form"
             && page !== "user_login"
+            && page !== "post_form"
             && page !== "user_register"
             && page !== "chat") {
         $("#toolbar_on").fadeIn("fast");

@@ -10,7 +10,7 @@ $$(document).on('click', '.chat', function (e) {
         pic = "img/user.png";
     }
     sessionStorage.chat_pic = pic;
-    //go("chat.html");
+    go("chat.html");
 });
 //================================
 // PAGE: CHAT

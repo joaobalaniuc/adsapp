@@ -169,7 +169,7 @@ function postReadCb(res) {
     $("#post_read .user_phone").attr("href", "tel:0" + post[0]["user_phone"]);
     $("#post_read .post_price").html(post[0]["post_price"]);
     pretty();
-    var txt = post[0]["post_txt"];
+    var txt = post[0]["post_txt_rn"];
     if (txt !== null) {
         $("#post_read .post_txt").html(txt);
     }
