@@ -1,4 +1,5 @@
 function ajaxPing() {
+    return false;
     //
     debug();
     //

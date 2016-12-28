@@ -50,15 +50,13 @@ $(document).ready(function () {
         $('#toplogo').css("margin-top", "10px");
     }
 
-
-
     userRead(localStorage.user_id, userReadCb_Me);
     userAds(localStorage.user_id, userAdsCb_Me);
     //postList(0);
     postList(0, "", true);
 
     // Get data and fill
-    getSession();
+    //getSession();
 
     // Global timer
     setInterval(function () {
@@ -71,7 +69,7 @@ $(document).ready(function () {
     }, 500);
 
     setTimeout(function () {
-        ajaxPing();
+        //ajaxPing();
     }, 1000);
 
 
@@ -156,7 +154,7 @@ function pageCheck() {
             clearInterval(pageRefreshTimer);
         }
         pageRefresh();
-        getSession();
+        //getSession();
         console.log("change page to " + page);
     }
 }

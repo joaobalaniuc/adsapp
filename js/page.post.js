@@ -261,6 +261,7 @@ function postList(last_id, op, followers) {
 
                     console.log(res);
                     if (res === false) {
+                        $("#post_none").fadeIn("slow");
                         return;
                     }
                     if (res.error) {
@@ -369,9 +370,6 @@ function postList(last_id, op, followers) {
                 } // res not null
                 else {
                     alert("Erro interno.");
-                }
-                if (sessionStorage.post2_id_list == 0) {
-                    $("#post_none").fadeIn("slow");
                 }
 
             }); // after ajax
