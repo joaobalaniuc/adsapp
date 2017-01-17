@@ -26,11 +26,9 @@ function go(fn) {
 }
 
 $$(document).on("submit", "form", function (e) {
-    //alert(1);
     e.preventDefault();
     return false;
 });
-
 
 //============================
 // READY

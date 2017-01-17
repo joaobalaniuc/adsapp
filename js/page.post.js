@@ -440,7 +440,7 @@ function postListGrid(last_id, op) {
                         item += '</div>';
                         item += '</div>';
                         item += '</div>';
-                        console.log(item);
+                        //console.log(item);
 
                         // PREPEND
                         if (op === "new") {
