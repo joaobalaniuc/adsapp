@@ -49,28 +49,42 @@ var app = {
 
         app.receivedEvent('deviceready');
 
-        var push = PushNotification.init({"android": {"senderID": "722208907195"},
-            "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {}});
+        var push = PushNotification.init({
+            "android": {
+                "senderID": "722208907195"
+            },
+            "ios": {
+                "senderID": "722208907195",
+                "gcmSandbox": "true",
+                "alert": "true",
+                "badge": "true",
+                "sound": "true"
+            },
+            "windows": {}
+        });
 
         push.on('registration', function (data) {
-            // data.registrationId
-            alert(data.registrationId);
+            //I can get registration id here
+            alert(JSON.stringify(data));
+
+            $.ajax({
+                url: localStorage.server + "/push_save_token.php",
+                data: {token: data.registrationId},
+                success: function (json) {
+                }
+            });
         });
 
         push.on('notification', function (data) {
-            alert(data.title+" Message: " +data.message);
-            // data.message,
-            // data.title,
-            // data.count,
-            // data.sound,
-            // data.image,
-            // data.additionalData
+            //this place doesn't work
+            alert("notification event");
+            alert(JSON.stringify(data));
         });
 
         push.on('error', function (e) {
-            // e.message
-            alert(e);
+            alert("push error");
         });
+
 
         // BACK BUTTON INDEX
         document.addEventListener("backbutton", function (e) {
