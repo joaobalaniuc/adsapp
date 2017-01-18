@@ -308,6 +308,10 @@ function postList(last_id, op, followers) {
                             if (val["user_bio"] !== null) {
                                 $(this).find(".user_bio").html(val["user_bio"]);
                             }
+                            // share
+                            $(this).find(".share").attr("data-message", val["post_txt"]);
+                            $(this).find(".share").attr("data-img", localStorage.server + localStorage.server_img + val["img_fn"]);
+                            // content
                             $(this).find(".user_read").attr("data-id", val["user_id"]);
                             $(this).find(".post_read").attr("data-id", val["post_id"]);
                             $(this).find(".user_name").html(val["user_name"]);
