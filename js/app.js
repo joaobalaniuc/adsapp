@@ -49,6 +49,29 @@ var app = {
 
         app.receivedEvent('deviceready');
 
+        var push = PushNotification.init({"android": {"senderID": "722208907195"},
+            "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {}});
+
+        push.on('registration', function (data) {
+            // data.registrationId
+            alert(data.registrationId);
+        });
+
+        push.on('notification', function (data) {
+            alert(data.title+" Message: " +data.message);
+            // data.message,
+            // data.title,
+            // data.count,
+            // data.sound,
+            // data.image,
+            // data.additionalData
+        });
+
+        push.on('error', function (e) {
+            // e.message
+            alert(e);
+        });
+
         // BACK BUTTON INDEX
         document.addEventListener("backbutton", function (e) {
             if (sessionStorage.activePage == "index") {

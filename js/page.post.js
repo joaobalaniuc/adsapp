@@ -309,7 +309,7 @@ function postList(last_id, op, followers) {
                                 $(this).find(".user_bio").html(val["user_bio"]);
                             }
                             // share
-                            $(this).find(".share").attr("data-message", val["post_txt"]);
+                            $(this).find(".share").attr("data-message", val["post_name"] + " por R$ " + val["post_price"]);
                             $(this).find(".share").attr("data-img", localStorage.server + localStorage.server_img + val["img_fn"]);
                             // content
                             $(this).find(".user_read").attr("data-id", val["user_id"]);

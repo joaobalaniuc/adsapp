@@ -7,8 +7,8 @@ $$(document).on('click', '.share', function (e) {
 function share(message, img) {
     // this is the complete list of currently supported params you can pass to the plugin (all optional) 
     var options = {
-        message: message + " - Baixe o AdsApp, e compre e venda de tudo!", // not supported on some apps (Facebook, Instagram) 
-        subject: "AdsApp, compre e venda de tudo!", // fi. for email 
+        message: message + " - Baixe o AdsApp. Compre e venda de tudo!", // not supported on some apps (Facebook, Instagram) 
+        subject: "AdsApp - Compre e venda de tudo!", // fi. for email 
         //files: ['', ''], // an array of filenames either locally or remotely 
         files: [img], // an array of filenames either locally or remotely 
         url: "https://build.phonegap.com/apps/2078405/share",
