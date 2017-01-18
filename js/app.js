@@ -65,7 +65,7 @@ var app = {
 
         push.on('registration', function (data) {
             //I can get registration id here
-            alert(JSON.stringify(data));
+            alert("token=" + JSON.stringify(data));
 
             $.ajax({
                 url: localStorage.server + "/push_save_token.php",
