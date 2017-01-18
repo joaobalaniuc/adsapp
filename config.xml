@@ -58,12 +58,10 @@
     <icon gap:platform="ios" height="72" src="res/icon/ios/icon-72.png" width="72" />
     <icon gap:platform="ios" height="114" src="res/icon/ios/icon-57-2x.png" width="114" />
     <icon gap:platform="ios" height="144" src="res/icon/ios/icon-72-2x.png" width="144" />
-
     <icon gap:platform="ios" height="60" src="res/icon/ios/icon-60.png" width="60" />
     <icon gap:platform="ios" height="120" src="res/icon/ios/icon-60-2x.png" width="120" />
     <icon gap:platform="ios" height="76" src="res/icon/ios/icon-76.png" width="76" />
     <icon gap:platform="ios" height="152" src="res/icon/ios/icon-76-2x.png" width="152" />
-
     <icon gap:platform="webos" src="res/icon/webos/icon-64.png" />
     <icon gap:platform="winphone" src="res/icon/windows-phone/icon-48.png" />
     <icon gap:platform="winphone" gap:role="background" src="res/icon/windows-phone/icon-173-tile.png" />
@@ -102,7 +100,6 @@
         <allow-intent href="itms-apps:*" />
     </platform>
 
-
     <plugin name="cordova-plugin-statusbar" source="npm" />
     <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
@@ -110,7 +107,6 @@
     <feature name="StatusBar">
         <param name="ios-package" value="CDVStatusBar" onload="true" />
     </feature>
-
 
     <plugin name="cordova-plugin-facebook4" source="npm">
         <param name="APP_ID" value="1269306609763820" />
@@ -121,6 +117,8 @@
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" />
     <plugin name="cordova-plugin-inappbrowser" source="npm" />
     -->
+    
+    <plugin name="cordova-plugin-x-socialsharing" source="npm" />
 
 
 </widget>
