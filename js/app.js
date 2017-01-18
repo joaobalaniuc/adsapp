@@ -54,8 +54,6 @@ var app = {
                 "senderID": "722208907195"
             },
             "ios": {
-                "senderID": "722208907195",
-                "gcmSandbox": "true",
                 "alert": "true",
                 "badge": "true",
                 "sound": "true"
