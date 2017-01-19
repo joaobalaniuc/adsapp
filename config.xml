@@ -120,9 +120,14 @@
     
     <plugin name="cordova-plugin-x-socialsharing" source="npm" />
     
+    <!--
     <plugin name="phonegap-plugin-push" spec="1.6.0">
         <param name="SENDER_ID" value="722208907195" />
     </plugin>
-
+    -->
+    
+    <plugin name="phonegap-plugin-push" spec="https://github.com/phonegap/phonegap-plugin-push#07fa81b7a3a62400915ac70b9a24a802465a6f95">
+        <param name="SENDER_ID" value="722208907195" />
+    </plugin>
 
 </widget>
