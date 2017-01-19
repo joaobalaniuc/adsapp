@@ -126,7 +126,7 @@
     </plugin>
     -->
     
-    <plugin name="phonegap-plugin-push" spec="https://github.com/phonegap/phonegap-plugin-push#07fa81b7a3a62400915ac70b9a24a802465a6f95">
+    <plugin name="phonegap-plugin-push" source="npm">
         <param name="SENDER_ID" value="722208907195" />
     </plugin>
 
