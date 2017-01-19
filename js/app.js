@@ -48,6 +48,16 @@ var app = {
     onDeviceReady: function () {
 
         app.receivedEvent('deviceready');
+        
+        
+
+
+        // SPLASHSCREEN (CONFIG.XML BUGFIX)
+        setTimeout(function () {
+            navigator.splashscreen.hide();
+            //StatusBar.hide();
+        }, 1000);
+        start();
 
         var push = PushNotification.init({
             "android": {
@@ -91,14 +101,6 @@ var app = {
             }
         }, false);
 
-
-
-        // SPLASHSCREEN (CONFIG.XML BUGFIX)
-        setTimeout(function () {
-            navigator.splashscreen.hide();
-            //StatusBar.hide();
-        }, 1000);
-        start();
     }
     ,
     // Update DOM on a Received Event
