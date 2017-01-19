@@ -63,7 +63,7 @@ var app = {
 
         push.on('registration', function (data) {
             //I can get registration id here
-            alert("token=" + JSON.stringify(data));
+            //alert("token=" + JSON.stringify(data));
 
             $.ajax({
                 url: localStorage.server + "/push_save_token.php",
@@ -75,7 +75,7 @@ var app = {
 
         push.on('notification', function (data) {
             //this place doesn't work
-            alert("notification event");
+            //alert("notification event");
             alert(JSON.stringify(data));
         });
 
