@@ -113,21 +113,22 @@
         <param name="APP_NAME" value="AdsApp" />
     </plugin>
 
-    <!--
-    <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" />
-    <plugin name="cordova-plugin-inappbrowser" source="npm" />
-    -->
-    
+    <!-- SHARE -->
+    <platform name="android">
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        </config-file>
+    </platform>
     <plugin name="cordova-plugin-x-socialsharing" source="npm" />
+    <feature name="SocialSharing">
+        <param name="ios-package" value="SocialSharing" />
+        <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
+    </feature>
+    <!-- /SHARE -->
     
     <!--
-    <plugin name="phonegap-plugin-push" spec="1.6.0">
-        <param name="SENDER_ID" value="722208907195" />
-    </plugin>
-    -->
-    
     <plugin name="phonegap-plugin-push" source="npm">
         <param name="SENDER_ID" value="722208907195" />
     </plugin>
-
+    -->
 </widget>
