@@ -19,13 +19,12 @@ var fb = {
             localStorage.fb_token = result.authResponse.accessToken;
 
             //facebookConnectPlugin.api("/me?fields=id,birthday,gender,first_name,middle_name,age_range,last_name,name,picture.width(400),email", [],
-            facebookConnectPlugin.api("/me?fields=id,email,birthday,gender,first_name,middle_name,last_name,picture.width(400)", [],
+            facebookConnectPlugin.api("/me?fields=id,email,first_name,middle_name,last_name,picture.width(400)", [],
                     function (result) {
 
                         if (typeof result.email !== "undefined") {
                             var email = result.email;
-                        }
-                        else {
+                        } else {
                             var email = result.id;
                         }
 
@@ -39,7 +38,7 @@ var fb = {
                                 user_pass: localStorage.fb_token,
                                 user_email: email,
                                 user_gender: result.gender,
-                                user_name: result.first_name+" "+result.last_name
+                                user_fullname: result.first_name + " " + result.last_name
                             },
                             type: 'GET',
                             dataType: 'jsonp',
@@ -52,8 +51,8 @@ var fb = {
 
                                 .fail(function () {
 
-                                  alert("Ocorreu um erro ao cadastrar sua conta com o facebook.");
-                                  return;
+                                    myApp.alert("Ocorreu um erro ao cadastrar sua conta com o facebook.");
+                                    return;
 
                                 })
 
@@ -70,7 +69,13 @@ var fb = {
                                             localStorage.user_id = res.id;
                                             localStorage.user_email = email;
                                             localStorage.user_pass = localStorage.fb_token;
-                                            window.location.href = "index.html";
+                                            if (res.user_name) {
+                                                // ja possui user_name
+                                                window.location.href = "index.html";
+                                            } else {
+                                                // nao possui
+                                                go("user_name.html");
+                                            }
                                         }
 
                                     } // res not null
@@ -84,10 +89,10 @@ var fb = {
                     });
             //
         }, function (err) {
-            //alert('an error occured while trying to login. please try again. Err: ' + JSON.stringify(err));
+            alert('an error occured while trying to login. please try again. Err: ' + JSON.stringify(err));
             //myApp.hideIndicator();
             if (typeof localStorage.fb_id !== "undefined") {
-                
+                alert("fb id ok: " + localStorage.fb_id);
             }
         });
     },
@@ -109,12 +114,12 @@ var fb = {
      alert("Failed: " + error);
      });
      },
-
+     
      getLoginStatusX: function () {
-
+     
      facebookConnectPlugin.getLoginStatus(
      function (response) {
-
+     
      alert("fb.getLoginStatusX() = " + JSON.stringify(response));
      localStorage.fb_status = response.status;
      if (response.status === 'connected') {
@@ -133,15 +138,15 @@ var fb = {
      function (error) {
      alert("Failed: " + error);
      });
-
+     
      },
      getLoginStatus: function () {
-
+     
      facebookConnectPlugin.getLoginStatus(function (response) {
-
+     
      //alert("fb.getLoginStatus() = ");
      localStorage.fb_status = response.status;
-
+     
      if (response.status === 'connected') {
      var uid = response.authResponse.userID;
      var accessToken = response.authResponse.accessToken;

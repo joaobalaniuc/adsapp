@@ -16,6 +16,54 @@ myApp.onPageBeforeInit('user_read', function (page) {
     //$(".toolbar").hide();
 });
 //=============================
+// PAGE: USER_NAME
+//=============================
+myApp.onPageInit('user_name', function (page) {
+    $.validator.addMethod("loginRegex", function (value, element) {
+        return this.optional(element) || /^[a-z0-9\.]+$/i.test(value);
+    }, "Username must contain only letters, numbers, or dashes.");
+
+    $("#userNameForm").validate({
+        rules: {
+            userName: {
+                required: true,
+                loginRegex: true,
+                minlength: 3
+            }
+        },
+        messages: {
+            userName: {
+                required: "Você precisa escolher um Username",
+                loginRegex: "Apenas letras, números, ponto(.) e sem espaços"
+            }
+        },
+        errorElement: 'div',
+        errorPlacement: function (error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error);
+            } else {
+                error.insertAfter(element.parent());
+            }
+        }
+        //errorLabelContainer: '.errorTxt'
+    });
+});
+$$(document).on('click', '#userNameSend', function (e) {
+    if ($("#userNameForm").valid()) {
+        userNameSend();
+    } else {
+        myApp.alert("Use apenas letras, números e ponto (.) sem espaços, acentos ou símbolos.");
+    }
+
+});
+$$(document).on('click', '#userNameCancel', function (e) {
+    userLogout();
+});
+$$(document).on('click', '#user_read .userFollow', function (e) {
+    userFollow(sessionStorage.friend_id);
+});
+//=============================
 // PAGE: USER_FORM
 //=============================
 myApp.onPageBeforeInit('user_form', function (page) {
@@ -207,8 +255,7 @@ function userReadCb_Me(res) {
         }
         if (res[0]["user_phone"] == null) {
             var phone = "(sem telefone)";
-        }
-        else {
+        } else {
             var phone = "(" + res[0]["user_phone"].splice(2, 0, ") ");
             phone = phone.splice(10, 0, "-");
         }
@@ -236,8 +283,7 @@ function userReadCb_Friend(res) {
         }
         if (res[0]["user_phone"] == null) {
             $("#user_read .user_phone").addClass("disabled");
-        }
-        else {
+        } else {
             var phone = "(" + res[0]["user_phone"].splice(2, 0, ") ");
             phone = phone.splice(10, 0, "-");
             $("#user_read .user_phone").attr("href", "tel:0" + res[0]["user_phone"]);
@@ -293,7 +339,7 @@ function userAdsCb_Me(res) {
             return;
         }
 
-        if (res[0]) {
+        if (res[0]["post_id"]) {
             $("#user_post").html("");
             $.each(res, function (key, val) {
 
@@ -400,8 +446,7 @@ function userFollow(target_id) {
                         if (res.follow > 0) {
                             $("#deixar").show();
                             $("#seguir").hide();
-                        }
-                        else {
+                        } else {
                             $("#deixar").hide();
                             $("#seguir").show();
                         }
@@ -503,6 +548,50 @@ function userSend() {
                         localStorage.user_id = res.id;
                         localStorage.user_email = res.email;
                         localStorage.user_pass = res.pass;
+                        window.location.href = "index.html";
+                    }
+
+                } // res not null
+            }); // after ajax
+}
+function userNameSend() {
+    // DATA TO SEND
+    var data_form = $("#userNameForm").serialize();
+    var data_user = {
+        user_id: localStorage.user_id,
+        user_email: localStorage.user_email,
+        user_pass: localStorage.user_pass
+    };
+    var data_user = $.param(data_user); // serialize
+    var data = data_form + "&" + data_user;
+    console.log(data);
+    myApp.showIndicator();
+
+    // RUN AJAX
+    $.ajax({
+        url: localStorage.server + "/user_name.php",
+        data: data,
+        type: 'GET',
+        dataType: 'jsonp',
+        jsonp: 'callback',
+        timeout: localStorage.timeout
+    })
+            .always(function () {
+                myApp.hideIndicator();
+            })
+
+            .fail(function () {
+                myApp.alert('Desculpe, a conexão falhou. Tente novamente mais tarde.', 'Ops!');
+            })
+
+            .done(function (res) {
+                if (res !== null) {
+                    console.log(res);
+                    if (res.error) {
+                        myApp.alert(res.error, 'Ops!');
+                        return;
+                    }
+                    if (res.success) {
                         window.location.href = "index.html";
                     }
 
