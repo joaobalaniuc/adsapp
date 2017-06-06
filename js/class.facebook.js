@@ -5,7 +5,7 @@
 var fb = {
     login: function () {
 
-        //myApp.showIndicator();
+        myApp.showIndicator();
 
         // get status 1st
         //facebookConnectPlugin.getLoginStatus(function (response) {
@@ -50,12 +50,12 @@ var fb = {
                             timeout: localStorage.timeout
                         })
                                 .always(function () {
-                                    //myApp.hideIndicator();
+                                    myApp.hideIndicator();
                                 })
 
                                 .fail(function () {
 
-                                    myApp.alert(localStorage.server + "=" + JSON.stringify(userdata) + "Ocorreu um erro ao cadastrar sua conta com o facebook.");
+                                    myApp.alert(localStorage.server + "=" + JSON.stringify(userdata) + " Ocorreu um erro ao cadastrar sua conta com o facebook.");
                                     return;
 
                                 })
