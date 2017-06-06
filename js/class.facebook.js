@@ -23,6 +23,57 @@ $(function () {
     });
 });
 
+function userFbSend(userdata) {
+
+    // RUN AJAX
+    $.ajax({
+        url: localStorage.server + "/user_facebook.php",
+        data: {
+            userdata
+        },
+        type: 'GET',
+        dataType: 'jsonp',
+        jsonp: 'callback',
+        timeout: localStorage.timeout
+    })
+            .always(function () {
+                myApp.hideIndicator();
+            })
+
+            .fail(function () {
+
+                myApp.alert("Ocorreu um erro ao cadastrar sua conta com o facebook.");
+                return;
+
+            })
+
+            .done(function (res) {
+
+                if (res !== null) {
+
+                    if (res.error) {
+                        alert(res.error);
+                        return;
+                    }
+                    if (res.id > 0) {
+                        localStorage.fb_id = result.id;
+                        localStorage.user_id = res.id;
+                        localStorage.user_email = email;
+                        localStorage.user_pass = localStorage.fb_token;
+                        if (res.user_name) {
+                            // ja possui user_name
+                            window.location.href = "index.html";
+                        } else {
+                            // nao possui
+                            go("user_name.html");
+                        }
+                    }
+
+                } // res not null
+            }); // after ajax
+    return false;
+}
+
 var fb = {
     login: function () {
 
@@ -59,53 +110,10 @@ var fb = {
                             user_fullname: result.first_name + " " + result.last_name
                         };
 
-                        // RUN AJAX
-                        $.ajax({
-                            url: localStorage.server + "/user_facebook.php",
-                            data: {
-                                userdata
-                            },
-                            type: 'GET',
-                            dataType: 'jsonp',
-                            jsonp: 'callback',
-                            timeout: localStorage.timeout
-                        })
-                                .always(function () {
-                                    myApp.hideIndicator();
-                                })
+                        setTimeout(function () {
+                            userFbSend(userdata);
+                        }, 1000);
 
-                                .fail(function () {
-
-                                    myApp.alert("Ocorreu um erro ao cadastrar sua conta com o facebook.");
-                                    return;
-
-                                })
-
-                                .done(function (res) {
-
-                                    if (res !== null) {
-
-                                        if (res.error) {
-                                            alert(res.error);
-                                            return;
-                                        }
-                                        if (res.id > 0) {
-                                            localStorage.fb_id = result.id;
-                                            localStorage.user_id = res.id;
-                                            localStorage.user_email = email;
-                                            localStorage.user_pass = localStorage.fb_token;
-                                            if (res.user_name) {
-                                                // ja possui user_name
-                                                window.location.href = "index.html";
-                                            } else {
-                                                // nao possui
-                                                go("user_name.html");
-                                            }
-                                        }
-
-                                    } // res not null
-                                }); // after ajax
-                        return false;
 
 
                     },
