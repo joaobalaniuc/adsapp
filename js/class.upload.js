@@ -29,7 +29,7 @@ function uploadPhoto(imageURI) {
     options.chunkedMode = false;
 
     var ft = new FileTransfer();
-    ft.upload(imageURI, "http://nickford.com.br/adsapp/upload.php", win, fail, options);
+    ft.upload(imageURI, "http://adsapp.com.br/upload.php", win, fail, options);
 }
 
 function win(r) {

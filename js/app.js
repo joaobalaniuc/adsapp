@@ -8,7 +8,7 @@ function start() {
     localStorage.version = "1.0.0";
 
     // Server
-    localStorage.server = "http://dev.house/adsapp/";
+    localStorage.server = "http://adsapp.com.br/";
     localStorage.server_img = "/app/upload/";
 
     // Dev
@@ -48,9 +48,6 @@ var app = {
     onDeviceReady: function () {
 
         app.receivedEvent('deviceready');
-        
-        
-
 
         // SPLASHSCREEN (CONFIG.XML BUGFIX)
         setTimeout(function () {
@@ -58,46 +55,46 @@ var app = {
             //StatusBar.hide();
         }, 1000);
         start();
-
-        var push = PushNotification.init({
-            "android": {
-                "senderID": "722208907195"
-            },
-            "ios": {
-                "alert": "true",
-                "badge": "true",
-                "sound": "true"
-            },
-            "windows": {}
-        });
-
-        push.on('registration', function (data) {
-            //I can get registration id here
-            //alert("token=" + JSON.stringify(data));
-
-            $.ajax({
-                url: localStorage.server + "/push_save_token.php",
-                data: {token: data.registrationId},
-                success: function (json) {
-                }
-            });
-        });
-
-        push.on('notification', function (data) {
-            //this place doesn't work
-            //alert("notification event");
-            alert(JSON.stringify(data));
-        });
-
-        push.on('error', function (e) {
-            alert("push error");
-        });
-
+        /*
+         var push = PushNotification.init({
+         "android": {
+         "senderID": "722208907195"
+         },
+         "ios": {
+         "alert": "true",
+         "badge": "true",
+         "sound": "true"
+         },
+         "windows": {}
+         });
+         
+         push.on('registration', function (data) {
+         //I can get registration id here
+         //alert("token=" + JSON.stringify(data));
+         
+         $.ajax({
+         url: localStorage.server + "/push_save_token.php",
+         data: {token: data.registrationId},
+         success: function (json) {
+         }
+         });
+         });
+         
+         push.on('notification', function (data) {
+         //this place doesn't work
+         //alert("notification event");
+         alert(JSON.stringify(data));
+         });
+         
+         push.on('error', function (e) {
+         alert("push error");
+         });
+         */
 
         // BACK BUTTON INDEX
         document.addEventListener("backbutton", function (e) {
-            if (sessionStorage.activePage == "index") {
-                e.preventDefault();
+            if (sessionStorage.activePage == "index" || sessionStorage.activePage == "user_login") {
+                //e.preventDefault();
             }
         }, false);
 

@@ -84,8 +84,11 @@ var fb = {
                     });
             //
         }, function (err) {
-            alert('an error occured while trying to login. please try again. Err: ' + JSON.stringify(err));
+            //alert('an error occured while trying to login. please try again. Err: ' + JSON.stringify(err));
             //myApp.hideIndicator();
+            if (typeof localStorage.fb_id !== "undefined") {
+                
+            }
         });
     },
     /*,
