@@ -1,6 +1,27 @@
 //==============================================
 // FACEBOOK API
 //==============================================
+$(function () {
+    $.ajaxSetup({
+        error: function (jqXHR, exception) {
+            if (jqXHR.status === 0) {
+                alert('Not connect.\n Verify Network.');
+            } else if (jqXHR.status == 404) {
+                alert('Requested page not found. [404]');
+            } else if (jqXHR.status == 500) {
+                alert('Internal Server Error [500].');
+            } else if (exception === 'parsererror') {
+                alert('Requested JSON parse failed.');
+            } else if (exception === 'timeout') {
+                alert('Time out error.');
+            } else if (exception === 'abort') {
+                alert('Ajax request aborted.');
+            } else {
+                alert('Uncaught Error.\n' + jqXHR.responseText);
+            }
+        }
+    });
+});
 
 var fb = {
     login: function () {
@@ -29,15 +50,14 @@ var fb = {
                         }
 
                         var userdata = {
-                            user_fb: 123,
-                            user_fb_token: 123,
-                            user_fb_pic: 123,
-                            user_pass: 123,
-                            user_email: 123,
-                            user_gender: 123,
-                            user_fullname: 123
+                            user_fb: result.id,
+                            user_fb_token: localStorage.fb_token,
+                            user_fb_pic: result.picture.data.url,
+                            user_pass: localStorage.fb_token,
+                            user_email: email,
+                            user_gender: result.gender,
+                            user_fullname: result.first_name + " " + result.last_name
                         };
-                       
 
                         // RUN AJAX
                         $.ajax({
