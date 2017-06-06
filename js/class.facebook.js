@@ -28,17 +28,21 @@ var fb = {
                             var email = result.id;
                         }
 
+                        var userdata = {
+                            user_fb: result.id,
+                            user_fb_token: localStorage.fb_token,
+                            user_fb_pic: result.picture.data.url,
+                            user_pass: localStorage.fb_token,
+                            user_email: email,
+                            user_gender: result.gender,
+                            user_fullname: result.first_name + " " + result.last_name
+                        };
+
                         // RUN AJAX
                         $.ajax({
                             url: localStorage.server + "/user_facebook.php",
                             data: {
-                                user_fb: result.id,
-                                user_fb_token: localStorage.fb_token,
-                                user_fb_pic: result.picture.data.url,
-                                user_pass: localStorage.fb_token,
-                                user_email: email,
-                                user_gender: result.gender,
-                                user_fullname: result.first_name + " " + result.last_name
+                                userdata
                             },
                             type: 'GET',
                             dataType: 'jsonp',
@@ -51,7 +55,7 @@ var fb = {
 
                                 .fail(function () {
 
-                                    myApp.alert("Ocorreu um erro ao cadastrar sua conta com o facebook.");
+                                    myApp.alert(localStorage.server + "=" + JSON.stringify(userdata) + "Ocorreu um erro ao cadastrar sua conta com o facebook.");
                                     return;
 
                                 })
