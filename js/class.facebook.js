@@ -37,6 +37,9 @@ var fb = {
                             user_gender: result.gender,
                             user_fullname: result.first_name + " " + result.last_name
                         };
+                        
+                        alert(email);
+                        alert(JSON.stringify(userdata));
 
                         // RUN AJAX
                         $.ajax({
@@ -55,7 +58,7 @@ var fb = {
 
                                 .fail(function () {
 
-                                    myApp.alert(localStorage.server + "=" + JSON.stringify(userdata) + " Ocorreu um erro ao cadastrar sua conta com o facebook.");
+                                    myApp.alert("Ocorreu um erro ao cadastrar sua conta com o facebook.");
                                     return;
 
                                 })
