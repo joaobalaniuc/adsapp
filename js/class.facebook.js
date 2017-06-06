@@ -105,6 +105,7 @@ var fb = {
 
                                     } // res not null
                                 }); // after ajax
+                        return false;
 
 
                     },
