@@ -7,7 +7,7 @@ function go(fn) {
     $$('.tab.active')[0].f7View.loadPage(fn, {ignoreCache: true});
 }
 function open(url) {
-    cordova.InAppBrowser.open(url, '_blank', 'location=yes');
+    cordova.InAppBrowser.open(url, '_system', 'location=yes');
 }
 // ================================
 // CENTER ABSOLUTE ELEMENT

@@ -309,7 +309,7 @@ function postList(last_id, op, followers) {
                                 // Preço em botão? (post_url)
                                 if (val["post_url"] !== null && val["post_url"] != "") {
                                     $(this).find(".priceTxt").hide();
-                                    $(this).find(".priceBut").show();
+                                    $(this).find(".priceBut").show().attr("data-open", val["post_url"]);
                                 }
                                 else {
                                     $(this).find(".priceTxt").show();

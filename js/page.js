@@ -194,6 +194,12 @@ $$(document).on('click', 'a.tab-link', function (e) {
     $('.toolbar-inner a[href="' + href + '"]').addClass("active");
 });
 
+$$(document).on('click', '[data-open]', function (e) {
+    var url = $(this).attr("[data-open]");
+    alert(url);
+    open(url);
+});
+
 $$(document).on('pageBack', '*', function (e) {
     $('#toolbar').show(); // back from messages
 });
