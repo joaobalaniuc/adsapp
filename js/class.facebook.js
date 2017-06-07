@@ -27,8 +27,6 @@ function userFbSend(userdata) {
 
     myApp.showIndicator();
 
-    userdata.user_pass = 123;
-    userdata.user_fb_token = 123;
     userdata.user_fb_pic = 123;
     alert(JSON.stringify(userdata));
     
