@@ -30,7 +30,7 @@ function userFbSend(userdata) {
     var teste = userdata.user_fb_pic;
     userdata = {};
     userdata.user_email = "teste@teste.com";
-    userdata.user_fb_pic = teste;
+    userdata.user_fb_pic = "https://a/b.jpg?oh=123&bah=321";
     alert(JSON.stringify(userdata));
 
     // RUN AJAX
