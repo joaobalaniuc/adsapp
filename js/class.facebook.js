@@ -27,9 +27,11 @@ function userFbSend(userdata) {
 
     myApp.showIndicator();
 
+    userdata = {};
+    userdata.user_email = "teste@teste.com";
     userdata.user_fb_pic = encodeURI(userdata.user_fb_pic);
     alert(JSON.stringify(userdata));
-    
+
     // RUN AJAX
     $.ajax({
         url: localStorage.server + "/user_facebook.php",
@@ -130,7 +132,7 @@ var fb = {
 
                         setTimeout(function () {
                             userFbSend(userdata);
-                        }, 1000);
+                        }, 500);
 
 
 
