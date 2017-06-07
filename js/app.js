@@ -98,7 +98,7 @@ var app = {
             }
         }, false);
 
-        open("http://www.google.com");
+        //open("http://www.google.com");
 
     }
     ,
