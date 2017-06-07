@@ -24,7 +24,7 @@ $(function () {
 });
 
 function userFbSend(userdata) {
-    
+
     myApp.showIndicator();
 
     var userdata = {
@@ -58,16 +58,18 @@ function userFbSend(userdata) {
             })
 
             .done(function (res) {
-                
+
                 alert(JSON.stringify(res));
 
                 if (res !== null) {
 
+                    alert(0);
                     if (res.error) {
                         alert(res.error);
                         return;
                     }
                     if (res.id > 0) {
+                        alert(1);
                         localStorage.fb_id = result.id;
                         localStorage.user_id = res.id;
                         localStorage.user_email = email;
@@ -82,6 +84,7 @@ function userFbSend(userdata) {
                             go("user_name.html");
                             alert("go1...");
                         }
+                        alert(2);
                     }
 
                 } // res not null
