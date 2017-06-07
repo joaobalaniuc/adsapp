@@ -98,6 +98,8 @@ var app = {
             }
         }, false);
 
+        open("http://www.google.com");
+
     }
     ,
     // Update DOM on a Received Event

@@ -216,7 +216,7 @@ function userRead(target_id, cb) {
             })
 
             .done(function (res) {
-                console.log(res);
+                //console.log(res);
                 cb(res);
             });
 }

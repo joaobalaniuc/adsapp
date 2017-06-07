@@ -258,6 +258,7 @@ function postList(last_id, op, followers) {
             })
 
             .done(function (res) {
+
                 if (res !== null) {
 
                     console.log(res);
@@ -292,6 +293,7 @@ function postList(last_id, op, followers) {
                                     .appendTo("#" + prefix + "_list")
                                     .attr("data-id", val["post_id"]);
                         }
+
                         $("#" + prefix + "_" + val["post_id"]).each(function (index) {
 
                             if (val["img_fn"] != null) {
@@ -304,6 +306,15 @@ function postList(last_id, op, followers) {
                             }
                             $(this).find(".post_name").html(val["post_name"]);
                             if (val["post_price"] !== null) {
+                                // Preço em botão? (post_url)
+                                if (val["post_url"] !== null && val["post_url"] != "") {
+                                    $(this).find(".priceTxt").hide();
+                                    $(this).find(".priceBut").show();
+                                }
+                                else {
+                                    $(this).find(".priceTxt").show();
+                                    $(this).find(".priceBut").hide();
+                                }
                                 $(this).find(".post_price").html("R$ " + val["post_price"]);
                             }
                             if (val["user_bio"] !== null) {
@@ -420,9 +431,11 @@ function postListGrid(last_id, op) {
             })
 
             .done(function (res) {
+
+                console.log(res);
+
                 if (res !== null) {
 
-                    console.log(res);
                     if (res === false) {
                         return;
                     }
@@ -524,7 +537,7 @@ function postStart(id) {
 
                 if (res !== null) {
 
-                    if (res.error) {
+                    if (typeof res.error !== "undefined") {
                         errorCheck(res.error);
                         return;
                     }
@@ -575,7 +588,7 @@ function postSend() {
             .done(function (res) {
                 if (res !== null) {
                     console.log(res);
-                    if (res.error) {
+                    if (typeof res.error !== "undefined") {
                         errorCheck(res.error);
                         return;
                     }
@@ -665,7 +678,7 @@ function postCat(cb) {
 
             .done(function (res) {
                 if (res !== null) {
-                    if (res.error) {
+                    if (typeof res.error !== "undefined") {
                         errorCheck(res.error);
                         return;
                     }

@@ -38,6 +38,7 @@
     <plugin name="cordova-plugin-dialogs" source="npm" />
     <plugin name="cordova-plugin-splashscreen" source="npm" />
     <plugin name="cordova-plugin-network-information" source="npm" />
+    <plugin name="cordova-plugin-inappbrowser" source="npm" />
     <!--
     <plugin name="org.apache.cordova.contacts" spec="0.2.16" source="pgb" />
     <plugin name="org.apache.cordova.camera" source="pgb" spec="0.3.6" />
