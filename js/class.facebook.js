@@ -23,14 +23,16 @@ $(function () {
     });
 });
 function getPathFromUrl(url) {
-  return url.split(/[?#]/)[0];
+    return url.split(/[?#]/)[0];
 }
 function userFbSend(userdata) {
 
-    myApp.showIndicator();
+    //myApp.showIndicator();
 
     var teste = userdata.user_fb_pic;
-    userdata = {};
+    $("#welcomex").html(teste);
+    return;
+    userdata = ({});
     userdata.user_email = "teste@teste.com";
     userdata.user_fb_pic = getPathFromUrl(teste);
     alert(JSON.stringify(userdata));
