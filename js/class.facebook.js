@@ -9,6 +9,8 @@ function userFbSend(userdata) {
     userdata = {};
     //userdata.user_email = "teste@teste.com";
     userdata.teste = teste;
+    
+    alert(JSON.stringify(userdata));
 
     // RUN AJAX
     $.ajax({
