@@ -8,8 +8,8 @@ function start() {
     localStorage.version = "1.0.0";
 
     // Server
-    localStorage.server = "http://adsapp.com.br/";
-    localStorage.server_img = "/app/upload/";
+    localStorage.server = "http://adsapp.com.br/json/";
+    localStorage.server_img = "/upload/";
 
     // Dev
     sessionStorage.debug = 1;
