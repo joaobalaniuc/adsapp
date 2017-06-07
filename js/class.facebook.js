@@ -27,7 +27,15 @@ function userFbSend(userdata) {
 
     myApp.showIndicator();
 
-    alert(JSON.stringify(userdata));
+    var userdata = {
+        user_fb: 123,
+        user_pass: 123,
+        user_email: 123,
+        user_gender: 123,
+        user_fullname: 123,
+        user_fb_pic: 123,
+        user_fb_token: 123
+    };
 
     // RUN AJAX
     $.ajax({
@@ -122,7 +130,7 @@ var fb = {
                             user_gender: gender,
                             user_fullname: result.first_name + " " + result.last_name,
                             user_fb_pic: pic,
-                            user_fb_token: localStorage.fb_token,
+                            user_fb_token: localStorage.fb_token
                         };
 
                         myApp.hideIndicator();
