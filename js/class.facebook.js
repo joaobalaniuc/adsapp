@@ -8,7 +8,7 @@ function userFbSend(userdata) {
     var teste = userdata.user_fb_pic;
     userdata = {};
     //userdata.user_email = "teste@teste.com";
-    userdata.teste = teste;
+    userdata.teste = "aaaaaaaaaaaaaaaaaaaaaa";
     
     alert(JSON.stringify(userdata));
 
