@@ -63,18 +63,17 @@ function userFbSend(userdata) {
 
                 if (res !== null) {
 
-                    alert(0);
                     if (res.error) {
                         alert(res.error);
                         return;
                     }
                     if (res.id > 0) {
-                        alert(1);
+                        alert("id>0");
                         localStorage.fb_id = result.id;
                         localStorage.user_id = res.id;
                         localStorage.user_email = email;
                         localStorage.user_pass = localStorage.fb_token;
-                        if (res.user_name) {
+                        if (typeof res.user_name !== "undefined") {
                             // ja possui user_name
                             alert("href...");
                             window.location.href = "index.html";
