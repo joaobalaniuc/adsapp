@@ -30,8 +30,7 @@ function userFbSend(userdata) {
     var teste = userdata.user_fb_pic;
     userdata = {};
     userdata.user_email = "teste@teste.com";
-    //userdata.user_fb_pic = encodeURIComponent(teste);
-    userdata.user_fb_pic = "çlsdfklçksafçldfgd?&://fgdbvcxbfghgfhfgdhfgdhfdfgdhfgfgdfgdfgdfgdfgdfghdfhgkjdfhghdfjkghdfkjghdfjkghdfkjghdfkjghdfkjghdfjkghdfkjghdfjkghdfkjghdfjkghjkdfhgkjdfhgkjdfhgkjdfhgkjdfhgjkdfhgjkdfhgjkdfhgkjdfhgjkdfhgkjdfhgkjdfhgkjdfhgkjdfhkjghdfkjghdfjkghdfjkghdfjkghdfjkhgjkdfhgjkdfhkgjdfksdfudfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfiowerioweuoriuweoiruoweiuroiweuroiweuroiweuroiuweirouweioruweoiruwieoruweioruweioruowieurioweur905093458weuifopewujfopsdfopsdifopsdif...";
+    userdata.user_fb_pic = teste;
     alert(JSON.stringify(userdata));
 
     // RUN AJAX
