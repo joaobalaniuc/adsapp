@@ -68,6 +68,8 @@ function userFbSend(userdata) {
             })
 
             .done(function (res) {
+                
+                alert(JSON.stringify(res));
 
                 if (res !== null) {
 
