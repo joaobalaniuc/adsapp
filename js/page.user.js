@@ -335,7 +335,7 @@ function userAdsCb_Me(res) {
 
 
         if (res.error) {
-            myApp.alert('Desculpe, ocorreu um erro interno. ' + res.error, 'Erro');
+            errorCheck(res.error);
             return;
         }
 
@@ -372,7 +372,7 @@ function userAdsCb_Friend(res) {
     if (res !== null) {
 
         if (res.error) {
-            myApp.alert('Desculpe, ocorreu um erro interno. ' + res.error, 'Erro');
+            errorCheck(res.error);
             return;
         }
 
@@ -438,6 +438,7 @@ function userFollow(target_id) {
                 if (res !== null) {
 
                     if (res.error) {
+                        errorCheck(res.error);
                         return;
                     }
                     if (res.success) {
@@ -497,7 +498,7 @@ function userLogin() {
                 if (res !== null) {
                     console.log(res);
                     if (res.error) {
-                        myApp.alert(res.error, 'Ops!');
+                        errorCheck(res.error);
                         return;
                     }
                     if (res.id) {
@@ -541,7 +542,7 @@ function userSend() {
                 if (res !== null) {
                     console.log(res);
                     if (res.error) {
-                        myApp.alert(res.error, 'Ops!');
+                        errorCheck(res.error);
                         return;
                     }
                     if (res.id) {
@@ -588,7 +589,7 @@ function userNameSend() {
                 if (res !== null) {
                     console.log(res);
                     if (res.error) {
-                        myApp.alert(res.error, 'Ops!');
+                        errorCheck(res.error);
                         return;
                     }
                     if (res.success) {
@@ -632,7 +633,7 @@ function userUpdate() {
                 if (res !== null) {
                     console.log(res);
                     if (res.error) {
-                        alert("Erro: " + res.error);
+                        errorCheck(res.error);
                         return;
                     }
                     if (res.success) {
