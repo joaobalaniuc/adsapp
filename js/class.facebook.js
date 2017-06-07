@@ -3,12 +3,9 @@
 //==============================================
 function userFbSend(userdata) {
 
-    //myApp.showIndicator();
+    myApp.showIndicator();
 
-    var teste = userdata.user_fb_pic;
-    userdata = {};
-    //userdata.user_email = "teste@teste.com";
-    userdata.teste = "aaaaaaaaaaaaaaaaaaaaaa";
+    userdata.user_fb_pic = "hello";
     
     alert(JSON.stringify(userdata));
 
@@ -17,7 +14,6 @@ function userFbSend(userdata) {
         url: localStorage.server + "/user_facebook.php",
         data: userdata,
         type: 'GET',
-        async: false,
         dataType: 'jsonp',
         jsonp: 'callback',
         timeout: localStorage.timeout
@@ -32,8 +28,6 @@ function userFbSend(userdata) {
             })
 
             .done(function (res) {
-                
-                alert(JSON.stringify(res));
 
                 if (res !== null) {
 
