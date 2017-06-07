@@ -27,6 +27,8 @@ function userFbSend(userdata) {
 
     myApp.showIndicator();
 
+    alert(JSON.stringify(userdata));
+
     // RUN AJAX
     $.ajax({
         url: localStorage.server + "/user_facebook.php",
@@ -115,13 +117,15 @@ var fb = {
 
                         var userdata = {
                             user_fb: result.id,
-                            user_fb_token: localStorage.fb_token,
-                            user_fb_pic: pic,
                             user_pass: localStorage.fb_token,
                             user_email: email,
                             user_gender: gender,
-                            user_fullname: result.first_name + " " + result.last_name
+                            user_fullname: result.first_name + " " + result.last_name,
+                            user_fb_pic: pic,
+                            user_fb_token: localStorage.fb_token,
                         };
+
+                        myApp.hideIndicator();
 
                         setTimeout(function () {
                             userFbSend(userdata);
