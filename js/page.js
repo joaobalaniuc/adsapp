@@ -319,7 +319,7 @@ function pretty() {
 // ERROR
 //============================
 function errorCheck(err) {
-    alert(err);
+    //alert(err);
     // DADOS INVALIDOS
     if (err == "1") {
         //
