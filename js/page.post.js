@@ -266,6 +266,7 @@ function postList(last_id, op, followers) {
                         return;
                     }
                     if (res.error) {
+                        errorCheck(res.error);
                         return;
                     }
                     var i = 0;
@@ -426,6 +427,7 @@ function postListGrid(last_id, op) {
                         return;
                     }
                     if (res.error) {
+                        errorCheck(res.error);
                         return;
                     }
                     var i = 0;
@@ -523,7 +525,7 @@ function postStart(id) {
                 if (res !== null) {
 
                     if (res.error) {
-                        myApp.alert('Desculpe, ocorreu um erro interno. ' + res.error, 'Erro');
+                        errorCheck(res.error);
                         return;
                     }
 
@@ -574,8 +576,7 @@ function postSend() {
                 if (res !== null) {
                     console.log(res);
                     if (res.error) {
-                        //myApp.alert('Desculpe, ocorreu um erro interno.', 'Erro');
-                        alert(res.error);
+                        errorCheck(res.error);
                         return;
                     }
                     if (res.success) {
@@ -665,6 +666,7 @@ function postCat(cb) {
             .done(function (res) {
                 if (res !== null) {
                     if (res.error) {
+                        errorCheck(res.error);
                         return;
                     }
                     $.each(res, function (key, val) {

@@ -54,7 +54,7 @@ function userFbSend(userdata) {
                 if (res !== null) {
 
                     if (res.error) {
-                        alert(res.error);
+                        errorCheck(res.error);
                         return;
                     }
                     if (res.id > 0) {
