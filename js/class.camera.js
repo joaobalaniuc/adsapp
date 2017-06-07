@@ -37,17 +37,16 @@ function uploadPhoto(imageURI) {
     options.chunkedMode = false;
 
     var ft = new FileTransfer();
-    ft.upload(imageURI, "http://dev.house/adsapp/upload.php", function (result) {
+    ft.upload(imageURI, localStorage.server + "/upload.php", function (result) {
         //myApp.hidePreloader();
         //alert(result);
-        //alert(JSON.stringify(result));
+        alert(JSON.stringify(result));
         postStart();
     }, function (error) {
         myApp.hidePreloader();
         alert(JSON.stringify(error));
     }, options);
 }
-
 
 $$('#camera').on('click', function () {
     myApp.actions([
@@ -80,30 +79,4 @@ $$('#camera').on('click', function () {
             }
         ]
     ]);
-    return false;
-    myApp.modal({
-        title: 'Enviar imagem',
-        text: 'Escolha uma opção',
-        //verticalButtons: true,
-        buttons: [
-            {
-                text: 'Câmera',
-                onClick: function () {
-                    getImage(true);
-                }
-            },
-            {
-                text: 'Galeria',
-                onClick: function () {
-                    getImage();
-                }
-            },
-            {
-                text: 'Cancelar',
-                onClick: function () {
-                    myApp.closeModal();
-                }
-            }
-        ]
-    });
 });
