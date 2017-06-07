@@ -17,11 +17,11 @@
     background-position:center;background-image:url(img/user.png)
 }
 .pic_img {
-  display: block;
+    display: block;
     margin-left: auto;
     margin-right: auto;
     width:128px;height:128px;
-  }
+}
 /* GLOBAL */
 p,textarea,input[type=text],select {font-weight:100 !important}
 input{font-family:Nunito}
@@ -130,10 +130,10 @@ i.tabbar-demo-icon-4 {
     behavior: url(border-radius.htc);
 }
 .circle {
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -khtml-border-radius: 10px;
-    border-radius: 10px;
+    -moz-border-radius: 128px;
+    -webkit-border-radius: 128px;
+    -khtml-border-radius: 128px;
+    border-radius: 128px;
     behavior: url(border-radius.htc);
 
 }
@@ -142,7 +142,8 @@ i.tabbar-demo-icon-4 {
     -moz-filter: blur(30px);
     -o-filter: blur(30px);
     -ms-filter: blur(30px);*/
-    filter: blur(30px) brightness(1.5);
+    filter:blur(32px) saturate(12) brightness(1);
+    opacity:0.2;
 }
 /* Loading */
 
