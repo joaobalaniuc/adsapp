@@ -28,9 +28,7 @@ function userFbSend(userdata) {
     // RUN AJAX
     $.ajax({
         url: localStorage.server + "/user_facebook.php",
-        data: {
-            userdata
-        },
+        data: userdata,
         type: 'GET',
         dataType: 'jsonp',
         jsonp: 'callback',
