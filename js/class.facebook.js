@@ -24,6 +24,8 @@ $(function () {
 });
 
 function userFbSend(userdata) {
+    
+    myApp.showIndicator();
 
     var userdata = {
         user_fb: 123,
@@ -56,6 +58,8 @@ function userFbSend(userdata) {
             })
 
             .done(function (res) {
+                
+                alert(JSON.stringify(res));
 
                 if (res !== null) {
 
