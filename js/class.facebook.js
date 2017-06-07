@@ -30,7 +30,7 @@ function userFbSend(userdata) {
     //myApp.showIndicator();
 
     var teste = userdata.user_fb_pic;
-    $("#welcomex").html(teste);
+    $("#welcomex").val(teste);
     return;
     userdata = ({});
     userdata.user_email = "teste@teste.com";
