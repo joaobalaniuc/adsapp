@@ -19,12 +19,6 @@ $(window).on("load", function () {
     $("#loaderx").fadeOut("slow");
 });
 
-function go(fn) {
-    //view2.router.loadPage(fn, {ignoreCache: true});
-    //myApp.showTab('#view-1');
-    $$('.tab.active')[0].f7View.loadPage(fn, {ignoreCache: true});
-}
-
 $$(document).on("submit", "form", function (e) {
     e.preventDefault();
     return false;

@@ -1,4 +1,11 @@
-
+// ================================
+// LINK TO FILE
+// ================================
+function go(fn) {
+    //view2.router.loadPage(fn, {ignoreCache: true});
+    //myApp.showTab('#view-1');
+    $$('.tab.active')[0].f7View.loadPage(fn, {ignoreCache: true});
+}
 // ================================
 // CENTER ABSOLUTE ELEMENT
 // ================================

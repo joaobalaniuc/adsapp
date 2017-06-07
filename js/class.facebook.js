@@ -70,10 +70,13 @@ function userFbSend(userdata) {
                         localStorage.user_pass = localStorage.fb_token;
                         if (res.user_name) {
                             // ja possui user_name
+                            alert("href...");
                             window.location.href = "index.html";
                         } else {
                             // nao possui
+                            alert("go0...");
                             go("user_name.html");
+                            alert("go1...");
                         }
                     }
 
