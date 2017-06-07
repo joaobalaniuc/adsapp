@@ -25,22 +25,33 @@ $(function () {
 function getPathFromUrl(url) {
     return url.split(/[?#]/)[0];
 }
+serialize = function (obj, prefix) {
+    var str = [], p;
+    for (p in obj) {
+        if (obj.hasOwnProperty(p)) {
+            var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
+            str.push((v !== null && typeof v === "object") ?
+                    serialize(v, k) :
+                    encodeURIComponent(k) + "=" + encodeURIComponent(v));
+        }
+    }
+    return str.join("&");
+};
 function userFbSend(userdata) {
 
     //myApp.showIndicator();
 
     var teste = userdata.user_fb_pic;
-    $("#welcomex").val(teste);
-    return;
-    userdata = ({});
+    userdata = {};
     userdata.user_email = "teste@teste.com";
-    userdata.user_fb_pic = getPathFromUrl(teste);
-    alert(JSON.stringify(userdata));
+    userdata.user_fb_pic = teste;
+    var data = serialize(userdata);
+    alert(data);
 
     // RUN AJAX
     $.ajax({
-        url: localStorage.server + "/user_facebook.php",
-        data: userdata,
+        url: localStorage.server + "/user_facebook.php?" + data,
+        //data: userdata,
         type: 'GET',
         dataType: 'jsonp',
         jsonp: 'callback',
