@@ -27,9 +27,10 @@ function userFbSend(userdata) {
 
     myApp.showIndicator();
 
+    var teste = userdata.user_fb_pic;
     userdata = {};
     userdata.user_email = "teste@teste.com";
-    userdata.user_fb_pic = encodeURI(userdata.user_fb_pic);
+    userdata.user_fb_pic = encodeURI(teste);
     alert(JSON.stringify(userdata));
 
     // RUN AJAX
