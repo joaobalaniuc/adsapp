@@ -173,6 +173,13 @@ function postReadCb(res) {
     if (txt !== null) {
         $("#post_read .post_txt").html(txt);
     }
+    // "buy" button
+    if (post[0]["post_url"] !== null && post[0]["post_url"] != "") {
+        $("#post_read .post_url").show().attr("data-open", post[0]["post_url"]);
+    }
+    else {
+        $("#post_read .post_url").hide();
+    }
     if (post[0]["like_id"] > 0) {
         $("#post_read .post_like").css("color", "blue");
         $("#post_read .post_like_txt").css("color", "blue").html("Curtiu");
@@ -205,6 +212,8 @@ function postEditCb(res) {
     $("#postCateg").html(cat1 + "" + cat2 + "" + cat3);
 }
 function postList(last_id, op, followers) {
+
+    console.log("a");
 
     var prefix;
     // POST GERAL
@@ -248,8 +257,15 @@ function postList(last_id, op, followers) {
         jsonp: 'callback',
         timeout: localStorage.timeout
     })
+
             .always(function () {
-                $("#" + prefix + "_infinite").fadeOut("slow");
+
+                $("#" + prefix + "_infinite").hide();
+
+                setTimeout(function () {
+                    $("body, html").scrollTop(300);
+                }, 1000);
+
 
             })
 
@@ -262,8 +278,11 @@ function postList(last_id, op, followers) {
                 if (res !== null) {
 
                     console.log(res);
+
                     if (res === false) {
-                        $("#post_none").fadeIn("slow");
+                        if ($('#post_list').children().length == 0) {
+                            $("#post_none").fadeIn("slow");
+                        }
                         return;
                     }
                     if (res.error) {
