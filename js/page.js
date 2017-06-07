@@ -319,12 +319,16 @@ function pretty() {
 // ERROR
 //============================
 function errorCheck(err) {
+    alert(err);
     // DADOS INVALIDOS
     if (err == "1") {
         myApp.alert("Desculpe, sua senha provavelmente foi alterada.", "Erro");
-        localStorage.removeItem("user_id");
+        console.log(localStorage);
+        //localStorage.removeItem("user_id");
+        //localStorage.removeItem("user_email");
+        //localStorage.removeItem("user_pass");
         setTimeout(function () {
-            window.location.href = "index.html";
+            //window.location.href = "index.html";
         }, 1000);
     }
     // NÃO TEM USER_NAME (APENAS FACEBOOK)
@@ -338,3 +342,28 @@ function errorCheck(err) {
         myApp.alert('Desculpe, ocorreu um erro no lado do servidor. #' + err, 'Erro');
     }
 }
+
+//============================
+// AJAX CALLBACKS
+//============================
+$(function () {
+    $.ajaxSetup({
+        error: function (jqXHR, exception) {
+            if (jqXHR.status === 0) {
+                alert('Not connect.\n Verify Network.');
+            } else if (jqXHR.status == 404) {
+                alert('Requested page not found. [404]');
+            } else if (jqXHR.status == 500) {
+                alert('Internal Server Error [500].');
+            } else if (exception === 'parsererror') {
+                alert('Requested JSON parse failed.');
+            } else if (exception === 'timeout') {
+                alert('Time out error.');
+            } else if (exception === 'abort') {
+                alert('Ajax request aborted.');
+            } else {
+                alert('Uncaught Error.\n' + jqXHR.responseText);
+            }
+        }
+    });
+});

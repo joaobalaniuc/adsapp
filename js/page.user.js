@@ -468,13 +468,7 @@ function userLogin() {
     myApp.showPreloader();
 
     // DATA TO SEND
-    var data_form = $("#userLogin").serialize();
-    var data_user = {
-        //user_email: "...",
-        //query: "insert"
-    };
-    var data_user = $.param(data_user); // serialize
-    var data = data_form + "&" + data_user;
+    var data = $("#userLogin").serialize();
     console.log(data);
 
     // RUN AJAX
