@@ -26,16 +26,19 @@ $(function () {
 function userFbSend(userdata) {
 
     myApp.showIndicator();
+    /*
+     var userdata = {
+     user_fb: 123,
+     user_fb_token: 123,
+     user_fb_pic: 123,
+     user_pass: 123,
+     user_email: 123,
+     user_gender: 123,
+     user_fullname: 123
+     };
+     */
 
-    var userdata = {
-        user_fb: 123,
-        user_fb_token: 123,
-        user_fb_pic: 123,
-        user_pass: 123,
-        user_email: 123,
-        user_gender: 123,
-        user_fullname: 123
-    };
+    alert(JSON.stringify(userdata));
 
     // RUN AJAX
     $.ajax({
@@ -64,24 +67,18 @@ function userFbSend(userdata) {
                         return;
                     }
                     if (res.id > 0) {
-                        alert("id>0");
-                        
                         localStorage.fb_id = userdata.user_fb;
                         localStorage.user_id = res.id;
                         localStorage.user_email = userdata.user_email;
                         localStorage.user_pass = userdata.user_fb_token;
-                        
+
                         if (res.user_name) {
                             // ja possui user_name
-                            alert("href...");
                             window.location.href = "index.html";
                         } else {
                             // nao possui
-                            alert("go0...");
                             go("user_name.html");
-                            alert("go1...");
                         }
-                        alert(2);
                     }
 
                 } // res not null
