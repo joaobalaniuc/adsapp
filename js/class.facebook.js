@@ -45,13 +45,11 @@ function userFbSend(userdata) {
     userdata = {};
     //userdata.user_email = "teste@teste.com";
     userdata.teste = teste;
-    var data = serialize(userdata);
-    alert(data);
 
     // RUN AJAX
     $.ajax({
-        url: localStorage.server + "/user_facebook.php?" + data,
-        //data: userdata,
+        url: localStorage.server + "/user_facebook.php",
+        data: userdata,
         type: 'GET',
         async: false,
         dataType: 'jsonp',
