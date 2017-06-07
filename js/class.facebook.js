@@ -22,7 +22,9 @@ $(function () {
         }
     });
 });
-
+function getPathFromUrl(url) {
+  return url.split(/[?#]/)[0];
+}
 function userFbSend(userdata) {
 
     myApp.showIndicator();
@@ -30,7 +32,7 @@ function userFbSend(userdata) {
     var teste = userdata.user_fb_pic;
     userdata = {};
     userdata.user_email = "teste@teste.com";
-    userdata.user_fb_pic = "https://a/b.jpg?oh=123&bah=321";
+    userdata.user_fb_pic = getPathFromUrl(teste);
     alert(JSON.stringify(userdata));
 
     // RUN AJAX
