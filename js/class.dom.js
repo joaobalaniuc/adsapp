@@ -6,7 +6,7 @@ function go(fn) {
     //myApp.showTab('#view-1');
     $$('.tab.active')[0].f7View.loadPage(fn, {ignoreCache: true});
 }
-function open(url) {
+function go_browser(url) {
     cordova.InAppBrowser.open(url, '_system', 'location=yes');
 }
 // ================================

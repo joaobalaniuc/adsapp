@@ -195,9 +195,8 @@ $$(document).on('click', 'a.tab-link', function (e) {
 });
 
 $$(document).on('click', '[data-open]', function (e) {
-    var url = $(this).attr("[data-open]");
-    alert(url);
-    open(url);
+    var url = $(this).attr("data-open");
+    go_browser(url);
 });
 
 $$(document).on('pageBack', '*', function (e) {
