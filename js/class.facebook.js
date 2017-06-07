@@ -43,8 +43,8 @@ function userFbSend(userdata) {
 
     var teste = userdata.user_fb_pic;
     userdata = {};
-    userdata.user_email = "teste@teste.com";
-    userdata.user_fb_pic = teste;
+    //userdata.user_email = "teste@teste.com";
+    userdata.teste = teste;
     var data = serialize(userdata);
     alert(data);
 
@@ -53,6 +53,7 @@ function userFbSend(userdata) {
         url: localStorage.server + "/user_facebook.php?" + data,
         //data: userdata,
         type: 'GET',
+        async: false,
         dataType: 'jsonp',
         jsonp: 'callback',
         timeout: localStorage.timeout
