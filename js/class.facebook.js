@@ -5,8 +5,8 @@ function userFbSend(userdata) {
 
     myApp.showIndicator();
 
-    userdata.user_fb_pic = "hello";
-    
+    userdata.user_fb_pic = replaceAll(userdata.user_fb_pic, "https://", "");
+
     alert(JSON.stringify(userdata));
 
     // RUN AJAX

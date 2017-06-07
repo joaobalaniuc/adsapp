@@ -640,6 +640,8 @@ function userUpdate() {
 function userLogout() {
     myApp.confirm('Tem certeza disto?', 'Fazer logout', function () {
         localStorage.removeItem("user_id");
+        localStorage.removeItem("user_email");
+        localStorage.removeItem("user_pass");
         setTimeout(function () {
             window.location.href = "index.html";
         }, 1000);
