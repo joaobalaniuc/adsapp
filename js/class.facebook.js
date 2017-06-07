@@ -51,10 +51,8 @@ function userFbSend(userdata) {
             })
 
             .fail(function () {
-
                 myApp.alert("Ocorreu um erro ao cadastrar sua conta com o facebook.");
                 return;
-
             })
 
             .done(function (res) {
@@ -67,11 +65,13 @@ function userFbSend(userdata) {
                     }
                     if (res.id > 0) {
                         alert("id>0");
-                        localStorage.fb_id = result.id;
+                        
+                        localStorage.fb_id = userdata.user_fb;
                         localStorage.user_id = res.id;
-                        localStorage.user_email = email;
-                        localStorage.user_pass = localStorage.fb_token;
-                        if (typeof res.user_name !== "undefined") {
+                        localStorage.user_email = userdata.user_email;
+                        localStorage.user_pass = userdata.user_fb_token;
+                        
+                        if (res.user_name) {
                             // ja possui user_name
                             alert("href...");
                             window.location.href = "index.html";
