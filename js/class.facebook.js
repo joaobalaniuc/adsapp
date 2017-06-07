@@ -27,16 +27,10 @@ function userFbSend(userdata) {
 
     myApp.showIndicator();
 
-    var userdata = {
-        user_fb: 123,
-        user_pass: 123,
-        user_email: 123,
-        user_gender: 123,
-        user_fullname: 123,
-        user_fb_pic: 123,
-        user_fb_token: 123
-    };
-
+    userdata.user_pass = 123;
+    userdata.user_fb_token = 123;
+    alert(JSON.stringify(userdata));
+    
     // RUN AJAX
     $.ajax({
         url: localStorage.server + "/user_facebook.php",
