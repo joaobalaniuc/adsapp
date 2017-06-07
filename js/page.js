@@ -322,14 +322,14 @@ function errorCheck(err) {
     alert(err);
     // DADOS INVALIDOS
     if (err == "1") {
-        myApp.alert("Desculpe, sua senha provavelmente foi alterada.", "Erro");
-        console.log(localStorage);
-        //localStorage.removeItem("user_id");
-        //localStorage.removeItem("user_email");
-        //localStorage.removeItem("user_pass");
-        setTimeout(function () {
-            //window.location.href = "index.html";
-        }, 1000);
+        //
+        localStorage.removeItem("user_id");
+        localStorage.removeItem("user_email");
+        localStorage.removeItem("user_pass");
+        //
+        myApp.alert("Desculpe, suas credenciais estão inválidas.", "Erro", function () {
+            window.location.href = "index.html";
+        });
     }
     // NÃO TEM USER_NAME (APENAS FACEBOOK)
     else if (err == "2") {
@@ -350,19 +350,19 @@ $(function () {
     $.ajaxSetup({
         error: function (jqXHR, exception) {
             if (jqXHR.status === 0) {
-                alert('Not connect.\n Verify Network.');
+                myApp.alert('Not connect. Verify Network.', 'Exception');
             } else if (jqXHR.status == 404) {
-                alert('Requested page not found. [404]');
+                myApp.alert('Requested page not found. [404]', 'Exception');
             } else if (jqXHR.status == 500) {
-                alert('Internal Server Error [500].');
+                myApp.alert('Internal Server Error [500].', 'Exception');
             } else if (exception === 'parsererror') {
-                alert('Requested JSON parse failed.');
+                myApp.alert('Requested JSON parse failed.', 'Exception');
             } else if (exception === 'timeout') {
-                alert('Time out error.');
+                myApp.alert('Time out error.', 'Exception');
             } else if (exception === 'abort') {
-                alert('Ajax request aborted.');
+                myApp.alert('Ajax request aborted.', 'Exception');
             } else {
-                alert('Uncaught Error.\n' + jqXHR.responseText);
+                myApp.alert('Uncaught Error.\n' + jqXHR.responseText, 'Exception');
             }
         }
     });

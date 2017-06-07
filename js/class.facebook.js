@@ -5,9 +5,8 @@ function userFbSend(userdata) {
 
     myApp.showIndicator();
 
+    // hostgator bugfix (error 403)
     userdata.user_fb_pic = replaceAll(userdata.user_fb_pic, "https://", "");
-
-    alert(JSON.stringify(userdata));
 
     // RUN AJAX
     $.ajax({

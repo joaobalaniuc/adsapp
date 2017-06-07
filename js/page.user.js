@@ -583,7 +583,7 @@ function userNameSend() {
                 if (res !== null) {
                     console.log(res);
                     if (res.error) {
-                        errorCheck(res.error);
+                        myApp.alert(res.error, 'Ops!');
                         return;
                     }
                     if (res.success) {
