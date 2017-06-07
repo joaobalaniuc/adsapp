@@ -27,7 +27,7 @@ function userFbSend(userdata) {
 
     myApp.showIndicator();
 
-    userdata.user_fb_pic = 123;
+    userdata.user_fb_pic = encodeURI(userdata.user_fb_pic);
     alert(JSON.stringify(userdata));
     
     // RUN AJAX
