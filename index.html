@@ -60,10 +60,6 @@
                                 <div class="pull-to-refresh-arrow"></div>
                             </div>
 
-
-
-
-
                             <div id="post_template" style="display:none;margin:0;margin-bottom:5px;box-shadow:none !important" class="card ks-facebook-card" data-id="1">
                                 <div class="user_read card-header" style="border:0">
                                     <div class="ks-facebook-avatar"><img class="user_fb_pic" style="border-radius:50%;box-shadow:none !important;border:0" src="img/user.png" width="34" height="34" /></div>
@@ -85,7 +81,7 @@
                                             -->
                                             <a href="#" class="chat"><i class="icon-chat color-pink" style="font-size:32px;margin-right:16px"></i></a>
                                             <a href="#" class="user_phone external"><i class="icon-phone color-pink" style="font-size:32px"></i></a>
-                                            
+
                                             <div class="priceTxt post_price" style="font-size:24px;float:right;margin-right:8px"></div>
                                             <div class="priceBut" style="display:inline-block;float:right;width:45%">
                                                 <a href="#" class="post_price button button-raised button-fill color-green"></a>
@@ -317,7 +313,22 @@
                                 </div>
                             </div>
 
+                            <a href="post_form.html">teste</a>
+
                             <div class="content-block" style="margin-top:0px;margin-bottom:0">
+
+
+
+                                <ul id="camera_sort">
+                                    <li class="ui-state-default">1</li>
+                                    <li class="ui-state-default">2</li>
+                                    <li class="ui-state-default">3</li>
+                                    <li class="ui-state-default">4</li>
+                                    <li class="ui-state-default">5</li>
+                                    <li class="ui-state-default">6</li>
+                                </ul>
+                                <div style="clear:both"></div>
+
                                 <h2 class="user_name" style="margin-bottom:-10px">...</h2>
                                 <p class="user_bio" style="margin-bottom:10px">...</p>
                                 <div class="row" style="font-weight:100">
@@ -430,7 +441,7 @@
         <!-- API -->
         <script type="text/javascript" src="f7/js/framework7.js"></script>
         <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mask.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script type="text/javascript" src="js/kitchen-sink.js"></script>
         <script type="text/javascript" src="js/views.js"></script>
         <!-- VENDOR -->
@@ -479,7 +490,11 @@
 
             console.log(localStorage);
             console.log(sessionStorage);
-            
+
+            $(function () {
+                $("#camera_sort").sortable();
+                $("#camera_sort").disableSelection();
+            });
         </script>
 
     </body>

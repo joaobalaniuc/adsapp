@@ -4,6 +4,21 @@
 #chat ::-webkit-input-placeholder {
     color: #fff;
 }
+/* camera
+#camera_sort {
+    list-style-type:none;padding-left:0;
+}
+#camera_sort li {
+    width: 30%;
+    padding-bottom: 30%;
+    background:#eee;
+    display:inline-block;
+    margin-left:1%;
+    margin-bottom:1%;
+}*/
+#camera_sort { list-style-type: none; margin: 0; padding: 0; width: 450px; }
+#camera_sort li { color:#333;background:#eee;margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center; }
+
 /* CUSTOM MODALS */
 .modal-buttons {text-align:center}
 .modal-button {display:inline-block !important;margin-left:auto;margin-right:auto;}

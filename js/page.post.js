@@ -12,8 +12,7 @@ $$(document).on('click', '.post_read', function (e) {
 //=============================
 $$(document).on('click', '#removeLastImg', function (e) {
     if (sessionStorage.edit_id > 0) {
-    }
-    else {
+    } else {
         myApp.confirm('Tem certeza disto?', 'Desfazer envio', function () {
             removeLastImg();
             //view1.router.back();
@@ -22,6 +21,7 @@ $$(document).on('click', '#removeLastImg', function (e) {
     }
 });
 myApp.onPageInit('post_form', function (page) {
+
     sessionStorage.serialize = $("#post_form form").serialize();
     // EDITAR POST
     if (sessionStorage.edit_id > 0) {
@@ -61,12 +61,12 @@ myApp.onPageInit('post_form', function (page) {
             }
         }
     });
+
 });
 $$(document).on('click', '.postSend', function (e) {
     if ($("#postForm").valid()) {
         postSend();
-    }
-    else {
+    } else {
         myApp.alert('Preencha corretamente os campos do formulário.', 'Ops!');
     }
 });
@@ -176,8 +176,7 @@ function postReadCb(res) {
     // "buy" button
     if (post[0]["post_url"] !== null && post[0]["post_url"] != "") {
         $("#post_read .post_url").show().attr("data-open", post[0]["post_url"]);
-    }
-    else {
+    } else {
         $("#post_read .post_url").hide();
     }
     if (post[0]["like_id"] > 0) {
@@ -221,8 +220,7 @@ function postList(last_id, op, followers) {
         prefix = "post2";
         if (op === "new") {
             sessionStorage.post_id_list_new = last_id;
-        }
-        else {
+        } else {
             op = "";
             sessionStorage.post_id_list = last_id;
         }
@@ -232,8 +230,7 @@ function postList(last_id, op, followers) {
         prefix = "post"; // #post2_template, #post2_list, etc...
         if (op === "new") {
             sessionStorage.post2_id_list_new = last_id;
-        }
-        else {
+        } else {
             op = "";
             sessionStorage.post2_id_list = last_id;
         }
@@ -329,8 +326,7 @@ function postList(last_id, op, followers) {
                                 if (val["post_url"] !== null && val["post_url"] != "") {
                                     $(this).find(".priceTxt").hide();
                                     $(this).find(".priceBut").show().attr("data-open", val["post_url"]);
-                                }
-                                else {
+                                } else {
                                     $(this).find(".priceTxt").show();
                                     $(this).find(".priceBut").hide();
                                 }
@@ -368,8 +364,7 @@ function postList(last_id, op, followers) {
                         if (typeof followers === "undefined") {
                             if (op === "new") {
                                 sessionStorage.post_id_list_new = val["post_id"];
-                            }
-                            else {
+                            } else {
                                 sessionStorage.post_id_list = val["post_id"];
                             }
                             if (last_id === 0) {
@@ -385,8 +380,7 @@ function postList(last_id, op, followers) {
                         else {
                             if (op === "new") {
                                 sessionStorage.post2_id_list_new = val["post_id"];
-                            }
-                            else {
+                            } else {
                                 sessionStorage.post2_id_list = val["post_id"];
                             }
                             if (last_id === 0) {
@@ -418,8 +412,7 @@ function postListGrid(last_id, op) {
     // POST GERAL
     if (op === "new") {
         sessionStorage.post_id_list_new = last_id;
-    }
-    else {
+    } else {
         op = "";
         sessionStorage.post_id_list = last_id;
     }
@@ -496,8 +489,7 @@ function postListGrid(last_id, op) {
                         //======================
                         if (op === "new") {
                             sessionStorage.post_id_list_new = val["post_id"];
-                        }
-                        else {
+                        } else {
                             sessionStorage.post_id_list = val["post_id"];
                         }
                         if (last_id === 0) {
@@ -752,8 +744,7 @@ function catChange(id) {
     $("#cat" + next_level).html(html);
     if (find > 0) {
         $(".cat" + next_level).fadeIn("fast");
-    }
-    else {
+    } else {
         $(".cat" + next_level).hide();
     }
 }
