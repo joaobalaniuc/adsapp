@@ -23,6 +23,9 @@ $$(document).on('click', '#removeLastImg', function (e) {
 myApp.onPageInit('post_form', function (page) {
 
     sessionStorage.serialize = $("#post_form form").serialize();
+
+    $("#camera_sort").sortable();
+
     // EDITAR POST
     if (sessionStorage.edit_id > 0) {
         var post_id = sessionStorage.edit_id;

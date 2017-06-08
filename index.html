@@ -315,21 +315,36 @@
 
                             <a href="post_form.html">teste</a>
 
-
+                            <ul id="camera_sort" style="margin-top:10px">
+                                <li class="ui-state-disabled ui-state-default">
+                                    1
+                                    <div><i class="fa fa-times-circle"></i></div>
+                                </li>
+                                <li class="ui-state-default">
+                                    2
+                                    <div><i class="fa fa-times-circle"></i></div>
+                                </li>
+                                <li class="ui-state-default">
+                                    3
+                                    <div><i class="fa fa-times-circle"></i></div>
+                                </li>
+                                <li class="ui-state-default">
+                                    4
+                                    <div><i class="fa fa-times-circle"></i></div>
+                                </li>
+                                <li class="ui-state-default">
+                                    5
+                                    <div><i class="fa fa-times-circle"></i></div>
+                                </li>
+                                <li class="ui-state-default">
+                                    6
+                                    <div><i class="fa fa-times-circle"></i></div>
+                                </li>
+                            </ul>
+                            <div style="clear:both"></div>
 
 
                             <div class="content-block" style="margin-top:0px;margin-bottom:0">
-
-
-                                <ul id="camera_sort">
-                                    <li class="ui-state-default">1</li>
-                                    <li class="ui-state-default">2</li>
-                                    <li class="ui-state-default">3</li>
-                                    <li class="ui-state-default">4</li>
-                                    <li class="ui-state-default">5</li>
-                                    <li class="ui-state-default">6</li>
-                                </ul>
-                                <div style="clear:both"></div>
 
                                 <h2 class="user_name" style="margin-bottom:-10px">...</h2>
                                 <p class="user_bio" style="margin-bottom:10px">...</p>
@@ -493,10 +508,11 @@
 
             console.log(localStorage);
             console.log(sessionStorage);
-
             $(function () {
-                $("#camera_sort").sortable();
-                //$("#camera_sort").disableSelection();
+                $("#camera_sort").sortable({
+                    items: "li:not(.ui-state-disabled)"
+                });
+                $('#camera_sort li').eq(2).css({'background-color':'red'});
             });
         </script>
 
