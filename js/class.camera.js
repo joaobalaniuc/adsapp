@@ -48,13 +48,14 @@ function photoUpload(imageURI) {
 function photoAdd(imageURI) {
     // active page
     if (sessionStorage.activePage !== "post_form") {
+        alert("1=" + imageURI);
         sessionStorage.imageURI = imageURI;
         go("post_form.html");
     }
     // add photo
     else {
         var x;
-        alert(imageURI);
+        alert("2=" + imageURI);
         for (x = 0; x <= 6; x++) {
             alert(x);
             var $el = $('#camera_sort li').eq(x);
