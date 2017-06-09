@@ -1,11 +1,11 @@
-function getImage(gallery) {
+function photoCamera(gallery) {
     var type, cb;
     if (typeof gallery === "undefined") {
         type = navigator.camera.PictureSourceType.PHOTOLIBRARY
     } else {
         type = navigator.camera.PictureSourceType.CAMERA
     }
-    navigator.camera.getPicture(showImage, function (message) {
+    navigator.camera.getPicture(photoShow, function (message) {
         //alert('get picture failed');
     }, {
         destinationType: navigator.camera.DestinationType.FILE_URI,
@@ -18,7 +18,7 @@ function getImage(gallery) {
         popoverOptions: true
     });
 }
-function uploadImage(imageURI) {
+function photoUpload(imageURI) {
     myApp.showPreloader();
     var options = new FileUploadOptions();
     options.fileKey = "file";
@@ -45,14 +45,17 @@ function uploadImage(imageURI) {
         alert(JSON.stringify(error));
     }, options);
 }
-function showImage(imageURI) {
+function photoShow(imageURI) {
     if (sessionStorage.activePage !== "post_form") {
+        sessionStorage.imageURI = imageURI;
         go("post_form.html");
     } else {
-        //$("#postCamera").css("background-image", "url(" + imageURI + ")");
-        //$("#index-3 [name='fn']").val(imageURI);
+        $("#postCamera").css("background-image", "url(" + imageURI + ")");
+        $("#index-3 [name='fn']").val(imageURI);
     }
 }
+
+
 $$('#camera').on('click', function () {
     myApp.actions([
         [
@@ -65,7 +68,7 @@ $$('#camera').on('click', function () {
                 bold: true,
                 color: "pink",
                 onClick: function () {
-                    getImage(true);
+                    photoCamera(true);
                 }
             },
             {
@@ -73,7 +76,7 @@ $$('#camera').on('click', function () {
                 bold: true,
                 color: "pink",
                 onClick: function () {
-                    getImage();
+                    photoCamera();
                 }
             }
         ],

@@ -24,8 +24,15 @@ myApp.onPageInit('post_form', function (page) {
 
     sessionStorage.serialize = $("#post_form form").serialize();
 
-    $("#camera_sort").sortable();
+    $("#camera_sort").sortable({
+        items: "li:not(.ui-state-disabled)"
+    });
 
+    if (typeof sessionStorage.imageURI !== "undefined") {
+        $('#camera_sort li').eq(0).css({"background-image": "url(" + sessionStorage.imageURI + ")"});
+        sessionStorage.removeItem("imageURI");
+    }
+    
     // EDITAR POST
     if (sessionStorage.edit_id > 0) {
         var post_id = sessionStorage.edit_id;
