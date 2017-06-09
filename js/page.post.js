@@ -29,9 +29,10 @@ myApp.onPageInit('post_form', function (page) {
     });
 
     if (typeof sessionStorage.imageURI !== "undefined") {
-        $('#camera_sort li').eq(0).css({"background-image": "url(" + sessionStorage.imageURI + ")"});
+        photoAdd(sessionStorage.imageURI);
         sessionStorage.removeItem("imageURI");
     }
+    
     
     // EDITAR POST
     if (sessionStorage.edit_id > 0) {

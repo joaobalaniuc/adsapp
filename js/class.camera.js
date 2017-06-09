@@ -1,4 +1,4 @@
-function photoCamera(gallery) {
+function photoGet(gallery) {
     var type, cb;
     if (typeof gallery === "undefined") {
         type = navigator.camera.PictureSourceType.PHOTOLIBRARY
@@ -50,13 +50,15 @@ function photoShow(imageURI) {
         sessionStorage.imageURI = imageURI;
         go("post_form.html");
     } else {
-        $("#postCamera").css("background-image", "url(" + imageURI + ")");
-        $("#index-3 [name='fn']").val(imageURI);
+        photoAdd(imageURI);
     }
+}
+function photoAdd(imageURI) {
+    $('#camera_sort li').eq(0).css({"background-image": "url(" + imageURI + ")"});
 }
 
 
-$$('#camera').on('click', function () {
+$$('.photoGet').on('click', function () {
     myApp.actions([
         [
             {
