@@ -29,11 +29,15 @@ myApp.onPageInit('post_form', function (page) {
     });
 
     if (typeof sessionStorage.imageURI !== "undefined") {
-        photoAdd(sessionStorage.imageURI);
+        alert("x");
+        setTimeout(function () {
+            photoAdd(sessionStorage.imageURI);
+        }, 1000);
+
         sessionStorage.removeItem("imageURI");
     }
-    
-    
+
+
     // EDITAR POST
     if (sessionStorage.edit_id > 0) {
         var post_id = sessionStorage.edit_id;
