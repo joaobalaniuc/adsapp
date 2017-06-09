@@ -108,7 +108,6 @@ function photoOptions() {
 $$('.photoGet').on('click', function () {
     photoOptions();
 });
-$$('.ui-state-disabled').on('click', function () {
-    alert(1);
+$$(document).on('click', '.ui-state-disabled', function (e) {
     photoOptions();
 });
