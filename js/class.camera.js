@@ -5,7 +5,7 @@ function photoGet(gallery) {
     } else {
         type = navigator.camera.PictureSourceType.CAMERA
     }
-    navigator.camera.getPicture(photoShow, function (message) {
+    navigator.camera.getPicture(photoAdd, function (message) {
         //alert('get picture failed');
     }, {
         destinationType: navigator.camera.DestinationType.FILE_URI,
@@ -45,16 +45,23 @@ function photoUpload(imageURI) {
         alert(JSON.stringify(error));
     }, options);
 }
-function photoShow(imageURI) {
+function photoAdd(imageURI) {
+    // active page
     if (sessionStorage.activePage !== "post_form") {
         sessionStorage.imageURI = imageURI;
         go("post_form.html");
-    } else {
-        photoAdd(imageURI);
     }
-}
-function photoAdd(imageURI) {
-    $('#camera_sort li').eq(0).css({"background-image": "url(" + imageURI + ")"});
+    // add photo
+    else {
+        var x;
+        for (x = 0; x <= 6; x++) {
+            var $el = $('#camera_sort li').eq(x);
+            if ($el.css("background-image") === "none") {
+                $el.css({"background-image": "url(" + imageURI + ")"});
+                return;
+            }
+        }
+    }
 }
 
 
