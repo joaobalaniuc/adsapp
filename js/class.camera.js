@@ -54,9 +54,12 @@ function photoAdd(imageURI) {
     // add photo
     else {
         var x;
+        alert(imageURI);
         for (x = 0; x <= 6; x++) {
+            alert(x);
             var $el = $('#camera_sort li').eq(x);
             if ($el.css("background-image") === "none") {
+                alert("ok");
                 $el.css({"background-image": "url(" + imageURI + ")"});
                 return;
             }
