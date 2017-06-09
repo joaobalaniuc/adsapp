@@ -87,9 +87,6 @@ $$(document).on('click', '#postCategEdit', function (e) {
     $(".catTxt").hide();
     $(".cat1").show();
 });
-$$(document).on('click', '#camera_sort .fa-times-circle', function (e) {
-    alert("excluir");
-});
 //=============================
 // PAGE: POST_READ
 //=============================

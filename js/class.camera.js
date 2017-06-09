@@ -65,13 +65,6 @@ function photoAdd(imageURI) {
         }
     }
 }
-function photoDel(x) {
-
-    $('#camera_sort li').eq(x).fadeOut("fast", function () {
-        $('#camera_sort').append('<li class="ui-state-disabled ui-state-default"><div><i class="fa fa-plus-circle"></i></div></li>');
-    });
-
-}
 function photoOptions() {
     myApp.actions([
         [
@@ -110,4 +103,10 @@ $$('.photoGet').on('click', function () {
 });
 $$(document).on('click', '.ui-state-disabled', function (e) {
     photoOptions();
+});
+$$(document).on('click', '#camera_sort .fa-times-circle', function (e) {
+    $(this).fadeOut("fast", function () {
+        $('#camera_sort').append('<li class="ui-state-disabled ui-state-default"><div><i class="fa fa-plus-circle"></i></div></li>');
+        $(this).remove();
+    });
 });
