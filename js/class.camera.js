@@ -77,7 +77,7 @@ $$('.photoGet').on('click', function () {
                 bold: true,
                 color: "pink",
                 onClick: function () {
-                    photoCamera(true);
+                    photoGet(true);
                 }
             },
             {
@@ -85,7 +85,7 @@ $$('.photoGet').on('click', function () {
                 bold: true,
                 color: "pink",
                 onClick: function () {
-                    photoCamera();
+                    photoGet();
                 }
             }
         ],
