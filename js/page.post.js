@@ -29,13 +29,10 @@ myApp.onPageInit('post_form', function (page) {
     });
 
     if (typeof sessionStorage.imageURI !== "undefined") {
-        alert("x");
         setTimeout(function () {
             photoAdd(sessionStorage.imageURI);
             sessionStorage.removeItem("imageURI");
         }, 1000);
-
-
     }
 
 

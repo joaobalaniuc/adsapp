@@ -72,8 +72,7 @@ function photoDel(x) {
     });
 
 }
-
-$$('.photoGet, .ui-state-disabled').on('click', function () {
+function photoOptions() {
     myApp.actions([
         [
             {
@@ -104,4 +103,12 @@ $$('.photoGet, .ui-state-disabled').on('click', function () {
             }
         ]
     ]);
+}
+
+$$('.photoGet').on('click', function () {
+    photoOptions();
+});
+$$('.ui-state-disabled').on('click', function () {
+    alert(1);
+    photoOptions();
 });
