@@ -32,9 +32,10 @@ myApp.onPageInit('post_form', function (page) {
         alert("x");
         setTimeout(function () {
             photoAdd(sessionStorage.imageURI);
+            sessionStorage.removeItem("imageURI");
         }, 1000);
 
-        sessionStorage.removeItem("imageURI");
+        
     }
 
 
