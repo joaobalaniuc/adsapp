@@ -14,9 +14,9 @@ $$(document).on('click', '#removeLastImg', function (e) {
     if (sessionStorage.edit_id > 0) {
     } else {
         myApp.confirm('Tem certeza disto?', 'Desfazer envio', function () {
-            removeLastImg();
+            window.location.href = "index.html";
+            //removeLastImg();
             //view1.router.back();
-
         });
     }
 });
@@ -35,7 +35,7 @@ myApp.onPageInit('post_form', function (page) {
             sessionStorage.removeItem("imageURI");
         }, 1000);
 
-        
+
     }
 
 
@@ -89,6 +89,9 @@ $$(document).on('click', '.postSend', function (e) {
 $$(document).on('click', '#postCategEdit', function (e) {
     $(".catTxt").hide();
     $(".cat1").show();
+});
+$$(document).on('click', '#camera_sort .fa-times-circle', function (e) {
+    alert("excluir");
 });
 //=============================
 // PAGE: POST_READ

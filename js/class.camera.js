@@ -48,28 +48,32 @@ function photoUpload(imageURI) {
 function photoAdd(imageURI) {
     // active page
     if (sessionStorage.activePage !== "post_form") {
-        alert("1=" + imageURI);
         sessionStorage.imageURI = imageURI;
         go("post_form.html");
     }
     // add photo
     else {
         var x;
-        alert("2=" + imageURI);
         for (x = 0; x <= 6; x++) {
-            alert(x);
             var $el = $('#camera_sort li').eq(x);
             if ($el.css("background-image") === "none") {
-                alert("ok");
                 $el.css({"background-image": "url(" + imageURI + ")"});
+                $el.removeClass("ui-state-disabled");
+                $el.find("i").removeClass("fa-plus-circle").addClass("fa-times-circle");
                 return;
             }
         }
     }
 }
+function photoDel(x) {
 
+    $('#camera_sort li').eq(x).fadeOut("fast", function () {
+        $('#camera_sort').append('<li class="ui-state-disabled ui-state-default"><div><i class="fa fa-plus-circle"></i></div></li>');
+    });
 
-$$('.photoGet').on('click', function () {
+}
+
+$$('.photoGet, .ui-state-disabled').on('click', function () {
     myApp.actions([
         [
             {
