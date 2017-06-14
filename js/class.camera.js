@@ -60,7 +60,7 @@ function photoUpload(array, n) {
         photoUpload(array, n);
         return;
     }
-    alert("upload=" + imageURI);
+    alert(sessionStorage.post_id);
 
     myApp.showIndicator();
     // file data
@@ -81,12 +81,12 @@ function photoUpload(array, n) {
     var ft = new FileTransfer();
     ft.upload(imageURI, localStorage.server + "/upload.php", function (result) {
         myApp.hideIndicator();
-        alert("ok=" + JSON.stringify(result));
+        //alert("ok=" + JSON.stringify(result));
         n = parseInt(n + 1);
         photoUpload(array, n);
     }, function (error) {
         myApp.hideIndicator();
-        alert("err=" + JSON.stringify(error));
+        //alert("err=" + JSON.stringify(error));
     }, options);
 }
 function photoAdd(imageURI) {

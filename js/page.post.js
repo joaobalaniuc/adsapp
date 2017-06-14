@@ -619,7 +619,6 @@ function postSend() {
                     if (res.success) {
                         sessionStorage.post_id = res.success;
                         postUpload();
-                        
                     }
                 } // res not null
             }); // after ajax
