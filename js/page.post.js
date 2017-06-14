@@ -618,7 +618,8 @@ function postSend() {
                     }
                     if (res.success) {
                         sessionStorage.post_id = res.success;
-                        window.location.href = "index.html";
+                        postUpload();
+                        
                     }
                 } // res not null
             }); // after ajax
