@@ -18,30 +18,6 @@ function photoGet(gallery) {
         popoverOptions: true
     });
 }
-function photoUploadBackup(imageURI) {
-    myApp.showIndicator();
-    // file data
-    var options = new FileUploadOptions();
-    options.fileKey = "file";
-    options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
-    options.mimeType = "image/jpeg";
-    // user data
-    var params = new Object();
-    params.user_id = localStorage.user_id;
-    params.user_email = localStorage.user_email;
-    params.user_pass = localStorage.user_pass;
-    options.params = params;
-    options.chunkedMode = false;
-    // transfer
-    var ft = new FileTransfer();
-    ft.upload(imageURI, localStorage.server + "/upload.php", function (result) {
-        myApp.hideIndicator();
-        alert("ok=" + JSON.stringify(result));
-    }, function (error) {
-        myApp.hideIndicator();
-        alert("err=" + JSON.stringify(error));
-    }, options);
-}
 function photoUpload(array, n) {
 
     if (typeof n === "undefined") {
@@ -60,7 +36,6 @@ function photoUpload(array, n) {
         photoUpload(array, n);
         return;
     }
-    alert(sessionStorage.post_id);
 
     myApp.showIndicator();
     // file data
