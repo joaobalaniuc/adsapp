@@ -223,9 +223,19 @@ function postEditCb(res) {
     }
     $("#postCateg").html(cat1 + "" + cat2 + "" + cat3);
 }
-function postList(last_id, op, followers) {
 
-    console.log("a");
+function makeid()
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 16; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
+function postList(last_id, op, followers) {
 
     var prefix;
     // POST GERAL
@@ -325,10 +335,34 @@ function postList(last_id, op, followers) {
 
                         $("#" + prefix + "_" + val["post_id"]).each(function (index) {
 
-                            if (val["img_fn"] != null) {
-                                $(this).find(".thumb").attr("src", localStorage.server + localStorage.server_img + "thumb_" + val["img_fn"]);
-                                $(this).find(".post_img").attr("src", localStorage.server + localStorage.server_img + val["img_fn"]);
 
+                            // EACH IMG GALLERY
+                            if (typeof val[0] !== "undefined") {
+                                var x;
+                                var id = makeid();
+                                for (x = 0; x < val[0].length; x++) {
+
+                                    $(this).find(".slick").append("<div id='slick_" + id + "'></div>");
+                                    var url = localStorage.server + localStorage.server_img + val[0][x]["img_fn"];
+                                    /*var content = '<div style="position:absolute;z-index:0;overflow:hidden;width:100vw;height:100vw;left:0;top:0">';
+                                     content += '<img class="thumb" style="filter: blur(7px) brightness(1);width:100%;height:100%" src="' + url + '" />';
+                                     content += '</div>';
+                                     content += '<img style="position:absolute;z-index:1;width:100vw;height:100vw;left:0;top:0" class="post_read post_img" src="' + url + '" />';
+                                     */
+                                    var content = '<img style="width:100vw;height:100vw" class="post_read post_img" src="' + url + '" />';
+                                    console.log(content);
+                                    $("#slick_" + id).append("<div>" + content + "</div>");
+
+                                }
+                                $("#slick_" + id).slick({
+                                    //arrows: false,
+                                    dots: true
+                                });
+                            }
+
+                            if (val["img_fn"] != null) {
+                                //$(this).find(".thumb").attr("src", localStorage.server + localStorage.server_img + "thumb_" + val["img_fn"]);
+                                //$(this).find(".post_img").attr("src", localStorage.server + localStorage.server_img + val["img_fn"]);
                             }
                             if (val["user_fb_pic"] != null) {
                                 $(this).find(".user_fb_pic").attr("src", val["user_fb_pic"]);
