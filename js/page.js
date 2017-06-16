@@ -207,7 +207,6 @@ myApp.onPageInit('*', function (page) {
 // GO INDEX (REFRESH)
 //==============================================
 function loadingShow(cb) {
-    return false;
     if (!$(".loaderx").length) {
         $("body").append('<div class="loaderx"><div><img src="img/loading.gif" /></div></div>');
     }

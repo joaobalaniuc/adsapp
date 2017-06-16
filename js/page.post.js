@@ -444,6 +444,16 @@ function postListGrid(where) {
 // INSERT / DELETE POST
 //=============================
 function postSend() {
+    // HTTP
+    var url = $("#post_form [name='post_url']").val();
+    if (url != "") {
+        var www = url;
+        www = replaceAll(www, "http://", "");
+        www = replaceAll(www, "https://", "");
+        alert(www);
+        $("#post_form [name='post_url']").val(www);
+    }
+    //
     var data_form = $("#post_form form").serialize();
     var data_user = {
         user_id: localStorage.user_id,
