@@ -223,44 +223,14 @@ function postEditCb(res) {
     }
     $("#postCateg").html(cat1 + "" + cat2 + "" + cat3);
 }
+//=============================
+// POST LIST
+//=============================
+function postList(where) {
 
-function makeid()
-{
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    console.log("postList(): where=" + where);
 
-    for (var i = 0; i < 16; i++)
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
-}
-
-function postList(last_id, op, followers) {
-
-    var prefix;
-    // POST GERAL
-    if (typeof followers === "undefined") {
-        prefix = "post2";
-        if (op === "new") {
-            sessionStorage.post_id_list_new = last_id;
-        } else {
-            op = "";
-            sessionStorage.post_id_list = last_id;
-        }
-    }
-    // POST FOLLOWER
-    else {
-        prefix = "post"; // #post2_template, #post2_list, etc...
-        if (op === "new") {
-            sessionStorage.post2_id_list_new = last_id;
-        } else {
-            op = "";
-            sessionStorage.post2_id_list = last_id;
-        }
-    }
-
-    //$("#" + prefix + "_infinite").show();
-
+    // AJAX
     $.ajax({
         url: localStorage.server + "/post_list.php",
         data: {
@@ -268,25 +238,16 @@ function postList(last_id, op, followers) {
             user_email: localStorage.user_email,
             user_pass: localStorage.user_pass,
             //
-            last_id: last_id,
-            op: op,
-            followers: followers
+            where: where
         },
         type: 'GET',
         dataType: 'jsonp',
         jsonp: 'callback',
         timeout: localStorage.timeout
     })
-
             .always(function () {
-
-                $("#" + prefix + "_infinite").hide();
-
-                setTimeout(function () {
-                    $("body, html").scrollTop(300);
-                }, 1000);
-
-
+                myApp.pullToRefreshDone();
+                myApp.hideIndicator();
             })
 
             .fail(function () {
@@ -294,175 +255,123 @@ function postList(last_id, op, followers) {
             })
 
             .done(function (res) {
-
-                if (res !== null) {
-
-                    console.log(res);
-
-                    if (res === false) {
-                        if ($('#post_list').children().length == 0) {
-                            $("#post_none").fadeIn("slow");
-                        }
-                        return;
-                    }
-                    if (res.error) {
-                        errorCheck(res.error);
-                        return;
-                    }
-                    var i = 0;
-                    $.each(res, function (key, val) {
-                        i++;
-                        // PREPEND
-                        if (op === "new") {
-                            $("#" + prefix + "_template")
-                                    .clone()
-                                    .prop({
-                                        id: prefix + "_" + val["post_id"]
-                                    })
-                                    .prependTo("#" + prefix + "_list")
-                                    .attr("data-id", val["post_id"]);
-                        }
-                        // APPEND
-                        else {
-                            $("#" + prefix + "_template")
-                                    .clone()
-                                    .prop({
-                                        id: prefix + "_" + val["post_id"]
-                                    })
-                                    .appendTo("#" + prefix + "_list")
-                                    .attr("data-id", val["post_id"]);
-                        }
-
-                        $("#" + prefix + "_" + val["post_id"]).each(function (index) {
-
-
-                            // EACH IMG GALLERY
-                            if (typeof val[0] !== "undefined") {
-                                var x;
-                                var id = makeid();
-                                for (x = 0; x < val[0].length; x++) {
-
-                                    $(this).find(".slick").append("<div id='slick_" + id + "'></div>");
-                                    var url = localStorage.server + localStorage.server_img + val[0][x]["img_fn"];
-                                    /*var content = '<div style="position:absolute;z-index:0;overflow:hidden;width:100vw;height:100vw;left:0;top:0">';
-                                     content += '<img class="thumb" style="filter: blur(7px) brightness(1);width:100%;height:100%" src="' + url + '" />';
-                                     content += '</div>';
-                                     content += '<img style="position:absolute;z-index:1;width:100vw;height:100vw;left:0;top:0" class="post_read post_img" src="' + url + '" />';
-                                     */
-                                    var content = '<img style="width:100vw;height:100vw" class="post_read post_img" src="' + url + '" />';
-                                    console.log(content);
-                                    $("#slick_" + id).append("<div>" + content + "</div>");
-
-                                }
-                                $("#slick_" + id).slick({
-                                    //arrows: false,
-                                    dots: true
-                                });
-                            }
-
-                            if (val["img_fn"] != null) {
-                                //$(this).find(".thumb").attr("src", localStorage.server + localStorage.server_img + "thumb_" + val["img_fn"]);
-                                //$(this).find(".post_img").attr("src", localStorage.server + localStorage.server_img + val["img_fn"]);
-                            }
-                            if (val["user_fb_pic"] != null) {
-                                $(this).find(".user_fb_pic").attr("src", val["user_fb_pic"]);
-                            }
-                            $(this).find(".post_name").html(val["post_name"]);
-                            if (val["post_price"] !== null) {
-                                // Preço em botão? (post_url)
-                                if (val["post_url"] !== null && val["post_url"] != "") {
-                                    $(this).find(".priceTxt").hide();
-                                    $(this).find(".priceBut").show().attr("data-open", val["post_url"]);
-                                } else {
-                                    $(this).find(".priceTxt").show();
-                                    $(this).find(".priceBut").hide();
-                                }
-                                $(this).find(".post_price").html("R$ " + val["post_price"]);
-                            }
-                            if (val["user_bio"] !== null) {
-                                $(this).find(".user_bio").html(val["user_bio"]);
-                            }
-                            // share
-                            $(this).find(".share").attr("data-message", val["post_name"] + " por R$ " + val["post_price"]);
-                            $(this).find(".share").attr("data-img", localStorage.server + localStorage.server_img + val["img_fn"]);
-                            // content
-                            $(this).find(".user_read").attr("data-id", val["user_id"]);
-                            $(this).find(".post_read").attr("data-id", val["post_id"]);
-                            $(this).find(".user_name").html(val["user_name"]);
-                            $(this).find(".post_date").html(val["post_date"]);
-                            $(this).find(".post_txt").html(val["post_txt"]);
-                            $(this).find(".post_txt").text(function (index, currentText) {
-                                if (currentText.length > 64) {
-                                    return currentText.substr(0, 128) + " ...";
-                                }
-                            });
-                            // chat
-                            $(this).find(".chat").attr("data-id", val["user_id"]);
-                            $(this).find(".chat").attr("data-name", val["user_name"]);
-                            // tel
-                            $(".user_phone").attr("href", "tel:0" + val["user_phone"]);
-
-                        }).show();
-                        //======================
-                        // ULTIMO ID RECEBIDO
-                        //======================
-                        // POST GERAL
-                        //======================
-                        if (typeof followers === "undefined") {
-                            if (op === "new") {
-                                sessionStorage.post_id_list_new = val["post_id"];
-                            } else {
-                                sessionStorage.post_id_list = val["post_id"];
-                            }
-                            if (last_id === 0) {
-                                sessionStorage.post_id_list = val["post_id"];
-                                if (i === 1)
-                                    sessionStorage.post_id_list_new = val["post_id"];
-                            }
-                            console.log("(NEW) post_id = " + sessionStorage.post_id_list_new + " (OLD) post_id = " + sessionStorage.post_id_list);
-                        }
-                        //======================
-                        // POST FOLLOWER
-                        //======================
-                        else {
-                            if (op === "new") {
-                                sessionStorage.post2_id_list_new = val["post_id"];
-                            } else {
-                                sessionStorage.post2_id_list = val["post_id"];
-                            }
-                            if (last_id === 0) {
-                                sessionStorage.post2_id_list = val["post_id"];
-                                if (i === 1)
-                                    sessionStorage.post2_id_list_new = val["post_id"];
-                            }
-                            console.log("(NEW) post2_id = " + sessionStorage.post2_id_list_new + " (OLD) post2_id = " + sessionStorage.post2_id_list);
-                        }
-                        pretty();
-                        setTimeout(function () {
-                            if ($('#post_list').children().length > 0) {
-                                $("#post_none").hide();
-                            }
-                        }, 500);
-                    });
-                } // res not null
-                else {
-                    alert("Erro interno.");
-                }
-
-            }); // after ajax
+                postListCb(res, "prepend");
+            });
 }
-function postListGrid(last_id, op) {
+function postListCb(res, position) {
+    if (res !== null) {
 
-    console.log("postListGrid...");
+        if (res === false) {
+            if ($('#post_list').children().length == 0) {
+                $("#post_none").fadeIn("slow");
+            }
+            return;
+        }
+        if (res.error) {
+            errorCheck(res.error);
+            return;
+        }
+        var i = 0;
+        $.each(res, function (key, val) {
+            i++;
+            var $el = $("#post_template")
+                    .clone()
+                    .prop({
+                        id: "post_" + val["post_id"]
+                    })
+                    .attr("data-id", val["post_id"]);
 
-    var prefix = "post2";
-    // POST GERAL
-    if (op === "new") {
-        sessionStorage.post_id_list_new = last_id;
-    } else {
-        op = "";
-        sessionStorage.post_id_list = last_id;
+            if (position === "prepend") {
+                $el.prependTo("#post_list");
+            } else {
+                $el.appendTo("#post_list");
+            }
+
+            $("#post_" + val["post_id"]).each(function (index) {
+
+                // EACH IMG GALLERY
+                if (typeof val[0] !== "undefined") {
+                    var x;
+                    var id = makeid();
+                    for (x = 0; x < val[0].length; x++) {
+                        $(this).find(".slick").append("<div id='slick_" + id + "'></div>");
+                        var url = localStorage.server + localStorage.server_img + val[0][x]["img_fn"];
+                        var content = '<img style="width:100vw;height:100vw" class="post_read post_img" src="' + url + '" />';
+                        //console.log(content);
+                        $("#slick_" + id).append("<div>" + content + "</div>");
+                    }
+                    $("#slick_" + id).slick({
+                        //arrows: false,
+                        dots: true
+                    });
+                }
+                if (val["user_fb_pic"] != null) {
+                    $(this).find(".user_fb_pic").attr("src", val["user_fb_pic"]);
+                }
+                $(this).find(".post_name").html(val["post_name"]);
+                if (val["post_price"] !== null) {
+                    // Preço em botão? (post_url)
+                    if (val["post_url"] !== null && val["post_url"] != "") {
+                        $(this).find(".priceTxt").hide();
+                        $(this).find(".priceBut").show().attr("data-open", val["post_url"]);
+                    } else {
+                        $(this).find(".priceTxt").show();
+                        $(this).find(".priceBut").hide();
+                    }
+                    $(this).find(".post_price").html("R$ " + val["post_price"]);
+                }
+                if (val["user_bio"] !== null) {
+                    $(this).find(".user_bio").html(val["user_bio"]);
+                }
+                // share
+                $(this).find(".share").attr("data-message", val["post_name"] + " por R$ " + val["post_price"]);
+                $(this).find(".share").attr("data-img", localStorage.server + localStorage.server_img + val["img_fn"]);
+                // content
+                $(this).find(".user_read").attr("data-id", val["user_id"]);
+                $(this).find(".post_read").attr("data-id", val["post_id"]);
+                $(this).find(".user_name").html(val["user_name"]);
+                $(this).find(".post_date").html(val["post_date"]);
+                $(this).find(".post_txt").html(val["post_txt"]);
+                $(this).find(".post_txt").text(function (index, currentText) {
+                    if (currentText.length > 64) {
+                        return currentText.substr(0, 128) + " ...";
+                    }
+                });
+                // chat
+                $(this).find(".chat").attr("data-id", val["user_id"]);
+                $(this).find(".chat").attr("data-name", val["user_name"]);
+                // tel
+                $(".user_phone").attr("href", "tel:0" + val["user_phone"]);
+            }).show();
+            //======================
+            // ULTIMO ID RECEBIDO
+            //======================
+
+            if (position === "prepend") {
+                sessionStorage.last_id_prepend = val["post_id"];
+            } else {
+                sessionStorage.last_id_append = val["post_id"];
+            }
+            /*
+             if (last_id === 0) {
+             sessionStorage.post2_id_list = val["post_id"];
+             if (i === 1)
+             sessionStorage.post2_id_list_new = val["post_id"];
+             }*/
+            //console.log("postList: followers = " + followers + " / op = " + op + " / last_id = " + last_id + " / post2_id new = " + sessionStorage.post2_id_list_new + " / old = " + sessionStorage.post2_id_list);
+
+            pretty();
+            setTimeout(function () {
+                if ($('#post_list').children().length > 0) {
+                    $("#post_none").hide();
+                }
+            }, 500);
+        });
     }
+}
+function postListGrid(where) {
+
+    console.log("postListGrid() start");
 
     $.ajax({
         url: localStorage.server + "/post_list.php",
@@ -471,8 +380,7 @@ function postListGrid(last_id, op) {
             user_email: localStorage.user_email,
             user_pass: localStorage.user_pass,
             //
-            last_id: last_id,
-            op: op
+            where: where
         },
         type: 'GET',
         dataType: 'jsonp',
@@ -480,9 +388,9 @@ function postListGrid(last_id, op) {
         timeout: localStorage.timeout
     })
             .always(function () {
-                $("#" + prefix + "_infinite").fadeOut("slow");
+                $("#post2_infinite").fadeOut("fast");
                 myApp.hideIndicator();
-                console.log("end postListGrid");
+                console.log("postListGrid() end.");
             })
 
             .fail(function () {
@@ -492,7 +400,6 @@ function postListGrid(last_id, op) {
             .done(function (res) {
 
                 console.log(res);
-
                 if (res !== null) {
 
                     if (res === false) {
@@ -520,34 +427,12 @@ function postListGrid(last_id, op) {
                         item += '</div>';
                         //console.log(item);
 
-                        // PREPEND
-                        if (op === "new") {
-
-                        }
-                        // APPEND
-                        else {
-                            $("#" + prefix + "_list").append(item);
-                        }
-
-                        //======================
-                        // ULTIMO ID RECEBIDO
-                        //======================
-                        // POST GERAL
-                        //======================
-                        if (op === "new") {
-                            sessionStorage.post_id_list_new = val["post_id"];
-                        } else {
-                            sessionStorage.post_id_list = val["post_id"];
-                        }
-                        if (last_id === 0) {
-                            sessionStorage.post_id_list = val["post_id"];
-                            if (i === 1)
-                                sessionStorage.post_id_list_new = val["post_id"];
-                        }
+                        $("#post2_list").append(item);
+                        
+                        sessionStorage.post_id_list
 
                     });
                     console.log("(NEW/GRID) post_id = " + sessionStorage.post_id_list_new + " (OLD) post_id = " + sessionStorage.post_id_list);
-
                 } // res not null
                 else {
                     alert("Erro interno.");
@@ -560,6 +445,8 @@ function postListGrid(last_id, op) {
 }
 // CEHCK LAST IMG
 function postStart(id) {
+
+    return;
 
     if (typeof id !== "undefined") {
         sessionStorage.img_last = res[0]["img_fn"];
@@ -592,7 +479,6 @@ function postStart(id) {
 
                 //console.log("iframe.loaded. result:");
                 console.log(res);
-
                 if (res !== null) {
 
                     if (typeof res.error !== "undefined") {
@@ -607,11 +493,7 @@ function postStart(id) {
                 } // res not null
             }); // after ajax
 }
-//=============================
-// GRID MASONRY
-//=============================
-function postGrid() {
-}
+
 //=============================
 // INSERT / DELETE POST
 //=============================
@@ -799,36 +681,30 @@ function catChange(id) {
 // PULL TO REFRESH
 //======================================
 $$('.pull-to-refresh-content').on('refresh', function (e) {
-    // ALL POSTS
-    if (sessionStorage.activePage === "index-2") {
-        postListGrid(sessionStorage.post2_id_list_new, "new");
-    }
-    // POST FOLLOWERS
-    else {
-        postList(sessionStorage.post_id_list_new, "new", true); // followers
-    }
-    setTimeout(function () {
-        myApp.pullToRefreshDone();
-    }, 1000);
+
+    postList("post_id > " + sessionStorage.last_id_prepend);
 });
 //======================================
 // INFINITE SCROLL
 //======================================
 $$('.infinite-scroll').on('infinite', function () {
-    // ALL POSTS
-    if (sessionStorage.activePage === "index-2") {
-        if ($("#post2_infinite").css("display") === "none") {
-            $("#post2_infinite").fadeIn("slow", function () {
-                postListGrid(sessionStorage.post_id_list);
-            });
-        }
-    }
-    // POST FOLLOWERS
-    else {
+
+    // INDEX
+    if (sessionStorage.activePage === "index") {
         if ($("#post_infinite").css("display") === "none") {
             $("#post_infinite").fadeIn("slow", function () {
-                postList(sessionStorage.post2_id_list, "", true);
+                postList("post_id < " + sessionStorage.last_id_prepend);
             });
         }
     }
+    // GRID
+    else {
+        if ($("#post2_infinite").css("display") === "none") {
+            $("#post2_infinite").fadeIn("slow", function () {
+                postList("post_id < " + sessionStorage.last_id_prepend);
+            });
+        }
+
+    }
+    $('.infinite-scroll-preloader').fadeOut("fast");
 });

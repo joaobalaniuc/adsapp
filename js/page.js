@@ -44,11 +44,11 @@ $(document).ready(function () {
 
     userRead(localStorage.user_id, userReadCb_Me);
     userAds(localStorage.user_id, userAdsCb_Me);
-    //postList(0);
-    postList(0, "", true);
 
-    // Get data and fill
-    //getSession();
+    // Post list
+    sessionStorage.last_id_prepend = 0;
+    sessionStorage.last_id_append = 0;
+    postList("post_id > " + sessionStorage.last_id_prepend);
 
     // Global timer
     setInterval(function () {

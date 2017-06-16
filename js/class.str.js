@@ -3,6 +3,17 @@ function getPathFromUrl(url) {
     return url.split(/[?#]/)[0];
 }
 
+// RANDOM CODE
+function makeid() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 16; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
 // ARRAY SERIALIZE
 serialize = function (obj, prefix) {
     var str = [], p;
@@ -54,10 +65,10 @@ function formatNum(num) {
 
 // REPLACE ALL OCCURENCES OF A STRING
 function replaceAll(string, token, newtoken) {
-	while (string.indexOf(token) != -1) {
- 		string = string.replace(token, newtoken);
-	}
-	return string;
+    while (string.indexOf(token) != -1) {
+        string = string.replace(token, newtoken);
+    }
+    return string;
 }
 
 // CLEAR "NULL" VALUES FOR DB INSERT
@@ -72,8 +83,7 @@ function clearNull(val) {
         }
         if (val[key] == "null") {
             val_ += "null,";
-        }
-        else {
+        } else {
             val_ += '"' + value + '"' + virg;
         }
     });
