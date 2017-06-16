@@ -478,7 +478,7 @@ function postSend() {
             })
 
             .fail(function () {
-                myApp.alert('Desculpe, verifique sua conexão e tente novamente.', 'Erro');
+                //myApp.alert('Desculpe, verifique sua conexão e tente novamente.', 'Erro');
             })
 
             .done(function (res) {
