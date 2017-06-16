@@ -10,16 +10,6 @@ $$(document).on('click', '.post_read', function (e) {
 //=============================
 // PAGE: POST_FORM
 //=============================
-$$(document).on('click', '#removeLastImg', function (e) {
-    if (sessionStorage.edit_id > 0) {
-    } else {
-        myApp.confirm('Tem certeza disto?', 'Desfazer envio', function () {
-            window.location.href = "index.html";
-            //removeLastImg();
-            //view1.router.back();
-        });
-    }
-});
 myApp.onPageInit('post_form', function (page) {
 
     sessionStorage.serialize = $("#post_form form").serialize();
@@ -108,7 +98,9 @@ $$(document).on('click', '.post_del', function (e) {
 //=============================
 function postRead(post_id, cb) {
 
-    myApp.showPreloader();
+    //myApp.showPreloader();
+    loadingShow();
+
     $.ajax({
         url: localStorage.server + "/post_read.php",
         data: {
@@ -124,6 +116,7 @@ function postRead(post_id, cb) {
         timeout: localStorage.timeout
     })
             .always(function () {
+                loadingHide();
                 myApp.hidePreloader();
             })
 
@@ -156,12 +149,21 @@ function postReadCb(res) {
     var like = post[0]["post_count_like"];
     if (like == null)
         like = 0;
-    // IMG
-    var img_fn = post[0]["img_fn"];
-    if (img_fn != null) {
-        var url = localStorage.server + localStorage.server_img + img_fn;
-        console.log(url);
-        $("#post_read .img_fn").attr("src", url);
+    // IMG CAROUSEL
+    if (typeof post[0][0] !== "undefined") {
+        var x;
+        var id = makeid();
+        for (x = 0; x < post[0][0].length; x++) {
+            $("#post_read .slick").append("<div id='slick_" + id + "'></div>");
+            var url = localStorage.server + localStorage.server_img + post[0][0][x]["img_fn"];
+            var content = '<img style="width:100vw;height:100vw" class="post_read post_img" src="' + url + '" />';
+            console.log(content);
+            $("#slick_" + id).append("<div>" + content + "</div>");
+        }
+        $("#slick_" + id).slick({
+            //arrows: false,
+            dots: true
+        });
     }
     if (post[0]["user_fb_pic"] != null) {
         $("#post_read .user_fb_pic").attr("src", post[0]["user_fb_pic"]);
@@ -255,7 +257,11 @@ function postList(where) {
             })
 
             .done(function (res) {
-                postListCb(res, "prepend");
+                if (where.indexOf(">") > 0) {
+                    postListCb(res, "prepend");
+                } else {
+                    postListCb(res, "append");
+                }
             });
 }
 function postListCb(res, position) {
@@ -279,7 +285,8 @@ function postListCb(res, position) {
                     .prop({
                         id: "post_" + val["post_id"]
                     })
-                    .attr("data-id", val["post_id"]);
+                    .attr("data-id", val["post_id"])
+                    .attr("post-id", val["post_id"]);
 
             if (position === "prepend") {
                 $el.prependTo("#post_list");
@@ -310,6 +317,7 @@ function postListCb(res, position) {
                 }
                 $(this).find(".post_name").html(val["post_name"]);
                 if (val["post_price"] !== null) {
+
                     // Preço em botão? (post_url)
                     if (val["post_url"] !== null && val["post_url"] != "") {
                         $(this).find(".priceTxt").hide();
@@ -323,9 +331,11 @@ function postListCb(res, position) {
                 if (val["user_bio"] !== null) {
                     $(this).find(".user_bio").html(val["user_bio"]);
                 }
+
                 // share
                 $(this).find(".share").attr("data-message", val["post_name"] + " por R$ " + val["post_price"]);
                 $(this).find(".share").attr("data-img", localStorage.server + localStorage.server_img + val["img_fn"]);
+
                 // content
                 $(this).find(".user_read").attr("data-id", val["user_id"]);
                 $(this).find(".post_read").attr("data-id", val["post_id"]);
@@ -342,23 +352,8 @@ function postListCb(res, position) {
                 $(this).find(".chat").attr("data-name", val["user_name"]);
                 // tel
                 $(".user_phone").attr("href", "tel:0" + val["user_phone"]);
-            }).show();
-            //======================
-            // ULTIMO ID RECEBIDO
-            //======================
 
-            if (position === "prepend") {
-                sessionStorage.last_id_prepend = val["post_id"];
-            } else {
-                sessionStorage.last_id_append = val["post_id"];
-            }
-            /*
-             if (last_id === 0) {
-             sessionStorage.post2_id_list = val["post_id"];
-             if (i === 1)
-             sessionStorage.post2_id_list_new = val["post_id"];
-             }*/
-            //console.log("postList: followers = " + followers + " / op = " + op + " / last_id = " + last_id + " / post2_id new = " + sessionStorage.post2_id_list_new + " / old = " + sessionStorage.post2_id_list);
+            }).show();
 
             pretty();
             setTimeout(function () {
@@ -371,7 +366,7 @@ function postListCb(res, position) {
 }
 function postListGrid(where) {
 
-    console.log("postListGrid() start");
+    console.log("postListGrid(): where = " + where);
 
     $.ajax({
         url: localStorage.server + "/post_list.php",
@@ -390,7 +385,7 @@ function postListGrid(where) {
             .always(function () {
                 $("#post2_infinite").fadeOut("fast");
                 myApp.hideIndicator();
-                console.log("postListGrid() end.");
+                //console.log("postListGrid() end.");
             })
 
             .fail(function () {
@@ -414,28 +409,30 @@ function postListGrid(where) {
                     $.each(res, function (key, val) {
                         i++;
                         // create new item elements
+                        var thumb = localStorage.server + localStorage.server_img + "thumb_" + val[0][0]["img_fn"];
                         var item = '';
                         item += '<div class="square">';
                         item += '<div class="content">';
                         item += '<div class="table">';
-                        item += '<div class="post_read table-cell" data-id="' + val["post_id"] + '" style="background-image:url(' + localStorage.server + localStorage.server_img + "thumb_" + val["img_fn"] + ')">';
+                        item += '<div class="post_read table-cell" data-id="' + val["post_id"] + '" style="background-image:url(' + thumb + ')">';
                         //item += '<img class="rs" src="'+localStorage.server+localStorage.server_img+val["img_fn"]+'" />';
                         //item += 'Responsive image.';
                         item += '</div>';
                         item += '</div>';
                         item += '</div>';
                         item += '</div>';
-                        //console.log(item);
+
+                        console.log(thumb);
 
                         $("#post2_list").append(item);
-                        
-                        sessionStorage.post_id_list
+
+                        //sessionStorage.post_id_list
 
                     });
-                    console.log("(NEW/GRID) post_id = " + sessionStorage.post_id_list_new + " (OLD) post_id = " + sessionStorage.post_id_list);
+                    //console.log("(NEW/GRID) post_id = " + sessionStorage.post_id_list_new + " (OLD) post_id = " + sessionStorage.post_id_list);
                 } // res not null
                 else {
-                    alert("Erro interno.");
+                    //alert("Erro interno.");
                 }
                 if (sessionStorage.post2_id_list == 0) {
                     $("#post_none").fadeIn("slow");
@@ -443,57 +440,6 @@ function postListGrid(where) {
 
             }); // after ajax
 }
-// CEHCK LAST IMG
-function postStart(id) {
-
-    return;
-
-    if (typeof id !== "undefined") {
-        sessionStorage.img_last = res[0]["img_fn"];
-        go("post_form.html");
-        return;
-    }
-
-    $.ajax({
-        url: localStorage.server + "/img_last.php",
-        data: {
-            'user_id': localStorage.user_id,
-            'user_email': localStorage.user_email,
-            'user_pass': localStorage.user_pass
-        },
-        type: 'GET',
-        dataType: 'jsonp',
-        jsonp: 'callback',
-        timeout: localStorage.timeout
-    })
-            .always(function () {
-                myApp.hidePreloader();
-                userAds(localStorage.user_id, userAdsCb_Me);
-            })
-
-            .fail(function () {
-                myApp.alert("Falha na conexão.", "Ops!")
-            })
-
-            .done(function (res) {
-
-                //console.log("iframe.loaded. result:");
-                console.log(res);
-                if (res !== null) {
-
-                    if (typeof res.error !== "undefined") {
-                        errorCheck(res.error);
-                        return;
-                    }
-
-                    if (res !== false) {
-                        sessionStorage.img_last = res[0]["img_fn"];
-                        go("post_form.html");
-                    }
-                } // res not null
-            }); // after ajax
-}
-
 //=============================
 // INSERT / DELETE POST
 //=============================
@@ -564,30 +510,6 @@ function postDel(post_id) {
             })
             .done(function (res) {
                 window.location.href = "index.html";
-            });
-}
-function removeLastImg() {
-    myApp.showPreloader();
-    $.ajax({
-        url: localStorage.server + "/img_del.php",
-        data: {
-            user_id: localStorage.user_id,
-            user_email: localStorage.user_email,
-            user_pass: localStorage.user_pass
-        },
-        type: 'GET',
-        dataType: 'jsonp',
-        jsonp: 'callback',
-        timeout: localStorage.timeout
-    })
-            .always(function () {
-                window.location.href = "index.html";
-            })
-            .fail(function () {
-                //myApp.alert('Desculpe, verifique sua conexão e tente novamente.', 'Erro');
-            })
-            .done(function (res) {
-                //window.location.href = "index.html";
             });
 }
 //=============================
@@ -678,14 +600,14 @@ function catChange(id) {
     }
 }
 //======================================
-// PULL TO REFRESH
+// PULL TO REFRESH (TOP)
 //======================================
 $$('.pull-to-refresh-content').on('refresh', function (e) {
-
-    postList("post_id > " + sessionStorage.last_id_prepend);
+    var id = lastId("post_list", "post-id");
+    postList("post_id > " + id);
 });
 //======================================
-// INFINITE SCROLL
+// INFINITE SCROLL (DOWN)
 //======================================
 $$('.infinite-scroll').on('infinite', function () {
 
@@ -693,7 +615,8 @@ $$('.infinite-scroll').on('infinite', function () {
     if (sessionStorage.activePage === "index") {
         if ($("#post_infinite").css("display") === "none") {
             $("#post_infinite").fadeIn("slow", function () {
-                postList("post_id < " + sessionStorage.last_id_prepend);
+                var id = firstId("post_list", "post-id");
+                postList("post_id < " + id);
             });
         }
     }
@@ -701,10 +624,21 @@ $$('.infinite-scroll').on('infinite', function () {
     else {
         if ($("#post2_infinite").css("display") === "none") {
             $("#post2_infinite").fadeIn("slow", function () {
-                postList("post_id < " + sessionStorage.last_id_prepend);
+                var id = firstId("post2_list", "data-id");
+                postListGrid("post_id < " + id);
             });
         }
-
     }
     $('.infinite-scroll-preloader').fadeOut("fast");
 });
+//======================================
+// GET LAST ID
+//======================================
+function lastId(parent_id, attr) {
+    var id = $("#" + parent_id + " [" + attr + "]").first().attr(attr);
+    return id;
+}
+function firstId(parent_id, attr) {
+    var id = $("#" + parent_id + " [" + attr + "]").last().attr(attr);
+    return id;
+}

@@ -3,6 +3,12 @@ function getPathFromUrl(url) {
     return url.split(/[?#]/)[0];
 }
 
+// CHECK IF IS FUNCTION
+function isFunction(functionToCheck) {
+    var getType = {};
+    return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+}
+
 // RANDOM CODE
 function makeid() {
     var text = "";

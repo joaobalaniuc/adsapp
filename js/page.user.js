@@ -189,7 +189,8 @@ $$(document).on('click', "#userSubmit", function (e) {
 function userRead(target_id, cb) {
 
     // PRELOADER
-    myApp.showPreloader();
+    //myApp.showPreloader();
+    loadingShow();
 
     // RUN AJAX
     $.ajax({
@@ -207,7 +208,7 @@ function userRead(target_id, cb) {
         timeout: localStorage.timeout
     })
             .always(function () {
-                myApp.hidePreloader();
+                //myApp.hidePreloader();
             })
 
             .fail(function () {
@@ -264,6 +265,8 @@ function userReadCb_Me(res) {
     } // res[0]
 }
 function userReadCb_Friend(res) {
+    
+    loadingHide();
 
     if (res[0]) {
         // chat button
@@ -331,8 +334,7 @@ function userAds(user_id, cb) {
 }
 function userAdsCb_Me(res) {
 
-    if (res !== null) {
-
+    if (res !== null && typeof res !== "undefined") {
 
         if (res.error) {
             errorCheck(res.error);
@@ -355,8 +357,8 @@ function userAdsCb_Me(res) {
                 $("#user_post_" + val["post_id"]).each(function (index) {
 
                     $(this).find(".post_name").html(val["post_name"]);
-                    $(this).find(".post_price").html(val["post_price"]);
-                    var url = localStorage.server + localStorage.server_img + "/" + val["img_fn"];
+                    $(this).find(".post_price").html("R$ " + val["post_price"]);
+                    var url = localStorage.server + localStorage.server_img + "/" + val[0][0]["img_fn"];
                     $(this).find(".img_fn").attr("src", url);
                 }).show();
             });
@@ -392,8 +394,8 @@ function userAdsCb_Friend(res) {
                 $("#friend_post_" + val["post_id"]).each(function (index) {
 
                     $(this).find(".post_name").html(val["post_name"]);
-                    $(this).find(".post_price").html(val["post_price"]);
-                    var url = localStorage.server + localStorage.server_img + "/" + val["img_fn"];
+                    $(this).find(".post_price").html("R$ "+val["post_price"]);
+                    var url = localStorage.server + localStorage.server_img + "/" + val[0][0]["img_fn"];
                     $(this).find(".img_fn").attr("src", url);
                 }).show();
             });

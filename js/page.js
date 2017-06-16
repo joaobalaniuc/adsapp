@@ -15,8 +15,8 @@
 // GLOBAL EVENTS
 //============================
 $(window).on("load", function () {
-    //loadingHide();
-    $("#loaderx").fadeOut("slow");
+    loadingHide();
+
 });
 
 $$(document).on("submit", "form", function (e) {
@@ -46,9 +46,7 @@ $(document).ready(function () {
     userAds(localStorage.user_id, userAdsCb_Me);
 
     // Post list
-    sessionStorage.last_id_prepend = 0;
-    sessionStorage.last_id_append = 0;
-    postList("post_id > " + sessionStorage.last_id_prepend);
+    postList("post_id > 0");
 
     // Global timer
     setInterval(function () {
@@ -82,8 +80,7 @@ function pageRefresh() {
             && page !== "chat") {
         $("#toolbar_on").fadeIn("fast");
         $("#toolbar_off").fadeOut("fast");
-    }
-    else {
+    } else {
         $("#toolbar_on, #toolbar_off").hide();
     }
     // novo post
@@ -102,8 +99,7 @@ function pageRefresh() {
             if ($('#post_list').children().length === 0) {
                 postList(0, "", true); // followers
             }
-        }
-        else {
+        } else {
             sessionStorage.loadIndex = 1;
         }
         // atualizou followers
@@ -122,8 +118,7 @@ function pageRefresh() {
         if ($('#post2_list').children().length === 0) {
             //postGrid();
             myApp.showIndicator();
-            postListGrid(0);
-
+            postListGrid("post_id > 0");
         }
 
     }
@@ -180,8 +175,7 @@ function conexCheck() {
     if (sessionStorage.onlineLast !== sessionStorage.online) {
         if (sessionStorage.online === "true") {
             $('#conexCheck').html("<span style='color:#6ccb5e'><img src='img/online.png' style='vertical-align:bottom' /> &nbsp; Conectado</span>");
-        }
-        else {
+        } else {
             $('#conexCheck').html("<span style='color:#e95651'><img src='img/offline.png' style='vertical-align:bottom' /> &nbsp; Você está offline</span>");
         }
         sessionStorage.onlineLast = sessionStorage.online;
@@ -207,6 +201,31 @@ myApp.onPageInit('*', function (page) {
     //var name = myApp.getCurrentView().activePage.name;
     //console.log("aaa=" + name);
 });
+
+
+//==============================================
+// GO INDEX (REFRESH)
+//==============================================
+function loadingShow(cb) {
+    return false;
+    if (!$(".loaderx").length) {
+        $("body").append('<div class="loaderx"><div><img src="img/loading.gif" /></div></div>');
+    }
+    $(".loaderx").fadeIn("fast", cb);
+}
+function loadingHide(cb) {
+    $(".loaderx").fadeOut("fast", cb);
+}
+$$(document).on('click', '.go_index', function (e) {
+    myApp.confirm('Tem certeza disto?', 'Voltar à home', function () {
+        go_index();
+    });
+});
+function go_index() {
+    loadingShow(function () {
+        window.location.href = "index.html";
+    });
+}
 
 //==============================================
 // FILL FORM WITH OBJECT DATA
@@ -273,11 +292,6 @@ function FF(data, form_elem) {
     } // for
 }
 
-function isFunction(functionToCheck) {
-    var getType = {};
-    return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
-}
-
 //============================
 // GLOBAL FUNCTIONS
 //============================
@@ -287,7 +301,21 @@ function setMask() {
     $('.zipcode').mask('00000-000');
 }
 
-
+// NOTIFY
+function notify(text, type) {
+    if (typeof type === "undefined") {
+        type = "error";
+    }
+    var n = new Noty({
+        text: text,
+        type: type, // success, error, warning, information, notification
+        theme: 'sunset', // mint, sunset, relax, metroui, bootstrap-v3, bootstrap-v4, nest, semanticui
+        layout: 'center',
+        timeout: 1500
+    });
+    console.log(n); // Returns a NOTY javascript object
+    n.show();
+}
 //==============================================
 // SET PRETTY DATE = REQUER prettydate.js
 //==============================================
@@ -318,7 +346,6 @@ function pretty() {
         }
     });
 }
-
 
 //============================
 // ERROR
@@ -355,19 +382,19 @@ $(function () {
     $.ajaxSetup({
         error: function (jqXHR, exception) {
             if (jqXHR.status === 0) {
-                myApp.alert('Not connect. Verify Network.', 'Exception');
+                notify('Not connect. Verify Network.');
             } else if (jqXHR.status == 404) {
-                myApp.alert('Requested page not found. [404]', 'Exception');
+                notify('Requested page not found. [404]');
             } else if (jqXHR.status == 500) {
-                myApp.alert('Internal Server Error [500].', 'Exception');
+                notify('Internal Server Error [500].');
             } else if (exception === 'parsererror') {
-                myApp.alert('Requested JSON parse failed.', 'Exception');
+                notify('Requested JSON parse failed.');
             } else if (exception === 'timeout') {
-                myApp.alert('Time out error.', 'Exception');
+                notify('Time out error.');
             } else if (exception === 'abort') {
-                myApp.alert('Ajax request aborted.', 'Exception');
+                notify('Ajax request aborted.');
             } else {
-                myApp.alert('Uncaught Error.\n' + jqXHR.responseText, 'Exception');
+                notify('Uncaught Error.\n' + jqXHR.responseText);
             }
         }
     });
