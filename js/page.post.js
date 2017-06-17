@@ -487,6 +487,7 @@ function postSend() {
             .done(function (res) {
                 if (res !== null) {
                     console.log(res);
+                    alert(JSON.stringify(res));
                     if (typeof res.error !== "undefined") {
                         errorCheck(res.error);
                         return;
