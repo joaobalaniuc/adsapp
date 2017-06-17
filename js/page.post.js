@@ -492,7 +492,7 @@ function postSend() {
                         return;
                     }
                     if (res.success) {
-                        alert("success..upload now...")
+                        alert("success..upload now...");
                         sessionStorage.post_id = res.success;
                         postUpload();
                     }
