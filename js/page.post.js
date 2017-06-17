@@ -450,7 +450,7 @@ function postSend() {
         var www = url;
         www = replaceAll(www, "http://", "");
         www = replaceAll(www, "https://", "");
-        alert(www);
+        www = www.toLowerCase();
         $("#post_form [name='post_url']").val(www);
     }
     //
@@ -463,6 +463,7 @@ function postSend() {
     var data_user = $.param(data_user); // serialize
     var data = data_form + "&" + data_user;
     console.log(data);
+    alert(JSON.stringify(data));
     // RUN AJAX
     myApp.showPreloader();
     $.ajax({
