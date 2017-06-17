@@ -312,7 +312,7 @@ function notify(text, type) {
         layout: 'center',
         timeout: 1500
     });
-    console.log(n); // Returns a NOTY javascript object
+    //console.log(n); // Returns a NOTY javascript object
     n.show();
 }
 //==============================================

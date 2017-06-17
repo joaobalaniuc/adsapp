@@ -16,7 +16,7 @@ $$(document).on('click', '.chat', function (e) {
 // PAGE: CHAT
 //================================
 myApp.onPageBeforeInit('chat', function (page) {
-    sessionStorage.chat_loading = 1; // spinner
+    sessionStorage.chat_loading = 1; // loading first time
     sessionStorage.chat_id = 0;
     $("#chatName").html(sessionStorage.chat_name);
     $("#chatPic").attr("src", sessionStorage.chat_pic);
@@ -37,10 +37,10 @@ $$(document).on('click', '#chatSend', function (e) {
     chatSend(chat_txt);
 });
 $$(document).on('click', '.chat_del', function (e) {
-  myApp.confirm('Are you sure?', function () {
-          var id_other = $(this).attr("data-id-other");
-          chatDel(id_other);
-      });
+    myApp.confirm('Are you sure?', function () {
+        var id_other = $(this).attr("data-id-other");
+        chatDel(id_other);
+    });
 });
 
 //================================
@@ -49,12 +49,12 @@ $$(document).on('click', '.chat_del', function (e) {
 function chatRead() {
     //
     var page = myApp.getCurrentView().activePage.name;
+
     if (page !== "chat") {
         return false;
     }
-    //
-    //if ($('.message').length === 0) {
-    if (sessionStorage.chat_loading == 1) {
+    // loading first time
+    if (sessionStorage.chat_loading === 1) {
         sessionStorage.chat_loading = 0;
         myApp.showIndicator();
     }
@@ -82,59 +82,58 @@ function chatRead() {
             })
 
             .fail(function () {
-                alert("err");
             })
 
             .done(function (res) {
                 console.log(res);
                 if (res[0]) {
-                    $.each(res, function (i, item) {
-
-                        var rs = res[i];
-
-                        // bugfix msg enviada proxima ao timer
-                        if (rs.chat_id > parseInt(sessionStorage.chat_id)) {
-                            // enviado
-                            if (rs.chat_user_src === localStorage.user_id) {
-                                var type = "sent";
-                            }
-                            // recebido
-                            else {
-                                var type = "received";
-                            }
-                            // mostrar
-                            myMessages.addMessage({
-                                text: rs.chat_txt,
-                                //avatar: "img/user.png",
-                                type: type,
-                                date: dateFormat(new Date(rs.chat_date_src), "dd/mm hh:MM")
-                                        //date: dateFormat(new Date(rs.chat_date), "dd/mm hh:MM")
-                            });
-
-                            /*
-                             $("#" + type + "_template")
-                             .clone()
-                             .prop({
-                             id: "msg_" + rs.chat_id
-                             })
-                             .appendTo("#msg");
-
-                             $("#msg_" + rs.chat_id).each(function (index) {
-
-                             $(this).find(".message-name").html(rs.user_name);
-                             $(this).find(".message-text").html(rs.chat_txt);
-                             $(this).find(".message-date").html(rs.chat_date);
-                             }).show();
-                             */
-
-                            sessionStorage.chat_id = rs.chat_id;
-                            window.scrollTo(0, document.body.scrollHeight);
-                        }
-                    }); // each
-
-
+                    chatReadCb(res);
                 }
             }); // after ajax
+}
+function chatReadCb(res) {
+    $.each(res, function (i, item) {
+        var rs = res[i];
+
+        // bugfix msg enviada proxima ao timer
+        if (rs.chat_id > parseInt(sessionStorage.chat_id)) {
+            // enviado
+            if (rs.chat_user_src === localStorage.user_id) {
+                var type = "sent";
+            }
+            // recebido
+            else {
+                var type = "received";
+            }
+            // mostrar
+            myMessages.addMessage({
+                text: rs.chat_txt,
+                //avatar: "img/user.png",
+                type: type,
+                date: dateFormat(new Date(rs.chat_date_src), "dd/mm hh:MM")
+                        //date: dateFormat(new Date(rs.chat_date), "dd/mm hh:MM")
+            });
+
+            /*
+             $("#" + type + "_template")
+             .clone()
+             .prop({
+             id: "msg_" + rs.chat_id
+             })
+             .appendTo("#msg");
+             
+             $("#msg_" + rs.chat_id).each(function (index) {
+             
+             $(this).find(".message-name").html(rs.user_name);
+             $(this).find(".message-text").html(rs.chat_txt);
+             $(this).find(".message-date").html(rs.chat_date);
+             }).show();
+             */
+
+            sessionStorage.chat_id = rs.chat_id;
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+    }); // each
 }
 function chatSend(chat_txt) {
 
@@ -254,10 +253,10 @@ function chatList(last_id) {
                         $("#chat_" + rs.chat_id).each(function (index) {
 
                             $(this).find(".chat")
-                                .attr("href", "chat.html")
-                                .attr("data-id", other_id)
-                                .attr("data-name", name)
-                                .attr("data-pic", pic);
+                                    .attr("href", "chat.html")
+                                    .attr("data-id", other_id)
+                                    .attr("data-name", name)
+                                    .attr("data-pic", pic);
 
                             $(this).find(".chat_del")
                                     .attr("data-id-other", other_id);
@@ -278,7 +277,7 @@ function chatList(last_id) {
 }
 function chatDel(id_other) {
 
-    console.log("id_other="+id_other);
+    console.log("id_other=" + id_other);
 
     myApp.showIndicator();
     $.ajax({
@@ -302,6 +301,6 @@ function chatDel(id_other) {
                 //myApp.alert('Desculpe, verifique sua conexão e tente novamente.', 'Erro');
             })
             .done(function (res) {
-                $("li[data-id-other="+id_other+"]").fadeOut("fast");
+                $("li[data-id-other=" + id_other + "]").fadeOut("fast");
             });
 }
