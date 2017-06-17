@@ -68,6 +68,7 @@ myApp.onPageInit('post_form', function (page) {
 });
 $$(document).on('click', '.postSend', function (e) {
     if ($("#postForm").valid()) {
+        alert("but");
         postSend();
     } else {
         myApp.alert('Preencha corretamente os campos do formulário.', 'Ops!');
@@ -444,6 +445,7 @@ function postListGrid(where) {
 // INSERT / DELETE POST
 //=============================
 function postSend() {
+    alert("funx");
     // HTTP
     var url = $("#post_form [name='post_url']").val();
     if (url != "") {
@@ -490,6 +492,7 @@ function postSend() {
                         return;
                     }
                     if (res.success) {
+                        alert("success..upload now...")
                         sessionStorage.post_id = res.success;
                         postUpload();
                     }
