@@ -220,7 +220,7 @@ function userCameraShow(imageURI) {
     $("#userForm [name='user_img']").val(imageURI);
 }
 function userCameraUpload(imageURI) {
-    alert(imageURI);
+    //alert(imageURI);
     myApp.showIndicator();
     var options = new FileUploadOptions();
     options.fileKey = "file";
@@ -238,7 +238,7 @@ function userCameraUpload(imageURI) {
     //alert(localStorage.server);
     var ft = new FileTransfer();
     ft.upload(imageURI, localStorage.server + "/user_upload.php", function (result) {
-        alert("ok="+result.response);
+        //alert("ok="+result.response);
         myApp.hideIndicator();
         userUpdate(result.response);
     }, function (error) {
