@@ -446,7 +446,6 @@ function postListGrid(where) {
 //=============================
 function postSend() {
     alert("funx");
-    return;
     // HTTP
     var url = $("#post_form [name='post_url']").val();
     if (url != "") {

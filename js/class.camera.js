@@ -105,6 +105,10 @@ function photoOptions() {
                 bold: true,
                 color: "pink",
                 onClick: function () {
+                    if (!isApp) {
+                        go("post_form.html");
+                        return;
+                    }
                     photoGet();
                 }
             }
