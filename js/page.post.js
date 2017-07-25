@@ -13,11 +13,9 @@ $$(document).on('click', '.post_read', function (e) {
 myApp.onPageInit('post_form', function (page) {
 
     sessionStorage.serialize = $("#post_form form").serialize();
-
     $("#camera_sort").sortable({
         items: "li:not(.ui-state-disabled)"
     });
-
     if (typeof sessionStorage.imageURI !== "undefined") {
         setTimeout(function () {
             photoAdd(sessionStorage.imageURI);
@@ -35,11 +33,11 @@ myApp.onPageInit('post_form', function (page) {
     else {
         // img
         /*
-        var url = localStorage.server + localStorage.server_img + "/" + sessionStorage.img_last;
-        console.log(url);
-        $("#img_last").attr("src", url);
-        $("[name=img_fn]").val(sessionStorage.img_last);
-        */
+         var url = localStorage.server + localStorage.server_img + "/" + sessionStorage.img_last;
+         console.log(url);
+         $("#img_last").attr("src", url);
+         $("[name=img_fn]").val(sessionStorage.img_last);
+         */
     }
     // VALIDATE
     $("#postForm").validate({
@@ -65,12 +63,14 @@ myApp.onPageInit('post_form', function (page) {
             }
         }
     });
-
 });
 $$(document).on('click', '.postSendx', function (e) {
-    alert("butx");
+    setTimeout(function () {
+        alert("aaa");
+    }, 1000);
     return;
-});
+}
+);
 $$(document).on('click', '.postSend', function (e) {
     if ($("#postForm").valid()) {
         alert("but");
@@ -107,7 +107,6 @@ function postRead(post_id, cb) {
 
     //myApp.showPreloader();
     loadingShow();
-
     $.ajax({
         url: localStorage.server + "/post_read.php",
         data: {
@@ -146,7 +145,7 @@ function postReadCb(res) {
         return;
     }
 
-    // COUNTS...
+// COUNTS...
     var view = post[0]["post_count_view"];
     if (view == null)
         view = 0;
@@ -168,7 +167,7 @@ function postReadCb(res) {
             $("#slick_" + id).append("<div>" + content + "</div>");
         }
         $("#slick_" + id).slick({
-            //arrows: false,
+//arrows: false,
             dots: true
         });
     }
@@ -176,7 +175,7 @@ function postReadCb(res) {
         $("#post_read .user_fb_pic").attr("src", post[0]["user_fb_pic"]);
     }
 
-    // CHAT FILL
+// CHAT FILL
     $("#post_read .chat").attr("data-id", post[0]["user_id"]);
     $("#post_read .chat").attr("data-name", post[0]["user_name"]);
     $("#post_read .chat").attr("data-pic", post[0]["user_fb_pic"]);
@@ -195,7 +194,7 @@ function postReadCb(res) {
     if (txt !== null) {
         $("#post_read .post_txt").html(txt);
     }
-    // "buy" button
+// "buy" button
     if (post[0]["post_url"] !== null && post[0]["post_url"] != "") {
         $("#post_read .post_url").show().attr("data-open", post[0]["post_url"]);
     } else {
@@ -238,7 +237,6 @@ function postEditCb(res) {
 function postList(where) {
 
     console.log("postList(): where=" + where);
-
     // AJAX
     $.ajax({
         url: localStorage.server + "/post_list.php",
@@ -294,7 +292,6 @@ function postListCb(res, position) {
                     })
                     .attr("data-id", val["post_id"])
                     .attr("post-id", val["post_id"]);
-
             if (position === "prepend") {
                 $el.prependTo("#post_list");
             } else {
@@ -342,7 +339,6 @@ function postListCb(res, position) {
                 // share
                 $(this).find(".share").attr("data-message", val["post_name"] + " por R$ " + val["post_price"]);
                 $(this).find(".share").attr("data-img", localStorage.server + localStorage.server_img + val["img_fn"]);
-
                 // content
                 $(this).find(".user_read").attr("data-id", val["user_id"]);
                 $(this).find(".post_read").attr("data-id", val["post_id"]);
@@ -359,9 +355,7 @@ function postListCb(res, position) {
                 $(this).find(".chat").attr("data-name", val["user_name"]);
                 // tel
                 $(".user_phone").attr("href", "tel:0" + val["user_phone"]);
-
             }).show();
-
             pretty();
             setTimeout(function () {
                 if ($('#post_list').children().length > 0) {
@@ -374,7 +368,6 @@ function postListCb(res, position) {
 function postListGrid(where) {
 
     console.log("postListGrid(): where = " + where);
-
     $.ajax({
         url: localStorage.server + "/post_list.php",
         data: {
@@ -428,11 +421,8 @@ function postListGrid(where) {
                         item += '</div>';
                         item += '</div>';
                         item += '</div>';
-
                         console.log(thumb);
-
                         $("#post2_list").append(item);
-
                         //sessionStorage.post_id_list
 
                     });
@@ -461,7 +451,7 @@ function postSend() {
         www = www.toLowerCase();
         $("#post_form [name='post_url']").val(www);
     }
-    //
+//
     var data_form = $("#post_form form").serialize();
     var data_user = {
         user_id: localStorage.user_id,
@@ -632,7 +622,7 @@ $$('.pull-to-refresh-content').on('refresh', function (e) {
 //======================================
 $$('.infinite-scroll').on('infinite', function () {
 
-    // INDEX
+// INDEX
     if (sessionStorage.activePage === "index") {
         if ($("#post_infinite").css("display") === "none") {
             $("#post_infinite").fadeIn("slow", function () {
@@ -641,7 +631,7 @@ $$('.infinite-scroll').on('infinite', function () {
             });
         }
     }
-    // GRID
+// GRID
     else {
         if ($("#post2_infinite").css("display") === "none") {
             $("#post2_infinite").fadeIn("slow", function () {
