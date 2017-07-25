@@ -236,7 +236,7 @@ function userReadCb_Form(res) {
     FF(res, "#userForm");
 
     $("#userForm [name=user_img]").val("");
-    
+
     // IMG UPLOAD
     var img = res[0].user_img;
     if (img != null && img != "") {
@@ -253,7 +253,7 @@ function userReadCb_Form(res) {
         }
     }
     loadingHide();
-    
+
     /*$(".user_first_name").html(res[0].user_first_name);
      $(".user_email").html(res[0].user_email);
      
@@ -280,11 +280,32 @@ function userReadCb_Me(res) {
         String.prototype.splice = function (idx, rem, str) {
             return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
         };
+
+
+        // IMG USER
+        var user_img;
+        if (res[0]["user_img"] != null && res[0]["user_img"] != "") {
+            user_img = localStorage.server + localStorage.server_img + res[0]["user_img"];
+        } else {
+            if (res[0]["user_fb_pic"] != null && res[0]["user_fb_pic"] != "") {
+                user_img = res[0]["user_fb_pic"];
+            } else {
+                user_img = "img/user.png";
+            }
+        }
+        $("#index-4 .pic_img").css("background-image", "url(" + user_img + ")");
+        $("#index-4 .pic_bg").css("background-image", "url(" + user_img + ")");
+        $("#index-4 .pic_img").css("width", "180px").css("height", "180px");
+
+
+
+        /*
         if (res[0]["user_fb_pic"] !== null) {
             $("#index-4 .pic_img").css("background-image", "url(" + res[0]["user_fb_pic"] + ")");
             $("#index-4 .pic_bg").css("background-image", "url(" + res[0]["user_fb_pic"] + ")");
             $("#index-4 .pic_img").css("width", "180px").css("height", "180px");//.css("margin", "32px");;
         }
+        */
         if (res[0]["user_phone"] == null) {
             var phone = "(sem telefone)";
         } else {
@@ -303,7 +324,23 @@ function userReadCb_Friend(res) {
         // chat button
         $("#user_read .chat").attr("data-id", res[0]["user_id"]);
         $("#user_read .chat").attr("data-name", res[0]["user_name"]);
-        $("#user_read .chat").attr("data-pic", res[0]["user_fb_pic"]);
+        
+        
+        
+        // IMG USER
+        var user_img;
+        if (res[0]["user_img"] != null && res[0]["user_img"] != "") {
+            user_img = localStorage.server + localStorage.server_img + res[0]["user_img"];
+        } else {
+            if (res[0]["user_fb_pic"] != null && res[0]["user_fb_pic"] != "") {
+                user_img = res[0]["user_fb_pic"];
+            } else {
+                user_img = "img/user.png";
+            }
+        }
+        $("#user_read .chat").attr("data-pic", user_img);
+        
+        
         //
         $("#user_read .user_name").html(res[0]["user_name"]);
         $("#user_read .user_bio").html(res[0]["user_bio"]);

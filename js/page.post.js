@@ -162,14 +162,25 @@ function postReadCb(res) {
             dots: true
         });
     }
-    if (post[0]["user_fb_pic"] != null && post[0]["user_fb_pic"] != "") {
-        $("#post_read .user_fb_pic").attr("src", post[0]["user_fb_pic"]);
+    
+    // IMG USER
+    var user_img;
+    if (post[0]["user_img"] != null && post[0]["user_img"] != "") {
+        user_img = localStorage.server + localStorage.server_img + post[0]["user_img"];
+    } else {
+        if (post[0]["user_fb_pic"] != null && post[0]["user_fb_pic"] != "") {
+            user_img = post[0]["user_fb_pic"];
+        } else {
+            user_img = "img/user.png";
+        }
     }
+    $("#post_read .user_img").attr("src", user_img);
+    
 
 // CHAT FILL
     $("#post_read .chat").attr("data-id", post[0]["user_id"]);
     $("#post_read .chat").attr("data-name", post[0]["user_name"]);
-    $("#post_read .chat").attr("data-pic", post[0]["user_fb_pic"]);
+    $("#post_read .chat").attr("data-pic", user_img);
     // FILL
     $("#post_read .user_read").attr("data-id", post[0]["user_id"]);
     $("#post_read .post_view").html(view);
@@ -308,9 +319,24 @@ function postListCb(res, position) {
                         dots: true
                     });
                 }
-                if (val["user_fb_pic"] != null && val["user_fb_pic"] != "") {
-                    $(this).find(".user_fb_pic").attr("src", val["user_fb_pic"]);
+                // IMG USER
+                var user_img;
+                if (val["user_img"] != null && val["user_img"] != "") {
+                    user_img = localStorage.server + localStorage.server_img + val["user_img"];
+                    $(this).find(".user_img").attr("src", user_img);
+                } else {
+                    if (val["user_fb_pic"] != null && val["user_fb_pic"] != "") {
+                        user_img = val["user_img"];
+                        $(this).find(".user_img").attr("src", user_img);
+                    } else {
+                        $(this).find(".user_img").attr("src", "img/user.png");
+                    }
                 }
+                /*
+                 if (val["user_fb_pic"] != null && val["user_fb_pic"] != "") {
+                 $(this).find(".user_fb_pic").attr("src", val["user_fb_pic"]);
+                 }
+                 */
                 $(this).find(".post_name").html(val["post_name"]);
                 if (val["post_price"] !== null) {
 
