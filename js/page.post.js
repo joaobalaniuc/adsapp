@@ -34,10 +34,12 @@ myApp.onPageInit('post_form', function (page) {
     // NOVO POST
     else {
         // img
+        /*
         var url = localStorage.server + localStorage.server_img + "/" + sessionStorage.img_last;
         console.log(url);
         $("#img_last").attr("src", url);
         $("[name=img_fn]").val(sessionStorage.img_last);
+        */
     }
     // VALIDATE
     $("#postForm").validate({
