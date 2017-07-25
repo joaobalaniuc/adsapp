@@ -75,7 +75,17 @@ myApp.onPageInit('user_form', function (page) {
     }, 500);
 });
 $$(document).on('click', '.userUpdate', function (e) {
-    userUpdate();
+    if ($("#userForm").valid()) {
+        var img_fn = $("#userForm [name='user_img']").val();
+        if (img_fn == "") {
+            userUpdate();
+        } else {
+            userCameraUpload(img_fn);
+        }
+    } else {
+        myApp.alert("Verifique os campos e tente novamente.");
+        return false;
+    }
 });
 $$(document).on('click', '.userLogout', function (e) {
     userLogout();
@@ -222,7 +232,28 @@ function userRead(target_id, cb) {
             });
 }
 function userReadCb_Form(res) {
+
     FF(res, "#userForm");
+
+    $("#userForm [name=user_img]").val("");
+    
+    // IMG UPLOAD
+    var img = res[0].user_img;
+    if (img != null && img != "") {
+        img = localStorage.server + localStorage.server_img + img;
+        $("#profileImgBg").css("background-image", "url(" + img + ")");
+        $("#profileImgFront").css("background-image", "url(" + img + ")");
+    }
+    // IMG FACEBOOK
+    else {
+        var fb = res[0].user_fb_pic;
+        if (fb != null) {
+            $("#profileImgBg").css("background-image", "url(" + fb + ")");
+            $("#profileImgFront").css("background-image", "url(" + fb + ")");
+        }
+    }
+    loadingHide();
+    
     /*$(".user_first_name").html(res[0].user_first_name);
      $(".user_email").html(res[0].user_email);
      
@@ -601,20 +632,21 @@ function userNameSend() {
                 } // res not null
             }); // after ajax
 }
-function userUpdate() {
+function userUpdate(user_img) {
     // DATA TO SEND
     var data_form = $("#userForm").serialize();
     var data_user = {
         user_id: localStorage.user_id,
         user_email: localStorage.user_email,
-        user_pass: localStorage.user_pass
+        user_pass: localStorage.user_pass,
+        user_img: user_img
     };
     var data_user = $.param(data_user); // serialize
     var data = data_form + "&" + data_user;
     console.log(data);
 
     // RUN AJAX
-    myApp.showPreloader();
+    myApp.showIndicator();
     $.ajax({
         url: localStorage.server + "/user_update.php",
         data: data,
@@ -624,7 +656,7 @@ function userUpdate() {
         timeout: localStorage.timeout
     })
             .always(function () {
-                myApp.hidePreloader();
+                myApp.hideIndicator();
             })
 
             .fail(function () {
