@@ -64,17 +64,8 @@ myApp.onPageInit('post_form', function (page) {
         }
     });
 });
-$$(document).on('click', '.postSendx', function (e) {
-    setTimeout(function () {
-        alert("aaa");
-    }, 1000);
-    return;
-}
-);
 $$(document).on('click', '.postSend', function (e) {
     if ($("#postForm").valid()) {
-        alert("but");
-        return;
         postSend();
     } else {
         myApp.alert('Preencha corretamente os campos do formulário.', 'Ops!');
@@ -441,7 +432,6 @@ function postListGrid(where) {
 // INSERT / DELETE POST
 //=============================
 function postSend() {
-    alert("funx");
     // HTTP
     var url = $("#post_form [name='post_url']").val();
     if (url != "") {
@@ -461,7 +451,7 @@ function postSend() {
     var data_user = $.param(data_user); // serialize
     var data = data_form + "&" + data_user;
     console.log(data);
-    alert(JSON.stringify(data));
+    //alert(JSON.stringify(data));
     // RUN AJAX
     myApp.showPreloader();
     $.ajax({

@@ -144,7 +144,6 @@ function postUpload() {
     }
     alert(JSON.stringify(arr));
     alert("upload-1");
-    return;
     photoUpload(arr);
 }
 $$(document).on('click', '.ui-state-disabled', function (e) {
