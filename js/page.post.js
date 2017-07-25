@@ -162,7 +162,7 @@ function postReadCb(res) {
             dots: true
         });
     }
-    
+
     // IMG USER
     var user_img;
     if (post[0]["user_img"] != null && post[0]["user_img"] != "") {
@@ -175,7 +175,7 @@ function postReadCb(res) {
         }
     }
     $("#post_read .user_img").attr("src", user_img);
-    
+
 
 // CHAT FILL
     $("#post_read .chat").attr("data-id", post[0]["user_id"]);
@@ -319,19 +319,22 @@ function postListCb(res, position) {
                         dots: true
                     });
                 }
+
+
                 // IMG USER
                 var user_img;
                 if (val["user_img"] != null && val["user_img"] != "") {
                     user_img = localStorage.server + localStorage.server_img + val["user_img"];
-                    $(this).find(".user_img").attr("src", user_img);
                 } else {
                     if (val["user_fb_pic"] != null && val["user_fb_pic"] != "") {
-                        user_img = val["user_img"];
-                        $(this).find(".user_img").attr("src", user_img);
+                        user_img = val["user_fb_pic"];
                     } else {
-                        $(this).find(".user_img").attr("src", "img/user.png");
+                        var user_img = "img/user.png";
                     }
                 }
+                $(this).find(".user_img").attr("src", user_img);
+
+
                 /*
                  if (val["user_fb_pic"] != null && val["user_fb_pic"] != "") {
                  $(this).find(".user_fb_pic").attr("src", val["user_fb_pic"]);

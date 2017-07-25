@@ -283,6 +283,7 @@ function userReadCb_Me(res) {
 
 
         // IMG USER
+        $("#index-4 .pic_img").css("width", "180px").css("height", "180px");
         var user_img;
         if (res[0]["user_img"] != null && res[0]["user_img"] != "") {
             user_img = localStorage.server + localStorage.server_img + res[0]["user_img"];
@@ -290,22 +291,23 @@ function userReadCb_Me(res) {
             if (res[0]["user_fb_pic"] != null && res[0]["user_fb_pic"] != "") {
                 user_img = res[0]["user_fb_pic"];
             } else {
+                $("#index-4 .pic_img").css("width", "128px").css("height", "128px");
                 user_img = "img/user.png";
             }
         }
         $("#index-4 .pic_img").css("background-image", "url(" + user_img + ")");
         $("#index-4 .pic_bg").css("background-image", "url(" + user_img + ")");
-        $("#index-4 .pic_img").css("width", "180px").css("height", "180px");
+        
 
 
 
         /*
-        if (res[0]["user_fb_pic"] !== null) {
-            $("#index-4 .pic_img").css("background-image", "url(" + res[0]["user_fb_pic"] + ")");
-            $("#index-4 .pic_bg").css("background-image", "url(" + res[0]["user_fb_pic"] + ")");
-            $("#index-4 .pic_img").css("width", "180px").css("height", "180px");//.css("margin", "32px");;
-        }
-        */
+         if (res[0]["user_fb_pic"] !== null) {
+         $("#index-4 .pic_img").css("background-image", "url(" + res[0]["user_fb_pic"] + ")");
+         $("#index-4 .pic_bg").css("background-image", "url(" + res[0]["user_fb_pic"] + ")");
+         $("#index-4 .pic_img").css("width", "180px").css("height", "180px");//.css("margin", "32px");;
+         }
+         */
         if (res[0]["user_phone"] == null) {
             var phone = "(sem telefone)";
         } else {
@@ -324,10 +326,11 @@ function userReadCb_Friend(res) {
         // chat button
         $("#user_read .chat").attr("data-id", res[0]["user_id"]);
         $("#user_read .chat").attr("data-name", res[0]["user_name"]);
-        
-        
-        
+
+
+
         // IMG USER
+        $("#user_read .pic_img").css("width", "180px").css("height", "180px");
         var user_img;
         if (res[0]["user_img"] != null && res[0]["user_img"] != "") {
             user_img = localStorage.server + localStorage.server_img + res[0]["user_img"];
@@ -336,22 +339,23 @@ function userReadCb_Friend(res) {
                 user_img = res[0]["user_fb_pic"];
             } else {
                 user_img = "img/user.png";
+                $("#user_read .pic_img").css("width", "128px").css("height", "128px");
             }
         }
         $("#user_read .chat").attr("data-pic", user_img);
+        //
+        $("#user_read .pic_img").attr("src", user_img);
+        $("#user_read .pic_bg").css("background-image", "url(" + user_img + ")");
         
-        
+
+
         //
         $("#user_read .user_name").html(res[0]["user_name"]);
         $("#user_read .user_bio").html(res[0]["user_bio"]);
         String.prototype.splice = function (idx, rem, str) {
             return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
         };
-        if (res[0]["user_fb_pic"] !== null) {
-            $("#user_read .pic_img").attr("src", res[0]["user_fb_pic"]);
-            $("#user_read .pic_bg").css("background-image", "url(" + res[0]["user_fb_pic"] + ")");
-            $("#user_read .pic_img").css("width", "180px").css("height", "180px");//.css("margin", "32px");;
-        }
+
         if (res[0]["user_phone"] == null) {
             $("#user_read .user_phone").addClass("disabled");
         } else {
