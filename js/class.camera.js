@@ -130,6 +130,7 @@ $$('.photoGet').on('click', function () {
 // POST_FORM
 //============================
 function postUpload() {
+    alert("upload-0");
     var x;
     var arr = [];
     for (x = 0; x <= 5; x++) {
@@ -142,6 +143,8 @@ function postUpload() {
         }
     }
     alert(JSON.stringify(arr));
+    alert("upload-1");
+    return;
     photoUpload(arr);
 }
 $$(document).on('click', '.ui-state-disabled', function (e) {

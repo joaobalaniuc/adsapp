@@ -25,7 +25,6 @@ myApp.onPageInit('post_form', function (page) {
         }, 1000);
     }
 
-
     // EDITAR POST
     if (sessionStorage.edit_id > 0) {
         var post_id = sessionStorage.edit_id;
@@ -65,6 +64,10 @@ myApp.onPageInit('post_form', function (page) {
         }
     });
 
+});
+$$(document).on('click', '.postSendx', function (e) {
+    alert("butx");
+    return;
 });
 $$(document).on('click', '.postSend', function (e) {
     if ($("#postForm").valid()) {
