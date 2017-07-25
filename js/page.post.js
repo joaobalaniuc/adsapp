@@ -69,6 +69,7 @@ myApp.onPageInit('post_form', function (page) {
 $$(document).on('click', '.postSend', function (e) {
     if ($("#postForm").valid()) {
         alert("but");
+        return;
         postSend();
     } else {
         myApp.alert('Preencha corretamente os campos do formulário.', 'Ops!');
