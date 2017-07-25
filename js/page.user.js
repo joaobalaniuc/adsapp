@@ -265,7 +265,7 @@ function userReadCb_Me(res) {
     } // res[0]
 }
 function userReadCb_Friend(res) {
-    
+
     loadingHide();
 
     if (res[0]) {
@@ -291,7 +291,9 @@ function userReadCb_Friend(res) {
             phone = phone.splice(10, 0, "-");
             $("#user_read .user_phone").attr("href", "tel:0" + res[0]["user_phone"]);
         }
-
+        if (res[0]["user_id"] == localStorage.user_id) {
+            $("#user_read .edit_hide").hide();
+        }
 
         if (res[0]["follow_id"] > 0) {
             $("#seguir").hide();
@@ -342,6 +344,7 @@ function userAdsCb_Me(res) {
         }
 
         if (res[0]["post_id"]) {
+
             $("#user_post").html("");
             $.each(res, function (key, val) {
 
@@ -358,8 +361,11 @@ function userAdsCb_Me(res) {
 
                     $(this).find(".post_name").html(val["post_name"]);
                     $(this).find(".post_price").html("R$ " + val["post_price"]);
-                    var url = localStorage.server + localStorage.server_img + "/" + val[0][0]["img_fn"];
-                    $(this).find(".img_fn").attr("src", url);
+
+                    if (typeof val[0][0] !== "undefined") {
+                        var url = localStorage.server + localStorage.server_img + "/" + val[0][0]["img_fn"];
+                        $(this).find(".img_fn").attr("src", url);
+                    }
                 }).show();
             });
         } // res[0]
@@ -394,7 +400,7 @@ function userAdsCb_Friend(res) {
                 $("#friend_post_" + val["post_id"]).each(function (index) {
 
                     $(this).find(".post_name").html(val["post_name"]);
-                    $(this).find(".post_price").html("R$ "+val["post_price"]);
+                    $(this).find(".post_price").html("R$ " + val["post_price"]);
                     var url = localStorage.server + localStorage.server_img + "/" + val[0][0]["img_fn"];
                     $(this).find(".img_fn").attr("src", url);
                 }).show();

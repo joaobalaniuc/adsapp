@@ -162,7 +162,7 @@ function postReadCb(res) {
             dots: true
         });
     }
-    if (post[0]["user_fb_pic"] != null) {
+    if (post[0]["user_fb_pic"] != null && post[0]["user_fb_pic"] != "") {
         $("#post_read .user_fb_pic").attr("src", post[0]["user_fb_pic"]);
     }
 
@@ -198,6 +198,7 @@ function postReadCb(res) {
 // MOSTRAR OPÇÕES DE EDITAR
     if (post[0]["user_id"] == localStorage.user_id) {
         $("#post_read .edit").show();
+        $("#post_read .edit_hide").hide();
     }
 }
 function postEditCb(res) {
@@ -307,7 +308,7 @@ function postListCb(res, position) {
                         dots: true
                     });
                 }
-                if (val["user_fb_pic"] != null) {
+                if (val["user_fb_pic"] != null && val["user_fb_pic"] != "") {
                     $(this).find(".user_fb_pic").attr("src", val["user_fb_pic"]);
                 }
                 $(this).find(".post_name").html(val["post_name"]);
@@ -473,13 +474,13 @@ function postSend() {
             .done(function (res) {
                 if (res !== null) {
                     console.log(res);
-                    alert(JSON.stringify(res));
+                    //alert(JSON.stringify(res));
                     if (typeof res.error !== "undefined") {
                         errorCheck(res.error);
                         return;
                     }
                     if (res.success) {
-                        alert("success..upload now...");
+                        //alert("success..upload now...");
                         sessionStorage.post_id = res.success;
                         postUpload();
                     }
