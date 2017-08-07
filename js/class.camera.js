@@ -85,6 +85,15 @@ function photoUpload(array, n) {
     }, options);
 }
 function photoAdd(imageURI) {
+
+    var id = Math.floor(Math.random() * 9999999) + 1111111;
+    var fn = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+    var dir = 'file:///storage/emulated/0/Android/data/br.com.nickford.adsapp/cache/';
+    renameFile(fn, dir, id + ".jpg", renameSuccess);
+    var fn_new = dir + id + ".jpg";
+    alert("fn_new=" + fn_new + " => fn=" + fn + " => dir=" + dir);
+    imageURI = fn_new;
+
     // active page
     if (sessionStorage.activePage !== "post_form") {
         sessionStorage.imageURI = imageURI;
@@ -248,4 +257,34 @@ function userCameraUpload(imageURI) {
         myApp.hideIndicator();
         alert(JSON.stringify(error));
     }, options);
+}
+
+//the function
+function renameFile(currentName, currentDir, newName, successFunction) {
+
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSystem) {
+
+        fileSystem.root.getFile(currentDir + currentName, null, function (fileEntry) {
+            fileSystem.root.getDirectory(currentDir, {create: true}, function (dirEntry) {
+                parentEntry = new DirectoryEntry(currentName, currentDir + currentName);
+
+                fileEntry.moveTo(dirEntry, newName, function () {
+
+                    successFunction();
+
+                }, renameFail);
+            }, renameFail);
+        }, renameFail);
+
+    }, renameFail);
+}
+
+//and the sample success function
+function renameSuccess() {
+    alert('renamed!');
+}
+
+//and the sample fail function
+function renameFail() {
+    alert('failed');
 }

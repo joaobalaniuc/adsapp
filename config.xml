@@ -59,6 +59,7 @@
     
     <!--plugins -->
     <plugin name="cordova-plugin-camera" source="npm" />
+    <plugin name="cordova-plugin-file" source="npm" />
     <plugin name="cordova-plugin-file-transfer" source="npm" />
     <plugin name="cordova-plugin-device" source="npm" />
     <plugin name="cordova-plugin-device-orientation" source="npm" />
