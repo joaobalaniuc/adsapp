@@ -150,7 +150,8 @@ function postUpload() {
             arr.push(0);
         }
     }
-    //alert(JSON.stringify(arr));
+    alert(JSON.stringify(arr));
+    return;
     //alert("upload-1");
     photoUpload(arr);
 }
