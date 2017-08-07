@@ -53,14 +53,16 @@ function photoUpload(array, n) {
         return;
     }
 
-    alert(n + " = " + imageURI);
-
     myApp.showIndicator();
+
     // file data
     var options = new FileUploadOptions();
     options.fileKey = "file";
     options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
     options.mimeType = "image/jpeg";
+
+    alert(n + " = " + options.fileName + " => " + imageURI);
+
     // user data
     var params = new Object();
     params.user_id = localStorage.user_id;
@@ -70,16 +72,15 @@ function photoUpload(array, n) {
     params.img_pos = n;
     options.params = params;
     options.chunkedMode = false;
+
     // transfer
     var ft = new FileTransfer();
     ft.upload(imageURI, localStorage.server + "/post_upload.php", function (result) {
         myApp.hideIndicator();
-        //alert("ok=" + JSON.stringify(result));
         n = parseInt(n + 1);
         photoUpload(array, n);
     }, function (error) {
         myApp.hideIndicator();
-        //alert("err=" + JSON.stringify(error));
     }, options);
 }
 function photoAdd(imageURI) {
