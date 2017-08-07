@@ -53,6 +53,8 @@ function photoUpload(array, n) {
         return;
     }
 
+    alert(n + " = " + imageURI);
+
     myApp.showIndicator();
     // file data
     var options = new FileUploadOptions();
@@ -150,8 +152,6 @@ function postUpload() {
             arr.push(0);
         }
     }
-    alert(JSON.stringify(arr));
-    return;
     //alert("upload-1");
     photoUpload(arr);
 }
