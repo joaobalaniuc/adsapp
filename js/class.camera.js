@@ -61,7 +61,6 @@ function photoUpload(array, n) {
     options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
     options.mimeType = "image/jpeg";
 
-    $("#testex").html("<img src='" + imageURI + "' />");
     alert(n + " = " + imageURI);
 
     // user data
@@ -71,6 +70,7 @@ function photoUpload(array, n) {
     params.user_pass = localStorage.user_pass;
     params.post_id = sessionStorage.post_id; // postSend()...
     params.img_pos = n;
+    params.img_fn_original = encodeURI(imageURI);
     options.params = params;
     options.chunkedMode = false;
 
