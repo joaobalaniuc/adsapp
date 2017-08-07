@@ -61,7 +61,8 @@ function photoUpload(array, n) {
     options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
     options.mimeType = "image/jpeg";
 
-    alert(n + " = " + options.fileName + " => " + imageURI);
+    $("#testex").html("<img src='" + imageURI + "' />");
+    alert(n + " = " + imageURI);
 
     // user data
     var params = new Object();
