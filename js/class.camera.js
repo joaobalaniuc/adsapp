@@ -268,7 +268,7 @@ function renameFile(currentName, currentDir, newName, successFunction) {
             fileSystem.root.getDirectory(currentDir, {create: true}, function (dirEntry) {
                 parentEntry = new DirectoryEntry(currentName, currentDir + currentName);
 
-                fileEntry.moveTo(dirEntry, newName, function () {
+                fileEntry.copyTo(dirEntry, newName, function () {
 
                     successFunction();
 
@@ -285,6 +285,6 @@ function renameSuccess() {
 }
 
 //and the sample fail function
-function renameFail() {
-    alert('failed');
+function renameFail(error) {
+    alert('failed=' + JSON.stringify(error));
 }
