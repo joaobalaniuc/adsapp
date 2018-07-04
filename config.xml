@@ -22,9 +22,6 @@
   <preference name="orientation" value="portrait" />
   <preference name="fullscreen" value="true" />
 
-
-
-
   <!--plugins -->
   <plugin name="cordova-plugin-camera" source="npm" />
   <plugin name="cordova-plugin-file" source="npm" />
@@ -37,7 +34,7 @@
   <plugin name="cordova-plugin-inappbrowser" source="npm" />
   <plugin name="cordova-plugin-whitelist" source="npm" />
   <plugin name="cordova-plugin-statusbar" source="npm" />
-
+<!--
   <plugin name="cordova-plugin-facebook4" source="npm">
     <param name="APP_ID" value="1269306609763820" />
     <param name="APP_NAME" value="AdsApp" />
@@ -48,7 +45,7 @@
     <param name="ios-package" value="SocialSharing" />
     <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
   </feature>
-
+-->
   <platform name="android">
     <icon density="ldpi" src="res/icon/android/icon-36-ldpi.png" />
     <icon density="mdpi" src="res/icon/android/icon-48-mdpi.png" />
@@ -61,7 +58,7 @@
   </platform>
 
   <platform name="ios">
-    
+
   </platform>
 
   <access origin="*" />
