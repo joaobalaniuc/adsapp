@@ -1,22 +1,22 @@
 <?xml version='1.0' encoding='utf-8'?>
 
-<widget xmlns = "http://www.w3.org/ns/widgets"  
-    xmlns:gap = "http://phonegap.com/ns/1.0"  
-    id        = "br.com.nickford.adsapp" 
+<widget xmlns = "http://www.w3.org/ns/widgets"
+    xmlns:gap = "http://phonegap.com/ns/1.0"
+    id        = "br.com.nickford.adsapp"
     version   = "1.0.1" >
-    
+
     <name>AdsApp</name>
-    
+
     <description>
         Social Network for Ads
     </description>
-    
+
     <author email="joao@dev.house" href="http://dev.house">
         Nickford
     </author>
-    
+
     <content src="index.html" />
-    
+
     <!-- all platforms -->
     <preference name="phonegap-version" value="cli-6.5.0" />
     <preference name="orientation" value="portrait" />
@@ -29,14 +29,14 @@
     <preference name="show-splash-screen-spinner" value="true" />
     <preference name="auto-hide-splash-screen" value="false" />
     <preference name="disable-cursor" value="false" />
-    
+
     <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="lightcontent" />
     <feature name="StatusBar">
         <param name="ios-package" value="CDVStatusBar" onload="true" />
     </feature>
-    
+
     <!-- iOS only -->
     <preference name="target-device" value="universal" />
     <preference name="prerendered-icon" value="true" />
@@ -44,7 +44,7 @@
     <preference name="exit-on-suspend" value="false" />
     <preference name="deployment-target" value="7.0" />
 
-    <!-- Android only -->
+    <!-- Android only --
     <preference name="phonegap-version" value="cli-6.5.0" />
     <preference name="android-build-tool" value="gradle" />
     <preference name="android-minSdkVersion" value="15" />
@@ -56,7 +56,7 @@
     <!-- crash fix for android -->
     <preference name="loadUrlTimeoutValue" value="700000" />
     <preference name="android-windowSoftInputMode" value="adjustResize" />
-    
+
     <!--plugins -->
     <plugin name="cordova-plugin-camera" source="npm" />
     <plugin name="cordova-plugin-file" source="npm" />
@@ -69,18 +69,18 @@
     <plugin name="cordova-plugin-inappbrowser" source="npm" />
     <plugin name="cordova-plugin-whitelist" source="npm" />
     <plugin name="cordova-plugin-statusbar" source="npm" />
-    
+
     <plugin name="cordova-plugin-facebook4" source="npm">
         <param name="APP_ID" value="1269306609763820" />
         <param name="APP_NAME" value="AdsApp" />
     </plugin>
-    
+
     <plugin name="cordova-plugin-x-socialsharing" source="npm" />
     <feature name="SocialSharing">
         <param name="ios-package" value="SocialSharing" />
         <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
     </feature>
-   
+
     <!-- iconn -->
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="res/icon/android/icon-36-ldpi.png" />
@@ -100,7 +100,7 @@
     <icon gap:platform="webos" src="res/icon/webos/icon-64.png" />
     <icon gap:platform="winphone" src="res/icon/windows-phone/icon-48.png" />
     <icon gap:platform="winphone" gap:role="background" src="res/icon/windows-phone/icon-173-tile.png" />
-    
+
     <!-- splash -->
     <splash src="splash.png" />
     <gap:splash gap:platform="android" gap:qualifier="port-ldpi" src="res/screen/android/screen-ldpi-portrait.png" />
@@ -122,8 +122,8 @@
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
-    
-    
+
+
     <access origin="*" launch-external="yes" />
     <access origin="whatsapp:*" launch-external="yes" />
     <allow-intent href="whatsapp:*" />
